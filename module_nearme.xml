@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_nearme" default="compile.module.nearme">
+  <dirname property="module.nearme.basedir" file="${ant.file.module_nearme}"/>
+  
+  <property name="module.jdk.home.nearme" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.nearme" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.nearme" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.nearme" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="nearme.output.dir" value="${module.nearme.basedir}/target/classes"/>
+  <property name="nearme.testoutput.dir" value="${module.nearme.basedir}/target/test-classes"/>
+  
+  <path id="nearme.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="nearme.module.production.classpath">
+    <path refid="${module.jdk.classpath.nearme}"/>
+    <path refid="library.maven:_com.sparkjava:spark-core:2.1.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.7.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-simple:1.7.7.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-server:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty.orbit:javax.servlet:3.0.0.v201112011016.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-http:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-util:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-io:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-webapp:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-xml:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-servlet:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-security:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.5.1.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.5.1.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.5.0.classpath"/>
+    <path refid="library.maven:_org.projectlombok:lombok:1.16.2.classpath"/>
+    <path refid="library.maven:_org.sql2o:sql2o:1.5.4.classpath"/>
+    <path refid="library.maven:_org.postgresql:postgresql:9.4-1201-jdbc41.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:18.0.classpath"/>
+  </path>
+  
+  <path id="nearme.runtime.production.module.classpath">
+    <pathelement location="${nearme.output.dir}"/>
+    <path refid="library.maven:_com.sparkjava:spark-core:2.1.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.7.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-simple:1.7.7.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-server:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty.orbit:javax.servlet:3.0.0.v201112011016.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-http:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-util:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-io:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-webapp:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-xml:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-servlet:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-security:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.5.1.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.5.1.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.5.0.classpath"/>
+    <path refid="library.maven:_org.sql2o:sql2o:1.5.4.classpath"/>
+    <path refid="library.maven:_org.postgresql:postgresql:9.4-1201-jdbc41.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:18.0.classpath"/>
+  </path>
+  
+  <path id="nearme.module.classpath">
+    <path refid="${module.jdk.classpath.nearme}"/>
+    <pathelement location="${nearme.output.dir}"/>
+    <path refid="library.maven:_junit:junit:4.12.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_com.sparkjava:spark-core:2.1.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.7.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-simple:1.7.7.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-server:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty.orbit:javax.servlet:3.0.0.v201112011016.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-http:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-util:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-io:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-webapp:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-xml:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-servlet:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-security:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.5.1.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.5.1.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.5.0.classpath"/>
+    <path refid="library.maven:_org.projectlombok:lombok:1.16.2.classpath"/>
+    <path refid="library.maven:_org.sql2o:sql2o:1.5.4.classpath"/>
+    <path refid="library.maven:_org.postgresql:postgresql:9.4-1201-jdbc41.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:18.0.classpath"/>
+    <path refid="library.maven:_org.easymock:easymock:3.3.1.classpath"/>
+    <path refid="library.maven:_cglib:cglib:3.1.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:5.0.3.classpath"/>
+    <path refid="library.maven:_org.objenesis:objenesis:2.1.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.3.1.classpath"/>
+  </path>
+  
+  <path id="nearme.runtime.module.classpath">
+    <pathelement location="${nearme.testoutput.dir}"/>
+    <pathelement location="${nearme.output.dir}"/>
+    <path refid="library.maven:_junit:junit:4.12.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_com.sparkjava:spark-core:2.1.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.7.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-simple:1.7.7.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-server:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty.orbit:javax.servlet:3.0.0.v201112011016.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-http:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-util:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-io:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-webapp:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-xml:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-servlet:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-security:9.0.2.v20130417.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.5.1.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.5.1.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.5.0.classpath"/>
+    <path refid="library.maven:_org.projectlombok:lombok:1.16.2.classpath"/>
+    <path refid="library.maven:_org.sql2o:sql2o:1.5.4.classpath"/>
+    <path refid="library.maven:_org.postgresql:postgresql:9.4-1201-jdbc41.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:18.0.classpath"/>
+    <path refid="library.maven:_org.easymock:easymock:3.3.1.classpath"/>
+    <path refid="library.maven:_cglib:cglib:3.1.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:5.0.3.classpath"/>
+    <path refid="library.maven:_org.objenesis:objenesis:2.1.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.3.1.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.nearme">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.nearme">
+    <patternset refid="excluded.from.module.nearme"/>
+  </patternset>
+  
+  <path id="nearme.module.sourcepath">
+    <dirset dir="${module.nearme.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="nearme.module.test.sourcepath">
+    <dirset dir="${module.nearme.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.nearme" depends="compile.module.nearme.production,compile.module.nearme.tests" description="Compile module nearme"/>
+  
+  <target name="compile.module.nearme.production" depends="register.custom.compilers" description="Compile module nearme; production classes">
+    <mkdir dir="${nearme.output.dir}"/>
+    <javac2 destdir="${nearme.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.nearme}/javac">
+      <compilerarg line="${compiler.args.nearme}"/>
+      <bootclasspath refid="nearme.module.bootclasspath"/>
+      <classpath refid="nearme.module.production.classpath"/>
+      <src refid="nearme.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.nearme"/>
+    </javac2>
+    
+    <copy todir="${nearme.output.dir}">
+      <fileset dir="${module.nearme.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.nearme.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.nearme.tests" depends="register.custom.compilers,compile.module.nearme.production" description="compile module nearme; test classes" unless="skip.tests">
+    <mkdir dir="${nearme.testoutput.dir}"/>
+    <javac2 destdir="${nearme.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.nearme}/javac">
+      <compilerarg line="${compiler.args.nearme}"/>
+      <bootclasspath refid="nearme.module.bootclasspath"/>
+      <classpath refid="nearme.module.classpath"/>
+      <src refid="nearme.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.nearme"/>
+    </javac2>
+    
+    <copy todir="${nearme.testoutput.dir}">
+      <fileset dir="${module.nearme.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.nearme" description="cleanup module">
+    <delete dir="${nearme.output.dir}"/>
+    <delete dir="${nearme.testoutput.dir}"/>
+  </target>
+</project>

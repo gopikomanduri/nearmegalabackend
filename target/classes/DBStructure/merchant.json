@@ -1,0 +1,19 @@
+{
+  "column": [
+    {"name":"Id", "type":"varchar(12)"},
+    {"name":"MarchantId", "type":"varchar(12)"},
+    {"name":"geohash", "type":"varchar(12)"},
+    {"name":"latitude", "type":"varchar(12)"},
+    {"name":"longitude", "type":"varchar(12)"},
+    {"name":"imgurl", "type":"varchar(100)"},
+    {"name":"MerchantName", "type":"varchar(32)"},
+    {"name":"landmark", "type":"varchar(128)"},
+    {"name":"locality", "type":"varchar(128)"},
+    {"name":"area", "type":"varchar(128)"},
+    {"name":"city", "type":"varchar(128)"},
+    {"name":"state", "type":"varchar(128)"},
+    {"name":"country", "type":"varchar(128)"},
+    {"name":"registeredon", "type":"varchar(25)"},
+    {"name":"isactive", "type":"varchar(2)"}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+    "column": [
+      {"name":"Id", "type":"varchar(12)"},
+      {"name":"MarchantId", "type":"varchar(12)"},
+      {"name":"category", "type":"INT(6)"},
+      {"name":"validtilldate", "type":"INT(2)"},
+      {"name":"validtillmonth", "type":"INT(2)"},
+      {"name":"validtillyear", "type":"INT(2)"},
+      {"name":"validfromdate", "type":"INT(2)"},
+      {"name":"validfrommonth", "type":"INT(2)"},
+      {"name":"validfromyear", "type":"INT(2)"},
+      {"name":"adimgurl", "type":"varchar(100)"},
+      {"name":"itemdesc", "type":"varchar(512)"},
+      {"name":"receivedon", "type":"varchar(24)"}
+    ]
+}

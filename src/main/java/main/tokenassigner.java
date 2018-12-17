@@ -1,5 +1,6 @@
 package main;
 
+import com.google.common.util.concurrent.AtomicDouble;
 import com.google.gson.Gson;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -16,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class tokenassigner {
 
 
-//    public void createTestData() {
+//    public void TestData() {
 //
 //        for(int i=0;i<20;i++)
 //        {
@@ -37,7 +38,12 @@ public class tokenassigner {
     }
 
 
-    HashMap<Integer, tokenserving> currenttokens = new HashMap<>();
+
+    AtomicDouble avgTime = new AtomicDouble(0);
+
+    AtomicDouble totalTime = new AtomicDouble(0);
+
+    Map<Integer, String> currentsmstokens = new TreeMap<>();
 
 
     ConcurrentLinkedQueue<Integer> pendingTokens = new ConcurrentLinkedQueue<>();
@@ -47,6 +53,7 @@ public class tokenassigner {
     ConcurrentHashMap<Integer, ConcurrentLinkedQueue<tokenDone>>  countersDoneDetails = new ConcurrentHashMap<>();
 
     ConcurrentHashMap<Integer, Integer> renewlistmerchantwise = new ConcurrentHashMap<>();
+
 
 
 
@@ -68,9 +75,10 @@ public class tokenassigner {
     Set<String> registeredContacts = new HashSet<>();
 
     HashMap<Integer,String> tokenWithContact = new HashMap<>();
+    Set<Integer> deregisterset = new HashSet<>();
 
 
-    public tokenassigner(String merchantId)
+    public  tokenassigner(String merchantId)
     {
         String merchantName = MySQLAccess.dbObj.getMerchantNameForId(merchantId);
         String dpimg = MySQLAccess.dbObj.getMerchantDpForId(merchantId);
@@ -78,7 +86,26 @@ public class tokenassigner {
         merDetails.merchanturl = dpimg;
     }
 
-    public String getMerchantTokenDetails(String merchantId)
+    public synchronized String deregistercustomer(String contact, String existingtoken) {
+
+        Integer iexistingToken = Integer.valueOf(existingtoken);
+//        if(currentMinPendingToken.get() > iexistingToken)
+//        {
+//            return "-2";
+//        }
+//        int x = 0;
+//        for(int i=0;i<pendingTokens.size();i++)
+//        {
+//
+//        }
+
+        deregisterset.add(iexistingToken);
+        return "0";
+
+    }
+
+
+    public synchronized String getMerchantTokenDetails(String merchantId)
     {
 
         System.out.println("in tokenassigner getMerchantTokenDetails for merchantId :"+merchantId);
@@ -91,7 +118,10 @@ public class tokenassigner {
             merDetails.merchanturl = dpimg;
         }
 
-        merDetails.currentRunningToken = currentMinPendingToken.get();
+        if(currentMinPendingToken.get() > 0)
+            merDetails.currentRunningToken = currentMinPendingToken.get();
+        else
+            merDetails.currentRunningToken = 0;
       //  pendingTokens.remove();
       //  currentMinPendingToken.set(pendingTokens.peek());
         merDetails.currentMaxToken = currentMaxToken.get();
@@ -107,9 +137,22 @@ public class tokenassigner {
 
     }
 
-    public String getPendingTokens() {
+    public synchronized String getPendingTokens() {
 
-        String str = new Gson().toJson(pendingTokens);
+        String str = "";
+
+        str = new Gson().toJson(pendingTokens);
+
+        if(pendingTokens.size() > 0) {
+            str = new Gson().toJson(pendingTokens);
+            System.out.println("IN getPendingtokens . pendingtoen size is > 0 . returning "+str);
+
+        }
+        else
+        {
+            System.out.println("IN getPendingtokens . pendingtoen size is 0 . returning "+str);
+
+        }
         return str;
     }
 
@@ -117,7 +160,7 @@ public class tokenassigner {
 
 
 
-    public String getTokenLogForCounter(String merchantId, String counterId)
+    public synchronized String getTokenLogForCounter(String merchantId, String counterId)
     {
 
         System.out.println("getTokenLogForCounter for merchantId :"+merchantId+" counterId = "+counterId.toString());
@@ -130,7 +173,7 @@ public class tokenassigner {
         return new Gson().toJson(tokensList);
     }
 
-    public String createcountersandhelpers(String merchantId, Integer counterscount, Integer helperscount)
+    public synchronized String createcountersandhelpers(String merchantId, Integer counterscount, Integer helperscount)
     {
 
         /*
@@ -155,7 +198,7 @@ public class tokenassigner {
     }
 
 
-    public List<counteremppayload> createcounters(String merchantId, Integer counterscount, String tableName)
+    public synchronized List<counteremppayload> createcounters(String merchantId, Integer counterscount, String tableName)
     {
 
         System.out.println("createcounters for merchantId :"+merchantId+" counterscount = "+counterscount.toString());
@@ -230,19 +273,24 @@ public class tokenassigner {
 
 
 
-    public tokenstatus createnewtoken(String merchantId)
+    public synchronized tokenstatus createnewtoken(String merchantId)
     {
         tokenstatus obj = new tokenstatus();
 
-        System.out.println("createnewtoken for merchantId :"+merchantId+" currentMaxToken = "+currentMaxToken.toString());
+        System.out.println("createnewtoken for merchantId :"+merchantId+" before increment currentMaxToken = "+currentMaxToken.toString());
         obj.token = currentMaxToken.incrementAndGet();
         System.out.println("createnewtoken for merchantId : after updating  currentMaxToken = "+currentMaxToken.toString());
 
+        pendingTokens.add(currentMaxToken.get());
+
+        if(currentMinPendingToken.get() == 0)
+        {
+            currentMinPendingToken.set(obj.token);
+        }
+
+
         obj.youareat = pendingTokens.size();
 
-        System.out.println("createnewtoken for merchantId : pendingTokens size is  = "+pendingTokens.size());
-
-        pendingTokens.add(currentMaxToken.get());
 
         System.out.println("createnewtoken for merchantId : pendingTokens size is  after adding = "+pendingTokens.size());
 
@@ -250,7 +298,7 @@ public class tokenassigner {
         return obj;
     }
 
-    public String createnewtokenWithContact(String merchantId, String contact)
+    public synchronized String createnewtokenWithContact(String merchantId, String contact, boolean helper)
     {
 //        currentMaxToken++;
 //        pendingTokens.add(currentMaxToken);
@@ -262,9 +310,13 @@ public class tokenassigner {
             registeredContacts.add(contact);
         }
             pendingNumbers.add(contact);
-            sendMsgToNumber(merchantId, contact, "your_token_is_"+tok);
+            sendMsgToNumber(merchantId, contact, "your_token_is_"+tok.token+"_you_are_at_"+tok.youareat);
 
 
+            if(helper == true)
+            {
+                currentsmstokens.put(tok.token,contact);
+            }
 
         System.out.println("created new token for contact "+contact+" . Token is "+tok.token+"  waiting at "+tok.youareat);
         return new Gson().toJson(tok);
@@ -274,7 +326,7 @@ public class tokenassigner {
 
 
 
-    public String sendMsgToNumber(String merchantId, String contact, String msg)
+    public synchronized String sendMsgToNumber(String merchantId, String contact, String msg)
     {
 
         //   String merchantName = MySQLAccess.dbObj.getMerchantNameForId(merchantId);
@@ -323,7 +375,7 @@ public class tokenassigner {
     }
 
 
-    public String sendMsgToNumber(String merchantId, String contact, String msg, String type, String receiptid)
+    public synchronized String sendMsgToNumber(String merchantId, String contact, String msg, String type, String receiptid)
     {
 
      //   String merchantName = MySQLAccess.dbObj.getMerchantNameForId(merchantId);
@@ -381,14 +433,14 @@ public class tokenassigner {
 
     }
 
-    public String getTokenStatus(String merchantId, Integer token, String contact, String existingStatus)
+    public synchronized String getTokenStatus(String merchantId, Integer token, String contact, String existingStatus)
     {
 
         String status = getTokenStatus(merchantId, token);
 
 
         String tokenstatus = "token_status="+status;
-        if(existingStatus != status) {
+        if(existingStatus.equalsIgnoreCase(status) == false) {
             sendMsgToNumber(merchantId, contact, tokenstatus);
         }
 
@@ -396,11 +448,10 @@ public class tokenassigner {
         return status;
     }
 
-    public String getTokenStatus(String merchantId, Integer token)
+    public synchronized String getTokenStatus(String merchantId, Integer token)
     {
         System.out.println("getTokenStatus for merchantId : merchantId = "+merchantId.toString());
 
-        Iterator<Integer> itr = pendingTokens.iterator();
 
         // hasNext() returns true if the queue has more elements
 
@@ -417,7 +468,7 @@ public class tokenassigner {
             renewlistmerchantwise.remove(token);
             System.out.println("getTokenStatus token is there for renew .. hence returning 5  = "+token.toString());
 
-            return "5";
+            return "-5";
         }
 
 
@@ -428,14 +479,20 @@ public class tokenassigner {
         Integer curPen = currentMinPendingToken.get();
 
         if(token < curPen) {
+            System.out.println("current pending is "+curPen+" And received token is "+token);
 
-            System.out.println("getTokenStatus token is already served . hence returning -1 = "+token.toString()
+            System.out.println("getTokenStatus token is already served r currently serving . hence returning -1 = "+token.toString()
                     +" .. current penidng one is "+currentMinPendingToken);
 
             return "-1";
         }
 
-        Integer pos = token - curPen +1;
+      //  Integer pos = token - curPen +1;
+        Integer pos = 0;
+        if(pendingTokens.size() > 0)
+            pos = token - pendingTokens.element() +1;
+
+
         System.out.println("getTokenStatus  "+token+"  to be served at position  = "+pos.toString());
 
 
@@ -461,12 +518,20 @@ public class tokenassigner {
     }
 
 
-    public String renewToken(String merchantId, Integer token)
+    public synchronized String renewToken(String merchantId, Integer token)
     {
 
         System.out.println("renewToken  "+token+"  merchantId  = "+merchantId.toString());
 
         Iterator<Integer> itr = pendingTokens.iterator();
+        while(itr.hasNext())
+        {
+            if(itr.next() == token)
+            {
+                itr.remove();
+                break;
+            }
+        }
 
 
         Integer count = 1;
@@ -477,18 +542,18 @@ public class tokenassigner {
         return "0";
     }
 
-//    public String renewToken(String merchantId, String existigToken)
+//    public String renewToken(String merchantId, String existigToken)F
 //    {
 //
 //    }
 
-    public String getNextToken(String merchantId, Integer counter, Integer existingtoken, Double timeserved, String starttime, String endTime)
+    public synchronized String getNextToken(String merchantId, Integer counter, Integer existingtoken, Double timeserved, String starttime, String endTime)
     {
 
         System.out.println("getNextToken   merchantId  = "+merchantId.toString()+" " +
                 "existingtoken ="+existingtoken.toString()+" ");
 
-        if(existingtoken == -1) {
+        if(existingtoken != 0) {
 
             Integer nextToken = 1;
             tokenDone temp = new tokenDone();
@@ -501,6 +566,9 @@ public class tokenassigner {
             temp.timeServed = timeserved;
             temp.token = existingtoken;
             doneTokens.add(temp);
+            totalTime.getAndAdd(temp.timeServed);
+            avgTime.set(totalTime.get()/doneTokens.size());
+
             ConcurrentLinkedQueue<tokenDone> doneDetails;
 
             if (countersDoneDetails.containsKey(counter) == true) {
@@ -527,13 +595,52 @@ public class tokenassigner {
           return "-1".toString();
       }
 
-            Integer tok = pendingTokens.element();
+
+      System.out.println("The followoing are penidng tokens");
+
+        for(Integer u : pendingTokens){
+           System.out.println("token is :"+u.toString());
+        }
+        System.out.println("getNextToken   merchantId  = "+merchantId.toString()+" counter  "+counter+"pendingTokens size is  = "+pendingTokens.size());
+
+        Integer tok = -1;
+
+     //   do {
+
+             tok = pendingTokens.element();
+
             pendingTokens.remove();
-            currentMinPendingToken.set(pendingTokens.element());
+            if(pendingTokens.size() > 0)
+                currentMinPendingToken.set(pendingTokens.element());
+
+        for(Map.Entry<Integer,String> entry : currentsmstokens.entrySet()) {
+            Integer key = entry.getKey();
+            String value = entry.getValue();
+
+            getTokenStatus(merchantId,key, value, "-1");
+
+            System.out.println(key + " => " + value);
+        }
+
+            if(currentsmstokens.containsKey(tok) == true)
+                currentsmstokens.remove(tok);
+    //    }while(deregisterset.contains(tok) == true);
+
+   //     deregisterset.remove(tok);
 
         tokenserving obj = new tokenserving();
         obj.token = tok;
         System.out.println("getNextToken   merchantId  = "+merchantId.toString()+" counter  "+counter+" returning token  = "+tok);
+
+//        for(Map.Entry<Integer,String> entry : currentsmstokens.entrySet()) {
+//            Integer key = entry.getKey();
+//            String value = entry.getValue();
+//
+//            getTokenStatus(merchantId,key, value, "-1");
+//
+//            System.out.println(key + " => " + value);
+//        }
+
         return tok.toString();
 
     }

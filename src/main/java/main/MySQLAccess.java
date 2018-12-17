@@ -843,20 +843,43 @@ public class merchantDetails {
     }
  */
 
+/*
+
+
+Id int(11) AI PK
+MerchantId varchar(128)
+geohash varchar(12)
+latitude double
+longitude double
+imgurl varchar(100)
+MerchantName varchar(32)
+state varchar(128)
+country varchar(128)
+registeredon varchar(128)
+isactive varchar(2)
+shopNo varchar(45)
+MerchantContact varchar(45)
+MerchantType int(3)
+password varchar(15)
+role int(11)
+ */
+
 
 merchantDetails temp = new merchantDetails();
 
             if(resultSet.next()) {
 
-                temp.merchantId = resultSet.getString("merchantId");
-                temp.merchantName = resultSet.getString("merchantName");
+                temp.merchantId = resultSet.getString("MerchantId");
+                temp.merchantName = resultSet.getString("MerchantName");
                 temp.imgurl = resultSet.getString("imgurl");
                 temp.merchantPhn = resultSet.getString("MerchantContact");
-                temp.landMark = resultSet.getString("landMark");
-                temp.locality = resultSet.getString("locality");
-                temp.area = resultSet.getString("area");
-                temp.city=resultSet.getString("city");
-                temp.state = resultSet.getString("state");
+                temp.latitude= resultSet.getDouble("latitude");
+                temp.longitude = resultSet.getDouble("longitude");
+//                temp.landMark = resultSet.getString("landMark");
+//                temp.locality = resultSet.getString("locality");
+//                temp.area = resultSet.getString("area");
+//                temp.city=resultSet.getString("city");
+//                temp.state = resultSet.getString("state");
                 temp.country = resultSet.getString("country");
 
             }
@@ -948,7 +971,7 @@ merchantDetails temp = new merchantDetails();
 
 
 
-            String loginquery = "SELECT role FROM nearmegala.merchant where ( merchantId = '"+merchantId+"' OR MerchantContact = '"+merchantId+"')" +
+            String loginquery = "SELECT role FROM nearmegala.merchant where ( merchantId = '"+merchantId+"' OR MerchantContact like '%"+merchantId+"%')" +
                     "  AND password = '"+password+"'";
 
 
@@ -2783,7 +2806,7 @@ imgurl varchar(128
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String  receiptid;
+        String  receiptid = "1";
         try {
             statement = connect.createStatement();
 
@@ -2797,7 +2820,7 @@ imgurl varchar(128
                 statement = connect.createStatement();
                 // Result set get the result of the SQL query
                 resultSet = statement
-                        .executeQuery("select max(Id),  receiptid from receipts where merchantid='"+merchantId+"'");
+                        .executeQuery("select max(receiptid) receiptid from receipts where merchantid='"+merchantId+"'");
 
 
                 while (resultSet.next()) {
@@ -2805,12 +2828,17 @@ imgurl varchar(128
                 }
 
                 //String nextIdstr = receiptid.substring(3,)
+                if(receiptid.length() == 0)
+                    return "1";
+                Integer val = Integer.valueOf(receiptid);
+                ++val;
+                return val.toString();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return "0";
+        return receiptid;
     }
 
 
@@ -2849,6 +2877,52 @@ String tableName = "receipts";
         } catch (SQLException e) {
             e.printStackTrace();
             return generatedKey.toString();
+        }
+    }
+
+    public List<contactspecificinfo> getMerchantreceiptsinfo(String merchantId,String lastId)
+    {
+        String tableName = "receipts";
+        Integer id = Integer.valueOf(lastId);
+        ArrayList<contactspecificinfo> temp = new ArrayList<contactspecificinfo>();
+        System.out.println("In getMerchantreceiptsinfo in db for merchantId "+merchantId+" lastId is "+lastId);
+
+        String sqlcmd = "select * from "+tableName+" where merchantid='"+merchantId+"' AND idreceipts>"+id;
+
+        System.out.println("getMerchantreceiptsinfo command executing is "+sqlcmd);
+
+        try
+        {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+
+
+            PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
+
+            //  stmnt.executeQuery();
+
+            resultSet = stmnt
+                    .executeQuery(sqlcmd);
+
+
+            List<contactspecificinfo> obj = resultSetToreceiptspayload(resultSet);
+            if(obj.size() == 0)
+            {
+                System.out.println("getMerchantreceiptsinfo No receipts history available ");
+
+                contactspecificinfo temp1 = new contactspecificinfo();
+                temp1.Id = -2;
+                obj.add(temp1);
+            }
+            System.out.println("getMerchantreceiptsinfo returning list size of "+obj.size());
+
+            return obj;
+        }
+        catch(Exception ex)
+        {
+            System.out.println("getMerchantreceiptsinfo in exception  "+ex.getMessage());
+
+            return temp;
         }
     }
 
@@ -2906,8 +2980,14 @@ type int(11)
         String tableName = "receipts";
         Integer id = Integer.valueOf(lastId);
         ArrayList<contactspecificinfo> temp = new ArrayList<contactspecificinfo>();
+        if(contact.contains("+") == true) {
+            contact = contact.substring(3);
 
-        String sqlcmd = "select * from "+tableName+" where contact='"+contact+"' AND idreceipts<"+lastId;
+        }
+
+        String sqlcmd = "select * from "+tableName+" where contact like '%"+contact+"' AND idreceipts>"+lastId;
+
+        System.out.println("executing sqlcmd "+sqlcmd);
         try
         {
             if(connect.isClosed() == true)
@@ -2929,7 +3009,7 @@ type int(11)
             temp1.Id = -2;
             obj.add(temp1);
         }
-            return resultSetToreceiptspayload(resultSet);
+            return obj;
         }
         catch(Exception ex)
         {

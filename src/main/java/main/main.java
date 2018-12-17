@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
@@ -167,7 +168,11 @@ public class main {
 
             String str = new Gson().toJson(ver);
 
-            System.out.println("responded with consumer version "+str);
+            LocalDateTime now = LocalDateTime.now();
+
+            String receivedOn = Util.getTimestamp(now);
+
+            System.out.println("Time : "+receivedOn+" responded with consumer version "+str);
             return str;
 
         });
@@ -186,7 +191,11 @@ public class main {
 
             String str = new Gson().toJson(temp);
 
-            System.out.println("responded with merchant version "+str);
+            LocalDateTime now = LocalDateTime.now();
+
+            String receivedOn = Util.getTimestamp(now);
+
+            System.out.println("Time : "+receivedOn+" responded with merchant version "+str);
 
             return str;
         });
@@ -259,7 +268,7 @@ public class main {
             String merchantid = request.queryParams("merchantid");
             String password = request.queryParams("password");
 
-            System.out.println("for /login .. request received merchantid "+merchantid+"  password "+password);
+            System.out.println("Time : "+Util.getCurrentDate()+" for /login .. request received merchantid "+merchantid+"  password "+password);
 
             //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
 
@@ -312,7 +321,8 @@ public class main {
                 else
                 {
                     tkobj = new tokenassigner(mid);
-                    merchantstokens.put(mid, tkobj);
+                    if(Integer.valueOf(str) == 1)
+                        merchantstokens.put(mid, tkobj);
                 }
 
                 System.out.println("for login "+merchantid+"  .. returning str "+str);
@@ -472,16 +482,24 @@ public class main {
             if(merchantstokens.containsKey(merchantid) == true)
             {
                 tkobj = merchantstokens.get(merchantid);
+                return tkobj.getNextToken(merchantid,Integer.valueOf(counter), Integer.valueOf(existingtoken),
+                        Double.valueOf(timeserved), starttime, endTime);
             }
             else
             {
-                tkobj = new tokenassigner();
-                merchantstokens.put(merchantid,tkobj);
+                System.out.println("for /getmerchanttokendetails ..counters not yet opened   "+merchantid+"  returning empty details");
+
+                return emptystr;
+
             }
+//            else
+//            {
+//                tkobj = new tokenassigner();
+//                merchantstokens.put(merchantid,tkobj);
+//            }
 
           //  tkobj.createTestData();
-            return tkobj.getNextToken(merchantid,Integer.valueOf(counter), Integer.valueOf(existingtoken),
-                    Double.valueOf(timeserved), starttime, endTime);
+
 
 
             //  return "Gopi";
@@ -668,6 +686,54 @@ public class main {
             //  return "Gopi";
         });
 
+        post("/getreceipthistory", (request, response) -> {
+
+            response.type("application/json");
+            String merchantid = request.queryParams("merchantid");
+            String lastid = request.queryParams("lastreceiptid");
+
+
+            System.out.println("for /getreceipthistory .. request received merchantid "+merchantid+"' lastid  = '"+lastid+"'");
+
+
+          //  if(merchantstokens.containsKey(merchantid) == true)
+          //  {
+                String str =  new contactspecificdatagatherer().getMerchantreceiptsinfo(merchantid, lastid);
+           // }
+
+
+            return str;
+
+
+            //  return "Gopi";
+        });
+
+        post("/deregister", (request, response) -> {
+
+            response.type("application/json");
+            String merchantid = request.queryParams("merchantid");
+            String contact = request.queryParams("contact");
+            String existingtoken = request.queryParams("existingtoken");
+
+
+            System.out.println("for /deregister .. request received merchantid "+merchantid+"' contact  = '"+contact+"'  existingtoken = '"+existingtoken+"'");
+
+            tokenassigner tkobj = null;
+
+
+            if(merchantstokens.containsKey(merchantid) == false)
+            {
+                return "-1";
+            }
+            tkobj = merchantstokens.get(merchantid);
+
+            return tkobj.deregistercustomer(contact, existingtoken);
+
+            //  return "Gopi";
+        });
+
+
+
 
         post("/posttospecificcontact", (request, response) -> {
 
@@ -697,9 +763,41 @@ public class main {
             {
                 tkobj = merchantstokens.get(merchantid);
             }
+            else
+            {
+                tkobj = new tokenassigner(merchantid);
+                merchantstokens.put(merchantid, tkobj);
+            }
+          String str =   tkobj.sendMsgToNumber(merchantid, contact,  img,  type,  receiptid);
+
+            System.out.println("for posttospecificcontact returning "+str);
+
+        return str;
 
 
-            return tkobj.sendMsgToNumber(merchantid, contact, img, type, receiptid);
+            //  return "Gopi";
+        });
+
+
+        post("/getnextreceiptid", (request, response) -> {
+
+
+            response.type("application/json");
+            String merchantid = request.queryParams("merchantid");
+
+
+
+            System.out.println("for /getnextreceiptid .. request received contact "+merchantid);
+
+            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
+
+//            String lng = request.queryParams("lng");
+//            String lastId = request.queryParams("lastId");
+            String str =  new contactspecificdatagatherer().getnextreceiptid(merchantid);
+            return str;
+
+
+
 
 
             //  return "Gopi";
@@ -768,6 +866,43 @@ public class main {
         });
 
 
+        post("/registerfortokenthruhelper", (request, response) -> {
+
+            /*
+            \
+            \
+            String merchantId, String counter, Integer existingtoken, Double timeserved, String starttime, String endTime
+             */
+            response.type("application/json");
+            String merchantid = request.queryParams("merchantid");
+            String consumercontact = request.queryParams("consumercontact");
+
+            System.out.println("for /registerfortokenthruhelper .. request received merchantid "+merchantid+" consumercontact  =  "+consumercontact);
+
+            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
+
+//            String lng = request.queryParams("lng");
+//            String lastId = request.queryParams("lastId");
+            tokenassigner tkobj = null;
+
+            if((tkobj = merchantstokens.get(merchantid)) != null)
+            {
+                // tkobj = new tokenassigner();
+                merchantstokens.put(merchantid,tkobj);
+                return tkobj.createnewtokenWithContact(merchantid, consumercontact, true);
+            }
+            else
+            {
+                System.out.println("for /getmerchanttokendetails ..counters not yet opened   "+merchantid+"  returning empty details");
+                return "-10";
+            }
+
+            //   return tkobj.createnewtoken(merchantid);
+
+
+            //  return "Gopi";
+        });
+
 
         post("/registerfortoken", (request, response) -> {
 
@@ -786,20 +921,21 @@ public class main {
 
 //            String lng = request.queryParams("lng");
 //            String lastId = request.queryParams("lastId");
-            tokenassigner tkobj = null;
+           tokenassigner tkobj = null;
 
-            if(merchantstokens.containsKey(merchantid) == true)
+            if((tkobj = merchantstokens.get(merchantid)) != null)
             {
-                tkobj = merchantstokens.get(merchantid);
+               // tkobj = new tokenassigner();
+                merchantstokens.put(merchantid,tkobj);
+                return tkobj.createnewtokenWithContact(merchantid, consumercontact, false);
             }
             else
             {
-                tkobj = new tokenassigner();
-                merchantstokens.put(merchantid,tkobj);
+                System.out.println("for /getmerchanttokendetails ..counters not yet opened   "+merchantid+"  returning empty details");
+                return "-10";
             }
 
-            return tkobj.createnewtokenWithContact(merchantid, consumercontact);
-         //   return tkobj.createnewtoken(merchantid);
+            //   return tkobj.createnewtoken(merchantid);
 
 
             //  return "Gopi";

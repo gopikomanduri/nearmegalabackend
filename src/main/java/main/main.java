@@ -275,6 +275,7 @@ public class main {
 //            String lng = request.queryParams("lng");
 //            String lastId = request.queryParams("lastId");
             merchant reg = new merchant();
+
             String str = reg.isValidMerchant(merchantid,password);
 //            if(Integer.valueOf(str) == 1)
 //            {
@@ -603,7 +604,7 @@ public class main {
             if(merchantstokens.containsKey(merchantid) == true)
             {
                 tkobj = merchantstokens.get(merchantid);
-                String str = tkobj.getTokenStatus(merchantid,Integer.valueOf(token), contact, existingStatus);
+                String str = tkobj.getTokenStatus(merchantid,Integer.valueOf(token), contact, existingStatus,-1);
 
                 System.out.println("for gettokenstatus , returning "+str);
                 return str;
@@ -770,6 +771,7 @@ public class main {
             }
           String str =   tkobj.sendMsgToNumber(merchantid, contact,  img,  type,  receiptid);
 
+
             System.out.println("for posttospecificcontact returning "+str);
 
         return str;
@@ -888,7 +890,8 @@ public class main {
             if((tkobj = merchantstokens.get(merchantid)) != null)
             {
                 // tkobj = new tokenassigner();
-                merchantstokens.put(merchantid,tkobj);
+                //Gopi.. commented on 24th dec
+            //    merchantstokens.put(merchantid,tkobj);
                 return tkobj.createnewtokenWithContact(merchantid, consumercontact, true);
             }
             else
@@ -1053,6 +1056,77 @@ public class main {
         });
 
 
+        post("/addsmsid", (request, response) -> {
+
+            /*
+    public String fetchjoineecount(Integer statusid, String geohash) {
+             */
+            response.type("application/json");
+
+            String smsid = request.queryParams("id");
+
+            String password = request.queryParams("password");
+
+
+            System.out.println("for /addsmsid .. request received . smsid "+smsid+" password "+password);
+
+            smshandlerclass.smsids.add(smsid);
+
+             MySQLAccess.dbObj.insertIntosmsids(smsid,password);
+
+            return "0";
+
+            //  return "Gopi";
+        });
+
+
+        post("/deactivatesmsid", (request, response) -> {
+
+            /*
+    public String fetchjoineecount(Integer statusid, String geohash) {
+             */
+            response.type("application/json");
+
+            String smsid = request.queryParams("id");
+
+
+
+            System.out.println("for /deactivatesmsid .. request received . smsid "+smsid);
+
+            smshandlerclass.deactivatesmsid(smsid);
+
+            MySQLAccess.dbObj.deactivatesmsid(smsid);
+
+            return "0";
+
+            //  return "Gopi";
+        });
+
+
+
+
+        post("/deletesmsid", (request, response) -> {
+
+            /*
+    public String fetchjoineecount(Integer statusid, String geohash) {
+             */
+            response.type("application/json");
+
+            String smsid = request.queryParams("id");
+
+
+            System.out.println("for /deletesmsid .. request received . smsid "+smsid+" ");
+
+
+
+            MySQLAccess.dbObj.deletefromsmsids(smsid);
+
+            return "0";
+
+            //  return "Gopi";
+        });
+
+
 
         post("/StartNegotiate", (request, response) -> {
             response.type("application/json");
@@ -1107,6 +1181,88 @@ public class main {
             NegotiationHandler obj = new NegotiationHandler();
             String res =  obj.NegotiationsResponse(merchantId, geoHash, Integer.valueOf(negotiationid), payload);
             System.out.println("for /negotiationresponse .. response sent "+res);
+            return res;
+
+            //  return "Gopi";
+        });
+
+        post("/anypendingtokens", (request, response) -> {
+            response.type("application/json");
+            String merchantid = request.queryParams("merchantid");
+
+
+
+            System.out.println("for /anypendingtokens .. request received "+merchantid);
+
+            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
+
+//            String lng = request.queryParams("lng");
+//            String lastId = request.queryParams("lastId");
+            String res = "-0";
+            tokenassigner tkobj = null;
+
+            if((tkobj = merchantstokens.get(merchantid)) != null)
+            {
+                // tkobj = new tokenassigner();
+                res = tkobj.anypendingtokens();
+            }
+            System.out.println("for  /anypendingtokens .. response sent "+res);
+            return res;
+
+            //  return "Gopi";
+        });
+
+
+
+        post("/currenttokenforallcounterswithmerchantid", (request, response) -> {
+            response.type("application/json");
+            String merchantid = request.queryParams("merchantid");
+
+
+
+            System.out.println("for /currenttokenforcounterswithmerchantid .. request received "+merchantid);
+
+            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
+
+//            String lng = request.queryParams("lng");
+//            String lastId = request.queryParams("lastId");
+            String res = "-12";
+            tokenassigner tkobj = null;
+
+            if((tkobj = merchantstokens.get(merchantid)) != null)
+            {
+                // tkobj = new tokenassigner();
+                res = tkobj.currentTokenForAllCounters();
+            }
+            System.out.println("for  /currenttokenforcounterswithmerchantid .. response sent "+res);
+            return res;
+
+            //  return "Gopi";
+        });
+
+        post("/currenttokenforcounterswithmerchantid", (request, response) -> {
+            response.type("application/json");
+            String merchantid = request.queryParams("merchantid");
+            String counter = request.queryParams("counters");
+
+
+
+
+            System.out.println("for /currenttokenforcounterswithmerchantid .. request received "+merchantid+"  counter is "+counter);
+
+            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
+
+//            String lng = request.queryParams("lng");
+//            String lastId = request.queryParams("lastId");
+            String res = "-12";
+            tokenassigner tkobj = null;
+
+            if((tkobj = merchantstokens.get(merchantid)) != null)
+            {
+                // tkobj = new tokenassigner();
+                res = tkobj.currentTokenForCounters(counter);
+            }
+            System.out.println("for  /currenttokenforcounterswithmerchantid .. response sent "+res);
             return res;
 
             //  return "Gopi";

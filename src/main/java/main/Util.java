@@ -24,6 +24,16 @@ public class Util {
         return day;
     }
 
+
+    public static boolean isNumeric(String strNum) {
+        try {
+            long d = Long.parseLong(strNum);
+        } catch (Exception ex) {
+            return false;
+        }
+        return true;
+    }
+
     public static String getTimestamp(LocalDateTime now)
     {
         int year = now.getYear();

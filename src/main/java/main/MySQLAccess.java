@@ -6,6 +6,7 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 class LatLng
 {
@@ -757,6 +758,147 @@ Integer generatedKey = -1;
     }
 
 
+    public Integer deletefromsmsids(String id)
+    {
+
+        /*
+
+idsmsid int(11) AI PK
+userid varchar(45)
+password varchar(45)
+         */
+        String tableName = "smsids";
+
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            preparedStatement = connect
+                    .prepareStatement("delete from smsids where userid like ? ; ");
+            preparedStatement.setString(1, "id");
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            return 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public Integer deactivatesmsid(String id)
+    {
+
+        /*
+
+idsmsid int(11) AI PK
+userid varchar(45)
+password varchar(45)
+         */
+        String tableName = "smsids";
+
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+
+            PreparedStatement update = connect.prepareStatement
+                    ("UPDATE smsids SET active = 0 WHERE userid = ?");
+
+
+            update.setString(1, id);
+
+            update.executeUpdate();
+
+            update.close();
+            return 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public Integer insertIntosmsids(String id, String password)
+    {
+
+        /*
+
+idsmsid int(11) AI PK
+userid varchar(45)
+password varchar(45)
+         */
+        String tableName = "smsids";
+
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            String sql = "INSERT INTO "+tableName+" (userid, password)" +
+                    "VALUES (?, ?)";
+            PreparedStatement preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setString(1,id);
+            preparedStatement.setString(2, password);
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            return 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+
+
+    public List<String> fetchsmsids()
+    {
+        List<String> ids = new LinkedList<>();
+        try
+        {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+
+
+
+            String pointsQuery = "SELECT userid FROM smsids where active=1";
+
+            statement = connect.createStatement();
+
+            // Result set get the result of the SQL query
+            resultSet = statement
+                    .executeQuery(pointsQuery);
+
+
+
+            String smsid;
+            while (resultSet.next()) {
+                smsid= resultSet.getString("userid");
+                ids.add(smsid);
+            }
+
+            return ids;
+        }
+        catch(Exception ex)
+        {
+            System.out.println("exception while fetching smsids ");
+            return ids;
+        }
+    }
+
     public Integer insertIntoMerchantAsEmp(String id, String password, String merchantId, String tableName)
     {
 
@@ -780,6 +922,8 @@ closedon datetime
         }
 
         try {
+
+
             String sql = "INSERT INTO "+tableName+" (counterid, password,merchantid)" +
                     "VALUES (?, ?, ?)";
             PreparedStatement preparedStatement = connect.prepareStatement(sql);
@@ -1024,6 +1168,24 @@ merchantDetails temp = new merchantDetails();
 
                    if(resultSet.next()) {
                        role = resultSet.getInt("role");
+                   }
+                   else
+                   {
+                       loginquery = "SELECT role FROM nearmegala.viewers where ( counterId = '"+merchantId+"')" +
+                               "  AND password = '"+password+"'";
+
+
+                       System.out.println("query executing is "+loginquery);
+                       statement = connect.createStatement();
+
+                       // Result set get the result of the SQL query
+                       resultSet = statement
+                               .executeQuery(loginquery);
+
+
+                       if(resultSet.next()) {
+                           role = resultSet.getInt("role");
+                       }
                    }
                }
 
@@ -2170,6 +2332,32 @@ minamount int(6)
 
     }
 
+    public void createTableIfNotExistGeneric( String tableName) {
+
+        try {
+
+
+            String mytabename = tableName;
+            DatabaseMetaData dmd = connect.getMetaData();
+
+
+            ResultSet tables = dmd.getTables(null, null, mytabename, null);
+            if (tables.next()) {
+                // Table exists
+            } else {
+                // CREATE TABLE new_tbl LIKE orig_tbl;
+                statement = connect.createStatement();
+                String createStatement = "CREATE TABLE "+mytabename+"  LIKE "+tableName+" ;";
+                statement.executeUpdate(createStatement);
+                //   statement.close();
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+    }
 
     public void createTableIfNotExistGeneric( String tableName, String geo) {
 

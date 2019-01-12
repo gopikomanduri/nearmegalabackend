@@ -9,7 +9,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -49,6 +52,7 @@ public class tokenassigner {
     ConcurrentLinkedQueue<Integer> pendingTokens = new ConcurrentLinkedQueue<>();
     ConcurrentLinkedQueue<String> pendingNumbers = new ConcurrentLinkedQueue<>();
     ConcurrentLinkedQueue<tokenDone> doneTokens = new ConcurrentLinkedQueue<>();
+    ConcurrentHashMap<Integer,String> runningTokens = new ConcurrentHashMap<>();
 
     ConcurrentHashMap<Integer, ConcurrentLinkedQueue<tokenDone>>  countersDoneDetails = new ConcurrentHashMap<>();
 
@@ -76,11 +80,14 @@ public class tokenassigner {
 
     HashMap<Integer,String> tokenWithContact = new HashMap<>();
     Set<Integer> deregisterset = new HashSet<>();
+    smshandlerclass smsobj = new smshandlerclass();
+    Integer smsindex = 0;
+    String merchantName = "";
 
 
     public  tokenassigner(String merchantId)
     {
-        String merchantName = MySQLAccess.dbObj.getMerchantNameForId(merchantId);
+         merchantName = MySQLAccess.dbObj.getMerchantNameForId(merchantId);
         String dpimg = MySQLAccess.dbObj.getMerchantDpForId(merchantId);
         merDetails.merchantname = merchantName;
         merDetails.merchanturl = dpimg;
@@ -110,7 +117,7 @@ public class tokenassigner {
 
         System.out.println("in tokenassigner getMerchantTokenDetails for merchantId :"+merchantId);
 
-        if(merDetails.merchantname == null || merDetails.merchantname.length() == 0)
+        if(merDetails.merchantname.length() == 0)
         {
             String merchantName = MySQLAccess.dbObj.getMerchantNameForId(merchantId);
             String dpimg = MySQLAccess.dbObj.getMerchantDpForId(merchantId);
@@ -179,23 +186,28 @@ public class tokenassigner {
         /*
         for test ..
          */
+        Integer viewerscount = 1;
         System.out.println("createcounters and helpers for merchantId :"+merchantId+" " +
                 "counterscount = "+counterscount.toString()+"  helperscount = "+helperscount.toString());
 
 
         List<counteremppayload> existingids =  createcounters(merchantId, counterscount, "counters");
         List<counteremppayload> existinghelperids =  createcounters(merchantId, helperscount, "helpers");
+        createcounters(merchantId, viewerscount, "viewers");
 
         counterandhelper obj = new counterandhelper();
 
         obj.counterslist = existingids;
         obj.helperslist = existinghelperids;
+       // obj.viewerlist = existingviewerids;
 
 
 
 
         return new Gson().toJson(obj);
     }
+
+
 
 
     public synchronized List<counteremppayload> createcounters(String merchantId, Integer counterscount, String tableName)
@@ -218,7 +230,12 @@ public class tokenassigner {
 
        int counter = 0;
 
-        if(tableName.equalsIgnoreCase("counters"))
+       if(tableName.equalsIgnoreCase("viewers"))
+       {
+           counter = 0;
+       }
+
+       else if(tableName.equalsIgnoreCase("counters"))
         {
             counter = currentMaxCounter.get();
         }
@@ -230,7 +247,12 @@ public class tokenassigner {
             for( i=counter+1;i<=counter+counterscount;i++)
             {
                 String id;
-                if(tableName.equalsIgnoreCase("helpers"))
+
+                if(tableName.equalsIgnoreCase("viewers"))
+                {
+                    id = merchantId+"_"+i.toString()+"_viewers";
+                }
+               else if(tableName.equalsIgnoreCase("helpers"))
                 {
                     id = merchantId+"_"+i.toString()+"_helper";
                 }
@@ -310,7 +332,17 @@ public class tokenassigner {
             registeredContacts.add(contact);
         }
             pendingNumbers.add(contact);
-            sendMsgToNumber(merchantId, contact, "your_token_is_"+tok.token+"_you_are_at_"+tok.youareat);
+
+        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+            // Simulate a long-running Job
+            try {
+                sendMsgToNumber(merchantId, contact, "your_token_is_"+tok.token+"_you_are_at_"+tok.youareat);
+
+            } catch (Exception e) {
+                System.out.println("exception in future.. in creating new token "+e.getMessage());
+            }
+            System.out.println("I'll run in a separate thread than the main thread.");
+        });
 
 
             if(helper == true)
@@ -335,53 +367,97 @@ public class tokenassigner {
 
 
 
+        if(Util.isNumeric(contact) == false)
+            return "1";
 
 
 
-        String myPasscode = "2013";
-        String myUsername = "gopi.komanduri";
-        String toPhoneNumber = contact;
-        String myMessage = msg;
-
-        HttpClient client = new DefaultHttpClient();
-
-        String connmsg = "http://cloud.fowiz.com/api/message_http_api.php?username="+myUsername+
-                "&phonenumber="+toPhoneNumber+"&message="+myMessage+"&passcode="+myPasscode;
-        System.out.println("sending following message "+connmsg);
-
-        HttpGet request = new HttpGet(connmsg);
         try {
-            HttpResponse response = client.execute(request);
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            System.out.println(" exception in sendmsgtonumber thread "+e.getMessage());
+            e.printStackTrace();
+        }
 
 
-            BufferedReader rd = new BufferedReader
-                    (new InputStreamReader(response.getEntity().getContent()));
+        Integer success = 0;
+        do {
 
-            String line = "";
-            StringBuffer myres = new StringBuffer();
-            while ((line = rd.readLine()) != null) {
-                myres.append(line);
+
+            String smsid = smsobj.getnextsmsid(smsindex);
+            ++smsindex;
+
+            String myPasscode = "2013";
+            String myUsername = smsid;
+            String toPhoneNumber = contact;
+            if(merDetails.merchantname.length() == 0)
+            {
+                String merchantName = MySQLAccess.dbObj.getMerchantNameForId(merchantId);
+                String dpimg = MySQLAccess.dbObj.getMerchantDpForId(merchantId);
+                merDetails.merchantname = merchantName;
+                merDetails.merchanturl = dpimg;
             }
+            String myMessage = merDetails.merchantname + "_" + msg;
 
-            return "0";
+            HttpClient client = new DefaultHttpClient();
 
-        }
-        catch(Exception ex)
-        {
-            System.out.println("Unable to send message "+ex.getMessage());
-            return "0";
-        }
+            String connmsg = "http://cloud.fowiz.com/api/message_http_api.php?username=" + myUsername +
+                    "&phonenumber=" + toPhoneNumber + "&message=" + myMessage + "&passcode=" + myPasscode;
+            System.out.println("after waiting for 1 sec .. sending following message " + connmsg);
+
+            HttpGet request = new HttpGet(connmsg);
+            try {
+                HttpResponse response = client.execute(request);
+
+
+                BufferedReader rd = new BufferedReader
+                        (new InputStreamReader(response.getEntity().getContent()));
+
+                String line = "";
+                //      StringBuffer myres = new StringBuffer();
+                while ((line = rd.readLine()) != null) {
+
+                    if (line.contains("\"success\":1") == true) {
+                        success = 1;
+                    }
+                    //   myres.append(line);
+                }
+
+
+            } catch (Exception ex) {
+                success = 0;
+                System.out.println("Unable to send message " + ex.getMessage());
+            }
+        }while(success == 0);
+
+        return "1";
 
     }
+
+
 
 
     public synchronized String sendMsgToNumber(String merchantId, String contact, String msg, String type, String receiptid)
     {
 
-     //   String merchantName = MySQLAccess.dbObj.getMerchantNameForId(merchantId);
+        String ret = "0";
+
+
+        if(Util.isNumeric(contact) == false)
+            return ret;
+
+
+
+        //   String merchantName = MySQLAccess.dbObj.getMerchantNameForId(merchantId);
      // Integer generatedNum =   MySQLAccess.dbObj.sendMsgToNumber( merchantId,  contact,msg);
      // String msgUrl = "http://cloud.fowiz.com/api/message_http_api.php?username=gopi.komanduri&phonenumber=+918686091898&message= "+merchantName+" "+msg+"&passcode=2013";
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            System.out.println("IN sendmsgtoNumber second.. exception "+e.getMessage());
+            e.printStackTrace();
+        }
 
         Integer itype = Integer.valueOf(type);
         if(itype == 0)
@@ -394,15 +470,26 @@ public class tokenassigner {
             MySQLAccess.dbObj.sendMsgToNumber(merchantId, contact, msg, receiptid);
 
             String myPasscode = "2013";
-            String myUsername = "gopi.komanduri";
+            String smsid = smsobj.getnextsmsid(smsindex);
+            ++smsindex;
+            String myUsername = smsid;
             String toPhoneNumber = contact;
-            String myMessage = msg;
+
+            if(merDetails.merchantname.length() == 0)
+            {
+                String merchantName = MySQLAccess.dbObj.getMerchantNameForId(merchantId);
+                String dpimg = MySQLAccess.dbObj.getMerchantDpForId(merchantId);
+                merDetails.merchantname = merchantName;
+                merDetails.merchanturl = dpimg;
+            }
+            String myMessage = merDetails.merchantname+"_"+msg;
 
             HttpClient client = new DefaultHttpClient();
 
             String connmsg = "http://cloud.fowiz.com/api/message_http_api.php?username=" + myUsername +
                     "&phonenumber=" + toPhoneNumber + "&message=" + myMessage + "&passcode=" + myPasscode;
             System.out.println("sending following message " + connmsg);
+
 
             HttpGet request = new HttpGet(connmsg);
             try {
@@ -413,12 +500,16 @@ public class tokenassigner {
                         (new InputStreamReader(response.getEntity().getContent()));
 
                 String line = "";
-                StringBuffer myres = new StringBuffer();
+              //  StringBuffer myres = new StringBuffer();
                 while ((line = rd.readLine()) != null) {
-                    myres.append(line);
+                    if(line.contains("\"success\":1"))
+                    {
+                        ret = "1";
+                    }
+                  //  myres.append(line);
                 }
 
-                return "0";
+                return ret;
 
             } catch (Exception ex) {
                 System.out.println("Unable to send message " + ex.getMessage());
@@ -428,21 +519,71 @@ public class tokenassigner {
 
         }
 
-        return "0";
+        return ret;
 
 
     }
 
-    public synchronized String getTokenStatus(String merchantId, Integer token, String contact, String existingStatus)
+    public void invokeFromGetTokenStatus(String merchantId, Integer token, String contact, String existingStatus, String tokenstatus, String status)
+    {
+        if (existingStatus.equalsIgnoreCase(status) == false) {
+
+            CompletableFuture<Void> future1 = CompletableFuture.runAsync(() -> {
+                // Simulate a long-running Job
+                try {
+                    if(currentsmstokens.containsKey(token) == true)
+                    sendMsgToNumber(merchantId, contact, tokenstatus);
+
+                } catch (Exception e) {
+                    System.out.println("exception in future..in get topkemn status " + e.getMessage());
+                }
+                System.out.println("I'll run in a separate thread than the main thread.");
+            });
+
+        }
+    }
+
+
+    public synchronized String getTokenStatus(String merchantId, Integer token, String contact, String existingStatus, Integer counter)
     {
 
         String status = getTokenStatus(merchantId, token);
 
+        Integer intStatus =  Integer.valueOf(status);
+        String tokenstatus = "token_status=" + status;
 
-        String tokenstatus = "token_status="+status;
-        if(existingStatus.equalsIgnoreCase(status) == false) {
-            sendMsgToNumber(merchantId, contact, tokenstatus);
+        if(intStatus == 0)
+        {
+            tokenstatus = "Please_proceed_to_the_counter";
+                    if(counter != -1)
+                    {
+                        tokenstatus += "_"+counter.toString();
+                    }
+            invokeFromGetTokenStatus(merchantId, token, contact, existingStatus, tokenstatus, status);
         }
+
+        else if(intStatus < 6)
+        {
+            invokeFromGetTokenStatus(merchantId, token, contact, existingStatus, tokenstatus, status);
+        }
+        else if(intStatus < 13 && intStatus%2 ==0)
+        {
+            invokeFromGetTokenStatus(merchantId, token, contact, existingStatus, tokenstatus, status);
+        }
+        else if(intStatus < 26 && intStatus%5 == 0)
+        {
+            invokeFromGetTokenStatus(merchantId, token, contact, existingStatus, tokenstatus, status);
+        }
+        else if(intStatus%10 == 0)
+        {
+            invokeFromGetTokenStatus(merchantId, token, contact, existingStatus, tokenstatus, status);
+        }
+
+    //    if(((intStatus > 25 ) && (intStatus %10 == 0)) ||  ((intStatus > 12 ) && (intStatus %5 == 0)) || ((intStatus > 5 ) && (intStatus %2 == 0)) || (intStatus > 0)){
+       // if((intStatus < 5 ) || (intStatus %2 != 0)) {
+
+
+
 
         System.out.println("for getTokenStatus . returning "+status);
         return status;
@@ -550,6 +691,9 @@ public class tokenassigner {
     public synchronized String getNextToken(String merchantId, Integer counter, Integer existingtoken, Double timeserved, String starttime, String endTime)
     {
 
+        LocalDateTime now1 = LocalDateTime.now();
+
+        System.out.println("start time "+Util.getTimestamp(now1));
         System.out.println("getNextToken   merchantId  = "+merchantId.toString()+" " +
                 "existingtoken ="+existingtoken.toString()+" ");
 
@@ -598,9 +742,9 @@ public class tokenassigner {
 
       System.out.println("The followoing are penidng tokens");
 
-        for(Integer u : pendingTokens){
-           System.out.println("token is :"+u.toString());
-        }
+//        for(Integer u : pendingTokens){
+//           System.out.println("token is :"+u.toString());
+//        }
         System.out.println("getNextToken   merchantId  = "+merchantId.toString()+" counter  "+counter+"pendingTokens size is  = "+pendingTokens.size());
 
         Integer tok = -1;
@@ -613,17 +757,39 @@ public class tokenassigner {
             if(pendingTokens.size() > 0)
                 currentMinPendingToken.set(pendingTokens.element());
 
-        for(Map.Entry<Integer,String> entry : currentsmstokens.entrySet()) {
-            Integer key = entry.getKey();
-            String value = entry.getValue();
+//        for(Map.Entry<Integer,String> entry : currentsmstokens.entrySet()) {
+//            Integer key = entry.getKey();
+//            String value = entry.getValue();
+//
+//            getTokenStatus(merchantId,key, value, "-1");
+//
+//            System.out.println(key + " => " + value);
+//        }
 
-            getTokenStatus(merchantId,key, value, "-1");
+        System.out.println("smstoken count is "+currentsmstokens.size());
 
-            System.out.println(key + " => " + value);
-        }
+            if(currentsmstokens.containsKey(tok) == true) {
 
-            if(currentsmstokens.containsKey(tok) == true)
-                currentsmstokens.remove(tok);
+
+                Integer finalTok = tok;
+                CompletableFuture<Void> future1 = CompletableFuture.runAsync(() -> {
+                    // Simulate a long-running Job
+                    try {
+                        String msg = "Please_proceed_to_counter_"+counter.toString();
+                        sendMsgToNumber(merchantId, currentsmstokens.get(finalTok),msg);
+
+                    } catch (Exception e) {
+                        System.out.println("exception in future..in getnexttoken when number is matched "+e.getMessage());
+                    }
+                    currentsmstokens.remove(finalTok);
+
+                    System.out.println("I'll run in a separate thread than the main thread.");
+                });
+
+
+          //      getTokenStatus(merchantId,tok, currentsmstokens.get(tok), "-1");
+
+            }
     //    }while(deregisterset.contains(tok) == true);
 
    //     deregisterset.remove(tok);
@@ -641,9 +807,104 @@ public class tokenassigner {
 //            System.out.println(key + " => " + value);
 //        }
 
+        // Using Lambda Expression
+            // Simulate a long-running Job
+            try {
+        for(Map.Entry<Integer,String> entry : currentsmstokens.entrySet()) {
+            Integer key = entry.getKey();
+            String value = entry.getValue();
+
+            CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+                try {
+
+
+                    getTokenStatus(merchantId, key, value, "-1", counter);
+                }
+                catch(Exception ex)
+                {
+                    System.out.println("exception in future.."+ex.getMessage());
+                }
+                    });
+
+            System.out.println(key + " => " + value);
+        }
+           } catch (Exception e) {
+                System.out.println("exception in for loop.."+e.getMessage());
+            }
+            System.out.println("I'll run in a separate thread than the main thread.");
+
+        LocalDateTime now2 = LocalDateTime.now();
+
+        System.out.println("end time "+Util.getTimestamp(now2));
+
+
+        runningTokens.put(counter,tok.toString());
+
         return tok.toString();
 
     }
+
+    public synchronized String currentTokenForCounter(Integer counter)
+    {
+
+        System.out.println("In currentTokenForCounter "+counter);
+
+        if(runningTokens.contains(counter))
+            return runningTokens.get(counter);
+            else
+                return "-12";
+
+    }
+
+    public synchronized String currentTokenForCounters(String counter)
+    {
+
+        System.out.println("In currentTokenForCounters "+counter);
+
+        Type type1 = new ArrayList<String>().getClass();
+        List<CounterData> countertokens = new ArrayList<CounterData>();
+
+        List<String> counters = new Gson().fromJson(counter, type1);
+
+
+        for(int i=0;i<counters.size();++i)
+        {
+            Integer counteval = Integer.valueOf(counters.get(i));
+            CounterData temp = new CounterData();
+            temp.CounterId = counters.get(i);
+            temp.tokenId = currentTokenForCounter(counteval);
+
+            System.out.println("In currentTokenForCounter. for counter "+counteval+"  tokenId "+temp.tokenId);
+
+            countertokens.add(temp);
+
+        }
+       String str = new Gson().toJson(countertokens);
+
+        return str;
+
+    }
+
+    public synchronized String currentTokenForAllCounters()
+    {
+
+        System.out.println("In currentTokenForAllCounters ");
+
+
+        String str = new Gson().toJson(runningTokens);
+
+        return str;
+
+    }
+
+    public synchronized String anypendingtokens()
+    {
+       if(pendingTokens.size() > 0)
+           return "1";
+       return "0";
+
+    }
+
 
 
     public String getBirthdayCount(String merchantId)

@@ -1,0 +1,3754 @@
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+--
+-- Host: localhost    Database: locator
+-- ------------------------------------------------------
+-- Server version	5.7.22-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `locator`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `locator` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `locator`;
+
+--
+-- Table structure for table `history`
+--
+
+DROP TABLE IF EXISTS `history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `history` (
+  `idHISTORY` int(11) NOT NULL AUTO_INCREMENT,
+  `fromUser` varchar(16) NOT NULL,
+  `toUser` varchar(45) NOT NULL,
+  `Response` varchar(250) DEFAULT NULL,
+  `when` datetime NOT NULL,
+  PRIMARY KEY (`idHISTORY`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `history`
+--
+
+LOCK TABLES `history` WRITE;
+/*!40000 ALTER TABLE `history` DISABLE KEYS */;
+/*!40000 ALTER TABLE `history` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `profile`
+--
+
+DROP TABLE IF EXISTS `profile`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `profile` (
+  `NUMBER` varchar(255) NOT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`NUMBER`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `profile`
+--
+
+LOCK TABLES `profile` WRITE;
+/*!40000 ALTER TABLE `profile` DISABLE KEYS */;
+/*!40000 ALTER TABLE `profile` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `registrations`
+--
+
+DROP TABLE IF EXISTS `registrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `registrations` (
+  `CONTACT` varchar(255) NOT NULL,
+  `MOBILESTAMP` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`CONTACT`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `registrations`
+--
+
+LOCK TABLES `registrations` WRITE;
+/*!40000 ALTER TABLE `registrations` DISABLE KEYS */;
+INSERT INTO `registrations` VALUES ('8179442558','8179442558');
+/*!40000 ALTER TABLE `registrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping events for database 'locator'
+--
+
+--
+-- Dumping routines for database 'locator'
+--
+
+--
+-- Current Database: `nearmegala`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `nearmegala` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `nearmegala`;
+
+--
+-- Table structure for table `ad_abcdef`
+--
+
+DROP TABLE IF EXISTS `ad_abcdef`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_abcdef` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_abcdef`
+--
+
+LOCK TABLES `ad_abcdef` WRITE;
+/*!40000 ALTER TABLE `ad_abcdef` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ad_abcdef` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_dpr0kj`
+--
+
+DROP TABLE IF EXISTS `ad_dpr0kj`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_dpr0kj` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_dpr0kj`
+--
+
+LOCK TABLES `ad_dpr0kj` WRITE;
+/*!40000 ALTER TABLE `ad_dpr0kj` DISABLE KEYS */;
+INSERT INTO `ad_dpr0kj` VALUES (1,'merchant_290',NULL,NULL,NULL,NULL,10,12,2018,'http://res.cloudinary.com/locator/image/upload/v1544462074/rgybxm1gaztc5zauhywx.jpg',NULL,'22:44:34 2018-12-10',NULL,'shop name');
+/*!40000 ALTER TABLE `ad_dpr0kj` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tdr1rx`
+--
+
+DROP TABLE IF EXISTS `ad_tdr1rx`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tdr1rx` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tdr1rx`
+--
+
+LOCK TABLES `ad_tdr1rx` WRITE;
+/*!40000 ALTER TABLE `ad_tdr1rx` DISABLE KEYS */;
+INSERT INTO `ad_tdr1rx` VALUES (1,'merchant_41',1,2018,8,25,21,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534841824/merchant_41/gsrvmfxpoupmlebvquvb.png','Znd','08:57:06 2018-08-21','Hdb','shop name'),(2,'merchant_43',1,21,7,2018,21,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534856633/merchant_43/j5ph69aqlkhnxnk721sz.png','','13:03:55 2018-08-21','','shop name');
+/*!40000 ALTER TABLE `ad_tdr1rx` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tdr1tv`
+--
+
+DROP TABLE IF EXISTS `ad_tdr1tv`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tdr1tv` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tdr1tv`
+--
+
+LOCK TABLES `ad_tdr1tv` WRITE;
+/*!40000 ALTER TABLE `ad_tdr1tv` DISABLE KEYS */;
+INSERT INTO `ad_tdr1tv` VALUES (1,'merchant_321',1,26,11,2018,26,11,2018,'http://res.cloudinary.com/locator/image/upload/v1543236239/merchant_290/dlc1mb0hqsi1yobyehy9.jpg','','18:14:01 2018-11-26','','shop name');
+/*!40000 ALTER TABLE `ad_tdr1tv` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tdr1v9`
+--
+
+DROP TABLE IF EXISTS `ad_tdr1v9`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tdr1v9` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tdr1v9`
+--
+
+LOCK TABLES `ad_tdr1v9` WRITE;
+/*!40000 ALTER TABLE `ad_tdr1v9` DISABLE KEYS */;
+INSERT INTO `ad_tdr1v9` VALUES (1,'merchant_290',NULL,NULL,NULL,NULL,10,12,2018,'http://res.cloudinary.com/locator/image/upload/v1544462980/j7uwstwdkowhq7i9txvo.jpg',NULL,'22:59:41 2018-12-10',NULL,'shop name'),(2,'merchant_290',NULL,NULL,NULL,NULL,16,12,2018,'http://res.cloudinary.com/locator/image/upload/v1544953429/imt5sjnngkqxy46mbobf.jpg',NULL,'15:13:50 2018-12-16',NULL,'shop name');
+/*!40000 ALTER TABLE `ad_tdr1v9` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tdr1xp`
+--
+
+DROP TABLE IF EXISTS `ad_tdr1xp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tdr1xp` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tdr1xp`
+--
+
+LOCK TABLES `ad_tdr1xp` WRITE;
+/*!40000 ALTER TABLE `ad_tdr1xp` DISABLE KEYS */;
+INSERT INTO `ad_tdr1xp` VALUES (1,'merchant_166',1,2,11,2018,2,11,2018,'http://res.cloudinary.com/locator/image/upload/v1541134345/merchant_166/jwtydjykbdwwork9r9ck.png','','10:22:28 2018-11-02','','shop name');
+/*!40000 ALTER TABLE `ad_tdr1xp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tdr1z2`
+--
+
+DROP TABLE IF EXISTS `ad_tdr1z2`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tdr1z2` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tdr1z2`
+--
+
+LOCK TABLES `ad_tdr1z2` WRITE;
+/*!40000 ALTER TABLE `ad_tdr1z2` DISABLE KEYS */;
+INSERT INTO `ad_tdr1z2` VALUES (1,'merchant_35',1,17,7,2018,17,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534516223/merchant_35/uhekxscox5iuswy8amti.jpg','delight','14:30:27 2018-08-17','delhi','shop name'),(2,'merchant_35',1,17,7,2018,17,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534528858/merchant_35/i4jor6f9wp4ut6h5fbxe.jpg','andhra image','18:01:00 2018-08-17','andhra','shop name'),(3,'merchant_64',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535524365/merchant_64/yoh1h7klw8zvqxdfcl0p.jpg','cake','12:02:47 2018-08-29','','shop name');
+/*!40000 ALTER TABLE `ad_tdr1z2` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tdr1z3`
+--
+
+DROP TABLE IF EXISTS `ad_tdr1z3`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tdr1z3` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=362 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tdr1z3`
+--
+
+LOCK TABLES `ad_tdr1z3` WRITE;
+/*!40000 ALTER TABLE `ad_tdr1z3` DISABLE KEYS */;
+INSERT INTO `ad_tdr1z3` VALUES (53,'merchant_0',1,9,7,2018,9,8,2018,'http://res.cloudinary.com/locator/image/upload/v1533819353/merchant_0_%2B918179442558/spxjntacmvgadwxthn4d.jpg','fhfy g','12:56:09 2018-08-09','555545','shop name'),(54,'merchant_15',1,10,7,2018,9,8,2018,'http://res.cloudinary.com/locator/image/upload/v1533849552/merchant_15_%2B918247638529/yyiaiqa2f5vqtrux3bj9.jpg','dghh','21:19:25 2018-08-09','dffg','shop name'),(55,'merchant_0',1,10,7,2018,10,8,2018,'http://res.cloudinary.com/locator/image/upload/v1533901840/merchant_0_%2B918179442558/vxytwrsblqlnpnxkcp64.jpg','ikea desc','11:50:42 2018-08-10','ikea','shop name'),(56,'merchant_15',1,10,7,2018,10,8,2018,'http://res.cloudinary.com/locator/image/upload/v1533902110/merchant_15_%2B918247638529/sepelyrdfouev7go4nja.jpg','13557','11:55:13 2018-08-10','my cod','shop name'),(57,'merchant_0',1,11,7,2018,10,8,2018,'http://res.cloudinary.com/locator/image/upload/v1533931443/merchant_0_%2B918179442558/d096ehfdeku2zj7wrmr8.jpg','fhhjj','20:04:23 2018-08-10','56567','shop name'),(58,'merchant_17',1,11,7,2018,10,8,2018,'http://res.cloudinary.com/locator/image/upload/v1533934221/merchant_17_%2B918247638529/v8vzz1pt9qpzfaisfyqm.jpg','fhcgv','20:50:31 2018-08-10','444444','shop name'),(59,'merchant_17',1,11,7,2018,11,8,2018,'http://res.cloudinary.com/locator/image/upload/v1533987729/merchant_17_%2B918247638529/w73si5lq34abe2tcyujc.jpg','gkkk','11:42:12 2018-08-11','5767','shop name'),(60,'merchant_17',1,11,7,2018,11,8,2018,'http://res.cloudinary.com/locator/image/upload/v1533987846/merchant_17_%2B918247638529/zovjmnsy82dan1zbty34.jpg','466 ghhj','11:44:07 2018-08-11','30june','shop name'),(61,'merchant_17',1,11,7,2018,11,8,2018,'http://res.cloudinary.com/locator/image/upload/v1533993297/merchant_17_%2B918247638529/ifi94dkl7p3pxsvxp2hv.jpg','s8per manmn','13:14:59 2018-08-11','superm','shop name'),(62,'merchant_17',1,11,7,2018,11,8,2018,'http://res.cloudinary.com/locator/image/upload/v1533995993/merchant_17_%2B918247638529/ce4zidxox9cubelgxkgr.jpg','my qr code','13:59:55 2018-08-11','qrcode','shop name'),(63,'merchant_0',1,12,7,2018,12,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534096871/merchant_0_%2B918179442558/lqxjohkl1cglxye3o8er.jpg','show','18:01:21 2018-08-12','bookmy','shop name'),(64,'merchant_0',1,12,7,2018,12,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534097064/merchant_0/grc5uzvw2exo5ugocqiy.jpg','clean img','18:04:26 2018-08-12','whitei','shop name'),(65,'merchant_17',1,12,7,2018,12,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534097231/merchant_17/hvtu87tfzh8oiemelbyj.jpg','my ward','18:07:13 2018-08-12','wardro','shop name'),(66,'merchant_0',1,13,7,2018,13,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534131277/merchant_0/jxazb1c4bbwslxyqdgdr.jpg','my screen shot','03:34:40 2018-08-13','screen','shop name'),(67,'merchant_0',1,13,7,2018,13,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534171419/merchant_0/aawmuiywl8engaqhzuhw.jpg','fhg hh','14:43:41 2018-08-13','adv','shop name'),(68,'merchant_0',1,14,7,2018,14,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534235910/merchant_0/guqdjrvtvp3mxnpqqfhz.jpg','my offer','08:38:32 2018-08-14','offer','shop name'),(69,'merchant_0',1,14,7,2018,14,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534235940/merchant_0/bp8rrofl5lkwuy8qvyia.jpg','rut','08:39:01 2018-08-14','5655','shop name'),(70,'merchant_0',1,14,7,2018,14,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534238082/merchant_0/mqmqejvxu6msjipuhscq.jpg','desc ghg','09:14:44 2018-08-14','upload','shop name'),(71,'merchant_0',1,14,7,2018,14,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534259534/merchant_0/vak4x4ur8kcvrcydnke9.jpg','offer ','15:12:18 2018-08-14','myapp','shop name'),(72,'merchant_21',1,2018,8,17,16,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534400019/merchant_21/pmk0c9zx74luwqh5iorr.jpg','vbshn','06:13:41 2018-08-16','saree','shop name'),(73,'merchant_21',1,16,7,2018,16,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534400051/merchant_21/tjtqbi2rglruoysxyjfk.jpg','hsnnsu','06:14:13 2018-08-16','hnshd ','shop name'),(74,'merchant_23',1,2018,8,17,16,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534426435/merchant_23/nlfhga2xbvjtodtwcxi1.jpg','bbs','13:33:57 2018-08-16','saree','shop name'),(75,'merchant_23',1,2018,8,20,17,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534514487/merchant_23/p80kxzhy0oo17vjusvcq.jpg','fun mania hobby classes','14:01:30 2018-08-17','06','shop name'),(76,'merchant_23',1,2018,8,20,17,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534514529/merchant_23/j6q05srwwm7gguxryrgy.jpg','namkeen ','14:02:11 2018-08-17','07','shop name'),(77,'merchant_23',1,2018,8,20,17,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534515862/merchant_23/pze1jfovnjz02gedludg.png','nidhi yoga','14:24:25 2018-08-17','08','shop name'),(78,'merchant_23',1,2018,8,20,17,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534518086/merchant_23/wx553p8hphikh8wrxcpw.png','Delhi delite','15:01:28 2018-08-17','09','shop name'),(79,'merchant_23',1,2018,8,19,17,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534519357/merchant_23/fciim3l7y0xlfxjn7sda.png','halka snacks','15:22:40 2018-08-17','10','shop name'),(80,'merchant_36',1,18,7,2018,18,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534597853/merchant_36/akcb2b62ujrib78qy3yg.jpg','upload examplw','13:10:55 2018-08-18','myoffe','shop name'),(81,'merchant_37',1,2018,8,19,18,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534600859/merchant_37/pdk24sraavnq2fdx0lkt.jpg','trial offer','14:01:01 2018-08-18','123456','shop name'),(82,'merchant_39',1,2018,8,25,19,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534665611/merchant_39/gjrtejadinvehysgqb49.png','Murali offer','08:00:13 2018-08-19','Myoffe','shop name'),(83,'merchant_44',1,21,7,2018,21,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534859687/merchant_44/pwwh4lxfwh3bw8iwsj8d.jpg','','13:54:48 2018-08-21','','shop name'),(84,'merchant_45',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534882610/merchant_45/jcqcsajkhofwfsvnwjoy.jpg','tryit','01:46:52 2018-08-22','try','shop name'),(85,'merchant_45',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534883947/merchant_45/e08p79oeduyzmoyhetqj.jpg','my roti','02:09:18 2018-08-22','roti','shop name'),(86,'merchant_45',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534883981/merchant_45/fvq7ropczzi2mnbxzd6k.jpg','gjh','02:09:43 2018-08-22','6666','shop name'),(87,'merchant_45',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534885340/merchant_45/zr6lilzrxhn50iuj347w.jpg','gerta','02:32:21 2018-08-22','geet','shop name'),(88,'merchant_44',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534911177/merchant_44/kwmh3kemek0aomgzph3l.jpg','my bed','09:43:00 2018-08-22','bed sh','shop name'),(89,'merchant_47',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534920964/merchant_47/z1s0r8drnjiigm3nhfrg.jpg','testing offer','12:26:07 2018-08-22','test','shop name'),(90,'merchant_45',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534930576/merchant_45/cp1u1nlrveoavcfp91mz.jpg','my des','15:06:18 2018-08-22','gjhj g','shop name'),(91,'merchant_45',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534930811/merchant_45/lwbmyvawqga9jrwo5sg7.jpg','fhbj gh','15:10:13 2018-08-22','ygh','shop name'),(92,'merchant_45',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534931160/merchant_45/fpj9dppmhhd1wdjah71s.jpg','vhh ','15:16:02 2018-08-22','677','shop name'),(93,'merchant_47',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534931252/merchant_47/sz0lza2ocvhskmfbtrkr.jpg','testing in vr mall','15:17:34 2018-08-22','vrtest','shop name'),(94,'merchant_45',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534941634/merchant_45/sencd1hezatlolqycdl7.jpg','food food','18:10:37 2018-08-22','food','shop name'),(95,'merchant_53',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534956589/merchant_53/jht9tzqh5kketjpfmc2z.jpg','high ghj','22:19:51 2018-08-22','ghhh','shop name'),(96,'merchant_57',1,23,8,2018,23,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535030300/merchant_57/ytsxr7n2xfsboqdhupco.jpg','our ','18:48:22 2018-08-23','issues','shop name'),(97,'merchant_60',1,23,8,2018,23,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535040783/merchant_60/nibtuookqd025joyqojn.jpg','guy j','21:43:05 2018-08-23','tytt','shop name'),(98,'merchant_57',1,24,8,2018,24,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535053020/merchant_57/so4uckmbeqinpy2ug8zp.jpg','pic','01:07:01 2018-08-24','loc','shop name'),(99,'merchant_57',1,24,8,2018,24,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535058857/merchant_57/actosftauf6mpcn7vc8q.jpg','offer details','02:44:19 2018-08-24','offers','shop name'),(100,'merchant_57',1,24,8,2018,24,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535086841/merchant_57/ux1eapoetnmh6i7wr5ge.jpg','676 uu','10:30:43 2018-08-24','gopi','shop name'),(101,'merchant_44',1,24,8,2018,24,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535124481/merchant_44/q5pwgpwjbm1ellt7dylc.jpg','vjgj hj','20:58:03 2018-08-24','godse','shop name'),(102,'merchant_57',1,25,8,2018,25,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535139439/merchant_57/fs5aruzqgolqj7wtcei8.jpg','selling','01:07:21 2018-08-25','sellin','shop name'),(103,'merchant_57',1,25,8,2018,25,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535143220/merchant_57/xttrm0emkjyvws1tucyg.jpg','chh h','02:10:22 2018-08-25','gh','shop name'),(104,'merchant_57',1,25,8,2018,25,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535143305/merchant_57/w3umstvqwe0sia4ae8vj.jpg','vjj h','02:11:47 2018-08-25','ghj','shop name'),(105,'merchant_57',1,25,8,2018,25,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535143330/merchant_57/cxcj7ngtzrr1toghebeb.jpg','ghj ','02:12:11 2018-08-25','gjj h','shop name'),(106,'merchant_57',1,25,8,2018,25,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535143515/merchant_57/q8z002ukcmsxoyapfiqj.jpg','vhhj','02:15:16 2018-08-25','gj hj','shop name'),(107,'merchant_44',1,25,8,2018,25,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535145926/merchant_44/zt2vpcsps44e8hvxnzoa.jpg','vadaa','02:55:28 2018-08-25','vada','shop name'),(108,'merchant_44',1,25,8,2018,25,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535146126/merchant_44/y6cieobc2pwpjanmxhlg.jpg','cbj','02:58:48 2018-08-25','gh','shop name'),(109,'merchant_44',1,25,8,2018,25,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535146805/merchant_44/durmmdnslahga4seu4bv.jpg','ghh h','03:10:07 2018-08-25','yuty','shop name'),(110,'merchant_44',1,25,8,2018,25,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535148969/merchant_44/crmkg6w4jmu4lxmjgshb.jpg','cv','03:46:11 2018-08-25','gg','shop name'),(111,'merchant_44',1,25,8,2018,25,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535149105/merchant_44/ygdflexya7hqii07phhb.jpg','ghjh','03:48:27 2018-08-25','hh','shop name'),(112,'merchant_44',1,25,8,2018,25,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535149158/merchant_44/ou8lbtcfvrhyta01wyky.jpg','gjj','03:49:19 2018-08-25','hhh','shop name'),(113,'merchant_44',1,25,8,2018,25,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535184673/merchant_44/nzfvznfgrrr91yb3gjbv.jpg','offer description 12345','13:41:14 2018-08-25','timeto','shop name'),(114,'merchant_44',1,25,8,2018,25,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535209946/merchant_44/ix6pt6devcvzjhqa5jzv.jpg','gjj','20:42:29 2018-08-25','yiu','shop name'),(115,'merchant_57',1,26,8,2018,26,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535266107/merchant_57/g5glvycvatfisfpramrf.jpg','fyt h','12:18:29 2018-08-26','5656','shop name'),(116,'merchant_57',1,26,8,2018,26,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535302739/merchant_57/i2xvoz41otnyazjdct3t.jpg','fh h,','22:29:01 2018-08-26','mypic ','shop name'),(117,'merchant_57',1,26,8,2018,26,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535303098/merchant_57/artzpelqimcnigjx41ec.jpg','ch hh','22:35:00 2018-08-26','ghh','shop name'),(118,'merchant_57',1,26,8,2018,26,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535303413/merchant_57/wanuucypeduodnrhs3j2.jpg','fh hi','22:40:18 2018-08-26','ads','shop name'),(119,'merchant_57',1,26,8,2018,26,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535303575/merchant_57/b28nyp2nfcre6n2gkuek.jpg','mhtugg','22:42:57 2018-08-26','tiffin','shop name'),(120,'merchant_57',1,26,8,2018,26,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535303978/merchant_57/qtnxp4srakfm7xg4tdgn.jpg','gu yu','22:49:39 2018-08-26','hjh','shop name'),(121,'merchant_44',1,26,8,2018,26,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535304501/merchant_44/dji0nnvljxohccsbqtkx.jpg','chhhh','22:58:25 2018-08-26','hj','shop name'),(122,'merchant_44',1,26,8,2018,26,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535304543/merchant_44/qcguej1kwxamicnjgzrg.jpg','my gala','22:59:05 2018-08-26','gala','shop name'),(123,'merchant_44',1,26,8,2018,26,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535304807/merchant_44/fxjjurigbr9px6mf62iw.jpg','fjj gh','23:03:28 2018-08-26','yuyy7','shop name'),(124,'merchant_44',1,26,8,2018,26,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535305110/merchant_44/onmsgmy9qkrhoxqyawup.jpg','hj','23:08:33 2018-08-26','bird','shop name'),(125,'merchant_44',1,26,8,2018,26,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535305334/merchant_44/sdjtjmu8cwtinc4vttxh.jpg','chg','23:12:15 2018-08-26','god','shop name'),(126,'merchant_44',1,26,8,2018,26,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535305706/merchant_44/cttcdpbyo5kaii5pcav0.jpg','vj','23:18:28 2018-08-26','gjj','shop name'),(127,'merchant_44',1,26,8,2018,26,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535306023/merchant_44/lbky1liuuytytxre0ddu.jpg','fhh g','23:23:44 2018-08-26','again','shop name'),(128,'merchant_44',1,26,8,2018,26,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535306458/merchant_44/uvkxnmd4k7yrp3bz9vel.jpg','ghj','23:31:01 2018-08-26','godaga','shop name'),(129,'merchant_44',1,26,8,2018,26,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535307010/merchant_44/g5zc7qextzxvafhyfxq5.jpg','gh','23:40:12 2018-08-26','birdag','shop name'),(130,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535308456/merchant_44/tjtgherwedcyb2fspdbz.jpg','vadaaa','00:04:17 2018-08-27','vada','shop name'),(131,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535309497/merchant_44/ooenbz5lyyjvwwgime7p.jpg','card','00:21:38 2018-08-27','mycard','shop name'),(132,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535309798/merchant_44/dfsqiazcakzirppbcpa1.jpg','fg','00:26:40 2018-08-27','qr','shop name'),(133,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535310307/merchant_44/iptm6hwy1he3mpk9tsw0.jpg','','00:35:09 2018-08-27','offer','shop name'),(134,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535310320/merchant_44/dnzfnbbdyghgojummo1y.jpg','','00:35:21 2018-08-27','offer1','shop name'),(135,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535311890/merchant_44/talivigy8tnkkficzfso.jpg','fff','01:01:31 2018-08-27','galaa','shop name'),(136,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535312925/merchant_44/ndbpguiuuwedzfwktoeo.jpg','add','01:18:47 2018-08-27','ads','shop name'),(137,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535313521/merchant_44/fqsvcysfdcgromrbmoqf.jpg','','01:28:42 2018-08-27','ghh','shop name'),(138,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535314081/merchant_44/vygmvnwflre0gnjuoz4y.jpg','cjj','01:38:03 2018-08-27','fjj','shop name'),(139,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535314546/merchant_44/x5ou4knioqtteabofkkl.jpg','cjj','01:45:47 2018-08-27','gy','shop name'),(140,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535315032/merchant_44/juqtjaud7clgp7efctsq.jpg','gh h','01:53:53 2018-08-27','ggg','shop name'),(141,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535315525/merchant_44/aquozjcajlfnk3scaej4.jpg','vnj','02:02:07 2018-08-27','fler','shop name'),(142,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535315698/merchant_44/dg462fhqn3zaqiddxoiz.jpg','chh','02:05:00 2018-08-27','ggg','shop name'),(143,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535316152/merchant_44/kv7jrddzqfeqca7r88wk.jpg','cgg','02:12:34 2018-08-27','ad','shop name'),(144,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535316264/merchant_44/fhqn0izonwvcglec2z45.jpg','fh','02:14:25 2018-08-27','god','shop name'),(145,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535316407/merchant_44/mr8r9ai0p5m850ejhnrg.jpg','ghh','02:16:49 2018-08-27','polics','shop name'),(146,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535316672/merchant_44/gyynniyrri2wr44zx9yq.jpg','vbn','02:21:13 2018-08-27','vadaa','shop name'),(147,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535317000/merchant_44/cp9dr0jznnhjykgap9rz.jpg','vvh','02:26:42 2018-08-27','god','shop name'),(148,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535317339/merchant_44/ymsvxpkbsspbrcbim02o.jpg','cjj','02:32:21 2018-08-27','gk','shop name'),(149,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535317452/merchant_44/uacea72xyhtfns4cyp9b.jpg','','02:34:14 2018-08-27','gh','shop name'),(150,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535317473/merchant_44/erg1tco4aiqqp9z8ozmc.jpg','','02:34:34 2018-08-27','','shop name'),(151,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535338756/merchant_57/ix6svchmrffwszsywz7x.jpg','vfff','08:29:18 2018-08-27','55','shop name'),(152,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535338823/merchant_57/cbhais6pdjonougovizb.jpg','guu','08:30:25 2018-08-27','murLi','shop name'),(153,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535338843/merchant_57/l5k9brvwwd8otbmgspti.jpg','gug6','08:30:45 2018-08-27','yy677','shop name'),(154,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535338860/merchant_57/lwons0xrxpefqsndfkbm.jpg','fgy','08:31:02 2018-08-27','ads','shop name'),(155,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535338948/merchant_57/chpbpgd98nbtfsru6nqo.jpg','gi','08:32:29 2018-08-27','yuu','shop name'),(156,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535339681/merchant_57/xoiaoon6zqug2ntebvaf.jpg','vhh','08:44:43 2018-08-27','imgs','shop name'),(157,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535341171/merchant_57/bf6lwpkk8voniyvfgjmm.jpg','mydoc','09:09:33 2018-08-27','doc','shop name'),(158,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535341276/merchant_44/pjsjooga8nkx6fkdljyl.png','fjh gh','09:11:17 2018-08-27','card','shop name'),(159,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535341508/merchant_44/msbkzu8ks3yieftoipbt.jpg','gu g','09:15:12 2018-08-27','667','shop name'),(160,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535344794/merchant_44/he7irvdxoz58kv6lqtuu.jpg','gh','10:09:56 2018-08-27','viii','shop name'),(161,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535344899/merchant_44/rmv0yj9av1cz8crwsyen.jpg','bjb b','10:11:40 2018-08-27','ogg','shop name'),(162,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535349833/merchant_57/umpbmckfoznj8cjs4dzt.jpg','ads','11:33:55 2018-08-27','ad','shop name'),(163,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535350417/merchant_57/tz1zidgi4gy0s3mo2hvc.jpg','mycode','11:43:39 2018-08-27','qrcode','shop name'),(164,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535373950/merchant_57/ppaljkhujupkkr8omk1y.jpg','ghh','18:15:52 2018-08-27','chk','shop name'),(165,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535374457/merchant_57/slsgzdgkzc7x5zt89wxy.jpg','fgg','18:24:19 2018-08-27','ggg','shop name'),(166,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535374551/merchant_57/t7to6ydhgajzrndaum6b.jpg','gh','18:25:53 2018-08-27','yy','shop name'),(167,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535374858/merchant_57/aebyom7s4nqv3yrfulsw.jpg','kk','18:31:00 2018-08-27','gg','shop name'),(168,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535376212/merchant_57/imydglm7ovdswckkls8c.jpg','gh g','18:53:34 2018-08-27','gruha','shop name'),(169,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535376258/merchant_57/i1thttrbute7wlaia02j.jpg','','18:54:22 2018-08-27','','shop name'),(170,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535378683/merchant_57/wrzsawxiytwjuwonynp0.jpg','fu67','19:34:44 2018-08-27','yyyy','shop name'),(171,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535379209/merchant_57/eyvdfro5wn07xccsa2ug.jpg','vr mall','19:43:31 2018-08-27','vr','shop name'),(172,'merchant_53',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535380750/merchant_53/ye0uoayyh3rl5zbhurh4.jpg','chari','20:09:12 2018-08-27','chinni','shop name'),(173,'merchant_53',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535380795/merchant_53/yfxz0dsdjox5zk4sm1dz.jpg','moeeeee','20:09:57 2018-08-27','more','shop name'),(174,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535384516/merchant_57/uf3fja55xcpm8g5ln776.jpg','yui','21:11:58 2018-08-27','778','shop name'),(175,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535386535/merchant_57/g8jbfmmb8xakptfgx5wc.jpg','gh','21:45:36 2018-08-27','chinni','shop name'),(176,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535386566/merchant_57/eje2qghopvj2ci15ne01.jpg','','21:46:07 2018-08-27','','shop name'),(177,'merchant_44',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535386722/merchant_44/lxklihlq4nwm3hbvbjed.jpg','des','21:48:44 2018-08-27','meh','shop name'),(178,'merchant_53',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535387521/merchant_53/huwkxeqczi2knxjwvvff.jpg','Good boy','22:02:05 2018-08-27','chinni','shop name'),(179,'merchant_57',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535387662/merchant_57/pvobbbfzsfpxnul7upx8.jpg','','22:04:24 2018-08-27','','shop name'),(180,'merchant_53',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535389913/merchant_53/df3k1kn3lacns0mnojol.jpg','','22:41:55 2018-08-27','','shop name'),(181,'merchant_53',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535390133/merchant_53/c1rp7doxvqrlxu4eqbwb.jpg','','22:45:35 2018-08-27','','shop name'),(182,'merchant_53',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535391410/merchant_53/drxcvigiy9j8dcsqirlx.jpg','','23:06:55 2018-08-27','gg','shop name'),(183,'merchant_53',1,27,8,2018,27,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535391678/merchant_53/rsi5kga09snno3ljjicr.jpg','','23:11:20 2018-08-27','','shop name'),(184,'merchant_44',1,28,8,2018,28,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535397524/merchant_44/j8rfuiwllycp2au50uzq.jpg','oooo','00:48:46 2018-08-28','ooo','shop name'),(185,'merchant_44',1,28,8,2018,28,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535397556/merchant_44/txnc8pnpwaeowwc2z1qp.jpg','inkoti','00:49:19 2018-08-28','inkoti','shop name'),(186,'merchant_53',1,28,8,2018,28,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535413115/merchant_53/lm5gkymxhbhnyjzxnf4x.jpg','gh','05:08:36 2018-08-28','ghh','shop name'),(187,'merchant_53',1,28,8,2018,28,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535413148/merchant_53/ndq70czhlnnawb4pijao.jpg','hjj','05:09:10 2018-08-28','ghh','shop name'),(188,'merchant_57',1,28,8,2018,28,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535438187/merchant_57/tla6p3zhhijpkdi4d96y.jpg','gu h','12:06:29 2018-08-28','y678','shop name'),(189,'merchant_57',1,28,8,2018,28,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535445322/merchant_57/wey7eoutadlwgvvazv1d.jpg','gu','14:05:24 2018-08-28','check','shop name'),(190,'merchant_57',1,28,8,2018,28,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535445795/merchant_57/qoz71iqk0mjzghyo17oh.jpg','gjh hj','14:13:18 2018-08-28','676','shop name'),(191,'merchant_57',1,28,8,2018,28,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535447460/merchant_57/ai0a27lcgdjcn4dzqp42.jpg','my chinni','14:41:02 2018-08-28','chinni','shop name'),(192,'merchant_57',1,28,8,2018,28,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535449672/merchant_57/nu5berj9t308f2rmcj0o.jpg','gii','15:17:54 2018-08-28','chinni','shop name'),(193,'merchant_57',1,28,8,2018,28,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535455396/merchant_57/lzsyshwzundvgwamnabh.jpg','fhgu gu','16:53:18 2018-08-28','card','shop name'),(194,'merchant_57',1,28,8,2018,28,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535455491/merchant_57/uijhdmh1pirjzs9etv71.jpg','','16:54:53 2018-08-28','','shop name'),(195,'merchant_57',1,28,8,2018,28,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535470853/merchant_57/rsfksdlhtslidu1tvjqf.jpg','gigiu','21:10:55 2018-08-28','6777','shop name'),(196,'merchant_57',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535503373/merchant_57/nnjwnzagipmknu2m3s0g.jpg','gu hu','06:12:55 2018-08-29','test','shop name'),(197,'merchant_61',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535520743/merchant_61/ykrewzuyretzovkig6ru.jpg','desc','11:02:25 2018-08-29','ofcr','shop name'),(198,'merchant_57',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535523778/merchant_57/y9kedgzpbocqdi1dkspj.jpg','description','11:53:33 2018-08-29','ofrcod','shop name'),(199,'merchant_62',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535523886/merchant_62/k4qs75w4wm2eno3uvtcx.jpg','vhh','11:54:48 2018-08-29','ghh','shop name'),(200,'merchant_57',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535539976/merchant_57/yju3lwovmbudwm6adhq8.jpg','fff','16:22:58 2018-08-29','ad','shop name'),(201,'merchant_57',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535540018/merchant_57/eowiilb9dueubg8sbckt.jpg','','16:23:40 2018-08-29','','shop name'),(202,'merchant_57',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535540885/merchant_57/havpc8bxzvcan2rpcylk.jpg','','16:38:07 2018-08-29','tuu,','shop name'),(203,'merchant_57',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535545039/merchant_57/vec1swgqwcksqds2ivcu.png','my app','17:47:21 2018-08-29','gala','shop name'),(204,'merchant_57',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535545145/merchant_57/sxnp0uytg5euelsvwgoq.jpg','app','17:49:07 2018-08-29','my gal','shop name'),(205,'merchant_44',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535546103/merchant_44/mmonfhid5agur1wnsy31.jpg','kid','18:05:07 2018-08-29','kid','shop name'),(206,'merchant_57',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535546543/merchant_57/jjajodx00vj7e9kj6bgk.jpg','ghh h','18:12:25 2018-08-29','codes','shop name'),(207,'merchant_44',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535547078/merchant_44/pxo2iqkqiidwwekcf4ka.jpg','cep global','18:21:20 2018-08-29','cep ','shop name'),(208,'merchant_44',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535547265/merchant_44/i4li93whuwskkrk5sao2.jpg','ladduss','18:24:26 2018-08-29','laddoo','shop name'),(209,'merchant_44',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535547802/merchant_44/ngey634weszxnrwhldae.jpg','mymsfs','18:33:23 2018-08-29','msf\nms','shop name'),(210,'merchant_57',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535552119/merchant_57/laep8ukinaykam4wxiay.jpg','my afs','19:45:23 2018-08-29','ads','shop name'),(211,'merchant_57',1,29,8,2018,29,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535556339/merchant_57/j8o1oivc4nc8btp5pghz.jpg','my ad','20:55:42 2018-08-29','ad','shop name'),(212,'merchant_57',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535567879/merchant_57/l3lv89ntqobsfflt749k.jpg','tuu','00:08:01 2018-08-30','7999','shop name'),(213,'merchant_65',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535613676/merchant_65/e7savkjbcvtghy1dnvln.jpg','ft gh','12:51:17 2018-08-30','dress','shop name'),(214,'merchant_65',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535615019/merchant_65/buqx7gny7kbfnbx9rvyy.jpg','got h','13:13:40 2018-08-30','tyyy','shop name'),(215,'merchant_65',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535615321/merchant_65/vtfrsrbkfbkwl3emncsg.jpg','','13:18:42 2018-08-30','ghh','shop name'),(216,'merchant_65',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535615811/merchant_65/z2ogyvdsfvq4cj1xnirh.jpg','th h','13:26:52 2018-08-30','yyy','shop name'),(217,'merchant_65',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535616832/merchant_65/cl42ufvlms3yfxbpypqu.jpg','tho hh','13:43:53 2018-08-30','yi','shop name'),(218,'merchant_65',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535617323/merchant_65/egzdzwq9jln5sra5gtfv.jpg','add ','13:52:04 2018-08-30','ad','shop name'),(219,'merchant_65',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535620747/merchant_65/v2ryccfkkttvlpn8w4lb.jpg','','14:49:09 2018-08-30','','shop name'),(220,'merchant_65',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535620780/merchant_65/uk2dqcgxkylzkc4xasyd.jpg','','14:49:41 2018-08-30','','shop name'),(221,'merchant_65',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535620996/merchant_65/nqt1dxo13xuvyjduridt.jpg','ghh','14:53:17 2018-08-30','yuu','shop name'),(222,'merchant_65',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535621478/merchant_65/p0bnrus8xtgmiuuldzpc.jpg','','15:01:19 2018-08-30','','shop name'),(223,'merchant_65',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535622465/merchant_65/l5asyupwreu5e4df7omq.jpg','tyy','15:17:47 2018-08-30','yyy','shop name'),(224,'merchant_65',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535622482/merchant_65/p3fftl8m6wzvreocc2qr.jpg','','15:18:04 2018-08-30','','shop name'),(225,'merchant_65',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535622612/merchant_65/aogikywdq1bdalexlw0a.jpg','my sale','15:20:14 2018-08-30','sale','shop name'),(226,'merchant_65',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535623416/merchant_65/jwt5snhm7yhkqcwsckkd.jpg','','15:33:37 2018-08-30','','shop name'),(227,'merchant_65',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535623778/merchant_65/fseb24n6kncwth4g0ymx.jpg','','15:39:40 2018-08-30','','shop name'),(228,'merchant_65',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535623798/merchant_65/qullpygmtrovj5hujpyk.jpg','','15:40:00 2018-08-30','','shop name'),(229,'merchant_57',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535625675/merchant_57/sqofkbnjtutjmiofzsai.jpg','ing','16:11:19 2018-08-30','test','shop name'),(230,'merchant_57',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535625745/merchant_57/w0irg65dmaijvz5zrwl9.jpg','uncle','16:12:30 2018-08-30','venu','shop name'),(231,'merchant_57',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535639978/merchant_57/nwhcvwknjb9avvwfouvn.jpg','','20:09:44 2018-08-30','off','shop name'),(232,'merchant_57',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535647419/merchant_57/vjedrmz4jo8e0q8oltif.jpg','','22:13:42 2018-08-30','','shop name'),(233,'merchant_57',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535647879/merchant_57/ziskyycatl5mrorifpck.jpg','','22:21:22 2018-08-30','','shop name'),(234,'merchant_57',1,30,8,2018,30,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535648633/merchant_57/btbnrjougd1ldcznazc4.jpg','','22:33:56 2018-08-30','','shop name'),(235,'merchant_67',1,1,9,2018,1,9,2018,'http://res.cloudinary.com/locator/image/upload/v1535811052/merchant_67/xyriiwqabarqrivhicr3.jpg','desc','19:40:54 2018-09-01','ofcr','shop name'),(236,'merchant_67',1,4,9,2018,1,9,2018,'http://res.cloudinary.com/locator/image/upload/v1535811191/merchant_67/sf8onpqxqbrgwvxkcqf4.png','testing the app','19:43:12 2018-09-01','test','shop name'),(237,'merchant_67',1,3,9,2018,3,9,2018,'http://res.cloudinary.com/locator/image/upload/v1535947728/merchant_67/szxycxesdfswr5q6wegf.jpg','tgy','09:38:49 2018-09-03','gopi','shop name'),(238,'merchant_67',1,4,9,2018,4,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536034926/merchant_67/gm9ktjtqks9oakzm3tln.jpg','vji h','09:52:08 2018-09-04','dharah','shop name'),(239,'merchant_67',1,4,9,2018,4,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536034974/merchant_67/zrw6dscaqm0gjpcihcoc.jpg','','09:52:55 2018-09-04','','shop name'),(240,'merchant_67',1,5,9,2018,5,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536092810/merchant_67/u5pxadh2svf7pdkr2rqq.jpg','','01:56:51 2018-09-05','','shop name'),(241,'merchant_67',1,7,9,2018,7,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536313655/merchant_67/sydkkbtyvpqyqkezdex3.jpg','','15:17:38 2018-09-07','','shop name'),(242,'merchant_67',1,10,9,2018,10,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536580697/merchant_67/zktxjhr0fwhidt1gzuws.jpg','','17:28:20 2018-09-10','','shop name'),(243,'merchant_67',1,10,9,2018,10,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536602034/merchant_67/jrvyhtpblswuxrwojcuh.jpg','','23:23:56 2018-09-10','','shop name'),(244,'merchant_67',1,10,9,2018,10,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536603961/merchant_67/mbfqrqp2pbsoejenxt5f.jpg','','23:56:03 2018-09-10','my','shop name'),(245,'merchant_67',1,10,9,2018,10,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536604025/merchant_67/c0ivnvpzvmydoehrh3s4.jpg','','23:57:07 2018-09-10','','shop name'),(246,'merchant_67',1,10,9,2018,10,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536604052/merchant_67/dja7wxcpzuk1voculdxh.jpg','','23:57:33 2018-09-10','','shop name'),(247,'merchant_67',1,11,9,2018,11,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536604216/merchant_67/whcrdo1ubovdkf2a9nfu.jpg','','00:00:19 2018-09-11','','shop name'),(248,'merchant_67',1,11,9,2018,11,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536604243/merchant_67/jc4gm7ufoymgrre9nm9b.jpg','','00:00:44 2018-09-11','','shop name'),(249,'merchant_67',1,11,9,2018,11,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536604888/merchant_67/mpw5xkjgcaplbu1r7ww4.jpg','','00:11:29 2018-09-11','','shop name'),(250,'merchant_67',1,11,9,2018,11,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536604965/merchant_67/fchrwjervnxvpbkj9xwv.jpg','','00:12:46 2018-09-11','','shop name'),(251,'merchant_67',1,11,9,2018,11,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536605066/merchant_67/usmvterzzudeeefqwnx6.jpg','','00:14:28 2018-09-11','','shop name'),(252,'merchant_67',1,12,9,2018,12,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536752845/merchant_67/w2juwxf3kfczx03jauw9.jpg','','17:17:40 2018-09-12','','shop name'),(253,'merchant_67',1,12,9,2018,12,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536759462/merchant_67/fqoerp2stf83ye4g3dni.jpg','','19:07:44 2018-09-12','','shop name'),(254,'merchant_67',1,12,9,2018,12,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536759477/merchant_67/aw3nkxfeo6u9xhwat6st.jpg','','19:08:00 2018-09-12','','shop name'),(255,'merchant_67',1,14,9,2018,14,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536907030/merchant_67/zngltlm7ojgescry6zak.jpg','','12:07:22 2018-09-14','','shop name'),(256,'merchant_67',1,14,9,2018,14,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536923471/merchant_67/josgysgqfdsgdf8mgkpd.jpg','','16:41:14 2018-09-14','','shop name'),(257,'merchant_67',1,14,9,2018,14,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536946264/merchant_67/pbrneq4iu65nf903d8it.jpg','','23:01:12 2018-09-14','','shop name'),(258,'merchant_67',1,14,9,2018,14,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536946313/merchant_67/lnp88agstr9qzileilka.jpg','','23:01:56 2018-09-14','','shop name'),(259,'merchant_67',1,15,9,2018,15,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536987241/merchant_67/el5f5qaklyx80qngflcm.jpg','','10:24:03 2018-09-15','','shop name'),(260,'merchant_67',1,15,9,2018,15,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536987246/merchant_67/s6muemaxuqwepsemhvya.jpg','','10:24:07 2018-09-15','','shop name'),(261,'merchant_67',1,15,9,2018,15,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536987260/merchant_67/nfiwz1jweikeirctz9i3.jpg','','10:24:31 2018-09-15','','shop name'),(262,'merchant_67',1,15,9,2018,15,9,2018,'http://res.cloudinary.com/locator/image/upload/v1537020183/merchant_67/uq9qhjhu7by04zgbxyaq.jpg','','19:33:05 2018-09-15','','shop name'),(263,'merchant_67',1,16,9,2018,16,9,2018,'http://res.cloudinary.com/locator/image/upload/v1537101389/merchant_67/neeuvxgztlwq3jajoup2.jpg','','18:06:30 2018-09-16','','shop name'),(264,'merchant_67',1,21,9,2018,21,9,2018,'http://res.cloudinary.com/locator/image/upload/v1537523311/merchant_67/jlibcdlpxiz5q3hrkfdx.jpg','','15:18:33 2018-09-21','','shop name'),(265,'merchant_67',1,23,9,2018,23,9,2018,'http://res.cloudinary.com/locator/image/upload/v1537710034/merchant_67/nxpkkokjppprjo1uj9gj.jpg','','19:10:36 2018-09-23','','shop name'),(266,'merchant_67',1,25,9,2018,25,9,2018,'http://res.cloudinary.com/locator/image/upload/v1537895880/merchant_67/oguhbxauxb9anw5l8otk.jpg','','22:48:02 2018-09-25','','shop name'),(267,'merchant_67',1,27,9,2018,27,9,2018,'http://res.cloudinary.com/locator/image/upload/v1538050676/merchant_67/db33ycjl9dkrotxqeijr.jpg','','17:47:57 2018-09-27','','shop name'),(268,'merchant_67',1,28,9,2018,28,9,2018,'http://res.cloudinary.com/locator/image/upload/v1538102063/merchant_67/dyhidit12uklm6xghp4l.jpg','','08:04:24 2018-09-28','','shop name'),(269,'merchant_67',1,29,9,2018,29,9,2018,'http://res.cloudinary.com/locator/image/upload/v1538209588/merchant_67/tb0qmvwjc3rhq65qyd5d.jpg','','13:56:29 2018-09-29','','shop name'),(270,'merchant_67',1,30,9,2018,30,9,2018,'http://res.cloudinary.com/locator/image/upload/v1538331699/merchant_67/vrixoqjhvgpdtoidfzik.jpg','','23:51:41 2018-09-30','','shop name'),(271,'merchant_67',1,1,10,2018,1,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538400037/merchant_67/bftkvmxkimambs8dumo7.jpg','','18:50:38 2018-10-01','','shop name'),(272,'merchant_67',1,5,10,2018,5,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538683199/merchant_67/xetzftx6zuevfk3177yh.jpg','','01:30:01 2018-10-05','','shop name'),(273,'merchant_67',1,5,10,2018,5,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538707409/merchant_67/tv40vpychda4woui1miu.jpg','','08:13:30 2018-10-05','','shop name'),(274,'merchant_67',1,5,10,2018,5,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538707434/merchant_67/kpjsu36qngrefkj3kba6.jpg','','08:13:55 2018-10-05','','shop name'),(275,'merchant_67',1,5,10,2018,5,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538708106/merchant_67/rsrtnfjqfzie4htjv5b8.jpg','','08:25:07 2018-10-05','','shop name'),(276,'merchant_67',1,5,10,2018,5,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538723150/merchant_67/yrq9k2onhl1nrcqh6ysz.jpg','','12:35:52 2018-10-05','','shop name'),(277,'merchant_67',1,6,10,2018,6,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538767255/merchant_67/asteygqiwwyiq96tijee.jpg','','00:52:04 2018-10-06','','shop name'),(278,'merchant_73',1,6,10,2018,6,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538844638/merchant_73/rerup09v5me0irjboken.jpg','','22:20:40 2018-10-06','576','shop name'),(279,'merchant_73',1,7,10,2018,7,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538895944/merchant_73/ubqy8qxdqgt8d88fztvy.jpg','','12:35:53 2018-10-07','','shop name'),(280,'merchant_73',1,7,10,2018,7,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538896724/merchant_73/mcijkxozvtleknsgxtm6.jpg','','12:48:45 2018-10-07','','shop name'),(281,'merchant_73',1,7,10,2018,7,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538907270/merchant_73/usuk11tecutplakcunwf.jpg','','15:44:32 2018-10-07','','shop name'),(282,'merchant_73',1,7,10,2018,7,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538907671/merchant_73/nir0bs2ew41j2pr7dfcp.jpg','','15:51:13 2018-10-07','','shop name'),(283,'merchant_73',1,7,10,2018,7,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538907736/merchant_73/bqdaemntmxai3ejxuvfl.jpg','','15:52:17 2018-10-07','','shop name'),(284,'merchant_77',1,8,10,2018,8,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538972693/merchant_77/rexigq8e6xcusxcyhz1r.jpg','my offer','09:54:54 2018-10-08','code','shop name'),(285,'merchant_77',1,8,10,2018,8,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538974575/merchant_77/uvsluklcwo3lsmcy4d5o.jpg','','10:26:18 2018-10-08','','shop name'),(286,'merchant_77',1,8,10,2018,8,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538974583/merchant_77/yolnyebe7gcqtmy3v1un.jpg','','10:26:24 2018-10-08','','shop name'),(287,'merchant_77',1,8,10,2018,8,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538974885/merchant_77/ons3qhtv454aj5oml0yq.jpg','','10:31:58 2018-10-08','','shop name'),(288,'merchant_84',1,12,10,2018,12,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539317311/merchant_84/fkwkjh8kivx4gd6seyo1.jpg','','09:38:33 2018-10-12','','shop name'),(289,'merchant_84',1,12,10,2018,12,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539323959/merchant_84/bsg4nwsyqqttnbw3afnv.jpg','','11:29:21 2018-10-12','','shop name'),(290,'merchant_84',1,12,10,2018,12,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539325527/merchant_84/wu6d9ph9ktgf7nc4ilia.jpg','','11:55:29 2018-10-12','','shop name'),(291,'merchant_84',1,12,10,2018,12,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539355374/merchant_84/idowbtz3eoeli47siomm.jpg','','20:12:57 2018-10-12','','shop name'),(292,'merchant_84',1,12,10,2018,12,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539358808/merchant_84/vjepohjt1h3pptqa5kae.jpg','','21:10:10 2018-10-12','','shop name'),(293,'merchant_84',1,12,10,2018,12,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539359121/merchant_84/hxhmchpyh7hpfyhpxuds.jpg','','21:15:31 2018-10-12','','shop name'),(294,'merchant_84',1,12,10,2018,12,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539359181/merchant_84/kcuvuapgc9ifqv4zvjpt.jpg','','21:16:29 2018-10-12','','shop name'),(295,'merchant_84',1,12,10,2018,12,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539359664/merchant_84/br4j5ccvcuxt1qpjhq7l.jpg','','21:24:35 2018-10-12','','shop name'),(296,'merchant_84',1,12,10,2018,12,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539359864/merchant_84/jcrkorl4gehkhwxujwzm.jpg','','21:27:46 2018-10-12','','shop name'),(297,'merchant_84',1,12,10,2018,12,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539359945/merchant_84/crmdwoebmrln1ykxyg3f.jpg','','21:29:07 2018-10-12','','shop name'),(298,'merchant_84',1,12,10,2018,12,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539360465/merchant_84/xmhotuhsos9cmkys6kjj.jpg','','21:37:48 2018-10-12','','shop name'),(299,'merchant_84',1,12,10,2018,12,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539360605/merchant_84/ajlhqjjxb9lvlaqydb1w.jpg','','21:40:06 2018-10-12','','shop name'),(300,'merchant_84',1,13,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539369848/merchant_84/z7y1z8gnbyk37vboumsq.jpg','','00:14:10 2018-10-13','','shop name'),(301,'merchant_86',1,13,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539442711/merchant_86/lawhega1ggx0stzhvj4e.jpg','','20:28:32 2018-10-13','','shop name'),(302,'merchant_86',1,13,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539442729/merchant_86/el8g0owttmuhbvwbalt0.jpg','','20:28:51 2018-10-13','','shop name'),(303,'merchant_86',1,13,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539443122/merchant_86/ytbhv6kktchts8ggdoaz.jpg','','20:35:23 2018-10-13','','shop name'),(304,'merchant_86',1,13,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539443165/merchant_86/lechs79ukd7flmadgbog.jpg','','20:36:07 2018-10-13','','shop name'),(305,'merchant_86',1,13,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539443333/merchant_86/ksdp8pusaafspncwmuoz.jpg','','20:38:59 2018-10-13','','shop name'),(306,'merchant_86',1,13,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539443491/merchant_86/wf8nsbifyk5iwnblhuwl.jpg','','20:42:23 2018-10-13','','shop name'),(307,'merchant_86',1,13,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539443699/merchant_86/oitwo78oaannaksuqwdj.jpg','','20:45:28 2018-10-13','','shop name'),(308,'merchant_86',1,13,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539443857/merchant_86/q33jwrdgt8sagkim298c.jpg','','20:47:46 2018-10-13','','shop name'),(309,'merchant_87',1,13,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539445133/merchant_87/srglik67owtzn7hhl42a.jpg','','21:08:55 2018-10-13','','shop name'),(310,'merchant_87',1,13,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539447168/merchant_87/zq5pldmosqf2zzkgxd3b.jpg','','21:42:57 2018-10-13','','shop name'),(311,'merchant_87',1,13,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539447230/merchant_87/ef2txiay0fuldu8tn3fk.jpg','','21:43:52 2018-10-13','','shop name'),(312,'merchant_88',1,13,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539449914/merchant_88/u0q0ob8nnnibt7zcrbhq.jpg','','22:28:36 2018-10-13','','shop name'),(313,'merchant_88',1,13,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539450052/merchant_88/evmzwbiojbwwomddop3x.jpg','','22:30:53 2018-10-13','','shop name'),(314,'merchant_88',1,13,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539450648/merchant_88/fpokjezlqd7kallqglvr.jpg','','22:40:50 2018-10-13','','shop name'),(315,'merchant_88',1,14,10,2018,14,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539476728/merchant_88/vbqdw9dptbjexpcanh55.jpg','','05:55:31 2018-10-14','','shop name'),(316,'merchant_88',1,14,10,2018,14,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539488964/merchant_88/jjhqtrnt9tytgpoeusiq.jpg','','09:19:26 2018-10-14','','shop name'),(317,'merchant_89',1,15,10,2018,15,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539579715/merchant_89/xnzo5lhkmkink8kid9j6.jpg','offer','10:31:56 2018-10-15','gopi','shop name'),(318,'merchant_89',1,15,10,2018,15,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539599837/merchant_89/cszix5jzjc1fkiravfda.jpg','','16:07:19 2018-10-15','','shop name'),(319,'merchant_89',1,16,10,2018,16,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539632368/merchant_89/ahvbi3z3rgabhwqmgjal.jpg','','01:09:30 2018-10-16','','shop name'),(320,'merchant_89',1,16,10,2018,16,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539710686/merchant_89/rvnoldfztwrwnfflk4wq.jpg','','22:54:48 2018-10-16','','shop name'),(321,'merchant_89',1,16,10,2018,16,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539710736/merchant_89/hiosn8kt5yp3vooeuxh3.jpg','','22:55:37 2018-10-16','','shop name'),(322,'merchant_89',1,17,10,2018,17,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539716228/merchant_89/nl6fnhibrunxjbbciimz.jpg','','00:27:11 2018-10-17','','shop name'),(323,'merchant_91',1,17,10,2018,17,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539782269/merchant_91/pidyd44tb5593cp8uhvb.jpg','desc','18:47:51 2018-10-17','code','shop name'),(324,'merchant_91',1,18,10,2018,18,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539804597/merchant_91/ikjrjtvmsdy1b6bufhim.jpg','fyu','00:59:59 2018-10-18','yui','shop name'),(325,'merchant_92',1,18,10,2018,18,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539876164/merchant_92/ytonfauuuhgpw0clessf.jpg','','20:52:46 2018-10-18','','shop name'),(326,'merchant_92',1,19,10,2018,19,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539926720/merchant_92/nfnnxvy7rhsrba1awtul.jpg','gopi','10:55:22 2018-10-19','gopi','shop name'),(327,'merchant_92',1,20,10,2018,20,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539978662/merchant_92/mpmtgwgydxid17zpe5vl.jpg','','01:21:04 2018-10-20','','shop name'),(328,'merchant_105',1,24,10,2018,24,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540380916/merchant_105/sigwyzy6y4untsusas1j.jpg','grfg','17:05:18 2018-10-24','gopo','shop name'),(329,'merchant_105',1,25,10,2018,25,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540437041/merchant_105/andmxahqi4q3tlq2nnpt.jpg','chinnilu','08:40:43 2018-10-25','chinni','shop name'),(330,'merchant_105',1,27,10,2018,27,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540644839/merchant_105/mnocnzwa7nhizjptstzo.jpg','vjjo','18:24:01 2018-10-27','gjhi','shop name'),(331,'merchant_119',1,28,10,2018,28,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540668902/merchant_119/dgajslwiwtguqjjewsbc.jpg','','01:05:03 2018-10-28','','shop name'),(332,'merchant_123',1,28,10,2018,28,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540670017/merchant_123/l7dcm0dfdn8qy8hozpnq.jpg','','01:23:39 2018-10-28','','shop name'),(333,'merchant_133',1,28,10,2018,28,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540719433/merchant_133/jrsct1m9eggi7iwcb4qh.jpg','vjj','15:07:15 2018-10-28','my cod','shop name'),(334,'merchant_135',1,28,10,2018,28,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540723397/merchant_135/yyqxbgszlbk9k88leibn.jpg','','16:13:18 2018-10-28','','shop name'),(335,'merchant_137',1,28,10,2018,28,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540724456/merchant_137/fjef0v6ihauspardycqb.jpg','','16:30:59 2018-10-28','','shop name'),(336,'merchant_139',1,28,10,2018,28,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540725049/merchant_139/dow1i7zqt0njmf74tl1n.jpg','','16:40:51 2018-10-28','','shop name'),(337,'merchant_141',1,28,10,2018,28,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540726600/merchant_141/pug6cdrjrc67eyph6qik.jpg','','17:06:41 2018-10-28','','shop name'),(338,'merchant_141',1,28,10,2018,28,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540734234/merchant_141/mgyvwfitzmp1d7nnwvjd.jpg','','19:13:56 2018-10-28','','shop name'),(339,'merchant_141',1,28,10,2018,28,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540734317/merchant_141/s8fqxgkbbmi0o9v6zpoa.jpg','','19:15:20 2018-10-28','','shop name'),(340,'merchant_141',1,28,10,2018,28,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540737922/merchant_141/txhbnk50rjtbwcibdz7x.jpg','','20:15:24 2018-10-28','','shop name'),(341,'merchant_141',1,28,10,2018,28,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540738039/merchant_141/tyerf2n9razwwromdwza.jpg','','20:17:20 2018-10-28','','shop name'),(342,'merchant_147',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540800200/merchant_147/pkkrsda8puw6sa0q59lk.jpg','','13:33:23 2018-10-29','','shop name'),(343,'merchant_147',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540810858/merchant_147/rlesbuyx4flatnz2j1af.jpg','','16:30:59 2018-10-29','','shop name'),(344,'merchant_147',1,25,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540811263/merchant_147/wru3krttx2xnscjwy21x.jpg','tyu','16:37:45 2018-10-29','677','shop name'),(345,'merchant_147',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540831666/merchant_147/xbdmvmcwgsiqzbjtrulo.jpg','','22:17:57 2018-10-29','','shop name'),(346,'merchant_147',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540831782/merchant_147/ttvrltv3rkcrbomikbmz.jpg','','22:20:04 2018-10-29','','shop name'),(347,'merchant_147',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540831850/merchant_147/ngcaaqio2obgard46qza.jpg','','22:21:15 2018-10-29','','shop name'),(348,'merchant_147',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540832120/merchant_147/q21dy9s5zvmswrjjvuss.jpg','','22:25:41 2018-10-29','','shop name'),(349,'merchant_147',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540832610/merchant_147/izegqxjujfhjlajpfyaa.jpg','','22:33:35 2018-10-29','','shop name'),(350,'merchant_147',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540832664/merchant_147/fiqidk8ohu6jatexyiyb.jpg','','22:34:37 2018-10-29','','shop name'),(351,'merchant_147',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540832915/merchant_147/ta3kdjkjqk7gnvkbuy5t.jpg','','22:38:40 2018-10-29','','shop name'),(352,'merchant_147',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540833186/merchant_147/kpoqjgtfjdzzt5yrjhdk.jpg','','22:43:12 2018-10-29','','shop name'),(353,'merchant_151',1,30,10,2018,30,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540868478/merchant_151/qod5pl27mdr61xq9nr5s.jpg','','08:31:20 2018-10-30','','shop name'),(354,'merchant_157',1,31,10,2018,31,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540931459/merchant_157/tgm5lxgrxtdjkeekvdcs.jpg','myogg','02:01:01 2018-10-31','off','shop name'),(355,'merchant_159',1,31,10,2018,31,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540969815/merchant_159/pr1qehwykilfpcadrtu5.jpg','','12:40:25 2018-10-31','','shop name'),(356,'merchant_164',1,2,11,2018,2,11,2018,'http://res.cloudinary.com/locator/image/upload/v1541101224/merchant_164/iqlcy7cwxa0koyrmtulg.jpg','','01:10:25 2018-11-02','','shop name'),(357,'merchant_166',1,2,11,2018,2,11,2018,'http://res.cloudinary.com/locator/image/upload/v1541133843/merchant_166/x23z9uksfoib3hisroul.png','','10:14:04 2018-11-02','','shop name'),(358,'merchant_166',1,2,11,2018,2,11,2018,'http://res.cloudinary.com/locator/image/upload/v1541145656/merchant_166/jt1jrbl6gwn9ut8dxw37.png','','13:31:00 2018-11-02','','shop name'),(359,'merchant_289',1,13,11,2018,13,11,2018,'http://res.cloudinary.com/locator/image/upload/v1542132795/merchant_289/d8uemfkjmprltxl3s5cl.jpg','vv','23:43:16 2018-11-13','dd','shop name'),(360,'merchant_307',1,18,11,2018,18,11,2018,'http://res.cloudinary.com/locator/image/upload/v1542543206/merchant_307/jq3hsd5a4xvxdeele1wf.jpg','','17:43:28 2018-11-18','','shop name'),(361,'merchant_321',1,26,11,2018,26,11,2018,'http://res.cloudinary.com/locator/image/upload/v1543236168/merchant_290/jtrjoq6fgyp7oxnb402y.jpg','','18:12:50 2018-11-26','','shop name');
+/*!40000 ALTER TABLE `ad_tdr1z3` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tdr1z4`
+--
+
+DROP TABLE IF EXISTS `ad_tdr1z4`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tdr1z4` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tdr1z4`
+--
+
+LOCK TABLES `ad_tdr1z4` WRITE;
+/*!40000 ALTER TABLE `ad_tdr1z4` DISABLE KEYS */;
+INSERT INTO `ad_tdr1z4` VALUES (1,'merchant_40',1,21,7,2018,21,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534840511/merchant_40/ofhggtzlweyuo19txg6p.jpg','ghhh','08:35:14 2018-08-21','46566','shop name'),(2,'merchant_42',1,21,7,2018,21,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534859878/merchant_42/ekcpxgcszes5oic2jwat.jpg','','13:58:00 2018-08-21','','shop name'),(3,'merchant_42',1,2018,8,23,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534880664/merchant_42/aj0vckukw6lq8wkwuipc.jpg','valid test','01:14:26 2018-08-22','56748','shop name'),(4,'merchant_42',1,22,7,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534881378/merchant_42/xgewtlxizodbhpaog3lr.jpg','offer desc','01:26:20 2018-08-22','myoffe','shop name'),(5,'merchant_79',1,8,10,2018,8,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538984312/merchant_79/e8uie4n9yrgdlhoktr1c.jpg','','13:08:34 2018-10-08','','shop name'),(6,'merchant_79',1,8,10,2018,8,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538985230/merchant_79/zbtu7en9kzvrbq9fztpy.jpg','','13:23:52 2018-10-08','','shop name'),(7,'merchant_79',1,8,10,2018,8,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538985375/merchant_79/fsetnflcuttwkeffauwn.jpg','','13:26:16 2018-10-08','','shop name'),(8,'merchant_80',1,8,10,2018,8,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538998005/merchant_80/czlnt99xzfaceq7imc11.jpg','','16:56:46 2018-10-08','','shop name'),(9,'merchant_80',1,8,10,2018,8,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539016752/merchant_80/d3chd3m0otbqcvm9ex0x.jpg','','22:09:13 2018-10-08','','shop name'),(10,'merchant_80',1,9,10,2018,9,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539025439/merchant_80/jqom3lpoqwlfbkssohwa.jpg','','00:34:01 2018-10-09','','shop name'),(11,'merchant_80',1,9,10,2018,9,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539026984/merchant_80/ubxavzrrh3kyxzaev10y.jpg','','00:59:45 2018-10-09','','shop name'),(12,'merchant_80',1,9,10,2018,9,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539060069/merchant_80/dqljj7sqfu6ggxqz4gcg.jpg','','10:11:11 2018-10-09','','shop name'),(13,'merchant_80',1,9,10,2018,9,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539060150/merchant_80/zcpbg1o2qa6r37mnc8c1.jpg','','10:12:32 2018-10-09','','shop name'),(14,'merchant_80',1,9,10,2018,9,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539070904/merchant_80/r6pzhzhzoxijow4quv66.jpg','','13:11:47 2018-10-09','','shop name'),(15,'merchant_80',1,9,10,2018,9,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539073067/merchant_80/uvuo5pfuyqsurzl4obca.jpg','','13:47:49 2018-10-09','','shop name'),(16,'merchant_80',1,10,10,2018,10,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539129182/merchant_80/gjtldskqsbupuji1u7f3.jpg','','05:23:04 2018-10-10','','shop name'),(17,'merchant_82',1,10,10,2018,10,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539161681/merchant_82/seyap6cxlej1rjj18mhf.jpg','','14:24:43 2018-10-10','','shop name'),(18,'merchant_82',1,10,10,2018,10,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539167281/merchant_82/ba2zzufapdjcnux964p6.jpg','','15:58:03 2018-10-10','','shop name'),(19,'merchant_82',1,10,10,2018,10,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539169904/merchant_82/za3h42wseiux6ca93ko6.jpg','','16:41:46 2018-10-10','','shop name'),(20,'merchant_82',1,10,10,2018,10,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539170574/merchant_82/r4qrczuym1prwpwqjz9z.jpg','','16:52:56 2018-10-10','','shop name'),(21,'merchant_82',1,11,10,2018,11,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539239443/merchant_82/qtmgukgjvwmobvethabs.jpg','','12:00:45 2018-10-11','\n','shop name'),(22,'merchant_82',1,11,10,2018,11,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539239501/merchant_82/xiglgxaq5vkutdytgelv.jpg','','12:01:42 2018-10-11','','shop name'),(23,'merchant_82',1,11,10,2018,11,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539239749/merchant_82/to5owy0b8c0vm2z04kyb.jpg','','12:05:51 2018-10-11','','shop name'),(24,'merchant_82',1,11,10,2018,11,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539272122/merchant_82/gandbyzx8b4grpvsgxmh.jpg','','21:05:23 2018-10-11','','shop name'),(25,'merchant_82',1,11,10,2018,11,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539272151/merchant_82/bgnrg6htcn7jzzbc7rh5.jpg','','21:05:52 2018-10-11','','shop name'),(26,'merchant_82',1,11,10,2018,11,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539272164/merchant_82/dah9przsenf1wa4wn4ac.jpg','','21:06:06 2018-10-11','','shop name'),(27,'merchant_82',1,12,10,2018,12,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539315119/merchant_82/ma7mhnrm4xobdmuvwc3y.jpg','','09:02:01 2018-10-12','','shop name'),(28,'merchant_82',1,12,10,2018,12,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539315370/merchant_82/b3zmrplfwvqvemyvjxie.jpg','','09:06:11 2018-10-12','','shop name');
+/*!40000 ALTER TABLE `ad_tdr1z4` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tdr1zj`
+--
+
+DROP TABLE IF EXISTS `ad_tdr1zj`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tdr1zj` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tdr1zj`
+--
+
+LOCK TABLES `ad_tdr1zj` WRITE;
+/*!40000 ALTER TABLE `ad_tdr1zj` DISABLE KEYS */;
+INSERT INTO `ad_tdr1zj` VALUES (1,'merchant_52',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534936752/merchant_52/nab8c13mkqn14cscqwf3.jpg','only 30','16:49:14 2018-08-22','cc','shop name'),(2,'merchant_52',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534937540/merchant_52/yarmuysekrgpv6rjdyf9.jpg','svnk','17:02:23 2018-08-22','fggg','shop name'),(3,'merchant_52',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534937937/merchant_52/og7spzctrjpxci0f0eia.jpg','bkkx','17:08:59 2018-08-22','vh','shop name'),(4,'merchant_52',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534940211/merchant_52/isebbjh7fti38qxfaice.jpg','desc','17:46:54 2018-08-22','fnn','shop name'),(5,'merchant_52',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534943251/merchant_52/li5fywml4wmigbvuppze.jpg','red cycle','18:37:33 2018-08-22','code','shop name'),(6,'merchant_52',1,25,8,2018,25,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535184578/merchant_52/dhmtxwduvqruxhgp07wq.jpg','gold scheme in muthoot','13:39:40 2018-08-25','goldnn','shop name');
+/*!40000 ALTER TABLE `ad_tdr1zj` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tdr1zv`
+--
+
+DROP TABLE IF EXISTS `ad_tdr1zv`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tdr1zv` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tdr1zv`
+--
+
+LOCK TABLES `ad_tdr1zv` WRITE;
+/*!40000 ALTER TABLE `ad_tdr1zv` DISABLE KEYS */;
+INSERT INTO `ad_tdr1zv` VALUES (1,'merchant_51',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534931629/merchant_51/ysi6sjmcdtsirsbhaxdi.jpg','testing the app','15:23:52 2018-08-22','govrcl','shop name'),(2,'merchant_51',1,22,8,2018,22,8,2018,'http://res.cloudinary.com/locator/image/upload/v1534932166/merchant_51/qpwpk5k21dumtdpcoxol.jpg','desc','15:32:47 2018-08-22','red','shop name');
+/*!40000 ALTER TABLE `ad_tdr1zv` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tdr26y`
+--
+
+DROP TABLE IF EXISTS `ad_tdr26y`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tdr26y` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tdr26y`
+--
+
+LOCK TABLES `ad_tdr26y` WRITE;
+/*!40000 ALTER TABLE `ad_tdr26y` DISABLE KEYS */;
+INSERT INTO `ad_tdr26y` VALUES (1,'merchant_0',1,31,8,2018,31,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535698844/merchant_0/qqhkztsnfvrt8ztiqqko.jpg','hosur ','12:30:47 2018-08-31','gopi','shop name'),(2,'merchant_0',1,31,8,2018,31,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535701379/merchant_0/fdrplzqrntcbh5agzkko.jpg','gjii','13:13:02 2018-08-31','gopi','shop name'),(3,'merchant_0',1,31,8,2018,31,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535702640/merchant_0/otivamfozrcem5hgbcky.jpg','gh','13:34:03 2018-08-31','venu','shop name'),(4,'merchant_0',1,31,8,2018,31,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535721794/merchant_0/wmo70xt6ehlv7vyprgv6.jpg','','18:53:17 2018-08-31','test','shop name');
+/*!40000 ALTER TABLE `ad_tdr26y` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tdr3bj`
+--
+
+DROP TABLE IF EXISTS `ad_tdr3bj`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tdr3bj` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tdr3bj`
+--
+
+LOCK TABLES `ad_tdr3bj` WRITE;
+/*!40000 ALTER TABLE `ad_tdr3bj` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ad_tdr3bj` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tepexv`
+--
+
+DROP TABLE IF EXISTS `ad_tepexv`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tepexv` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tepexv`
+--
+
+LOCK TABLES `ad_tepexv` WRITE;
+/*!40000 ALTER TABLE `ad_tepexv` DISABLE KEYS */;
+INSERT INTO `ad_tepexv` VALUES (1,'merchant_90',1,18,10,2018,15,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539627786/merchant_90/eqkpljgyrvniyxlkhr3v.jpg','free ride','23:53:07 2018-10-15','disc','shop name'),(2,'merchant_90',1,12,10,2018,16,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539630144/merchant_90/op0ry7yscoakcw72xhr2.jpg','chyg','00:32:25 2018-10-16','rrfxc','shop name'),(3,'merchant_97',1,21,10,2018,21,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540144020/merchant_97/at4kvmndkg6jis0kicql.jpg','cc','23:17:06 2018-10-21','pp','shop name'),(4,'merchant_125',1,28,10,2018,28,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540703002/merchant_125/to0d9le5namdutoucngn.jpg','sgsh z','10:33:23 2018-10-28','nsnsb','shop name'),(5,'merchant_143',1,28,10,2018,28,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540751114/merchant_143/pzlpieivsorfvq8crqtd.jpg','ghhh','23:55:15 2018-10-28','off','shop name'),(6,'merchant_149',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540828800/merchant_149/f0aipwotmeberamaa0ip.jpg','zbzn','21:30:02 2018-10-29','jsjsbx','shop name'),(7,'merchant_149',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540828833/merchant_149/h1uuewub1bucmhbpkpnm.jpg','ffg','21:30:35 2018-10-29','sed','shop name'),(8,'merchant_147',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540836182/merchant_147/h7kldg6fvxzbycerztpy.jpg','','23:33:05 2018-10-29','','shop name'),(9,'merchant_149',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540836819/merchant_149/ht0omio77eavucwtxyow.jpg','','23:43:41 2018-10-29','','shop name'),(10,'merchant_255',1,6,11,2018,6,11,2018,'http://res.cloudinary.com/locator/image/upload/v1541526328/merchant_255/utqzfbcrc0cbnhtpb4sf.jpg','hjif','23:15:29 2018-11-06','bjhs','shop name'),(11,'merchant_289',1,13,11,2018,13,11,2018,'http://res.cloudinary.com/locator/image/upload/v1542132684/merchant_289/tvnogipzyerbsy4ygzlx.jpg','xkxk','23:41:25 2018-11-13','jzix','shop name'),(12,'merchant_290',NULL,NULL,NULL,NULL,16,12,2018,'http://res.cloudinary.com/locator/image/upload/v1544953617/v30wexukkhigvsp0f0eo.jpg',NULL,'15:16:58 2018-12-16',NULL,'shop name'),(13,'merchant_290',1,16,12,2018,16,12,2018,'http://res.cloudinary.com/locator/image/upload/v1544954096/merchant_304/lzvjlrdfmfdbkkwpjufz.jpg','df bdbxbx','15:24:58 2018-12-16','tken','shop name'),(14,'merchant_304',1,16,12,2018,16,12,2018,'http://res.cloudinary.com/locator/image/upload/v1544980438/merchant_304/djoynz7eewx3egn2zdkg.jpg','gggg','22:44:00 2018-12-16','vghhg','shop name'),(15,'merchant_304',1,16,12,2018,16,12,2018,'http://res.cloudinary.com/locator/image/upload/v1544980490/merchant_304/bloznns26pfxj1zuihjq.jpg','vvbb','22:44:52 2018-12-16','bh hgg','shop name'),(16,'merchant_304',1,16,12,2018,16,12,2018,'http://res.cloudinary.com/locator/image/upload/v1544980535/merchant_304/apgyhnhrc6t4sefpv8a5.jpg','','22:45:36 2018-12-16','gg','shop name'),(17,'merchant_304',1,16,12,2018,16,12,2018,'http://res.cloudinary.com/locator/image/upload/v1544980585/merchant_304/cpqw1yrajg4w6mmalalv.jpg','do hhx','22:46:27 2018-12-16','dhv','shop name');
+/*!40000 ALTER TABLE `ad_tepexv` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tepfc8`
+--
+
+DROP TABLE IF EXISTS `ad_tepfc8`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tepfc8` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tepfc8`
+--
+
+LOCK TABLES `ad_tepfc8` WRITE;
+/*!40000 ALTER TABLE `ad_tepfc8` DISABLE KEYS */;
+INSERT INTO `ad_tepfc8` VALUES (1,'merchant_166',1,2,11,2018,2,11,2018,'http://res.cloudinary.com/locator/image/upload/v1541134410/merchant_166/lky05fvbupt220gn4zvp.png','','10:23:32 2018-11-02','','shop name');
+/*!40000 ALTER TABLE `ad_tepfc8` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tf8f5c`
+--
+
+DROP TABLE IF EXISTS `ad_tf8f5c`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tf8f5c` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tf8f5c`
+--
+
+LOCK TABLES `ad_tf8f5c` WRITE;
+/*!40000 ALTER TABLE `ad_tf8f5c` DISABLE KEYS */;
+INSERT INTO `ad_tf8f5c` VALUES (1,'merchant_151',1,30,10,2018,30,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540876332/merchant_151/d5w2l4epuqpdqd3y5szu.jpg','','10:42:14 2018-10-30','','shop name');
+/*!40000 ALTER TABLE `ad_tf8f5c` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_ts5ejh`
+--
+
+DROP TABLE IF EXISTS `ad_ts5ejh`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_ts5ejh` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_ts5ejh`
+--
+
+LOCK TABLES `ad_ts5ejh` WRITE;
+/*!40000 ALTER TABLE `ad_ts5ejh` DISABLE KEYS */;
+INSERT INTO `ad_ts5ejh` VALUES (1,'merchant_70',1,12,10,2018,1,10,2018,'http://res.cloudinary.com/locator/image/upload/v1538417490/merchant_70/jt44nwhczejy9adrkckp.jpg','test','23:41:34 2018-10-01','qwert','shop name'),(2,'merchant_81',1,27,10,2018,9,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539026837/merchant_81/ultdavbrybvvvprjymln.jpg','test','00:57:20 2018-10-09','556643','shop name'),(3,'merchant_83',1,27,10,2018,11,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539279524/merchant_83/njwurx8lxcqe7uviw8m8.jpg','nice offer','23:08:46 2018-10-11','sdfghj','shop name'),(4,'merchant_83',1,27,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539411548/merchant_83/earsinmp6fvdmkf5amkh.jpg','geg','11:49:13 2018-10-13','999888','shop name'),(5,'merchant_83',1,14,10,2018,13,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539411629/merchant_83/yz6uhwdyblalwcnszk2g.jpg','offer dec','11:50:32 2018-10-13','123456','shop name'),(6,'merchant_83',1,27,10,2018,16,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539630980/merchant_83/j5vybe9kifzgcm1py4up.jpg','hello','00:46:24 2018-10-16','qwerty','shop name'),(7,'merchant_83',1,20,10,2018,16,10,2018,'http://res.cloudinary.com/locator/image/upload/v1539632832/merchant_83/j5bgjcigxnhldggzsodj.jpg','hello2','01:17:17 2018-10-16','asdfgh','shop name'),(8,'merchant_83',1,27,10,2018,27,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540663264/merchant_83/hlsr7w74iwgqtrebvsms.jpg','test','23:31:06 2018-10-27','987654','shop name'),(9,'merchant_83',1,31,10,2018,27,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540663861/merchant_83/mxnimvzesby4nzzakluu.jpg','jchch','23:41:03 2018-10-27','355353','shop name'),(10,'merchant_83',1,27,10,2018,27,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540663979/merchant_83/mrzv6a4eshazi259c9l2.jpg','hchc','23:43:02 2018-10-27','445556','shop name'),(11,'merchant_83',1,27,10,2018,27,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540664285/merchant_83/er404dwodgpxaxptwpye.jpg','bcbcv','23:48:07 2018-10-27','chhchc','shop name'),(12,'merchant_147',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540833746/merchant_147/mbedkgdznze4iufsdhst.jpg','','22:52:28 2018-10-29','','shop name'),(13,'merchant_345',NULL,NULL,NULL,NULL,9,12,2018,'http://res.cloudinary.com/locator/image/upload/v1544343757/wg6iuwedoxmpmf7toa75.png',NULL,'13:52:38 2018-12-09',NULL,'shop name');
+/*!40000 ALTER TABLE `ad_ts5ejh` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_ts5ejj`
+--
+
+DROP TABLE IF EXISTS `ad_ts5ejj`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_ts5ejj` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_ts5ejj`
+--
+
+LOCK TABLES `ad_ts5ejj` WRITE;
+/*!40000 ALTER TABLE `ad_ts5ejj` DISABLE KEYS */;
+INSERT INTO `ad_ts5ejj` VALUES (1,'merchant_344',NULL,NULL,NULL,NULL,9,12,2018,'http://res.cloudinary.com/locator/image/upload/v1544341212/z4igifyysxojfmhmhpfq.jpg',NULL,'13:10:13 2018-12-09',NULL,'shop name'),(2,'merchant_345',NULL,NULL,NULL,NULL,9,12,2018,'http://res.cloudinary.com/locator/image/upload/v1544343937/h7l1v3sz3sxepcguzfyy.jpg',NULL,'13:55:39 2018-12-09',NULL,'shop name'),(3,'merchant_345',NULL,NULL,NULL,NULL,9,12,2018,'http://res.cloudinary.com/locator/image/upload/v1544344153/ml0ajyzj3maabjh71nrp.jpg',NULL,'13:59:14 2018-12-09',NULL,'shop name');
+/*!40000 ALTER TABLE `ad_ts5ejj` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tsmzqq`
+--
+
+DROP TABLE IF EXISTS `ad_tsmzqq`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tsmzqq` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tsmzqq`
+--
+
+LOCK TABLES `ad_tsmzqq` WRITE;
+/*!40000 ALTER TABLE `ad_tsmzqq` DISABLE KEYS */;
+INSERT INTO `ad_tsmzqq` VALUES (1,'merchant_164',1,2,11,2018,2,11,2018,'http://res.cloudinary.com/locator/image/upload/v1541146462/merchant_164/iqpkyjkywvw9edlzkymt.jpg','','13:44:24 2018-11-02','','shop name');
+/*!40000 ALTER TABLE `ad_tsmzqq` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tsmzwc`
+--
+
+DROP TABLE IF EXISTS `ad_tsmzwc`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tsmzwc` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tsmzwc`
+--
+
+LOCK TABLES `ad_tsmzwc` WRITE;
+/*!40000 ALTER TABLE `ad_tsmzwc` DISABLE KEYS */;
+INSERT INTO `ad_tsmzwc` VALUES (1,'merchant_168',1,28,11,2018,2,11,2018,'http://res.cloudinary.com/locator/image/upload/v1541146570/merchant_168/wqbosfyz6cyl1vc1rtcn.png','3rd free order','13:46:12 2018-11-02','574646','shop name'),(2,'merchant_164',1,2,11,2018,2,11,2018,'http://res.cloudinary.com/locator/image/upload/v1541146614/merchant_164/ohcldutc4upm1mjecn3z.jpg','','13:46:56 2018-11-02','','shop name');
+/*!40000 ALTER TABLE `ad_tsmzwc` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_tsvbuw`
+--
+
+DROP TABLE IF EXISTS `ad_tsvbuw`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_tsvbuw` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_tsvbuw`
+--
+
+LOCK TABLES `ad_tsvbuw` WRITE;
+/*!40000 ALTER TABLE `ad_tsvbuw` DISABLE KEYS */;
+INSERT INTO `ad_tsvbuw` VALUES (1,'merchant_164',1,2,11,2018,2,11,2018,'http://res.cloudinary.com/locator/image/upload/v1541145809/merchant_164/yeineofjzn3a7jjtydyu.jpg','','13:33:31 2018-11-02','','shop name');
+/*!40000 ALTER TABLE `ad_tsvbuw` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_ttncwc`
+--
+
+DROP TABLE IF EXISTS `ad_ttncwc`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_ttncwc` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_ttncwc`
+--
+
+LOCK TABLES `ad_ttncwc` WRITE;
+/*!40000 ALTER TABLE `ad_ttncwc` DISABLE KEYS */;
+INSERT INTO `ad_ttncwc` VALUES (1,'merchant_58',1,23,9,2018,23,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535008495/merchant_58/lmx42gomo0gmmdadudja.jpg','3d wallpapers of your choice only at RS  95/sq ft with installation','12:44:59 2018-08-23','3dwal','shop name'),(2,'merchant_58',1,31,8,2018,23,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535016112/merchant_58/aqbyjo2w7guotqytc7wr.jpg','wallpaper at RS 90/sq ft','14:51:55 2018-08-23','3d2wl','shop name'),(3,'merchant_58',1,24,8,2018,23,8,2018,'http://res.cloudinary.com/locator/image/upload/v1535021632/merchant_58/wglvtrl9ovmnwvct8vu9.png','Cole Haan shoes only in range of RS 3000 to 10000.','16:23:54 2018-08-23','coleh','shop name'),(4,'merchant_69',1,4,9,2018,4,9,2018,'http://res.cloudinary.com/locator/image/upload/v1536053260/merchant_69/des8r9iysfzbizbvo2rg.jpg','bdgh hfhja jshhha jfjd hdh','14:57:54 2018-09-04','bsgg','shop name');
+/*!40000 ALTER TABLE `ad_ttncwc` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_ttngjn`
+--
+
+DROP TABLE IF EXISTS `ad_ttngjn`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_ttngjn` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_ttngjn`
+--
+
+LOCK TABLES `ad_ttngjn` WRITE;
+/*!40000 ALTER TABLE `ad_ttngjn` DISABLE KEYS */;
+INSERT INTO `ad_ttngjn` VALUES (1,'merchant_147',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540833220/merchant_147/sqm4bpwk4b8fsp0c4oo1.jpg','','22:43:42 2018-10-29','','shop name');
+/*!40000 ALTER TABLE `ad_ttngjn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_ttqwg4`
+--
+
+DROP TABLE IF EXISTS `ad_ttqwg4`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_ttqwg4` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_ttqwg4`
+--
+
+LOCK TABLES `ad_ttqwg4` WRITE;
+/*!40000 ALTER TABLE `ad_ttqwg4` DISABLE KEYS */;
+INSERT INTO `ad_ttqwg4` VALUES (1,'merchant_147',1,29,10,2018,29,10,2018,'http://res.cloudinary.com/locator/image/upload/v1540832945/merchant_147/tuddwe64ypiapzu2qvgj.jpg','','22:39:16 2018-10-29','','shop name');
+/*!40000 ALTER TABLE `ad_ttqwg4` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ads`
+--
+
+DROP TABLE IF EXISTS `ads`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ads` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(45) NOT NULL,
+  `Category` int(10) DEFAULT NULL,
+  `ValidTillDate` int(2) DEFAULT NULL,
+  `ValidTillMonth` int(2) DEFAULT NULL,
+  `ValidTillYear` int(4) DEFAULT NULL,
+  `ValidFromDate` int(2) DEFAULT NULL,
+  `ValidFromMonth` int(2) DEFAULT NULL,
+  `ValidFromYear` int(4) DEFAULT NULL,
+  `adimgurl` varchar(128) DEFAULT NULL,
+  `itemdesc` varchar(512) DEFAULT NULL,
+  `receivedOn` varchar(45) DEFAULT NULL,
+  `offercode` varchar(6) DEFAULT NULL,
+  `shopname` varchar(45) DEFAULT 'shop name',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ads`
+--
+
+LOCK TABLES `ads` WRITE;
+/*!40000 ALTER TABLE `ads` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ads` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bangalore_ffffff_yyyyyy`
+--
+
+DROP TABLE IF EXISTS `bangalore_ffffff_yyyyyy`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bangalore_ffffff_yyyyyy` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(128) NOT NULL,
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bangalore_ffffff_yyyyyy`
+--
+
+LOCK TABLES `bangalore_ffffff_yyyyyy` WRITE;
+/*!40000 ALTER TABLE `bangalore_ffffff_yyyyyy` DISABLE KEYS */;
+INSERT INTO `bangalore_ffffff_yyyyyy` VALUES (1,'bangalore_ffffff_yyyyyy_0','tdr1z3',12.9718903,77.6696154,'http://res.cloudinary.com/locator/image/upload/v1532233380/qkwwfwstzskowvlrgjfs.jpg','gopi','karnataka','India','2018-07-22T04:24:40.066502300','1','fjvj hhf','+918179442558'),(2,'bangalore_ffffff_yyyyyy_0','tdr1z3',12.9718903,77.6696154,'http://res.cloudinary.com/locator/image/upload/v1532233518/bnaxzhc4fvjoczkpzulz.jpg','gopi','karnataka','India','2018-07-22T04:26:30.238399700','1','fjvj hhf','+918179442558');
+/*!40000 ALTER TABLE `bangalore_ffffff_yyyyyy` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bengaluru_shivanandanagar_lbsnilgiris`
+--
+
+DROP TABLE IF EXISTS `bengaluru_shivanandanagar_lbsnilgiris`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bengaluru_shivanandanagar_lbsnilgiris` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(128) NOT NULL,
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bengaluru_shivanandanagar_lbsnilgiris`
+--
+
+LOCK TABLES `bengaluru_shivanandanagar_lbsnilgiris` WRITE;
+/*!40000 ALTER TABLE `bengaluru_shivanandanagar_lbsnilgiris` DISABLE KEYS */;
+INSERT INTO `bengaluru_shivanandanagar_lbsnilgiris` VALUES (1,'bengaluru_shivanandanagar_lbsnilgiris_0','tdr1z3',12.9718903,77.6696154,'http://res.cloudinary.com/locator/image/upload/v1532232769/pygm8uz9xmbsoekpcbh9.jpg','gopi','karnataka','India','2018-07-22T04:13:02.284916800','1','hno 105 block b','+918179442558');
+/*!40000 ALTER TABLE `bengaluru_shivanandanagar_lbsnilgiris` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `birthdays`
+--
+
+DROP TABLE IF EXISTS `birthdays`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `birthdays` (
+  `idBirthdays` int(11) NOT NULL AUTO_INCREMENT,
+  `contact` varchar(15) NOT NULL,
+  `geohash` varchar(12) DEFAULT NULL,
+  PRIMARY KEY (`idBirthdays`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `birthdays`
+--
+
+LOCK TABLES `birthdays` WRITE;
+/*!40000 ALTER TABLE `birthdays` DISABLE KEYS */;
+/*!40000 ALTER TABLE `birthdays` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `category` (
+  `idcategory` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(45) NOT NULL,
+  `imgurl` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`idcategory`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `category`
+--
+
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` VALUES (1,'Restaurant VegFood  ','https://res.cloudinary.com/locator/image/upload/v1540743476/categories/vegetarianfood.png'),(2,'Restaurant  NonVeg Food','https://res.cloudinary.com/locator/image/upload/v1540744002/categories/nonvegfood.png'),(3,'Vegetables','https://res.cloudinary.com/locator/image/upload/v1540744412/categories/vegetables.png'),(4,'NonVeg Raw Items','https://res.cloudinary.com/locator/image/upload/v1540745294/categories/nonvegrawitems.jpg'),(5,'Ice Creams','https://res.cloudinary.com/locator/image/upload/v1540747088/categories/icecreams.jpg'),(6,'Coffee shop','https://res.cloudinary.com/locator/image/upload/v1540747255/categories/coffeeshop.jpg'),(7,'Groceries','https://res.cloudinary.com/locator/image/upload/v1540747455/categories/grocery.jpg'),(8,'Men Apparel','https://res.cloudinary.com/locator/image/upload/v1540748297/categories/men_apparel.jpg'),(9,'Women Apparel','https://res.cloudinary.com/locator/image/upload/v1540748822/categories/womenappareal.jpg'),(10,'Child Apparel','https://res.cloudinary.com/locator/image/upload/v1540749280/categories/childapparel.png'),(11,'stationery','https://res.cloudinary.com/locator/image/upload/v1540749438/categories/stationery.jpg'),(12,'Mobile Phones','https://res.cloudinary.com/locator/image/upload/v1540749708/categories/mobiles.jpg'),(13,'Bakery','https://res.cloudinary.com/locator/image/upload/v1540749798/categories/bakery.jpg'),(14,'pendrives','https://res.cloudinary.com/locator/image/upload/v1540749892/categories/pendrives.jpg'),(15,'Electronics','https://res.cloudinary.com/locator/image/upload/v1540750069/categories/electronicitems.png'),(16,'Men accessories','https://res.cloudinary.com/locator/image/upload/v1540750208/categories/menaccessories.jpg'),(17,'Women accessories','https://res.cloudinary.com/locator/image/upload/v1540750349/categories/womenaccessories.jpg'),(18,'Men Saloon','https://res.cloudinary.com/locator/image/upload/v1540750509/categories/mensalon.jpg'),(19,'Men SPA','https://res.cloudinary.com/locator/image/upload/v1540750723/categories/menspa.jpg'),(20,'Women SPA','https://res.cloudinary.com/locator/image/upload/v1540750882/categories/womenspa.jpg'),(21,'Men GYM','https://res.cloudinary.com/locator/image/upload/v1540751152/categories/mengym.jpg'),(22,'Women GYM','https://res.cloudinary.com/locator/image/upload/v1540751311/categories/womengym.jpg'),(23,'Health n Fitness','https://res.cloudinary.com/locator/image/upload/v1540751401/categories/healthandfitness.jpg'),(24,'Plastic goods','https://res.cloudinary.com/locator/image/upload/v1540751569/categories/plasticgoods.jpg'),(25,'Kitchen appliances','https://res.cloudinary.com/locator/image/upload/v1540751664/categories/kitchemaccessories.jpg'),(26,'Hardware','https://res.cloudinary.com/locator/image/upload/v1540751887/categories/hardwareaccessories.jpg'),(27,'Toys','https://res.cloudinary.com/locator/image/upload/v1540752088/toys_tpeume.jpg'),(28,'Pets','https://res.cloudinary.com/locator/image/upload/v1540752276/Pets_lbnynq.jpg'),(29,'Medicals','https://res.cloudinary.com/locator/image/upload/v1540752439/medicals_jcpwnq.jpg'),(30,'Diagnostics','https://res.cloudinary.com/locator/image/upload/v1540752548/categories/diagnostics.jpg'),(31,'Novelties ','https://res.cloudinary.com/locator/image/upload/v1540752742/categories/novelties.jpg'),(32,'Sports','https://res.cloudinary.com/locator/image/upload/v1540752835/sports_xlklqf.jpg'),(33,'Institutes','https://res.cloudinary.com/locator/image/upload/v1540752945/educational_v3bv97.jpg'),(34,'women\'s beauty parlour','https://res.cloudinary.com/locator/image/upload/v1540753081/categories/womenbeautyparlour.jpg');
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cghhhbv_fhujjhv_fhhjj`
+--
+
+DROP TABLE IF EXISTS `cghhhbv_fhujjhv_fhhjj`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cghhhbv_fhujjhv_fhhjj` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(25) NOT NULL,
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cghhhbv_fhujjhv_fhhjj`
+--
+
+LOCK TABLES `cghhhbv_fhujjhv_fhhjj` WRITE;
+/*!40000 ALTER TABLE `cghhhbv_fhujjhv_fhhjj` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cghhhbv_fhujjhv_fhhjj` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `chiokbb_ojhjjaba_xghjnbb`
+--
+
+DROP TABLE IF EXISTS `chiokbb_ojhjjaba_xghjnbb`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `chiokbb_ojhjjaba_xghjnbb` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(128) NOT NULL,
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `chiokbb_ojhjjaba_xghjnbb`
+--
+
+LOCK TABLES `chiokbb_ojhjjaba_xghjnbb` WRITE;
+/*!40000 ALTER TABLE `chiokbb_ojhjjaba_xghjnbb` DISABLE KEYS */;
+INSERT INTO `chiokbb_ojhjjaba_xghjnbb` VALUES (1,'chiokbb_ojhjjaba_xghjnbb_0','tdr1z3',12.9718903,77.6696154,'http://res.cloudinary.com/locator/image/upload/v1532235466/rlobtkhc4k7kaeghlrcz.jpg','guin','fiinvc','India','2018-07-22T04:57:58.364095800','1','auad','+918179442558');
+/*!40000 ALTER TABLE `chiokbb_ojhjjaba_xghjnbb` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ckcdi_dujcn_dhvvl`
+--
+
+DROP TABLE IF EXISTS `ckcdi_dujcn_dhvvl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ckcdi_dujcn_dhvvl` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(128) NOT NULL,
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ckcdi_dujcn_dhvvl`
+--
+
+LOCK TABLES `ckcdi_dujcn_dhvvl` WRITE;
+/*!40000 ALTER TABLE `ckcdi_dujcn_dhvvl` DISABLE KEYS */;
+INSERT INTO `ckcdi_dujcn_dhvvl` VALUES (1,'ckcdi_dujcn_dhvvl_0','tdr1z3',12.9718903,77.6696154,'http://res.cloudinary.com/locator/image/upload/v1532236489/yogmwdczc28y58mirsh1.jpg','rivv','fihckk','India','2018-07-22T05:15:02.989519700','1','syckk','+918179442558');
+/*!40000 ALTER TABLE `ckcdi_dujcn_dhvvl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `MYUSER` varchar(30) NOT NULL,
+  `EMAIL` varchar(30) DEFAULT NULL,
+  `WEBPAGE` varchar(100) NOT NULL,
+  `DATUM` date NOT NULL,
+  `SUMMARY` varchar(40) NOT NULL,
+  `COMMENTS` varchar(400) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comments`
+--
+
+LOCK TABLES `comments` WRITE;
+/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+INSERT INTO `comments` VALUES (1,'lars','myemail@gmail.com','http://www.vogella.com','2009-09-14','Summary','My first comment');
+/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `consumers`
+--
+
+DROP TABLE IF EXISTS `consumers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `consumers` (
+  `idconsumers` int(11) NOT NULL AUTO_INCREMENT,
+  `consumername` varchar(128) NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `DOB` date NOT NULL,
+  `dpurl` varchar(256) NOT NULL,
+  `registeredon` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int(11) DEFAULT NULL,
+  `sex` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`idconsumers`)
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `consumers`
+--
+
+LOCK TABLES `consumers` WRITE;
+/*!40000 ALTER TABLE `consumers` DISABLE KEYS */;
+INSERT INTO `consumers` VALUES (1,'gopi','+918179442558','1971-10-21','http://res.cloudinary.com/locator/image/upload/v1539876022/bjzj1yrzbym9swojaul9.jpg','2018-10-18 20:51:19',NULL,0),(2,'mornihh','+919966525464','1994-10-21','http://res.cloudinary.com/locator/image/upload/v1540142957/rzdtsntzdcnmibvdlktx.jpg','2018-10-21 22:59:19',NULL,0),(3,'Gopi','+919246655322','1991-10-24','http://res.cloudinary.com/locator/image/upload/v1540397974/clndejqbc481l74npro8.jpg','2018-10-24 21:49:35',NULL,0),(4,'gopo','+918179442558','1981-10-10','http://res.cloudinary.com/locator/image/upload/v1540404452/ymokukc8ff2t5zsowqbi.jpg','2018-10-24 23:37:33',NULL,0),(5,'gopi','+918179442558','1999-10-24','http://res.cloudinary.com/locator/image/upload/v1540405321/ox0ghofljkhpafe6wjin.jpg','2018-10-24 23:52:03',NULL,0),(6,'aruna','+918686091898','1987-10-24','http://res.cloudinary.com/locator/image/upload/v1540405823/bm99md1hx7duikc9whwf.jpg','2018-10-25 00:00:25',NULL,0),(7,'gopi','+918179442558','1995-10-25','http://res.cloudinary.com/locator/image/upload/v1540437206/kfhg7mvoibvndarwinkl.jpg','2018-10-25 08:43:27',NULL,0),(8,'vamshi\n','+919908654334','1990-01-11','http://res.cloudinary.com/locator/image/upload/v1540440891/kvy9suhcf8ti6c7uzsdw.png','2018-10-25 09:44:53',NULL,0),(9,'gopi','+918179442558','1989-10-27','http://res.cloudinary.com/locator/image/upload/v1540588142/i6vspxxdopya3theilpn.jpg','2018-10-27 02:39:03',NULL,0),(10,'gopi','+918179442558','1986-10-30','http://res.cloudinary.com/locator/image/upload/v1540653501/easz9sjzxumlogtbd2h2.jpg','2018-10-27 20:48:23',NULL,0),(11,'shzzn','+919966525464','1996-10-17','http://res.cloudinary.com/locator/image/upload/v1540662034/kc1ctknylh2mfnllkzez.jpg','2018-10-27 23:10:36',NULL,0),(12,'mayur','+918200785387','2002-10-28','http://res.cloudinary.com/locator/image/upload/v1540668044/sedhhhhw4bzid4rqsse2.jpg','2018-10-28 00:50:47',NULL,0),(13,'','+918200785387','2006-10-13','http://res.cloudinary.com/locator/image/upload/v1540668968/qeslrm6z4itxbadityla.jpg','2018-10-28 01:06:10',NULL,0),(14,'','+918200785387','1979-10-28','http://res.cloudinary.com/locator/image/upload/v1540703034/ivmc9w34zbnnq1mchwvw.jpg','2018-10-28 10:33:56',NULL,0),(15,'','+918200785387','1980-10-28','http://res.cloudinary.com/locator/image/upload/v1540703511/gaf1dscelb37ncd7rorb.jpg','2018-10-28 10:41:52',NULL,0),(16,'820078533\n','+918200785387','1993-10-28','http://res.cloudinary.com/locator/image/upload/v1540703764/md0dmpe625dpi8zpamvo.jpg','2018-10-28 10:46:07',NULL,0),(17,'mayur','+918200785387','1989-10-28','http://res.cloudinary.com/locator/image/upload/v1540735423/ahktdxcdxzcaudiukltw.jpg','2018-10-28 19:33:46',NULL,0),(18,'       Gop','+919246655322','1940-10-29','http://res.cloudinary.com/locator/image/upload/v1540804623/ycwnqnbbfwni0zdnguqg.jpg','2018-10-29 14:47:05',NULL,0),(19,'','+918200785387','1991-10-26','http://res.cloudinary.com/locator/image/upload/v1540841423/po2rocfjeqmpsglknzoo.jpg','2018-10-30 01:00:25',NULL,0),(20,'mayur','+918200785387','1991-10-26','http://res.cloudinary.com/locator/image/upload/v1540841533/nrmdkmbybd06ggcbdttf.jpg','2018-10-30 01:02:16',NULL,0),(21,'mayur','+918200785387','1984-10-30','http://res.cloudinary.com/locator/image/upload/v1540841682/gullqtxb9fgs8xi13bzy.jpg','2018-10-30 01:04:44',NULL,0),(22,'gopi','+918179442558','1977-10-30','http://res.cloudinary.com/locator/image/upload/v1540868201/gcuqdz6smyijsmnheajg.jpg','2018-10-30 08:26:43',NULL,0),(23,'mYur','+918200785387','1985-10-31','http://res.cloudinary.com/locator/image/upload/v1540924877/ovbbdh9eryzmerkstxun.jpg','2018-10-31 00:11:20',NULL,0),(24,'gopo','+918179442558','1964-11-05','http://res.cloudinary.com/locator/image/upload/v1541058532/da8194lfo8csh7dbbspg.jpg','2018-11-01 13:18:54',NULL,0),(25,'gopi','+918179442558','1986-11-02','http://res.cloudinary.com/locator/image/upload/v1541101174/i5uoyhzadj3p4cvinblu.jpg','2018-11-02 01:09:35',NULL,0),(26,'Amit K T','+919871278657','1990-08-28','http://res.cloudinary.com/locator/image/upload/v1541145371/bzo94dbzbub6b4rse9gj.jpg','2018-11-02 13:26:13',NULL,0),(27,'gopi','+918179442558','2001-11-04','http://res.cloudinary.com/locator/image/upload/v1541333767/dzcibxmw6zrabt51gzof.jpg','2018-11-04 17:46:08',NULL,0),(28,'mayur','+919904405269','1993-11-07','http://res.cloudinary.com/locator/image/upload/v1541579274/eox6aljkszh0mkwiyqy1.jpg','2018-11-07 13:57:57',NULL,0),(29,'gopi','+918179442558','1978-11-07','http://res.cloudinary.com/locator/image/upload/v1541604333/rndcukx8xfe9yugaqq2p.jpg','2018-11-07 20:55:35',NULL,0),(30,'Bujji','+919246655322','1975-11-07','http://res.cloudinary.com/locator/image/upload/v1541604665/twgqzyrvoozdrnaf6uhe.jpg','2018-11-07 21:01:07',NULL,0),(31,'Gopi','+919246655322','1979-11-07','http://res.cloudinary.com/locator/image/upload/v1541605429/jrwxriifnykohpkceb9e.jpg','2018-11-07 21:13:51',NULL,0),(32,'mayur','+919904405269','1997-11-10','http://res.cloudinary.com/locator/image/upload/v1541868634/kxlebgcafrinsbgotena.jpg','2018-11-10 22:20:38',NULL,0),(33,'mayur','+919904405269','1988-11-10','http://res.cloudinary.com/locator/image/upload/v1541872683/gypex09gzjxffmzag3sx.jpg','2018-11-10 23:28:05',NULL,0),(34,'gopi','+918179442558','1975-11-11','http://res.cloudinary.com/locator/image/upload/v1541881649/shw5b4filre7v2ocfmag.jpg','2018-11-11 01:57:31',NULL,0),(35,'gopi','+918179442558','1945-11-13','http://res.cloudinary.com/locator/image/upload/v1542110759/bnnkdyqjldtcbmapzh9a.jpg','2018-11-13 17:36:01',NULL,0),(36,'gopi','+918179442558','1986-11-14','http://res.cloudinary.com/locator/image/upload/v1542140379/encdezjgmn0adcxocwy0.jpg','2018-11-14 01:49:41',NULL,0),(37,'gopi','+918179442558','1997-11-14','http://res.cloudinary.com/locator/image/upload/v1542141149/bihtws1y6ku8keqdlszg.jpg','2018-11-14 02:02:31',NULL,0),(38,'gopi','+918179442558','1991-11-14','http://res.cloudinary.com/locator/image/upload/v1542141545/vtsobuilgplym7gaoqvb.jpg','2018-11-14 02:09:07',NULL,0),(39,'gopi','+918179442558','1991-11-14','http://res.cloudinary.com/locator/image/upload/v1542141896/a9uibxsdnsmytawqexty.jpg','2018-11-14 02:14:58',NULL,0),(40,'gopi','+918247638529','2002-11-14','http://res.cloudinary.com/locator/image/upload/v1542213378/p660hdj2uuupoujk9khs.jpg','2018-11-14 22:06:20',NULL,0),(41,'Murali','+919849124680','1982-11-02','http://res.cloudinary.com/locator/image/upload/v1542264387/ztr4raqn8rehdazirl7c.jpg','2018-11-15 12:16:29',NULL,0),(42,'aruna','+918686091898','1983-11-15','http://res.cloudinary.com/locator/image/upload/v1542267378/utmjpafrnyldqoeufdd2.png','2018-11-15 13:06:19',NULL,0),(43,'mayur','+918200785387','1981-11-16','http://res.cloudinary.com/locator/image/upload/v1542307097/rwitox2knvxbjkrxnri7.jpg','2018-11-16 00:08:18',NULL,0),(44,'msyur','+918200785387','2000-11-17','http://res.cloudinary.com/locator/image/upload/v1542393342/zgotkdp5fpts2dgxuc68.jpg','2018-11-17 00:05:44',NULL,0),(45,'gppi','+918179442558','1972-11-21','http://res.cloudinary.com/locator/image/upload/v1542803918/b1nkmhpbqnixzr5j51lc.jpg','2018-11-21 18:08:39',NULL,0),(46,'Aditya ','+919573637437','1995-06-04','http://res.cloudinary.com/locator/image/upload/v1542822835/d2xnbynhqvxenxe93vby.jpg','2018-11-21 23:23:56',NULL,0),(47,'mayur','+918200785387','1962-11-22','http://res.cloudinary.com/locator/image/upload/v1542909763/lz5rtg34replxogdhvmh.jpg','2018-11-22 23:32:46',NULL,0),(48,'chandana','+916281523374','1988-02-05','http://res.cloudinary.com/locator/image/upload/v1543235923/oqg1boneg9o1r4rtrt7e.jpg','2018-11-26 18:08:46',NULL,0),(49,'mayur','+918200785387','1992-11-29','http://res.cloudinary.com/locator/image/upload/v1543512424/qkvx4vnb63nev7q0ftd6.jpg','2018-11-29 22:57:08',NULL,0),(50,'mayur','+918200785387','1983-11-29','http://res.cloudinary.com/locator/image/upload/v1543514798/s1xcglgqwu5letockyc0.jpg','2018-11-29 23:36:40',NULL,0),(51,'gopo','+918179442558','2000-11-30','http://res.cloudinary.com/locator/image/upload/v1543519008/udunedps8dtcvkjg5aww.jpg','2018-11-30 00:46:51',NULL,0),(52,'gopo','+918179442558','1997-12-19','http://res.cloudinary.com/locator/image/upload/v1543687723/nodeasbxy9twhxzdrko5.jpg','2018-12-01 23:38:44',NULL,0),(53,'krishna','+917702278317','1994-05-31','http://res.cloudinary.com/locator/image/upload/v1543689148/mhgluinfakncm7ijwfq2.jpg','2018-12-02 00:02:32',NULL,0),(54,'Bujji','+919246655322','1990-12-02','http://res.cloudinary.com/locator/image/upload/v1543733322/dzrwkdreshuk1ucbfbyd.jpg','2018-12-02 12:18:43',NULL,0),(55,'gopi','+918179442558','1981-12-02','http://res.cloudinary.com/locator/image/upload/v1543734505/ax9fzar8avvnmaubqgyz.jpg','2018-12-02 12:38:37',NULL,0),(56,'gopi','+918179442558','1994-12-02','http://res.cloudinary.com/locator/image/upload/v1543747736/s27ipwzojufg6itfryhf.jpg','2018-12-02 16:18:58',NULL,0),(57,'gopi','+918179442558','1988-12-02','http://res.cloudinary.com/locator/image/upload/v1543748161/osx62tydvpaxfzjwhjpp.jpg','2018-12-02 16:26:09',NULL,0),(58,'gopi','+918179442558','1987-12-02','http://res.cloudinary.com/locator/image/upload/v1543748752/usmjgzhfsrvel9nzokcl.jpg','2018-12-02 16:35:53',NULL,0),(59,'prasad','+918179968859','1994-05-07','http://res.cloudinary.com/locator/image/upload/v1543749588/npiipgim8ywfegft0ixy.jpg','2018-12-02 16:49:49',NULL,0),(60,'Vinay Kuma','+917988722137','1994-12-20','http://res.cloudinary.com/locator/image/upload/v1543805437/jbpbfc9kjqckv3xsjwap.jpg','2018-12-03 08:20:39',NULL,0),(61,'amit','+919871278657','1990-12-12','http://res.cloudinary.com/locator/image/upload/v1543948184/wk6xp6j99durkculpj3u.jpg','2018-12-04 23:59:46',NULL,0),(62,'amit','+919871278657','1990-12-26','http://res.cloudinary.com/locator/image/upload/v1544013182/z5j23cl5e11f2sdtjtnp.jpg','2018-12-05 18:03:04',NULL,0),(63,'Amit Tiwari','+918125802142','1992-12-05','http://res.cloudinary.com/locator/image/upload/v1544029357/ihkncjfswdtsw3pdteu6.jpg','2018-12-05 22:32:39',NULL,0),(64,'Amit','+919871278657','1989-12-20','http://res.cloudinary.com/locator/image/upload/v1544103392/pym3wmsuc1gnsv3jnwbb.jpg','2018-12-06 19:06:34',NULL,0),(65,'Amit','+919871278657','1975-12-06','http://res.cloudinary.com/locator/image/upload/v1544105385/m6fukdpbwkvieeipzqja.jpg','2018-12-06 19:39:55',NULL,0),(66,'sumit','+918247638529','1990-12-06','http://res.cloudinary.com/locator/image/upload/v1544106051/rjigqgblyiwawqxj6xv2.jpg','2018-12-06 19:50:53',NULL,0),(67,'Amit Kumar','+919871278657','1989-12-08','http://res.cloudinary.com/locator/image/upload/v1544246456/ltefgahn0d1v14ljuoqq.jpg','2018-12-08 10:50:58',NULL,0),(68,'Amit Tiwar','+918200785387','1988-12-08','http://res.cloudinary.com/locator/image/upload/v1544246862/fyzmqvzlhkfhnsmcxwr7.jpg','2018-12-08 10:57:44',NULL,0),(69,'gopi','+918179442558','1972-12-08','http://res.cloudinary.com/locator/image/upload/v1544276764/pnbs7emuimh1lwjnf6xo.jpg','2018-12-08 19:16:06',NULL,0),(70,'Amit tiwari','+919871278657','1955-12-08','http://res.cloudinary.com/locator/image/upload/v1544293327/atf0801ejbsjn9vivbey.jpg','2018-12-08 23:52:09',NULL,0),(71,'assf','+918125802142','1986-12-08','http://res.cloudinary.com/locator/image/upload/v1544293410/hclw7jtsjcdaawpm3npo.jpg','2018-12-08 23:53:32',NULL,0),(72,'gopi','+918179442558','1976-12-16','http://res.cloudinary.com/locator/image/upload/v1544941908/cguogxof7gvzban6aabb.jpg','2018-12-16 12:01:50',NULL,0),(73,'gopi','+918179442558','1986-12-16','http://res.cloudinary.com/locator/image/upload/v1544942905/hf7r8mcshb9yrvraihl8.jpg','2018-12-16 12:18:27',NULL,0),(74,'gopi','+918179442558','1984-12-16','http://res.cloudinary.com/locator/image/upload/v1544943633/jbmho4wwmgd68hqtbapm.jpg','2018-12-16 12:30:34',NULL,0),(75,'gopi','+918179442558','1972-12-16','http://res.cloudinary.com/locator/image/upload/v1544944948/ie5iczkiaomvxcjna07r.jpg','2018-12-16 12:52:30',NULL,0),(76,'gopo','+918179442558','1971-12-16','http://res.cloudinary.com/locator/image/upload/v1544945469/u8tdbyy0x0y2ozdfrwrc.jpg','2018-12-16 13:01:11',NULL,0),(77,'Amit Kumar','+918247638529','1968-12-16','http://res.cloudinary.com/locator/image/upload/v1544950178/lbsivuu4c2rkcvlwp38e.jpg','2018-12-16 14:19:40',NULL,0),(78,'gopi','+918179442558','1974-12-16','http://res.cloudinary.com/locator/image/upload/v1544951979/m3s5tnkpeku2luafusrh.jpg','2018-12-16 14:49:40',NULL,0),(79,'amitktiwari','+918247638529','1964-12-16','http://res.cloudinary.com/locator/image/upload/v1544952130/njc1kvzykvuo5fl9yqum.jpg','2018-12-16 14:52:12',NULL,0),(80,'gopo','+918179442558','1978-12-16','http://res.cloudinary.com/locator/image/upload/v1544954548/rfcvvvaysb9drejcqkp9.jpg','2018-12-16 15:32:30',NULL,0),(81,'ami','+919871278657','1976-12-16','http://res.cloudinary.com/locator/image/upload/v1544954673/ggealconlb8lij6kx0dj.jpg','2018-12-16 15:34:34',NULL,0),(82,'shhsh','+918179968859','2005-12-17','http://res.cloudinary.com/locator/image/upload/v1545066911/ylm5xwghxxo9neov1j7x.jpg','2018-12-17 22:45:13',NULL,0),(83,'gopi','+918179442558','1952-12-19','http://res.cloudinary.com/locator/image/upload/v1545225633/ohfxslt8fhdvszjvoicf.jpg','2018-12-19 18:50:35',NULL,0),(84,'gopi','+918179442558','1988-12-19','http://res.cloudinary.com/locator/image/upload/v1545226395/bzk4oamctqpy65n2rvhs.jpg','2018-12-19 19:03:16',NULL,0),(85,'mayur','+918200785387','1997-12-19','http://res.cloudinary.com/locator/image/upload/v1545242993/rhu7mehdbwqmv7z2jamk.png','2018-12-19 23:39:55',NULL,0),(86,'mayur','+918200785387','1987-12-19','http://res.cloudinary.com/locator/image/upload/v1545243844/omqtkmpinsfk4jlfwl0f.jpg','2018-12-19 23:54:06',NULL,0),(87,'mayur','+918200785387','1991-12-22','http://res.cloudinary.com/locator/image/upload/v1545465100/fzbgtuutix0phx6veikz.jpg','2018-12-22 13:21:42',NULL,0),(88,'gopi','+918179442558','1984-12-22','http://res.cloudinary.com/locator/image/upload/v1545472801/liyxqczywtvnnpbrysgf.jpg','2018-12-22 15:30:03',NULL,0),(89,'Amit Tiwari','+919871278657','1990-08-28','http://res.cloudinary.com/locator/image/upload/v1545485532/z685gm97akxfz75ea6po.jpg','2018-12-22 19:02:14',NULL,0),(90,'Amit Kumar Tiwari','+919871278657','1990-08-28','http://res.cloudinary.com/locator/image/upload/v1545487197/jbs7pyi36qxzuv7xzh5q.jpg','2018-12-22 19:29:59',NULL,0),(91,'gopi','+918179442558','1999-12-25','http://res.cloudinary.com/locator/image/upload/v1545757309/qeboowuhsnd8fu1os9bc.jpg','2018-12-25 22:31:51',NULL,0),(92,'kisho','+919606820557','1981-12-26','http://res.cloudinary.com/locator/image/upload/v1545809146/rgra50ewmzohx9hpoiuf.jpg','2018-12-26 12:55:48',NULL,0);
+/*!40000 ALTER TABLE `consumers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `counters`
+--
+
+DROP TABLE IF EXISTS `counters`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `counters` (
+  `idcounters` int(11) NOT NULL AUTO_INCREMENT,
+  `counterid` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL DEFAULT '0000',
+  `merchantid` varchar(45) NOT NULL,
+  `createdon` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `closedon` datetime DEFAULT NULL,
+  `role` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`idcounters`,`counterid`)
+) ENGINE=InnoDB AUTO_INCREMENT=374 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `counters`
+--
+
+LOCK TABLES `counters` WRITE;
+/*!40000 ALTER TABLE `counters` DISABLE KEYS */;
+INSERT INTO `counters` VALUES (130,'merchant_277_1','0000','merchant_277','2018-11-14 16:57:14',NULL,1),(131,'merchant_277_2','0000','merchant_277','2018-11-14 16:57:15',NULL,1),(132,'merchant_290_1','0000','merchant_290','2018-11-14 22:06:18',NULL,1),(133,'merchant_290_2','0000','merchant_290','2018-11-14 22:06:18',NULL,1),(134,'merchant_295_1','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(135,'merchant_295_2','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(136,'merchant_295_3','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(137,'merchant_295_4','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(138,'merchant_295_5','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(139,'merchant_295_6','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(140,'merchant_295_7','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(141,'merchant_295_8','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(142,'merchant_295_9','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(143,'merchant_295_10','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(144,'merchant_295_11','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(145,'merchant_295_12','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(146,'merchant_295_13','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(147,'merchant_295_14','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(148,'merchant_295_15','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(149,'merchant_295_16','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(150,'merchant_295_17','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(151,'merchant_295_18','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(152,'merchant_295_19','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(153,'merchant_295_20','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(154,'merchant_295_21','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(155,'merchant_295_22','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(156,'merchant_295_23','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(157,'merchant_295_24','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(158,'merchant_295_25','0000','merchant_295','2018-11-15 12:25:11',NULL,1),(159,'merchant_295_26','0000','merchant_295','2018-11-15 12:25:12',NULL,1),(160,'merchant_295_27','0000','merchant_295','2018-11-15 12:25:12',NULL,1),(161,'merchant_295_28','0000','merchant_295','2018-11-15 12:25:12',NULL,1),(162,'merchant_295_29','0000','merchant_295','2018-11-15 12:25:12',NULL,1),(163,'merchant_295_30','0000','merchant_295','2018-11-15 12:25:12',NULL,1),(164,'merchant_295_31','0000','merchant_295','2018-11-15 12:48:21',NULL,1),(165,'merchant_298_1','0000','merchant_298','2018-11-16 09:32:19',NULL,1),(166,'merchant_298_2','0000','merchant_298','2018-11-16 09:32:19',NULL,1),(167,'merchant_307_1','0000','merchant_307','2018-11-16 23:50:04',NULL,1),(168,'merchant_307_2','0000','merchant_307','2018-11-16 23:50:04',NULL,1),(169,'merchant_307_3','0000','merchant_307','2018-11-16 23:50:04',NULL,1),(170,'merchant_307_4','0000','merchant_307','2018-11-16 23:50:04',NULL,1),(171,'merchant_307_5','0000','merchant_307','2018-11-16 23:50:04',NULL,1),(172,'merchant_290_1','0000','merchant_290','2018-11-19 00:17:38',NULL,1),(173,'merchant_290_2','0000','merchant_290','2018-11-19 00:17:38',NULL,1),(174,'merchant_290_3','0000','merchant_290','2018-11-19 00:39:02',NULL,1),(175,'merchant_290_4','0000','merchant_290','2018-11-19 00:39:02',NULL,1),(176,'-1_1','0000','-1','2018-11-22 00:43:00',NULL,1),(177,'-1_2','0000','-1','2018-11-22 00:43:00',NULL,1),(178,'-1_3','0000','-1','2018-11-22 00:43:00',NULL,1),(179,'-1_4','0000','-1','2018-11-22 00:43:00',NULL,1),(180,'-1_5','0000','-1','2018-11-22 00:43:00',NULL,1),(181,'-1_6','0000','-1','2018-11-22 00:43:00',NULL,1),(182,'-1_7','0000','-1','2018-11-22 00:43:00',NULL,1),(183,'-1_8','0000','-1','2018-11-22 00:43:00',NULL,1),(184,'-1_9','0000','-1','2018-11-22 00:43:00',NULL,1),(185,'-1_10','0000','-1','2018-11-22 00:43:00',NULL,1),(186,'-1_11','0000','-1','2018-11-22 00:43:00',NULL,1),(187,'-1_12','0000','-1','2018-11-22 00:43:00',NULL,1),(188,'-1_13','0000','-1','2018-11-22 00:43:00',NULL,1),(189,'-1_14','0000','-1','2018-11-22 00:43:00',NULL,1),(190,'-1_15','0000','-1','2018-11-22 00:43:00',NULL,1),(191,'-1_16','0000','-1','2018-11-22 00:43:00',NULL,1),(192,'-1_17','0000','-1','2018-11-22 00:43:00',NULL,1),(193,'-1_18','0000','-1','2018-11-22 00:43:00',NULL,1),(194,'-1_19','0000','-1','2018-11-22 00:43:00',NULL,1),(195,'-1_20','0000','-1','2018-11-22 00:43:00',NULL,1),(196,'-1_21','0000','-1','2018-11-22 00:43:00',NULL,1),(197,'-1_22','0000','-1','2018-11-22 00:43:00',NULL,1),(198,'-1_23','0000','-1','2018-11-22 00:43:00',NULL,1),(199,'-1_24','0000','-1','2018-11-22 00:43:00',NULL,1),(200,'-1_25','0000','-1','2018-11-22 00:43:00',NULL,1),(201,'-1_26','0000','-1','2018-11-22 00:43:00',NULL,1),(202,'-1_27','0000','-1','2018-11-22 00:43:00',NULL,1),(203,'-1_28','0000','-1','2018-11-22 00:43:00',NULL,1),(204,'-1_29','0000','-1','2018-11-22 00:43:00',NULL,1),(205,'-1_30','0000','-1','2018-11-22 00:43:00',NULL,1),(206,'-1_31','0000','-1','2018-11-22 00:43:00',NULL,1),(207,'-1_32','0000','-1','2018-11-22 00:43:00',NULL,1),(208,'-1_33','0000','-1','2018-11-22 00:43:00',NULL,1),(209,'-1_34','0000','-1','2018-11-22 00:43:00',NULL,1),(210,'-1_35','0000','-1','2018-11-22 00:43:00',NULL,1),(211,'-1_36','0000','-1','2018-11-22 00:43:00',NULL,1),(212,'-1_37','0000','-1','2018-11-22 00:43:00',NULL,1),(213,'-1_38','0000','-1','2018-11-22 00:43:00',NULL,1),(214,'-1_39','0000','-1','2018-11-22 00:43:00',NULL,1),(215,'-1_40','0000','-1','2018-11-22 00:43:00',NULL,1),(216,'-1_41','0000','-1','2018-11-22 00:43:00',NULL,1),(217,'-1_42','0000','-1','2018-11-22 00:43:00',NULL,1),(218,'-1_43','0000','-1','2018-11-22 00:43:00',NULL,1),(219,'-1_44','0000','-1','2018-11-22 00:43:00',NULL,1),(220,'-1_45','0000','-1','2018-11-22 00:43:00',NULL,1),(221,'-1_46','0000','-1','2018-11-22 00:43:00',NULL,1),(222,'-1_47','0000','-1','2018-11-22 00:43:00',NULL,1),(223,'-1_48','0000','-1','2018-11-22 00:43:00',NULL,1),(224,'-1_49','0000','-1','2018-11-22 00:43:00',NULL,1),(225,'-1_50','0000','-1','2018-11-22 00:43:00',NULL,1),(226,'-1_51','0000','-1','2018-11-22 00:43:19',NULL,1),(227,'-1_52','0000','-1','2018-11-22 00:43:19',NULL,1),(228,'-1_53','0000','-1','2018-11-22 00:43:19',NULL,1),(229,'-1_54','0000','-1','2018-11-22 00:43:19',NULL,1),(230,'-1_55','0000','-1','2018-11-22 00:43:19',NULL,1),(231,'-1_56','0000','-1','2018-11-22 00:43:20',NULL,1),(232,'-1_57','0000','-1','2018-11-22 00:43:20',NULL,1),(233,'-1_58','0000','-1','2018-11-22 00:43:20',NULL,1),(234,'-1_59','0000','-1','2018-11-22 00:43:20',NULL,1),(235,'-1_60','0000','-1','2018-11-22 00:43:20',NULL,1),(236,'-1_61','0000','-1','2018-11-22 00:43:20',NULL,1),(237,'-1_62','0000','-1','2018-11-22 00:43:20',NULL,1),(238,'-1_63','0000','-1','2018-11-22 00:43:20',NULL,1),(239,'-1_64','0000','-1','2018-11-22 00:43:20',NULL,1),(240,'-1_65','0000','-1','2018-11-22 00:43:20',NULL,1),(241,'-1_66','0000','-1','2018-11-22 00:43:20',NULL,1),(242,'-1_67','0000','-1','2018-11-22 00:43:20',NULL,1),(243,'-1_68','0000','-1','2018-11-22 00:43:20',NULL,1),(244,'-1_69','0000','-1','2018-11-22 00:43:20',NULL,1),(245,'-1_70','0000','-1','2018-11-22 00:43:20',NULL,1),(246,'-1_71','0000','-1','2018-11-22 00:43:20',NULL,1),(247,'-1_72','0000','-1','2018-11-22 00:43:20',NULL,1),(248,'-1_73','0000','-1','2018-11-22 00:43:20',NULL,1),(249,'-1_74','0000','-1','2018-11-22 00:43:20',NULL,1),(250,'-1_75','0000','-1','2018-11-22 00:43:20',NULL,1),(251,'-1_76','0000','-1','2018-11-22 00:43:20',NULL,1),(252,'-1_77','0000','-1','2018-11-22 00:43:20',NULL,1),(253,'-1_78','0000','-1','2018-11-22 00:43:20',NULL,1),(254,'-1_79','0000','-1','2018-11-22 00:43:20',NULL,1),(255,'-1_80','0000','-1','2018-11-22 00:43:20',NULL,1),(256,'-1_81','0000','-1','2018-11-22 00:43:20',NULL,1),(257,'-1_82','0000','-1','2018-11-22 00:43:20',NULL,1),(258,'-1_83','0000','-1','2018-11-22 00:43:20',NULL,1),(259,'-1_84','0000','-1','2018-11-22 00:43:20',NULL,1),(260,'-1_85','0000','-1','2018-11-22 00:43:20',NULL,1),(261,'-1_86','0000','-1','2018-11-22 00:43:20',NULL,1),(262,'-1_87','0000','-1','2018-11-22 00:43:20',NULL,1),(263,'-1_88','0000','-1','2018-11-22 00:43:20',NULL,1),(264,'-1_89','0000','-1','2018-11-22 00:43:20',NULL,1),(265,'-1_90','0000','-1','2018-11-22 00:43:20',NULL,1),(266,'-1_91','0000','-1','2018-11-22 00:43:20',NULL,1),(267,'-1_92','0000','-1','2018-11-22 00:43:20',NULL,1),(268,'-1_93','0000','-1','2018-11-22 00:43:20',NULL,1),(269,'-1_94','0000','-1','2018-11-22 00:43:20',NULL,1),(270,'-1_95','0000','-1','2018-11-22 00:43:20',NULL,1),(271,'-1_96','0000','-1','2018-11-22 00:43:20',NULL,1),(272,'-1_97','0000','-1','2018-11-22 00:43:20',NULL,1),(273,'-1_98','0000','-1','2018-11-22 00:43:20',NULL,1),(274,'-1_99','0000','-1','2018-11-22 00:43:20',NULL,1),(275,'-1_100','0000','-1','2018-11-22 00:43:20',NULL,1),(276,'merchant_290_1','0000','merchant_290','2018-11-26 01:00:40',NULL,1),(277,'merchant_290_2','0000','merchant_290','2018-11-26 01:00:40',NULL,1),(278,'merchant_290_3','0000','merchant_290','2018-11-26 01:00:40',NULL,1),(279,'merchant_290_4','0000','merchant_290','2018-11-26 01:00:40',NULL,1),(280,'merchant_290_5','0000','merchant_290','2018-11-26 01:00:40',NULL,1),(281,'merchant_290_1','0000','merchant_290','2018-12-02 00:15:51',NULL,1),(282,'merchant_290_2','0000','merchant_290','2018-12-02 00:15:51',NULL,1),(283,'merchant_290_1','0000','merchant_290','2018-12-02 00:19:05',NULL,1),(284,'merchant_290_2','0000','merchant_290','2018-12-02 00:19:05',NULL,1),(285,'merchant_290_1','0000','merchant_290','2018-12-02 00:33:15',NULL,1),(286,'merchant_290_2','0000','merchant_290','2018-12-02 00:33:15',NULL,1),(287,'merchant_290_1','0000','merchant_290','2018-12-02 16:21:54',NULL,1),(288,'merchant_290_2','0000','merchant_290','2018-12-02 16:21:54',NULL,1),(289,'merchant_290_1','0000','merchant_290','2018-12-02 16:26:55',NULL,1),(290,'merchant_290_2','0000','merchant_290','2018-12-02 16:26:55',NULL,1),(291,'merchant_290_1','0000','merchant_290','2018-12-02 16:54:45',NULL,1),(292,'merchant_290_2','0000','merchant_290','2018-12-02 16:54:45',NULL,1),(293,'merchant_290_3','0000','merchant_290','2018-12-02 16:56:56',NULL,1),(294,'merchant_290_4','0000','merchant_290','2018-12-02 16:56:56',NULL,1),(295,'merchant_290_5','0000','merchant_290','2018-12-02 17:22:21',NULL,1),(296,'merchant_290_6','0000','merchant_290','2018-12-02 17:22:21',NULL,1),(297,'merchant_326_1','0000','merchant_326','2018-12-02 17:40:52',NULL,1),(298,'merchant_326_2','0000','merchant_326','2018-12-02 17:40:52',NULL,1),(299,'merchant_326_3','0000','merchant_326','2018-12-02 17:40:52',NULL,1),(300,'merchant_326_4','0000','merchant_326','2018-12-02 17:40:52',NULL,1),(301,'merchant_326_5','0000','merchant_326','2018-12-02 17:40:52',NULL,1),(302,'merchant_326_6','0000','merchant_326','2018-12-02 17:41:19',NULL,1),(303,'merchant_326_7','0000','merchant_326','2018-12-02 17:41:19',NULL,1),(304,'merchant_326_8','0000','merchant_326','2018-12-02 17:41:48',NULL,1),(305,'merchant_326_9','0000','merchant_326','2018-12-02 17:41:48',NULL,1),(306,'merchant_326_10','0000','merchant_326','2018-12-02 17:41:48',NULL,1),(307,'merchant_326_11','0000','merchant_326','2018-12-02 17:41:48',NULL,1),(308,'merchant_326_12','0000','merchant_326','2018-12-02 17:41:48',NULL,1),(309,'merchant_326_1','0000','merchant_326','2018-12-02 17:43:28',NULL,1),(310,'merchant_326_2','0000','merchant_326','2018-12-02 17:43:28',NULL,1),(311,'merchant_326_3','0000','merchant_326','2018-12-02 17:43:28',NULL,1),(312,'merchant_326_4','0000','merchant_326','2018-12-02 17:43:28',NULL,1),(313,'merchant_326_5','0000','merchant_326','2018-12-02 17:43:28',NULL,1),(314,'merchant_304_1','0000','merchant_304','2018-12-03 23:19:04',NULL,1),(315,'merchant_304_2','0000','merchant_304','2018-12-03 23:19:04',NULL,1),(316,'merchant_334_1','0000','merchant_334','2018-12-04 07:06:48',NULL,1),(317,'merchant_334_2','0000','merchant_334','2018-12-04 07:06:48',NULL,1),(318,'merchant_334_3','0000','merchant_334','2018-12-04 07:06:48',NULL,1),(319,'merchant_334_4','0000','merchant_334','2018-12-04 07:06:48',NULL,1),(320,'merchant_334_5','0000','merchant_334','2018-12-04 07:06:48',NULL,1),(321,'merchant_338_1','0000','merchant_338','2018-12-05 00:31:07',NULL,1),(322,'merchant_338_2','0000','merchant_338','2018-12-05 00:31:07',NULL,1),(323,'merchant_342_1','0000','merchant_342','2018-12-05 18:03:43',NULL,1),(324,'merchant_342_2','0000','merchant_342','2018-12-05 18:03:43',NULL,1),(325,'merchant_342_3','0000','merchant_342','2018-12-05 18:03:43',NULL,1),(326,'merchant_342_4','0000','merchant_342','2018-12-05 18:03:43',NULL,1),(327,'merchant_342_5','0000','merchant_342','2018-12-05 18:03:43',NULL,1),(328,'merchant_308_1','0000','merchant_308','2018-12-07 09:46:36',NULL,1),(329,'merchant_308_2','0000','merchant_308','2018-12-07 09:46:36',NULL,1),(330,'merchant_306_1','0000','merchant_306','2018-12-09 00:14:25',NULL,1),(331,'merchant_306_2','0000','merchant_306','2018-12-09 00:14:25',NULL,1),(332,'merchant_306_3','0000','merchant_306','2018-12-09 00:16:02',NULL,1),(333,'merchant_306_4','0000','merchant_306','2018-12-09 00:16:02',NULL,1),(334,'merchant_306_5','0000','merchant_306','2018-12-09 00:16:02',NULL,1),(335,'merchant_347_1','0000','merchant_347','2018-12-16 12:04:39',NULL,1),(336,'merchant_347_2','0000','merchant_347','2018-12-16 12:04:39',NULL,1),(337,'merchant_347_3','0000','merchant_347','2018-12-16 12:04:39',NULL,1),(338,'merchant_347_1','0000','merchant_347','2018-12-16 13:17:11',NULL,1),(339,'merchant_347_2','0000','merchant_347','2018-12-16 13:17:11',NULL,1),(340,'merchant_351_1','0000','merchant_351','2018-12-20 23:12:51',NULL,1),(341,'merchant_351_2','0000','merchant_351','2018-12-20 23:12:51',NULL,1),(342,'merchant_351_3','0000','merchant_351','2018-12-20 23:12:51',NULL,1),(343,'merchant_356_1','0000','merchant_356','2018-12-23 14:50:30',NULL,1),(344,'merchant_356_2','0000','merchant_356','2018-12-23 14:50:30',NULL,1),(345,'merchant_356_3','0000','merchant_356','2018-12-23 14:50:30',NULL,1),(346,'merchant_356_4','0000','merchant_356','2018-12-23 14:50:30',NULL,1),(347,'merchant_356_5','0000','merchant_356','2018-12-23 14:50:31',NULL,1),(348,'merchant_358_1','0000','merchant_358','2018-12-23 15:01:57',NULL,1),(349,'merchant_358_2','0000','merchant_358','2018-12-23 15:01:57',NULL,1),(350,'merchant_358_3','0000','merchant_358','2018-12-23 15:01:57',NULL,1),(351,'merchant_358_4','0000','merchant_358','2018-12-23 15:01:57',NULL,1),(352,'merchant_358_5','0000','merchant_358','2018-12-23 15:01:58',NULL,1),(353,'merchant_362_1','0000','merchant_362','2018-12-23 16:02:34',NULL,1),(354,'merchant_362_2','0000','merchant_362','2018-12-23 16:02:34',NULL,1),(355,'merchant_362_3','0000','merchant_362','2018-12-23 16:02:34',NULL,1),(356,'merchant_377_1','0000','merchant_377','2018-12-24 08:28:38',NULL,1),(357,'merchant_377_2','0000','merchant_377','2018-12-24 08:28:38',NULL,1),(358,'merchant_377_1','0000','merchant_377','2018-12-24 08:29:05',NULL,1),(359,'merchant_377_2','0000','merchant_377','2018-12-24 08:29:05',NULL,1),(360,'merchant_365_1','0000','merchant_365','2018-12-24 09:07:42',NULL,1),(361,'merchant_368_1','0000','merchant_368','2018-12-24 09:08:49',NULL,1),(362,'merchant_365_2','0000','merchant_365','2018-12-25 19:14:53',NULL,1),(363,'merchant_354_2','0000','merchant_354','2018-12-25 19:14:53',NULL,1),(364,'merchant_379_1','0000','merchant_379','2018-12-28 09:39:54',NULL,1),(365,'merchant_379_2','0000','merchant_379','2018-12-28 09:39:54',NULL,1),(366,'merchant_387_1','0000','merchant_387','2018-12-29 00:15:06',NULL,1),(367,'merchant_387_2','0000','merchant_387','2018-12-29 00:15:06',NULL,1),(368,'merchant_347_1','0000','merchant_347','2018-12-29 00:17:10',NULL,1),(369,'merchant_347_2','0000','merchant_347','2018-12-29 00:17:10',NULL,1),(370,'merchant_347_3','0000','merchant_347','2018-12-29 00:17:14',NULL,1),(371,'merchant_347_4','0000','merchant_347','2018-12-29 00:17:14',NULL,1),(372,'merchant_347_5','0000','merchant_347','2018-12-29 00:17:16',NULL,1),(373,'merchant_347_6','0000','merchant_347','2018-12-29 00:17:16',NULL,1);
+/*!40000 ALTER TABLE `counters` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `customerpointsavailed`
+--
+
+DROP TABLE IF EXISTS `customerpointsavailed`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `customerpointsavailed` (
+  `idcustomerpointsavailed` int(11) NOT NULL,
+  `contact` varchar(45) NOT NULL,
+  `pointsused` int(10) NOT NULL DEFAULT '0',
+  `goodieselected` int(3) NOT NULL DEFAULT '0',
+  `usedon` varchar(128) NOT NULL DEFAULT '""',
+  PRIMARY KEY (`idcustomerpointsavailed`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customerpointsavailed`
+--
+
+LOCK TABLES `customerpointsavailed` WRITE;
+/*!40000 ALTER TABLE `customerpointsavailed` DISABLE KEYS */;
+/*!40000 ALTER TABLE `customerpointsavailed` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `employee`
+--
+
+DROP TABLE IF EXISTS `employee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `employee` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(20) DEFAULT NULL,
+  `lastname` varchar(20) DEFAULT NULL,
+  `title` varchar(30) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `yearofservice` int(11) DEFAULT NULL,
+  `salary` int(11) DEFAULT NULL,
+  `perks` int(11) DEFAULT NULL,
+  `email` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `employee`
+--
+
+LOCK TABLES `employee` WRITE;
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+INSERT INTO `employee` VALUES (1,'John','Chen','Senior Programmer',31,3,120000,25000,'j@hotmail.com'),(2,'Jan','Pillai','Senior Programmer',32,4,110000,20000,'g@yahoo.com'),(3,'Ane','Pandit','Web Designer',24,3,90000,15000,'a@gmail.com'),(4,'Mary','Anchor','Web Designer',27,2,85000,15000,'m@mail.com'),(5,'Fred','King','Programmer',32,3,75000,15000,'f@net.com'),(6,'John','Mac','Programmer',32,4,80000,16000,'j@hotmail.com'),(7,'Arthur','Sam','Programmer',28,2,75000,14000,'e@yahoo.com'),(8,'Alok','Nanda','Programmer',32,3,70000,10000,'a@yahoo.com'),(9,'Susan','Ra','Multimedia Programmer',32,4,90000,15000,'h@gmail.com'),(10,'Paul','Simon','Multimedia Programmer',23,1,85000,12000,'ps@gmail.com'),(11,'Edward','Parhar','Multimedia Programmer',30,2,75000,15000,'a@hotmail.com'),(12,'Kim','Hunter','Senior Web Designer',32,4,110000,20000,'kim@coolmail.com'),(13,'Roger','Lewis','System Administrator',32,3,100000,13000,'roger@mail.com'),(14,'Danny','Gibson','System Administrator',31,2,90000,12000,'danny@hotmail.com'),(15,'Mike','Harper','Senior Marketing Executive',36,1,120000,28000,'m@gmail.com'),(16,'Mary','Sunday','Marketing Executive',31,5,90000,25000,'monica@bigmail.com'),(17,'Jack','Sim','Marketing Executive',27,1,70000,18000,'hal@gmail.com'),(18,'Joe','Irvine','Marketing Executive',27,1,72000,18000,'joseph@hotmail.com'),(19,'Henry','Ali','Customer Service Manager',32,3,70000,9000,'shahida@hotmail.com'),(20,'Peter','Champion','Finance Manager',32,2,120000,25000,'peter@yahoo.com');
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `fhuuhgg_gghhuu_fgggh`
+--
+
+DROP TABLE IF EXISTS `fhuuhgg_gghhuu_fgggh`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `fhuuhgg_gghhuu_fgggh` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(128) NOT NULL,
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `fhuuhgg_gghhuu_fgggh`
+--
+
+LOCK TABLES `fhuuhgg_gghhuu_fgggh` WRITE;
+/*!40000 ALTER TABLE `fhuuhgg_gghhuu_fgggh` DISABLE KEYS */;
+INSERT INTO `fhuuhgg_gghhuu_fgggh` VALUES (1,'fhuuhgg_gghhuu_fgggh_0','tdr1z3',12.9718903,77.6696154,'http://res.cloudinary.com/locator/image/upload/v1532204369/d3hfkhtktqihqjcozatt.jpg','fgyu','duijbb','India','2018-07-21T20:20:04.176035400','1','guu','+918179442558');
+/*!40000 ALTER TABLE `fhuuhgg_gghhuu_fgggh` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `fiis_fuiidv_cjoav`
+--
+
+DROP TABLE IF EXISTS `fiis_fuiidv_cjoav`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `fiis_fuiidv_cjoav` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(128) NOT NULL,
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `fiis_fuiidv_cjoav`
+--
+
+LOCK TABLES `fiis_fuiidv_cjoav` WRITE;
+/*!40000 ALTER TABLE `fiis_fuiidv_cjoav` DISABLE KEYS */;
+INSERT INTO `fiis_fuiidv_cjoav` VALUES (1,'fiis_fuiidv_cjoav_0','tdr1z3',12.9718903,77.6696154,'http://res.cloudinary.com/locator/image/upload/v1532205203/pot3djrzdrdtwgw4q0ge.jpg','gisdgg','fuikb','India','2018-07-21T20:33:34.223195800','1','gaiafg','+918179442558');
+/*!40000 ALTER TABLE `fiis_fuiidv_cjoav` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `fjjjtt_fyfyu67_gjgu7`
+--
+
+DROP TABLE IF EXISTS `fjjjtt_fyfyu67_gjgu7`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `fjjjtt_fyfyu67_gjgu7` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(128) NOT NULL,
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `fjjjtt_fyfyu67_gjgu7`
+--
+
+LOCK TABLES `fjjjtt_fyfyu67_gjgu7` WRITE;
+/*!40000 ALTER TABLE `fjjjtt_fyfyu67_gjgu7` DISABLE KEYS */;
+INSERT INTO `fjjjtt_fyfyu67_gjgu7` VALUES (1,'fjjjtt_fyfyu67_gjgu7_0','tdr1z3',12.9718903,77.6696154,'http://res.cloudinary.com/locator/image/upload/v1532205913/ss4n252qhihxudmuad9x.jpg','gopi','fufyy','India','2018-07-21T20:45:30.317225900','1','ryffg','+918179442558');
+/*!40000 ALTER TABLE `fjjjtt_fyfyu67_gjgu7` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `group_msg`
+--
+
+DROP TABLE IF EXISTS `group_msg`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `group_msg` (
+  `idgroup_msg` int(11) NOT NULL AUTO_INCREMENT,
+  `msgowner` varchar(15) NOT NULL,
+  `parentmsg` int(11) DEFAULT NULL,
+  `date` date NOT NULL,
+  `message` varchar(512) NOT NULL,
+  `message_imgurl` varchar(256) DEFAULT NULL,
+  `sex` varchar(10) NOT NULL DEFAULT 'male',
+  `modifiedon` date NOT NULL,
+  `rootmsg` int(11) NOT NULL,
+  PRIMARY KEY (`idgroup_msg`),
+  KEY `FK_PARENTMSG_idx` (`parentmsg`),
+  CONSTRAINT `FK_PARENTMSG` FOREIGN KEY (`parentmsg`) REFERENCES `group_msg` (`idgroup_msg`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `group_msg`
+--
+
+LOCK TABLES `group_msg` WRITE;
+/*!40000 ALTER TABLE `group_msg` DISABLE KEYS */;
+/*!40000 ALTER TABLE `group_msg` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `groups`
+--
+
+DROP TABLE IF EXISTS `groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `groups` (
+  `idgroups` int(11) NOT NULL AUTO_INCREMENT,
+  `groupname` varchar(45) NOT NULL,
+  `groupdp` varchar(256) NOT NULL,
+  `owner` varchar(15) NOT NULL,
+  `createdon` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `userscount` int(11) NOT NULL DEFAULT '1',
+  `groupdesc` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`idgroups`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `groups`
+--
+
+LOCK TABLES `groups` WRITE;
+/*!40000 ALTER TABLE `groups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `helpers`
+--
+
+DROP TABLE IF EXISTS `helpers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `helpers` (
+  `idcounters` int(11) NOT NULL AUTO_INCREMENT,
+  `counterid` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL DEFAULT '0000',
+  `merchantid` varchar(45) NOT NULL,
+  `createdon` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `closedon` datetime DEFAULT NULL,
+  `role` int(11) NOT NULL DEFAULT '2',
+  PRIMARY KEY (`idcounters`,`counterid`)
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `helpers`
+--
+
+LOCK TABLES `helpers` WRITE;
+/*!40000 ALTER TABLE `helpers` DISABLE KEYS */;
+INSERT INTO `helpers` VALUES (16,'merchant_277_1_helper','0000','merchant_277','2018-11-14 16:57:15',NULL,2),(17,'merchant_277_2_helper','0000','merchant_277','2018-11-14 16:57:15',NULL,2),(18,'merchant_290_1_helper','0000','merchant_290','2018-11-14 22:06:18',NULL,2),(19,'merchant_290_2_helper','0000','merchant_290','2018-11-14 22:06:18',NULL,2),(20,'merchant_295_1_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(21,'merchant_295_2_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(22,'merchant_295_3_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(23,'merchant_295_4_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(24,'merchant_295_5_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(25,'merchant_295_6_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(26,'merchant_295_7_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(27,'merchant_295_8_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(28,'merchant_295_9_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(29,'merchant_295_10_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(30,'merchant_295_11_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(31,'merchant_295_12_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(32,'merchant_295_13_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(33,'merchant_295_14_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(34,'merchant_295_15_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(35,'merchant_295_16_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(36,'merchant_295_17_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(37,'merchant_295_18_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(38,'merchant_295_19_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(39,'merchant_295_20_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(40,'merchant_295_21_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(41,'merchant_295_22_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(42,'merchant_295_23_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(43,'merchant_295_24_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(44,'merchant_295_25_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(45,'merchant_295_26_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(46,'merchant_295_27_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(47,'merchant_295_28_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(48,'merchant_295_29_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(49,'merchant_295_30_helper','0000','merchant_295','2018-11-15 12:25:12',NULL,2),(50,'merchant_295_31_helper','0000','merchant_295','2018-11-15 12:48:21',NULL,2),(51,'merchant_298_1_helper','0000','merchant_298','2018-11-16 09:32:19',NULL,2),(52,'merchant_298_2_helper','0000','merchant_298','2018-11-16 09:32:19',NULL,2),(53,'merchant_307_1_helper','0000','merchant_307','2018-11-16 23:50:04',NULL,2),(54,'merchant_307_2_helper','0000','merchant_307','2018-11-16 23:50:04',NULL,2),(55,'merchant_290_1_helper','0000','merchant_290','2018-11-19 00:17:39',NULL,2),(56,'merchant_290_2_helper','0000','merchant_290','2018-11-19 00:17:39',NULL,2),(57,'-1_1_helper','0000','-1','2018-11-22 00:43:00',NULL,2),(58,'-1_2_helper','0000','-1','2018-11-22 00:43:00',NULL,2),(59,'-1_3_helper','0000','-1','2018-11-22 00:43:00',NULL,2),(60,'-1_4_helper','0000','-1','2018-11-22 00:43:20',NULL,2),(61,'-1_5_helper','0000','-1','2018-11-22 00:43:20',NULL,2),(62,'-1_6_helper','0000','-1','2018-11-22 00:43:20',NULL,2),(63,'merchant_290_1_helper','0000','merchant_290','2018-12-02 00:15:51',NULL,2),(64,'merchant_290_2_helper','0000','merchant_290','2018-12-02 00:15:51',NULL,2),(65,'merchant_290_1_helper','0000','merchant_290','2018-12-02 00:19:05',NULL,2),(66,'merchant_290_2_helper','0000','merchant_290','2018-12-02 00:19:05',NULL,2),(67,'merchant_290_1_helper','0000','merchant_290','2018-12-02 00:33:15',NULL,2),(68,'merchant_290_2_helper','0000','merchant_290','2018-12-02 00:33:15',NULL,2),(69,'merchant_290_1_helper','0000','merchant_290','2018-12-02 16:21:54',NULL,2),(70,'merchant_290_2_helper','0000','merchant_290','2018-12-02 16:21:54',NULL,2),(71,'merchant_290_1_helper','0000','merchant_290','2018-12-02 16:26:56',NULL,2),(72,'merchant_290_2_helper','0000','merchant_290','2018-12-02 16:26:56',NULL,2),(73,'merchant_290_1_helper','0000','merchant_290','2018-12-02 16:54:45',NULL,2),(74,'merchant_290_2_helper','0000','merchant_290','2018-12-02 16:54:45',NULL,2),(75,'merchant_290_3_helper','0000','merchant_290','2018-12-02 16:56:56',NULL,2),(76,'merchant_290_4_helper','0000','merchant_290','2018-12-02 16:56:56',NULL,2),(77,'merchant_290_5_helper','0000','merchant_290','2018-12-02 17:22:21',NULL,2),(78,'merchant_290_6_helper','0000','merchant_290','2018-12-02 17:22:21',NULL,2),(79,'merchant_342_1_helper','0000','merchant_342','2018-12-05 18:03:43',NULL,2),(80,'merchant_342_2_helper','0000','merchant_342','2018-12-05 18:03:43',NULL,2),(81,'merchant_308_1_helper','0000','merchant_308','2018-12-07 09:46:36',NULL,2),(82,'merchant_308_2_helper','0000','merchant_308','2018-12-07 09:46:36',NULL,2),(83,'merchant_338_1_helper','0000','merchant_338','2018-12-09 00:22:34',NULL,2),(84,'merchant_338_2_helper','0000','merchant_338','2018-12-09 00:22:34',NULL,2),(85,'merchant_338_3_helper','0000','merchant_338','2018-12-09 00:22:34',NULL,2),(86,'merchant_338_4_helper','0000','merchant_338','2018-12-09 00:22:34',NULL,2),(87,'merchant_338_5_helper','0000','merchant_338','2018-12-09 00:22:34',NULL,2),(88,'merchant_347_1_helper','0000','merchant_347','2018-12-16 12:04:39',NULL,2),(89,'merchant_347_2_helper','0000','merchant_347','2018-12-16 12:04:39',NULL,2),(90,'merchant_347_1_helper','0000','merchant_347','2018-12-16 13:17:12',NULL,2),(91,'merchant_304_1_helper','0000','merchant_304','2018-12-16 17:00:31',NULL,2),(92,'merchant_304_2_helper','0000','merchant_304','2018-12-16 17:00:31',NULL,2),(93,'merchant_351_1_helper','0000','merchant_351','2018-12-20 23:12:51',NULL,2),(94,'merchant_351_2_helper','0000','merchant_351','2018-12-20 23:12:51',NULL,2),(95,'merchant_356_1_helper','0000','merchant_356','2018-12-23 14:50:31',NULL,2),(96,'merchant_356_2_helper','0000','merchant_356','2018-12-23 14:50:31',NULL,2),(97,'merchant_356_3_helper','0000','merchant_356','2018-12-23 14:50:31',NULL,2),(98,'merchant_356_4_helper','0000','merchant_356','2018-12-23 14:50:31',NULL,2),(99,'merchant_358_1_helper','0000','merchant_358','2018-12-23 15:01:58',NULL,2),(100,'merchant_358_2_helper','0000','merchant_358','2018-12-23 15:01:58',NULL,2),(101,'merchant_358_3_helper','0000','merchant_358','2018-12-23 15:01:58',NULL,2),(102,'merchant_358_4_helper','0000','merchant_358','2018-12-23 15:01:58',NULL,2),(103,'merchant_362_1_helper','0000','merchant_362','2018-12-23 16:02:34',NULL,2),(104,'merchant_362_2_helper','0000','merchant_362','2018-12-23 16:02:34',NULL,2),(105,'merchant_362_3_helper','0000','merchant_362','2018-12-23 16:02:34',NULL,2),(106,'merchant_377_1_helper','0000','merchant_377','2018-12-24 08:28:38',NULL,2),(107,'merchant_377_2_helper','0000','merchant_377','2018-12-24 08:28:38',NULL,2),(108,'merchant_377_1_helper','0000','merchant_377','2018-12-24 08:29:05',NULL,2),(109,'merchant_377_2_helper','0000','merchant_377','2018-12-24 08:29:05',NULL,2),(110,'merchant_365_1_helper','0000','merchant_365','2018-12-24 09:07:42',NULL,2),(111,'merchant_368_1_helper','0000','merchant_368','2018-12-24 09:08:49',NULL,2),(112,'merchant_354_2_helper','0000','merchant_354','2018-12-25 19:14:53',NULL,2),(113,'merchant_354_3_helper','0000','merchant_354','2018-12-25 19:14:53',NULL,2),(114,'merchant_379_2_helper','0000','merchant_379','2018-12-28 09:39:54',NULL,2),(115,'merchant_379_3_helper','0000','merchant_379','2018-12-28 09:39:54',NULL,2),(116,'merchant_387_2_helper','0000','merchant_387','2018-12-29 00:15:06',NULL,2),(117,'merchant_387_3_helper','0000','merchant_387','2018-12-29 00:15:06',NULL,2),(118,'merchant_347_2_helper','0000','merchant_347','2018-12-29 00:17:10',NULL,2),(119,'merchant_347_3_helper','0000','merchant_347','2018-12-29 00:17:10',NULL,2),(120,'merchant_347_2_helper','0000','merchant_347','2018-12-29 00:17:14',NULL,2),(121,'merchant_347_3_helper','0000','merchant_347','2018-12-29 00:17:14',NULL,2),(122,'merchant_347_2_helper','0000','merchant_347','2018-12-29 00:17:16',NULL,2),(123,'merchant_347_3_helper','0000','merchant_347','2018-12-29 00:17:16',NULL,2);
+/*!40000 ALTER TABLE `helpers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jfhi_dihdf_djjvfyok`
+--
+
+DROP TABLE IF EXISTS `jfhi_dihdf_djjvfyok`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `jfhi_dihdf_djjvfyok` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(128) NOT NULL,
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `jfhi_dihdf_djjvfyok`
+--
+
+LOCK TABLES `jfhi_dihdf_djjvfyok` WRITE;
+/*!40000 ALTER TABLE `jfhi_dihdf_djjvfyok` DISABLE KEYS */;
+INSERT INTO `jfhi_dihdf_djjvfyok` VALUES (1,'jfhi_dihdf_djjvfyok_0','tdr1z3',12.9718903,77.6696154,'http://res.cloudinary.com/locator/image/upload/v1532235070/gdfpr618oxr1ci3pofw1.jpg','duhdf','ogfjnb','India','2018-07-22T04:51:22.192063','1','sgjkj','+918179442558');
+/*!40000 ALTER TABLE `jfhi_dihdf_djjvfyok` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `job_asdfgf`
+--
+
+DROP TABLE IF EXISTS `job_asdfgf`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `job_asdfgf` (
+  `idjobs` int(11) NOT NULL AUTO_INCREMENT,
+  `employername` varchar(512) NOT NULL,
+  `employerlocationurl` varchar(256) NOT NULL,
+  `jobDescription` varchar(256) DEFAULT NULL,
+  `locationLandmark` varchar(128) NOT NULL,
+  `offeringpost` varchar(64) NOT NULL,
+  `educationQualification` varchar(64) DEFAULT NULL,
+  `experienceReq` varchar(26) DEFAULT NULL,
+  `sex` varchar(10) NOT NULL,
+  `ageLimitation` varchar(10) DEFAULT NULL,
+  `contact` varchar(16) NOT NULL,
+  `emailId` varchar(128) DEFAULT NULL,
+  `interviewDate` varchar(45) NOT NULL,
+  `shiftTimings` varchar(45) DEFAULT NULL,
+  `salary` varchar(45) NOT NULL,
+  `postedon` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idjobs`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `job_asdfgf`
+--
+
+LOCK TABLES `job_asdfgf` WRITE;
+/*!40000 ALTER TABLE `job_asdfgf` DISABLE KEYS */;
+INSERT INTO `job_asdfgf` VALUES (1,'testnew','https://www.google.com/maps/?q=23.0225,72.5714','testdescnew','testlandmarknew','testpost','testeducation','testexp','male','56','990552266','new@gmail.com','12-09-2018','9to12','50000','2018-10-03 01:14:22');
+/*!40000 ALTER TABLE `job_asdfgf` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `job_tdr1z3`
+--
+
+DROP TABLE IF EXISTS `job_tdr1z3`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `job_tdr1z3` (
+  `idjobs` int(11) NOT NULL AUTO_INCREMENT,
+  `employername` varchar(512) NOT NULL,
+  `employerlocationurl` varchar(256) NOT NULL,
+  `jobDescription` varchar(256) DEFAULT NULL,
+  `locationLandmark` varchar(128) NOT NULL,
+  `offeringpost` varchar(64) NOT NULL,
+  `educationQualification` varchar(64) DEFAULT NULL,
+  `experienceReq` varchar(26) DEFAULT NULL,
+  `sex` varchar(10) NOT NULL,
+  `ageLimitation` varchar(10) DEFAULT NULL,
+  `contact` varchar(16) NOT NULL,
+  `emailId` varchar(128) DEFAULT NULL,
+  `interviewDate` varchar(45) NOT NULL,
+  `shiftTimings` varchar(45) DEFAULT NULL,
+  `salary` varchar(45) NOT NULL,
+  `postedon` date NOT NULL,
+  PRIMARY KEY (`idjobs`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `job_tdr1z3`
+--
+
+LOCK TABLES `job_tdr1z3` WRITE;
+/*!40000 ALTER TABLE `job_tdr1z3` DISABLE KEYS */;
+INSERT INTO `job_tdr1z3` VALUES (1,'nearme','https://www.google.com/maps/?q=12.9707329,77.6696581','marketing','aditya soigne','marketing executive','x','0','female','20','8179442558','gopi.komanduri@gmail.com','26-9-2018','07','50000','2018-10-04'),(2,'nearme','https://www.google.com/maps/?q=12.9707329,77.6696581','testing','beml qtrs','my yest','10','0','male','20','8179442558','gopi.komanduri@gmail.com','20-9-2018','10','5000','2018-10-06'),(3,'nearme','https://www.google.com/maps/?q=12.9707098,77.6696458','sales ','cynosure block','sales','x','1','male','25','8179442558','g@.com','26-9-2018','45:56','5000','2018-10-17'),(4,'nearmegala','https://www.google.com/maps/?q=12.9707231,77.6696589','test','hhh','hkk','x','3','male','25','8179442558','gopi@..com','28-9-2018','12','8000','2018-10-27');
+/*!40000 ALTER TABLE `job_tdr1z3` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `job_tdr1z4`
+--
+
+DROP TABLE IF EXISTS `job_tdr1z4`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `job_tdr1z4` (
+  `idjobs` int(11) NOT NULL AUTO_INCREMENT,
+  `employername` varchar(512) NOT NULL,
+  `employerlocationurl` varchar(256) NOT NULL,
+  `jobDescription` varchar(256) DEFAULT NULL,
+  `locationLandmark` varchar(128) NOT NULL,
+  `offeringpost` varchar(64) NOT NULL,
+  `educationQualification` varchar(64) DEFAULT NULL,
+  `experienceReq` varchar(26) DEFAULT NULL,
+  `sex` varchar(10) NOT NULL,
+  `ageLimitation` varchar(10) DEFAULT NULL,
+  `contact` varchar(16) NOT NULL,
+  `emailId` varchar(128) DEFAULT NULL,
+  `interviewDate` varchar(45) NOT NULL,
+  `shiftTimings` varchar(45) DEFAULT NULL,
+  `salary` varchar(45) NOT NULL,
+  `postedon` date NOT NULL,
+  PRIMARY KEY (`idjobs`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `job_tdr1z4`
+--
+
+LOCK TABLES `job_tdr1z4` WRITE;
+/*!40000 ALTER TABLE `job_tdr1z4` DISABLE KEYS */;
+INSERT INTO `job_tdr1z4` VALUES (1,'nearme','https://www.google.com/maps/?q=12.9789181,77.6576702','agent','aditya','regular','x','10','male','50','8179442558','gopi.','18-9-2018','tjj','8855','2018-10-08'),(2,'gala','https://www.google.com/maps/?q=12.9794275,77.6580313','my job','here','helper','x','0','male','58','8179442558','gopi@k..com','19-9-2018','667','800','2018-10-10'),(3,'gala','https://www.google.com/maps/?q=12.9789213,77.657673','mydesc ','test','rrr','x','rey','male','58','8179442558','gopi@..com','26-9-2018','ghhi','852','2018-10-10'),(4,'my name','https://www.google.com/maps/?q=12.979311,77.6578755','my desc','lm','hjj','x','5','male','25','8179442558','gopi@..com','27-9-2018','89','8525','2018-10-12');
+/*!40000 ALTER TABLE `job_tdr1z4` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `job_ts5ejh`
+--
+
+DROP TABLE IF EXISTS `job_ts5ejh`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `job_ts5ejh` (
+  `idjobs` int(11) NOT NULL AUTO_INCREMENT,
+  `employername` varchar(512) NOT NULL,
+  `employerlocationurl` varchar(256) NOT NULL,
+  `jobDescription` varchar(256) DEFAULT NULL,
+  `locationLandmark` varchar(128) NOT NULL,
+  `offeringpost` varchar(64) NOT NULL,
+  `educationQualification` varchar(64) DEFAULT NULL,
+  `experienceReq` varchar(26) DEFAULT NULL,
+  `sex` varchar(10) NOT NULL,
+  `ageLimitation` varchar(10) DEFAULT NULL,
+  `contact` varchar(16) NOT NULL,
+  `emailId` varchar(128) DEFAULT NULL,
+  `interviewDate` varchar(45) NOT NULL,
+  `shiftTimings` varchar(45) DEFAULT NULL,
+  `salary` varchar(45) NOT NULL,
+  `postedon` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idjobs`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `job_ts5ejh`
+--
+
+LOCK TABLES `job_ts5ejh` WRITE;
+/*!40000 ALTER TABLE `job_ts5ejh` DISABLE KEYS */;
+INSERT INTO `job_ts5ejh` VALUES (1,'testnew','https://www.google.com/maps/?q=23.0225,72.5714','testdescnew','testlandmarknew','testpost','testeducation','testexp','male','56','990552266','new@gmail.com','12-09-2018','9to12','50000','2018-10-03 01:21:07'),(2,'testnew','https://www.google.com/maps/?q=23.0225,72.5714','testdescnew','testlandmarknew','testpost','testeducation','testexp','male','56','990552266','new@gmail.com','12-09-2018','9to12','50000','2018-10-03 01:40:44'),(3,'bzbz','https://www.google.com/maps/?q=23.0508095,72.6448676','zhhz','zhzh','zhzh','zbzb','zbzvz','male','79797','7879799787','zbzbzh','3-9-2018','zhzbz','7979797','2018-10-03 01:47:44'),(4,'bzbz','https://www.google.com/maps/?q=23.0508095,72.6448676','zhhz','zhzh','zhzh','zbzb','zbzvz','male','79797','7879799787','zbzbzh','3-9-2018','zhzbz','7979797','2018-10-03 01:47:49'),(5,'demo','https://www.google.com/maps/?q=23.0508511,72.6452372','ggg','vvg','vgg','bvg','vvg','male','88','9928430476','abcd@gmail.com','4-9-2018','9to1@','50000','2018-10-04 00:00:00'),(6,'hfgdxgh','https://www.google.com/maps/?q=23.0508511,72.6452372','tsgsst','hxgx','zggz','zggzgz','gzgzzg','male','868','655442','xg@g.c','4-9-2018','bcch','686865','2018-10-04 00:00:00'),(7,'vvvv','https://www.google.com/maps/?q=23.0508511,72.6452372','gf','ff','ff','ff','gg','male','88','55555555855','ccc@g.c','4-9-2018','vvv','5555','2018-10-04 00:00:00'),(11,'mayur','https://www.google.com/maps/?q=23.0508511,72.6452372','clerk','maruli plaza','cleark','bechlor','2 year','male','55','1234567890','mj@gmail.com','5-9-2018','5to11','20000','2018-10-05 00:00:00');
+/*!40000 ALTER TABLE `job_ts5ejh` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jobs`
+--
+
+DROP TABLE IF EXISTS `jobs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `jobs` (
+  `idjobs` int(11) NOT NULL AUTO_INCREMENT,
+  `employername` varchar(512) NOT NULL,
+  `employerlocationurl` varchar(256) NOT NULL,
+  `jobDescription` varchar(256) DEFAULT NULL,
+  `locationLandmark` varchar(128) NOT NULL,
+  `offeringpost` varchar(64) NOT NULL,
+  `educationQualification` varchar(64) DEFAULT NULL,
+  `experienceReq` varchar(26) DEFAULT NULL,
+  `sex` varchar(10) NOT NULL,
+  `ageLimitation` varchar(10) DEFAULT NULL,
+  `contact` varchar(16) NOT NULL,
+  `emailId` varchar(128) DEFAULT NULL,
+  `interviewDate` varchar(45) NOT NULL,
+  `shiftTimings` varchar(45) DEFAULT NULL,
+  `salary` varchar(45) NOT NULL,
+  `postedon` date NOT NULL,
+  PRIMARY KEY (`idjobs`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `jobs`
+--
+
+LOCK TABLES `jobs` WRITE;
+/*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `merchant`
+--
+
+DROP TABLE IF EXISTS `merchant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `merchant` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL DEFAULT '0',
+  `longitude` double NOT NULL DEFAULT '0',
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) DEFAULT 'Karnataka',
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(128) NOT NULL DEFAULT 'CURRENT_TIMESTAMP',
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL DEFAULT '0000000000',
+  `MerchantType` int(3) NOT NULL DEFAULT '0',
+  `password` varchar(15) NOT NULL DEFAULT '0000',
+  `role` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=389 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `merchant`
+--
+
+LOCK TABLES `merchant` WRITE;
+/*!40000 ALTER TABLE `merchant` DISABLE KEYS */;
+INSERT INTO `merchant` VALUES (1,'merchant1','abcdef',12.444,77.444,'http://res.cloudinary.com/locator/image/upload/v1531857333/nqihwspfcezcmpbllsda.jpg','NearMe','Karnataka','INDIA','18/7/2018','1',NULL,'',0,'0000',0),(9,'merchant_0','tdr1z3',12.9707015,77.6696716,'http://res.cloudinary.com/locator/image/upload/v1532769916/fpairvtlnrwojdhex9qo.jpg','Muralu','Chchg','India','2018-07-28T09:25:18.871076','1','Fhfhghfg','+919849124680',0,'0000',0),(10,'merchant_0','tdr1z3',12.9706821,77.6696787,'http://res.cloudinary.com/locator/image/upload/v1532772418/ztmupsp9jpzunpptvwad.jpg','Gopi','Fhgvh','India','2018-07-28T10:07:00.162148400','1','Etdyy','+919849124680',0,'0000',0),(11,'merchant_0','tdr1z3',12.9706826,77.6696684,'http://res.cloudinary.com/locator/image/upload/v1532772625/ymvgss9j3hgg1pik3b19.jpg','Murali','Fjdg','India','2018-07-28T10:10:26.553539700','1','V','+919849124680',0,'0000',0),(19,'merchant_18','tdr1z3',12.9707104,77.6696534,'http://res.cloudinary.com/locator/image/upload/v1534360796/azksqrdn3gn8h6ugqncy.jpg','fjk nk','fihvkl','INDIA','2018-08-15T19:19:57.777148100','1','cvnn','+918639613292',0,'0000',0),(20,'merchant_19','tdr1z3',12.9706934,77.6695013,'http://res.cloudinary.com/locator/image/upload/v1534361408/vh1bjxqcy9b2qoygyo6k.jpg','viik','x','INDIA','2018-08-15T19:30:11.089101100','1','cghhh','+918639613292',0,'0000',0),(21,'merchant_20','tdr1z3',12.9707927,77.6695073,'http://res.cloudinary.com/locator/image/upload/v1534363385/lr1vjadihjykt1fubcbm.jpg','chuax','d','INDIA','2018-08-15T20:03:07.046572500','1','sddsd','+918639613292',0,'0000',0),(22,'merchant_21','tdr1z3',12.9707331,77.6696879,'http://res.cloudinary.com/locator/image/upload/v1534399944/pdltkqtl2ib36vlji2fk.jpg','sravani','Karnataka','INDIA','2018-08-16T06:12:26.515052300','1','25','+919959860293',0,'0000',0),(23,'merchant_22','tdr1z3',12.9707324,77.6696836,'http://res.cloudinary.com/locator/image/upload/v1534399990/xqwsvezxppjetq8zgvnb.jpg','sravani','Karnataka','INDIA','2018-08-16T06:13:12.108754300','1','25','+919959860293',0,'0000',0),(24,'merchant_23','tdr1z3',12.9707311,77.6696945,'http://res.cloudinary.com/locator/image/upload/v1534426391/zfniewc76kxhgdlk8kuz.jpg','s','njkms','INDIA','2018-08-16T13:33:13.496119700','1','vnn','+919959860293',0,'0000',0),(25,'merchant_24','tdr1z3',12.9707347,77.6697015,'http://res.cloudinary.com/locator/image/upload/v1534426398/qzpskrv29emu4qarct66.jpg','s','njkms','INDIA','2018-08-16T13:33:19.605315900','1','vnn','+919959860293',0,'0000',0),(38,'merchant_37','tdr1z3',12.97077749999999,77.66962890624993,'http://res.cloudinary.com/locator/image/upload/v1534600783/cf3hvan61qhgsac0khmp.jpg','siri shop','','INDIA','2018-08-18T13:59:45.601808900','1','001','+918639613292',0,'0000',0),(39,'merchant_38','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1534612418/nxjllg0imuhqot3rc8dd.jpg','aa shop','','INDIA','2018-08-18T17:13:46.646956300','1','cjkwf','+918639613292',0,'0000',0),(40,'merchant_39','tdr1z3',12.970682500000002,77.66966015624993,'http://res.cloudinary.com/locator/image/upload/v1534665555/ifolyguyxkmwgz06juzt.jpg','Murali','','INDIA','2018-08-19T07:59:17.911011400','1','Gah','+919849124680',0,'0000',0),(42,'merchant_41','tdr1rx',12.919767500000013,77.68347265625002,'http://res.cloudinary.com/locator/image/upload/v1534841798/qwn4hh8ne6hxxiyfaheq.jpg','Murali','','INDIA','2018-08-21T08:56:40.723235700','1','Bsb','+919849124680',0,'0000',0),(44,'merchant_43','tdr1rx',12.919767500000013,77.68349609375,'http://res.cloudinary.com/locator/image/upload/v1534856618/tijao1239mbwity7ciko.jpg','Murali','','INDIA','2018-08-21T13:03:40.036731700','1','Bj','+919849124680',0,'0000',0),(45,'merchant_44','tdr1z3',12.970692500000006,77.6696523437499,'http://res.cloudinary.com/locator/image/upload/v1534859673/xyhgc9zeugd17enax5jm.jpg','aruna','','INDIA','2018-08-21T13:54:34.112642500','1','5768','+918686091898',0,'0000',0),(47,'merchant_46','tdr1z2',12.968652499999997,77.66879296874995,'http://res.cloudinary.com/locator/image/upload/v1534917248/udgrlyomc4mhvkwedi0v.jpg','Murali','','INDIA','2018-08-22T11:24:10.130651100','1','Hh','+919849124680',0,'0000',0),(48,'merchant_47','tdr1z3',12.970682500000002,77.66966015624993,'http://res.cloudinary.com/locator/image/upload/v1534920344/io8tnetxlvugnsbf64xr.jpg','siri shop','','INDIA','2018-08-22T12:15:45.487158100','1','shop no 1','+918639613292',0,'0000',0),(49,'merchant_48','tdr1z3',12.970682500000002,77.66966015624993,'http://res.cloudinary.com/locator/image/upload/v1534920349/odgw8zvghscutg6fs7fp.jpg','siri shop','','INDIA','2018-08-22T12:15:50.330887700','1','shop no 1','+918639613292',0,'0000',0),(50,'merchant_49','tdr1z3',12.970682500000002,77.66966015624993,'http://res.cloudinary.com/locator/image/upload/v1534920356/jyggevpdymbtsq3ll1kf.jpg','siri shop','','INDIA','2018-08-22T12:15:57.393430900','1','shop no 1','+918639613292',0,'0000',0),(51,'merchant_50','tdr1z3',12.970682500000002,77.66966015624993,'http://res.cloudinary.com/locator/image/upload/v1534920365/tt0aqvchfy10f1fiahsc.jpg','siri shop','','INDIA','2018-08-22T12:16:06.065294600','1','shop no 1','+918639613292',0,'0000',0),(52,'merchant_51','tdr1zv',12.996312500000007,77.69526171874995,'http://res.cloudinary.com/locator/image/upload/v1534931588/yubsfqm5py6bilekumfr.jpg','go colors ','','INDIA','2018-08-22T15:23:09.595175600','1','21','+918639613292',0,'0000',0),(53,'merchant_52','tdr1zj',12.992882500000015,77.66173046874995,'http://res.cloudinary.com/locator/image/upload/v1534936014/mtvwpvvjvlnz4xzt2yyo.jpg','go colors','','INDIA','2018-08-22T16:36:56.505311900','1','21','+918639613292',0,'0000',0),(59,'merchant_58','ttncwc',28.396502200000004,77.29372819999999,'http://res.cloudinary.com/locator/image/upload/v1535008335/t975qrxlmejivbeszxu5.jpg','Vinay Kuma','','INDIA','2018-08-23T12:42:17.722647300','1','3A-WH-64 N.I.T Faridabad','+919540926815',0,'0000',0),(60,'merchant_59','',28.392340400000002,77.3060746,'http://res.cloudinary.com/locator/image/upload/v1535010365/xmubpfkfgk5knx0bebva.jpg','testid2','','INDIA','2018-08-23T13:16:06.927537800','1','5 d-82 N.I.T faridabad','+917065267973',0,'0000',0),(61,'merchant_60','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1535040603/yji6mmzp4xen1uj9qevv.jpg','amma','','INDIA','2018-08-23T21:40:04.566756700','1','ghhh','+919959860239',0,'0000',0),(62,'merchant_61','tdr1z3',12.970742500000007,77.66967578124994,'http://res.cloudinary.com/locator/image/upload/v1535520672/ts3st92erwofeuda1vc3.jpg','chinni shp','','INDIA','2018-08-29T11:01:14.456321','1','21','+918639613292',0,'0000',0),(63,'merchant_62','tdr1z3',12.969465734267292,77.66969220712781,'http://res.cloudinary.com/locator/image/upload/v1535523458/mfrqht6vojvd9my7oejj.jpg','siri','','INDIA','2018-08-29T11:47:40.318124400','1','dfg','+918639613292',0,'0000',0),(64,'merchant_63','tdr1z3',12.969465734267292,77.66969220712781,'http://res.cloudinary.com/locator/image/upload/v1535523466/r33dnucrflbkamrgrecs.jpg','siri','','INDIA','2018-08-29T11:47:47.724395400','1','dfg','+918639613292',0,'0000',0),(65,'merchant_64','tdr1z2',12.968983399999997,77.6698388,'http://res.cloudinary.com/locator/image/upload/v1535524201/rharlmhhdhqlgmqku5qp.jpg','Parul ','','INDIA','2018-08-29T12:00:03.193800200','1','nw201','+919343808009',0,'0000',0),(69,'merchant_68','tdr1z3',12.970682500000002,77.66862890624995,'http://res.cloudinary.com/locator/image/upload/v1535871923/mrubb9kj8h95lxuttlev.jpg','n shridha','','INDIA','2018-09-02T12:35:24.972195400','1','chess coach ','+919731205350',0,'0000',0),(70,'merchant_69','ttncwc',28.396502200000004,77.29372819999999,'http://res.cloudinary.com/locator/image/upload/v1536053135/e8xtoxmcaqq95flycr00.jpg','vk decor','','INDIA','2018-09-04T14:55:37.175291600','1','','+919540926815',0,'0000',0),(71,'merchant_70','ts5ejh',23.050807499999998,72.64487109374998,'http://res.cloudinary.com/locator/image/upload/v1538417425/gd3ypqi3lblkenk3ok4z.jpg','mayur','','INDIA','2018-10-01T23:40:27.973049700','1','qwe','+918200785387',0,'0000',0),(72,'merchant_71','',0,0,'http://res.cloudinary.com/locator/image/upload/v1538708818/uufetv7ulpmjg7hu3bgc.jpg','Bujji','','INDIA','2018-10-05T08:37:00.505827300','1','Ghg','+919246655322',0,'0000',0),(73,'merchant_72','',0,0,'http://res.cloudinary.com/locator/image/upload/v1538763385/czrjvaeei2kxczsjcfi6.jpg','hemanth','','INDIA','2018-10-05T23:46:27.159858600','1','115','+919703848204',0,'0000',0),(82,'merchant_81','ts5ejh',23.050807499999998,72.64487109374998,'http://res.cloudinary.com/locator/image/upload/v1539024589/egcfpa2h85s2jbfloxab.jpg','mayur','','INDIA','2018-10-09T00:19:52.253534200','1','220','+918200785387',0,'0000',0),(84,'merchant_83','ts5ejh',23.05049250000001,72.64523828124997,'http://res.cloudinary.com/locator/image/upload/v1539279415/z0q6b799079pkf2dlxy2.jpg','mayur jain','','INDIA','2018-10-11T23:06:57.252591600','1','143','+918200785387',0,'0000',0),(91,'merchant_90','tepexv',17.520663799999998,78.3922838,'http://res.cloudinary.com/locator/image/upload/v1539627696/awyaf00cjdq1cmfc2gqo.jpg','ghbh','','INDIA','2018-10-15T23:51:37.581512','1','rt','+918125802142',0,'0000',0),(94,'merchant_93','tepexv',17.520581,78.3926386,'http://res.cloudinary.com/locator/image/upload/v1539880214/saiemiezayqddlbgfulf.jpg','my bsbs','','INDIA','2018-10-18T22:00:14.724454','1','disgggsvsv','+918125802142',0,'0000',0),(95,'merchant_94','tepexv',17.520581,78.3926386,'http://res.cloudinary.com/locator/image/upload/v1539880215/fyib0x3kd2nvxcfw0cva.jpg','my bsbs','','INDIA','2018-10-18T22:00:16.021298700','1','disgggsvsv','+918125802142',0,'0000',0),(96,'merchant_95','tepexv',17.5208969,78.393168,'http://res.cloudinary.com/locator/image/upload/v1540011282/cqcyeoqgdgxcbautyore.jpg','gt','','INDIA','2018-10-20T10:24:44.015007300','1','gh','+918125802142',0,'0000',0),(97,'merchant_96','tepexv',17.5208969,78.393168,'http://res.cloudinary.com/locator/image/upload/v1540011283/oqwjwadb7imukp6f07iu.jpg','gt','','INDIA','2018-10-20T10:24:44.404144300','1','gh','+918125802142',0,'0000',0),(98,'merchant_97','tepexv',17.5208969,78.393168,'http://res.cloudinary.com/locator/image/upload/v1540056161/oggpe3zcctqkh3rmdvla.jpg','super','','INDIA','2018-10-20T22:52:42.801787300','1','sgs','+919703848204',0,'0000',0),(99,'merchant_98','tepexv',17.5208969,78.393168,'http://res.cloudinary.com/locator/image/upload/v1540056162/rce7hrxmlkfqtseaycxg.jpg','super','','INDIA','2018-10-20T22:52:43.282252600','1','sgs','+919703848204',0,'0000',0),(100,'merchant_99','tepexv',17.521106,78.3927049,'http://res.cloudinary.com/locator/image/upload/v1540056412/jxhb50edihuvjhf0sq0i.jpg','morning','','INDIA','2018-10-20T22:56:53.901434300','1','hdhdj','+918179968859',0,'0000',0),(101,'merchant_100','tepexv',17.521106,78.3927049,'http://res.cloudinary.com/locator/image/upload/v1540056413/l3itcdhfcqfud7scqefh.jpg','morning','','INDIA','2018-10-20T22:56:58.727611200','1','hdhdj','+918179968859',0,'0000',0),(102,'merchant_101','tepexv',17.5208969,78.393168,'http://res.cloudinary.com/locator/image/upload/v1540056451/bvuwaedibptkjmi1nmhb.jpg','ggcx','','INDIA','2018-10-20T22:57:32.413150300','1','hdhdj','+918179968859',0,'0000',0),(103,'merchant_102','tepexv',17.5208969,78.393168,'http://res.cloudinary.com/locator/image/upload/v1540056452/dvbbw2twed2cuhhz5c4l.jpg','ggcx','','INDIA','2018-10-20T22:57:32.723710700','1','hdhdj','+918179968859',0,'0000',0),(108,'merchant_107','tepexv',17.5205303,78.3937959,'http://res.cloudinary.com/locator/image/upload/v1540403166/nbdibkl6u7stlnsiem9x.jpg','hemanth','','INDIA','2018-10-24T23:16:12.730210900','1','a','+919966525464',0,'0000',0),(109,'merchant_108','tepexv',17.5205303,78.3937959,'http://res.cloudinary.com/locator/image/upload/v1540403176/pvngtgnqcyyoz7r771e4.jpg','hemanth','','INDIA','2018-10-24T23:16:16.579829200','1','a','+919966525464',0,'0000',0),(110,'merchant_109','tepexv',17.520471,78.392178,'http://res.cloudinary.com/locator/image/upload/v1540403520/vpb73wovcsjasoahos93.jpg','grape','','INDIA','2018-10-24T23:22:01.606190100','1','gab','+919966525464',0,'0000',0),(111,'merchant_110','tepexv',17.520471,78.392178,'http://res.cloudinary.com/locator/image/upload/v1540403521/s30ieyql4qifmayp5vjo.jpg','grape','','INDIA','2018-10-24T23:22:02.112086600','1','gab','+919966525464',0,'0000',0),(112,'merchant_111','',0,0,'http://res.cloudinary.com/locator/image/upload/v1540405979/mwerhne351pauowgobkl.jpg','whsh','','INDIA','2018-10-25T00:03:00.874237400','1','sg','+918125802142',0,'0000',0),(113,'merchant_112','',0,0,'http://res.cloudinary.com/locator/image/upload/v1540405980/ycvbea3kislqblihwobw.jpg','whsh','','INDIA','2018-10-25T00:03:01.400602300','1','sg','+918125802142',0,'0000',0),(114,'merchant_113','',0,0,'http://res.cloudinary.com/locator/image/upload/v1540492285/ow8mr2ebjxtyh1l5jdfz.png','tt','','INDIA','2018-10-26T00:01:26.221256700','1','sg','+918179968859',0,'0000',0),(115,'merchant_114','',0,0,'http://res.cloudinary.com/locator/image/upload/v1540492286/t3lbplgm4wiv9kng8hgw.png','tt','','INDIA','2018-10-26T00:01:27.433171500','1','sg','+918179968859',0,'0000',0),(116,'merchant_115','',0,0,'http://res.cloudinary.com/locator/image/upload/v1540662208/z13dudl8zpqt9a1am8rp.jpg','shhdh','','INDIA','2018-10-27T23:13:29.661754300','1','fg','+919966525464',0,'0000',0),(117,'merchant_116','',0,0,'http://res.cloudinary.com/locator/image/upload/v1540662209/tnaqcpbnafhht2mta6be.jpg','shhdh','','INDIA','2018-10-27T23:13:31.303356900','1','fg','+919966525464',0,'0000',0),(122,'merchant_121','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1540669472/e1ndq3fjicv7u5f8ik8h.jpg','hdndn','','INDIA','2018-10-28T01:14:34.133838700','1','sgsh','+919966525464',0,'0000',0),(123,'merchant_122','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1540669473/wfpzqqfs52y3jkdto98j.jpg','hdndn','','INDIA','2018-10-28T01:14:34.475648500','1','sgsh','+919966525464',0,'0000',0),(126,'merchant_125','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1540702955/wgfbto1jzoxhdexh2fkc.jpg','dhhsh','','INDIA','2018-10-28T10:32:37.247097200','1','sjsj','+919966525464',0,'0000',0),(127,'merchant_126','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1540702956/ksmv1ftuo0xwzrpaj9xt.jpg','dhhsh','','INDIA','2018-10-28T10:32:37.327151200','1','sjsj','+919966525464',0,'0000',0),(130,'merchant_129','tepexv',17.520663799999998,78.3922838,'http://res.cloudinary.com/locator/image/upload/v1540705607/gw1sulnarblnnlcodfec.jpg','vshd','','INDIA','2018-10-28T11:16:49.157449700','1','bz','+919966525464',0,'0000',0),(131,'merchant_130','tepexv',17.520663799999998,78.3922838,'http://res.cloudinary.com/locator/image/upload/v1540705608/nyxh91nhsf1uzhexdwkt.jpg','vshd','','INDIA','2018-10-28T11:16:49.344960500','1','bz','+919966525464',0,'0000',0),(132,'merchant_131','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1540705711/ivs1c5hfjxnpqcciqvox.jpg','gh','','INDIA','2018-10-28T11:18:32.711171200','1','HH','+919966525464',0,'0000',0),(133,'merchant_132','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1540705712/mxn1fxe285kbnauvq2je.jpg','gh','','INDIA','2018-10-28T11:18:34.050056600','1','HH','+919966525464',0,'0000',0),(144,'merchant_143','tepexv',17.520581,78.3926386,'http://res.cloudinary.com/locator/image/upload/v1540751041/usdtpn7jl9r88uwdbp7i.jpg','tester','','INDIA','2018-10-28T23:54:02.596967400','1','shhs','+919966525464',0,'0000',0),(145,'merchant_144','tepexv',17.520581,78.3926386,'http://res.cloudinary.com/locator/image/upload/v1540751041/yf1oln0pidi8gifxqbts.jpg','tester','','INDIA','2018-10-28T23:54:02.628229700','1','shhs','+919966525464',0,'0000',0),(150,'merchant_149','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1540828773/ehyhri8rouxtkjvnbkvl.jpg','xjdh','','INDIA','2018-10-29T21:29:34.299620700','1','ah','+919966525464',0,'0000',0),(151,'merchant_150','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1540828774/gkuaxglnnn60uusoeta8.jpg','xjdh','','INDIA','2018-10-29T21:29:35.049607500','1','ah','+919966525464',0,'0000',0),(164,'merchant_163','tepexv',17.518839099999997,78.3931408,'http://res.cloudinary.com/locator/image/upload/v1541087738/xysnaxqilx25naopl0en.jpg','agha','','INDIA','2018-11-01T21:25:40.633724','1','ahba','+919966525464',0,'0000',0),(167,'merchant_166','tdr1z3',12.970727500000002,77.66966015624993,'http://res.cloudinary.com/locator/image/upload/v1541133770/et1dz45bkurt21thkxmh.jpg','Murali','','INDIA','2018-11-02T10:12:53.275274700','1','Hb','+919849124680',0,'0000',0),(168,'merchant_167','tdr1z3',12.970727500000002,77.66966015624993,'http://res.cloudinary.com/locator/image/upload/v1541133772/tk6xfyxwxs6r1r7v0ah8.png','Murali','','INDIA','2018-11-02T10:12:53.349482400','1','Hb','+919849124680',0,'0000',0),(169,'merchant_168','tsmzwc',25.234692599999995,75.891724,'http://res.cloudinary.com/locator/image/upload/v1541146454/s7tkpdd9sqpoubvdyfen.png','Amit','','INDIA','2018-11-02T13:44:16.650298','1','87644','+919871278657',0,'0000',0),(170,'merchant_169','tsmzwc',25.234692599999995,75.891724,'http://res.cloudinary.com/locator/image/upload/v1541146455/a6qob0tdtku2funbv8kx.png','Amit','','INDIA','2018-11-02T13:44:16.778225100','1','87644','+919871278657',0,'0000',0),(171,'merchant_170','tepexv',17.521209199999998,78.3920119,'http://res.cloudinary.com/locator/image/upload/v1541260950/mvertrwcm5xjhjny7dzd.jpg','naren','','INDIA','2018-11-03T21:32:31.905696600','1','gghh','+919966525464',0,'2580',0),(172,'merchant_171','tepexv',17.521209199999998,78.3920119,'http://res.cloudinary.com/locator/image/upload/v1541260951/iwizcwyoik1qdsffikkw.jpg','naren','','INDIA','2018-11-03T21:32:32.343187900','1','gghh','+919966525464',0,'2580',0),(173,'merchant_170_0','0000',0,0,NULL,'merchant_170_0','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(174,'merchant_170_1','0000',0,0,NULL,'merchant_170_1','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(175,'merchant_170_2','0000',0,0,NULL,'merchant_170_2','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(176,'merchant_170_3','0000',0,0,NULL,'merchant_170_3','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(177,'merchant_170_4','0000',0,0,NULL,'merchant_170_4','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(178,'merchant_170_0','0000',0,0,NULL,'merchant_170_0','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(179,'merchant_170_1','0000',0,0,NULL,'merchant_170_1','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(180,'merchant_170_2','0000',0,0,NULL,'merchant_170_2','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(181,'merchant_170_3','0000',0,0,NULL,'merchant_170_3','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(182,'merchant_170_4','0000',0,0,NULL,'merchant_170_4','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(185,'merchant_171_0','0000',0,0,NULL,'merchant_171_0','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(186,'merchant_171_1','0000',0,0,NULL,'merchant_171_1','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(187,'merchant_171_2','0000',0,0,NULL,'merchant_171_2','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(188,'merchant_171_3','0000',0,0,NULL,'merchant_171_3','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(189,'merchant_171_4','0000',0,0,NULL,'merchant_171_4','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(190,'merchant_171_5','0000',0,0,NULL,'merchant_171_5','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(191,'merchant_171_6','0000',0,0,NULL,'merchant_171_6','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(192,'merchant_171_7','0000',0,0,NULL,'merchant_171_7','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(193,'merchant_171_8','0000',0,0,NULL,'merchant_171_8','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(194,'merchant_171_9','0000',0,0,NULL,'merchant_171_9','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(195,'-1_0','0000',0,0,NULL,'-1_0','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(196,'-1_1','0000',0,0,NULL,'-1_1','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(197,'-1_2','0000',0,0,NULL,'-1_2','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(198,'-1_0','0000',0,0,NULL,'-1_0','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(199,'-1_1','0000',0,0,NULL,'-1_1','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(200,'-1_2','0000',0,0,NULL,'-1_2','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(201,'-1_3','0000',0,0,NULL,'-1_3','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(202,'-1_4','0000',0,0,NULL,'-1_4','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(203,'-1_5','0000',0,0,NULL,'-1_5','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(204,'-1_0','0000',0,0,NULL,'-1_0','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(205,'-1_1','0000',0,0,NULL,'-1_1','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(206,'-1_2','0000',0,0,NULL,'-1_2','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(207,'-1_3','0000',0,0,NULL,'-1_3','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(208,'-1_4','0000',0,0,NULL,'-1_4','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(209,'-1_5','0000',0,0,NULL,'-1_5','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(210,'merchant_171_0','0000',0,0,NULL,'merchant_171_0','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(211,'merchant_171_1','0000',0,0,NULL,'merchant_171_1','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(212,'merchant_171_2','0000',0,0,NULL,'merchant_171_2','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(213,'merchant_171_3','0000',0,0,NULL,'merchant_171_3','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(214,'merchant_171_4','0000',0,0,NULL,'merchant_171_4','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(215,'merchant_171_0','0000',0,0,NULL,'merchant_171_0','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(216,'merchant_171_1','0000',0,0,NULL,'merchant_171_1','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(217,'merchant_171_2','0000',0,0,NULL,'merchant_171_2','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(218,'merchant_171_3','0000',0,0,NULL,'merchant_171_3','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(219,'merchant_171_4','0000',0,0,NULL,'merchant_171_4','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(220,'merchant_171_0','0000',0,0,NULL,'merchant_171_0','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(221,'merchant_171_1','0000',0,0,NULL,'merchant_171_1','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(222,'merchant_171_2','0000',0,0,NULL,'merchant_171_2','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(223,'merchant_171_3','0000',0,0,NULL,'merchant_171_3','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(224,'merchant_171_4','0000',0,0,NULL,'merchant_171_4','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(225,'merchant_171_0','0000',0,0,NULL,'merchant_171_0','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(226,'merchant_171_1','0000',0,0,NULL,'merchant_171_1','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(227,'merchant_171_2','0000',0,0,NULL,'merchant_171_2','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(228,'merchant_171_3','0000',0,0,NULL,'merchant_171_3','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(229,'merchant_171_4','0000',0,0,NULL,'merchant_171_4','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(230,'merchant_171_0','0000',0,0,NULL,'merchant_171_0','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(231,'merchant_171_1','0000',0,0,NULL,'merchant_171_1','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(232,'merchant_171_2','0000',0,0,NULL,'merchant_171_2','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(233,'merchant_171_3','0000',0,0,NULL,'merchant_171_3','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(234,'merchant_171_4','0000',0,0,NULL,'merchant_171_4','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(235,'merchant_171_0','0000',0,0,NULL,'merchant_171_0','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(236,'merchant_171_1','0000',0,0,NULL,'merchant_171_1','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(237,'merchant_171_2','0000',0,0,NULL,'merchant_171_2','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(238,'merchant_171_3','0000',0,0,NULL,'merchant_171_3','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(239,'merchant_171_4','0000',0,0,NULL,'merchant_171_4','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(240,'merchant_171_5','0000',0,0,NULL,'merchant_171_5','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(241,'merchant_171_0','0000',0,0,NULL,'merchant_171_0','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(242,'merchant_171_1','0000',0,0,NULL,'merchant_171_1','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(243,'merchant_171_2','0000',0,0,NULL,'merchant_171_2','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(244,'merchant_171_3','0000',0,0,NULL,'merchant_171_3','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(245,'merchant_171_4','0000',0,0,NULL,'merchant_171_4','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(246,'merchant_171_0','0000',0,0,NULL,'merchant_171_0','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(247,'merchant_171_1','0000',0,0,NULL,'merchant_171_1','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(248,'merchant_171_2','0000',0,0,NULL,'merchant_171_2','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(249,'merchant_171_3','0000',0,0,NULL,'merchant_171_3','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(250,'merchant_171_4','0000',0,0,NULL,'merchant_171_4','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(251,'merchant_171_0','0000',0,0,NULL,'merchant_171_0','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(252,'merchant_171_1','0000',0,0,NULL,'merchant_171_1','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(253,'merchant_171_2','0000',0,0,NULL,'merchant_171_2','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(254,'merchant_171_3','0000',0,0,NULL,'merchant_171_3','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(255,'merchant_171_4','0000',0,0,NULL,'merchant_171_4','Karnataka','INDIA','CURRENT_TIMESTAMP','1',NULL,'0000000000',0,'0000',1),(256,'merchant_255','tepexv',17.521572100000004,78.3923971,'http://res.cloudinary.com/locator/image/upload/v1541516357/hdghhrxzvoujlqysngck.jpg','ssda','','INDIA','2018-11-06T20:29:19.513293500','1','dadd','+919966525464',0,'2580',0),(257,'merchant_256','tepexv',17.521572100000004,78.3923971,'http://res.cloudinary.com/locator/image/upload/v1541516359/ojvohblzrtbdfzkxtamg.jpg','ssda','','INDIA','2018-11-06T20:29:20.497658800','1','dadd','+919966525464',0,'2580',0),(273,'merchant_272','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1541586191/mjoqbxqw2kjqex4dopxe.jpg','Gopi','','INDIA','2018-11-07T15:53:18.370412700','1','Vhch','+919246655322',0,'0000',0),(274,'merchant_273','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1541586199/lsqtare2aa5rhtz40oet.jpg','Gopi','','INDIA','2018-11-07T15:53:24.198535500','1','Vhch','+919246655322',0,'0000',0),(275,'merchant_274','tshvyn',23.5468979,74.44890579999999,'http://res.cloudinary.com/locator/image/upload/v1541588872/uewotm17zpnloulz02kj.jpg','mayur','','INDIA','2018-11-07T16:37:54.637402700','1','1234','+919904405269',0,'12345',0),(276,'merchant_275','tshvyn',23.5468979,74.44890579999999,'http://res.cloudinary.com/locator/image/upload/v1541588873/ameqomnqiwfwrgiclxya.jpg','mayur','','INDIA','2018-11-07T16:37:55.106152600','1','1234','+919904405269',0,'12345',0),(283,'merchant_282','tepexv',17.5208969,78.393168,'http://res.cloudinary.com/locator/image/upload/v1542128541/pfnojvaljh98lgx9eezq.jpg','hem','','INDIA','2018-11-13T22:32:22.903273200','1','fhh','+919703848204',0,'2580',0),(284,'merchant_283','tepexv',17.5208969,78.393168,'http://res.cloudinary.com/locator/image/upload/v1542128542/bm3psz4enbzinrclrtht.jpg','hem','','INDIA','2018-11-13T22:32:23.122066300','1','fhh','+919703848204',0,'2580',0),(285,'merchant_284','tepexv',17.5211526,78.39239719999999,'http://res.cloudinary.com/locator/image/upload/v1542131098/ypjcc76mf1fmvmpkq4xc.jpg','yjh','','INDIA','2018-11-13T23:15:42.638758200','1','v','+919703848204',0,'2580',0),(286,'merchant_285','tepexv',17.5211526,78.39239719999999,'http://res.cloudinary.com/locator/image/upload/v1542131098/ypjcc76mf1fmvmpkq4xc.jpg','yjh','','INDIA','2018-11-13T23:15:47.685662','1','v','+919703848204',0,'2580',0),(287,'merchant_286','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1542132317/rbvrlx1l4ubc0hzqxeos.jpg','hghh','','INDIA','2018-11-13T23:35:20.746690100','1',' bnj','+919966525464',0,'2580',0),(288,'merchant_287','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1542132477/pcuwud3ebhw6mfo2fkkp.jpg','sjsj','','INDIA','2018-11-13T23:37:58.683964600','1','shshhs','+919966525464',0,'2580',0),(289,'merchant_288','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1542132477/pcuwud3ebhw6mfo2fkkp.jpg','sjsj','','INDIA','2018-11-13T23:37:59.512072300','1','shshhs','+919966525464',0,'2580',0),(290,'merchant_289','tepexv',17.521106,78.3927049,'http://res.cloudinary.com/locator/image/upload/v1542132631/j7otagwnc4jqvul7ms2d.jpg','djjd','','INDIA','2018-11-13T23:40:32.199340500','1','vhh','+919966525464',0,'2580',0),(291,'merchant_290','tepexv',17.521106,78.3927049,'http://res.cloudinary.com/locator/image/upload/v1542132631/a3tj1w5cr7ebbco8xpdt.jpg','djjd','','INDIA','2018-11-13T23:40:32.511826900','1','vhh','+919966525464',0,'2580',0),(296,'merchant_295','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1542264792/id6bwcvayoyfmuwslp10.jpg','Murali','','INDIA','2018-11-15T12:23:13.465207800','1','Hn','+919849124680',0,'1980',0),(297,'merchant_296','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1542264793/ojjxlaldwbaocbo9ruju.png','Murali','','INDIA','2018-11-15T12:23:13.887075500','1','Hn','+919849124680',0,'1980',0),(299,'merchant_298','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1542340914/cpvbv8pwxdydlbi9ur4a.jpg','Gopi','','INDIA','2018-11-16T09:31:55.824054','1','G hgd','+919246655322',0,'0000',0),(300,'merchant_299','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1542340978/rmeinartzcjkn1sfgphu.jpg','Gopi','','INDIA','2018-11-16T09:32:58.964580900','1','G hgd','+919246655322',0,'0000',0),(302,'merchant_301','tepexv',17.521106,78.3927049,'http://res.cloudinary.com/locator/image/upload/v1542385530/lcyitqezju0psb5q4nxp.jpg','fgj','','INDIA','2018-11-16T21:55:31.200038100','1','de','+918125802142',0,'2580',0),(303,'merchant_302','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1542387299/fyl47zvfnolztix3baqc.jpg','dddf','','INDIA','2018-11-16T22:25:00.856647300','1','ddn','+918179968859',0,'1478',0),(304,'merchant_303','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1542387816/dlsl4wqvyzh9zjl7h1b9.jpg','fhh','','INDIA','2018-11-16T22:33:37.717820100','1','ghjj','+918125802142',0,'22222',0),(305,'merchant_304','tepexv',17.521106,78.3927049,'http://res.cloudinary.com/locator/image/upload/v1542388726/eycozm0jw75gz7s6blcu.jpg','cff','','INDIA','2018-11-16T22:48:47.857022800','1','ddf','+918125802142',0,'44444',0),(306,'merchant_305','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1542388946/aza6pymrn5lwnm7gtjjz.jpg','zbz','','INDIA','2018-11-16T22:52:27.716040','1','endnns','+919703848204',0,'66666',0),(307,'merchant_306','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1542388948/sicdicph4jwdtl9z728s.jpg','zbz','','INDIA','2018-11-16T22:52:29.387960400','1','endnns','+919703848204',0,'66666',0),(308,'merchant_307','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1542392316/z9vviyjdcu1p1b58mfdm.jpg','gopi','','INDIA','2018-11-16T23:48:38.216433600','1','ghhjh','+918686091898',0,'0000',0),(309,'merchant_308','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1542392317/y7jviubxbjm4wknyrdyv.jpg','gopi','','INDIA','2018-11-16T23:48:38.278920100','1','ghhjh','+918686091898',0,'0000',0),(326,'merchant_325','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1543654336/cwfofezcqdd0o0bnmkrq.jpg','bsp','','INDIA','2018-12-01T14:22:17.660412','1','hdhdh','+918179968859',0,'2580',0),(327,'merchant_326','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1543654337/i5cvsw7kyry7mdam8sgz.jpg','bsp','','INDIA','2018-12-01T14:22:18.879164300','1','hdhdh','+918179968859',0,'2580',0),(330,'merchant_329','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1543688331/jkvace02uemyzl7yussu.jpg','krishna','','INDIA','2018-12-01T23:48:53.661930900','1','557','+917702278317',0,'16312',0),(331,'merchant_330','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1543688338/bqvesykmrfavqtilgmgo.jpg','krishna','','INDIA','2018-12-01T23:49:02.427558600','1','557','+917702278317',0,'16312',0),(338,'merchant_337','',0.000007500000002380603,-0.00002734375000557065,'http://res.cloudinary.com/locator/image/upload/v1543949982/foeh5bih8ejurwr2nvxj.jpg','Amit k','','INDIA','2018-12-05T00:29:44.084600600','1','5656566','+919871278657',0,'12345',0),(339,'merchant_338','',0.000007500000002380603,-0.00002734375000557065,'http://res.cloudinary.com/locator/image/upload/v1543949987/mfpomvab0muekcrkpu3b.jpg','Amit k','','INDIA','2018-12-05T00:29:47.740788900','1','5656566','+919871278657',0,'12345',0),(344,'merchant_339','',23.050482500000008,72.64701171875,'http://res.cloudinary.com/locator/image/upload/v1544247102/fpnqqd5xyznnhfgcaiub.jpg','mayur','','INDIA','2018-12-08T11:02:08.065258300','1','508','+918200785387',0,'0000',0),(345,'merchant_344','ts5ejh',23.050482500000008,72.64701171875,'http://res.cloudinary.com/locator/image/upload/v1544247128/hesz9t4fyasz0dox86oa.jpg','mayur','','INDIA','2018-12-08T11:02:09.940515600','1','508','+918200785387',0,'0000',0),(346,'merchant_345','ts5ejh',23.050852499999998,72.64523828124997,'http://res.cloudinary.com/locator/image/upload/v1544343106/felwihzh9xxpwnnodd4i.png','bh','','INDIA','2018-12-09T13:41:47.972990300','1','fyh','+918200785387',0,'0000',0),(347,'merchant_346','ts5ejh',23.050852499999998,72.64523828124997,'http://res.cloudinary.com/locator/image/upload/v1544343107/vnbwhkydfcfz8fot2avb.png','bh','','INDIA','2018-12-09T13:41:48.629260600','1','fyh','+918200785387',0,'0000',0),(348,'merchant_347','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1544941722/veezpd7ndtq5fv3vzhv3.jpg','Amit Tiwari','','INDIA','2018-12-16T11:58:44.796680300','1','ch hhhh','+919871278657',0,'0000',0),(349,'merchant_347','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1544941721/fthlkyjxgzb03evv1g7w.jpg','Amit Tiwari','','INDIA','2018-12-16T11:58:44.798525400','1','ch hhhh','+919871278657',0,'0000',0),(350,'merchant_349','tepexv',17.520581,78.3926386,'http://res.cloudinary.com/locator/image/upload/v1545069422/jfmgy2l75vtz7lrbfn7u.jpg','testeer','','INDIA','2018-12-17T23:27:03.407992900','1','hdhjd','+919703848204',0,'2580',0),(351,'merchant_350','tepexv',17.520581,78.3926386,'http://res.cloudinary.com/locator/image/upload/v1545069423/t0udpcnve3fnukabibqj.jpg','testeer','','INDIA','2018-12-17T23:27:03.814236800','1','hdhjd','+919703848204',0,'2580',0),(352,'merchant_351','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1545327635/roiyiqrxzxkos9bo5mzq.jpg','gopi','','INDIA','2018-12-20T23:10:37.020676100','1','gihj','+918179442558',0,'0000',0),(353,'merchant_352','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1545327636/gokgfjoxyydc1qtgbpmt.jpg','gopi','','INDIA','2018-12-20T23:10:37.489650','1','gihj','+918179442558',0,'0000',0),(354,'merchant_353','tepexv',17.5205303,78.3937959,'http://res.cloudinary.com/locator/image/upload/v1545330636/xchcjbjigucxk9kwwzkm.jpg','hemdnd','','INDIA','2018-12-21T00:00:37.985144700','1','jssns','+919703848204',0,'2580',0),(355,'merchant_354','tepexv',17.5205303,78.3937959,'http://res.cloudinary.com/locator/image/upload/v1545330637/gu71flfdddudz8nmp4wy.jpg','hemdnd','','INDIA','2018-12-21T00:00:38.172662400','1','jssns','+919703848204',0,'2580',0),(356,'merchant_355','tsmzx1',25.2339596,75.9041008,'http://res.cloudinary.com/locator/image/upload/v1545556731/b6vknajx3fgt2lmjc1mi.jpg','aktiwari','','INDIA','2018-12-23T14:48:53.315619800','1','rt23','+919871278657',0,'0000',0),(357,'merchant_356','tsmzx1',25.2339596,75.9041008,'http://res.cloudinary.com/locator/image/upload/v1545556766/nhl6b5b4opfz1oocjkmu.jpg','aktiwari','','INDIA','2018-12-23T14:49:27.534343100','1','rt23','+919871278657',0,'0000',0),(358,'merchant_357','tsmzwd',25.238276499999998,75.8766333,'http://res.cloudinary.com/locator/image/upload/v1545557491/czxfcihwkxrlbgtdy6zn.jpg','aktiwari','','INDIA','2018-12-23T15:01:34.393936','1','46452','+919871278657',0,'0000',0),(359,'merchant_358','tsmzwd',25.238276499999998,75.8766333,'http://res.cloudinary.com/locator/image/upload/v1545557493/wbu2wzff9dy9qos3q3yq.jpg','aktiwari','','INDIA','2018-12-23T15:01:34.456467300','1','46452','+919871278657',0,'0000',0),(360,'merchant_359','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1545560929/e6cjzbcpudaswcms3t63.jpg','gopi','','INDIA','2018-12-23T15:58:50.473233','1','vjvji','+918179442558',0,'0000',0),(361,'merchant_360','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1545560930/eelzfopehv68rklpqnyp.jpg','gopi','','INDIA','2018-12-23T15:58:51.629450300','1','vjvji','+918179442558',0,'0000',0),(362,'merchant_361','',25.2339596,75.9041008,'http://res.cloudinary.com/locator/image/upload/v1545561031/gtq3b245m1wohdfbpdl6.jpg','hoping','','INDIA','2018-12-23T16:00:42.067073200','1','gggg','+919871278657',0,'0000',0),(363,'merchant_362','tsmzx1',25.2339596,75.9041008,'http://res.cloudinary.com/locator/image/upload/v1545561050/vjuwtltnhqlxdnl7tlb1.jpg','hoping','','INDIA','2018-12-23T16:00:51.160781900','1','gggg','+919871278657',0,'0000',0),(364,'merchant_363','tepexv',17.5205303,78.3937959,'http://res.cloudinary.com/locator/image/upload/v1545561340/giwozvhdgk6h0hfvwxqr.jpg','tester','','INDIA','2018-12-23T16:05:40.942177900','1','ttt','+919966525464',0,'1234',0),(365,'merchant_364','tepexv',17.5205303,78.3937959,'http://res.cloudinary.com/locator/image/upload/v1545561340/o6ktsgy7tkuqincmzhrd.jpg','tester','','INDIA','2018-12-23T16:05:47.301471800','1','ttt','+919966525464',0,'1234',0),(366,'merchant_365','tdr1wz',12.9597192,77.650594,'http://res.cloudinary.com/locator/image/upload/v1545580034/oziovlryk8r9pelzybvn.jpg','Manipal_exservice_ip','','INDIA','2018-12-23T21:17:16.302290100','1','112','+918686091898',0,'0000',0),(367,'merchant_366','tdr1wz',12.9597192,77.650594,'http://res.cloudinary.com/locator/image/upload/v1545580032/d6scrkjyquunqldzaf3y.png','Manipal_exservice_ip','','INDIA','2018-12-23T21:17:16.380448100','1','112','+918686091898',0,'0000',0),(368,'merchant_367','tdr1wz',12.9597192,77.650594,'http://res.cloudinary.com/locator/image/upload/v1545587609/tga1mdjqa5pfowyrkmtg.png','Manipal_exservice_op','','INDIA','2018-12-23T23:23:32.127445400','1','yu1432','+918179442558',0,'0000',0),(369,'merchant_368','tdr1wz',12.9597192,77.650594,'http://res.cloudinary.com/locator/image/upload/v1545587613/gyvmgjlw0pgjax8t234h.png','Manipal_exservice_op','','INDIA','2018-12-23T23:23:33.752421','1','yu1432','+918179442558',0,'0000',0),(370,'merchant_369','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1545587949/fubo3neqmh09vpouhoda.jpg','gopi','','INDIA','2018-12-23T23:29:10.783858400','1','giguu','+918179442558',0,'0000',0),(371,'merchant_370','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1545587959/lyh4jxgpzwxycjjrag6j.jpg','gopi','','INDIA','2018-12-23T23:29:20.424458100','1','giguu','+918179442558',0,'0000',0),(372,'merchant_371','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1545588001/qftaerws6zsywdfjnb15.jpg','gopi','','INDIA','2018-12-23T23:30:02.580724800','1','fhfyu','+918179442558',0,'0000',0),(373,'merchant_372','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1545588011/xfmcxztwin7jfvrfhnzo.jpg','gopi','','INDIA','2018-12-23T23:30:12.315088400','1','fhfyu','+918179442558',0,'0000',0),(374,'merchant_373','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1545588182/fyofvqmsijcv86ghqexw.jpg','gopi','','INDIA','2018-12-23T23:33:03.252718300','1','vjgu','+918179442558',0,'0000',0),(375,'merchant_374','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1545588229/fusj6lpuljyhjql6otzv.jpg','gjhu','','INDIA','2018-12-23T23:33:50.627641100','1','chhuu','+918179442558',0,'0000',0),(376,'merchant_375','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1545588239/xhgteya1siravqmfg7im.jpg','gjhu','','INDIA','2018-12-23T23:34:00.659098','1','chhuu','+918179442558',0,'0000',0),(377,'merchant_376','tsmzx5',25.241733999999997,75.896709,'http://res.cloudinary.com/locator/image/upload/v1545620275/w1v5js3ye1bj9ao5lsqg.jpg','Amit Tiwari','','INDIA','2018-12-24T08:27:57.455704700','1','675656','+919871278657',0,'0000',0),(378,'merchant_377','tsmzx5',25.241733999999997,75.896709,'http://res.cloudinary.com/locator/image/upload/v1545620278/wfchjseefgt3ebh6rpp9.jpg','Amit Tiwari','','INDIA','2018-12-24T08:27:58.658820400','1','675656','+919871278657',0,'0000',0),(379,'merchant_378','teperz',17.4854393,78.39024049999999,'http://res.cloudinary.com/locator/image/upload/v1545620308/difgcgzwjhlr2xknj7gm.jpg','kiran','','INDIA','2018-12-24T08:28:29.643293400','1','hehdh','+918125802142',0,'1234',0),(380,'merchant_379','teperz',17.4854393,78.39024049999999,'http://res.cloudinary.com/locator/image/upload/v1545620309/iofocoyrise0btlowpbr.jpg','kiran','','INDIA','2018-12-24T08:28:30.174426400','1','hehdh','+918125802142',0,'1234',0),(381,'merchant_380','tsmzx1',25.2339596,75.9041008,'http://res.cloudinary.com/locator/image/upload/v1545621971/cvqnudtshixsonhv1gw3.jpg','Amit Kumar tiwari','','INDIA','2018-12-24T08:56:12.675158600','1','675666','+919871278657',0,'0000',0),(382,'merchant_381','tsmzx1',25.2339596,75.9041008,'http://res.cloudinary.com/locator/image/upload/v1545621977/waqkvwi45dxpcircnxwq.jpg','Amit Kumar tiwari','','INDIA','2018-12-24T08:56:21.237561100','1','675666','+919871278657',0,'0000',0),(383,'merchant_382','tsmzx1',25.2339596,75.9041008,'http://res.cloudinary.com/locator/image/upload/v1545622225/zegteawwy0nrijqe297b.jpg','Amit Kumar Tiwari','','INDIA','2018-12-24T09:00:25.971992800','1','865565','+919871278657',0,'0000',0),(384,'merchant_383','tsmzx1',25.2339596,75.9041008,'http://res.cloudinary.com/locator/image/upload/v1545622229/ipsxjehryoxlfe1pfua3.jpg','Amit Kumar Tiwari','','INDIA','2018-12-24T09:00:29.987620400','1','865565','+919871278657',0,'0000',0),(385,'merchant_384','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1545854580/qxzazq2rertepeejxvmd.jpg','gopi','','INDIA','2018-12-27T01:33:02.143472400','1','bjhj','+919148249424',0,'0000',0),(386,'merchant_385','tdr1z3',12.9706155,77.6691419,'http://res.cloudinary.com/locator/image/upload/v1545854581/nonw5pf97p4llxb0bcrh.jpg','gopi','','INDIA','2018-12-27T01:33:02.440283400','1','bjhj','+919148249424',0,'0000',0),(387,'merchant_386','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1546022631/fkbgw4jsicyvbukxuil4.png','rider','','INDIA','2018-12-29T00:13:53.064385600','1','bbsh','+918125802142',0,'1234',0),(388,'merchant_387','tepexv',17.520904899999998,78.3923999,'http://res.cloudinary.com/locator/image/upload/v1546022633/s2igxaexkmppsmceojaa.png','rider','','INDIA','2018-12-29T00:13:53.861047700','1','bbsh','+918125802142',0,'1234',0);
+/*!40000 ALTER TABLE `merchant` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `merchant_counters`
+--
+
+DROP TABLE IF EXISTS `merchant_counters`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `merchant_counters` (
+  `idmerchant_counters` int(11) NOT NULL AUTO_INCREMENT,
+  `counterid` int(11) NOT NULL,
+  `issuedtoken` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '2',
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`idmerchant_counters`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `merchant_counters`
+--
+
+LOCK TABLES `merchant_counters` WRITE;
+/*!40000 ALTER TABLE `merchant_counters` DISABLE KEYS */;
+/*!40000 ALTER TABLE `merchant_counters` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `merchantlatestversion`
+--
+
+DROP TABLE IF EXISTS `merchantlatestversion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `merchantlatestversion` (
+  `version` int(11) NOT NULL,
+  PRIMARY KEY (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `merchantlatestversion`
+--
+
+LOCK TABLES `merchantlatestversion` WRITE;
+/*!40000 ALTER TABLE `merchantlatestversion` DISABLE KEYS */;
+INSERT INTO `merchantlatestversion` VALUES (5);
+/*!40000 ALTER TABLE `merchantlatestversion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `merchantpoints`
+--
+
+DROP TABLE IF EXISTS `merchantpoints`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `merchantpoints` (
+  `idmerchantpoints` int(11) NOT NULL AUTO_INCREMENT,
+  `merchantid` varchar(128) DEFAULT NULL,
+  `totalpoints` int(10) DEFAULT NULL,
+  `existingpoints` int(10) DEFAULT NULL,
+  `lastaddedpointson` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idmerchantpoints`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `merchantpoints`
+--
+
+LOCK TABLES `merchantpoints` WRITE;
+/*!40000 ALTER TABLE `merchantpoints` DISABLE KEYS */;
+/*!40000 ALTER TABLE `merchantpoints` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `merchantpointsavailed`
+--
+
+DROP TABLE IF EXISTS `merchantpointsavailed`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `merchantpointsavailed` (
+  `idmerchantpointsavailed` int(11) NOT NULL,
+  `merchantid` varchar(128) NOT NULL,
+  `pointsused` int(10) DEFAULT '0',
+  `usedon` varchar(128) DEFAULT '""',
+  PRIMARY KEY (`idmerchantpointsavailed`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `merchantpointsavailed`
+--
+
+LOCK TABLES `merchantpointsavailed` WRITE;
+/*!40000 ALTER TABLE `merchantpointsavailed` DISABLE KEYS */;
+/*!40000 ALTER TABLE `merchantpointsavailed` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `merchantreceipts`
+--
+
+DROP TABLE IF EXISTS `merchantreceipts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `merchantreceipts` (
+  `idmerchantreceipts` int(11) NOT NULL AUTO_INCREMENT,
+  `receiptprefix` varchar(45) NOT NULL,
+  `receiptnumber` int(11) NOT NULL,
+  `receiptsuffix` varchar(45) NOT NULL,
+  PRIMARY KEY (`idmerchantreceipts`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `merchantreceipts`
+--
+
+LOCK TABLES `merchantreceipts` WRITE;
+/*!40000 ALTER TABLE `merchantreceipts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `merchantreceipts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotations`
+--
+
+DROP TABLE IF EXISTS `negotations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotations` (
+  `idnegotations` int(11) NOT NULL AUTO_INCREMENT,
+  `customercontact` varchar(15) NOT NULL,
+  `merchantid` varchar(128) NOT NULL,
+  `geohash` varchar(6) NOT NULL,
+  `minamount` int(4) NOT NULL,
+  `maxamount` int(11) NOT NULL,
+  `DiscountExpectation` int(3) NOT NULL,
+  `ShoppingProbableDates` varchar(45) NOT NULL,
+  `description` varchar(512) DEFAULT NULL,
+  `delivered` int(1) NOT NULL DEFAULT '0',
+  `adnotification` int(11) NOT NULL,
+  PRIMARY KEY (`idnegotations`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotations`
+--
+
+LOCK TABLES `negotations` WRITE;
+/*!40000 ALTER TABLE `negotations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `negotations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotations_tdr1z3`
+--
+
+DROP TABLE IF EXISTS `negotations_tdr1z3`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotations_tdr1z3` (
+  `idnegotations` int(11) NOT NULL AUTO_INCREMENT,
+  `customercontact` varchar(15) NOT NULL,
+  `merchantid` varchar(128) NOT NULL,
+  `geohash` varchar(6) NOT NULL,
+  `minamount` int(4) NOT NULL,
+  `maxamount` int(11) NOT NULL,
+  `DiscountExpectation` int(3) NOT NULL,
+  `ShoppingProbableDates` varchar(45) NOT NULL,
+  `description` varchar(512) DEFAULT NULL,
+  `delivered` int(1) NOT NULL DEFAULT '0',
+  `adnotification` int(11) NOT NULL,
+  PRIMARY KEY (`idnegotations`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotations_tdr1z3`
+--
+
+LOCK TABLES `negotations_tdr1z3` WRITE;
+/*!40000 ALTER TABLE `negotations_tdr1z3` DISABLE KEYS */;
+INSERT INTO `negotations_tdr1z3` VALUES (1,'+918179442558','merchant_73','tdr1z3',500,20,86,'8985','vhjj',0,283),(2,'+918179442558','merchant_73','tdr1z3',20,8,8,'555','gjh',0,283),(3,'+918179442558','merchant_77','tdr1z3',1000,80,50,'8','gjhj',0,284),(4,'+918179442558','merchant_77','tdr1z3',1000,80,50,'8','gjhj',0,284),(5,'+918179442558','merchant_77','tdr1z3',1000,500,80,'8555','gjj',0,287),(6,'+918179442558','merchant_84','tdr1z3',150,2000,21,'from: 13-9-2018, to: 20-9-2018','my',0,288),(7,'+918179442558','merchant_84','tdr1z3',500,5000,20,'from: 13-9-2018, to: 20-9-2018','hjj',0,299),(8,'+918179442558','merchant_84','tdr1z3',2222,9999,50,'from: 13-9-2018, to: 21-9-2018','yy',0,288),(9,'+918179442558','merchant_84','tdr1z3',80,50000,25,'from: 13-9-2018, to: 28-9-2018','hj',0,288),(10,'+918179442558','merchant_84','tdr1z3',500,5000,52,'from: 20-9-2018, to: 28-9-2018','ghu',0,300),(11,'+918179442558','merchant_84','tdr1z3',20,300,25,'from: 30-9-2018, to: 31-9-2018','gh',0,300),(12,'+918179442558','merchant_84','tdr1z3',50,50000,3,'from: 26-9-2018, to: 27-9-2018','hk',0,300),(13,'+918179442558','merchant_87','tdr1z3',50,50000,25,'from: 19-9-2018, to: 26-9-2018','tt',0,311),(14,'+918179442558','merchant_88','tdr1z3',2002,5005,25,'from: 14-9-2018, to: 19-9-2018','fhhh',0,312),(15,'+918179442558','merchant_88','tdr1z3',2222,9999,10,'from: 14-9-2018, to: 26-9-2018','yyhu',0,313),(16,'+918179442558','merchant_88','tdr1z3',200,10000,10,'from: 3-10-2018, to: 17-10-2018','cbcv',0,314),(17,'+918179442558','merchant_89','tdr1z3',500,8000,25,'from: 19-9-2018, to: 27-9-2018','test',0,317),(18,'+918179442558','merchant_89','tdr1z3',2000,20000,10,'from: 19-9-2018, to: 2-10-2018','gh',0,318),(19,'+918179442558','merchant_89','tdr1z3',5000,80000,25,'from: 19-9-2018, to: 28-9-2018','gh',0,318),(20,'+918200785387','merchant_89','tdr1z3',8000,10000,25,'from: 17-9-2018, to: 20-9-2018','test',0,322),(21,'+918179442558','merchant_91','tdr1z3',2896,5000,25,'from: 19-9-2018, to: 27-9-2018','neef',0,323),(22,'+918179442558','merchant_91','tdr1z3',8000,80000,25,'from: 19-9-2018, to: 26-9-2018','my desc',0,324),(23,'+918179442558','merchant_92','tdr1z3',8522,50000,25,'from: 20-9-2018, to: 27-9-2018','hu',0,326),(24,'+918179442558','merchant_92','tdr1z3',8522,50000,20,'from: 20-9-2018, to: 27-9-2018','gest',0,326),(25,'+918179442558','merchant_92','tdr1z3',10000,20000,25,'from: 21-9-2018, to: 1-10-2018','test',0,327),(26,'+918179442558','merchant_105','tdr1z3',8000,50000,25,'from: 25-9-2018, to: 26-9-2018','gj',0,328),(27,'+918179442558','merchant_105','tdr1z3',80000,100000,25,'from: 28-9-2018, to: 31-9-2018','vj',0,330);
+/*!40000 ALTER TABLE `negotations_tdr1z3` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotations_tdr1z4`
+--
+
+DROP TABLE IF EXISTS `negotations_tdr1z4`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotations_tdr1z4` (
+  `idnegotations` int(11) NOT NULL AUTO_INCREMENT,
+  `customercontact` varchar(15) NOT NULL,
+  `merchantid` varchar(128) NOT NULL,
+  `geohash` varchar(6) NOT NULL,
+  `minamount` int(4) NOT NULL,
+  `maxamount` int(11) NOT NULL,
+  `DiscountExpectation` int(3) NOT NULL,
+  `ShoppingProbableDates` varchar(45) NOT NULL,
+  `description` varchar(512) DEFAULT NULL,
+  `delivered` int(1) NOT NULL DEFAULT '0',
+  `adnotification` int(11) NOT NULL,
+  PRIMARY KEY (`idnegotations`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotations_tdr1z4`
+--
+
+LOCK TABLES `negotations_tdr1z4` WRITE;
+/*!40000 ALTER TABLE `negotations_tdr1z4` DISABLE KEYS */;
+INSERT INTO `negotations_tdr1z4` VALUES (1,'+918179442558','merchant_79','tdr1z4',5000,500,55,'555','ghj',0,5),(2,'+918179442558','merchant_79','tdr1z4',8000,80,58,'855','ghh',0,6),(3,'+918179442558','merchant_79','tdr1z4',56666,500,558,'585','ghj',0,7),(4,'+918179442558','merchant_80','tdr1z4',500,60,20,'866','gjhj',0,8),(5,'+918179442558','merchant_80','tdr1z4',500,5000,88,'88','gj',0,9),(6,'+918179442558','merchant_80','tdr1z4',10,800,88,'from: 3-9-2018, to: 26-9-2018','fy',0,10),(7,'+918179442558','merchant_80','tdr1z4',10,50,50,'from: 28-8-2018, to: 29-8-2018','vh',0,10),(8,'+918179442558','merchant_80','tdr1z4',50,1000,58,'from: 18-9-2018, to: 27-9-2018','gh',0,14),(9,'+918179442558','merchant_80','tdr1z4',5000,8000,58,'from: 9-9-2018, to: 10-9-2018','ggh',0,14),(10,'+918179442558','merchant_80','tdr1z4',800,5000,10,'from: 10-9-2018, to: 26-9-2018','cbh',0,15),(11,'+918179442558','merchant_80','tdr1z4',50,2000,88,'from: 18-9-2018, to: 27-9-2018','ggg',0,15),(12,'+918179442558','merchant_80','tdr1z4',99,8888,20,'from: 11-9-2018, to: 27-9-2018','trst',0,16),(13,'+918179442558','merchant_82','tdr1z4',80,8000,58,'from: 11-9-2018, to: 13-9-2018','ghh',0,17),(14,'+918179442558','merchant_82','tdr1z4',5,55,88,'from: 11-9-2018, to: 28-9-2018','gh',0,18),(15,'+918179442558','merchant_82','tdr1z4',80,5888,58,'from: 19-9-2018, to: 28-9-2018','vh',0,22),(16,'+918179442558','merchant_82','tdr1z4',90,800,10,'from: 19-9-2018, to: 27-9-2018','gh',0,25),(17,'+918179442558','merchant_82','tdr1z4',20,2000,25,'from: 13-9-2018, to: 2-10-2018','my ',0,27),(18,'+918179442558','merchant_82','tdr1z4',200000,2000000,15,'from: 13-9-2018, to: 27-9-2018','my details',0,28),(19,'+918179442558','merchant_82','tdr1z4',50,5000,55,'from: 20-9-2018, to: 27-9-2018','ttt',0,28),(20,'+918179442558','merchant_82','tdr1z4',80,50000,52,'from: 13-9-2018, to: 28-9-2018','gjj',0,28);
+/*!40000 ALTER TABLE `negotations_tdr1z4` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotations_tepexv`
+--
+
+DROP TABLE IF EXISTS `negotations_tepexv`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotations_tepexv` (
+  `idnegotations` int(11) NOT NULL AUTO_INCREMENT,
+  `customercontact` varchar(15) NOT NULL,
+  `merchantid` varchar(128) NOT NULL,
+  `geohash` varchar(6) NOT NULL,
+  `minamount` int(4) NOT NULL,
+  `maxamount` int(11) NOT NULL,
+  `DiscountExpectation` int(3) NOT NULL,
+  `ShoppingProbableDates` varchar(45) NOT NULL,
+  `description` varchar(512) DEFAULT NULL,
+  `delivered` int(1) NOT NULL DEFAULT '0',
+  `adnotification` int(11) NOT NULL,
+  PRIMARY KEY (`idnegotations`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotations_tepexv`
+--
+
+LOCK TABLES `negotations_tepexv` WRITE;
+/*!40000 ALTER TABLE `negotations_tepexv` DISABLE KEYS */;
+INSERT INTO `negotations_tepexv` VALUES (1,'+918125802142','merchant_90','tepexv',5,9,2,'from: 16-9-2018, to: 27-9-2018','hjjn',0,1),(2,'+919966525464','merchant_97','tepexv',2,5,22,'from: 19-9-2018, to: 19-9-2018','sbjz',0,3);
+/*!40000 ALTER TABLE `negotations_tepexv` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotations_ts5ejh`
+--
+
+DROP TABLE IF EXISTS `negotations_ts5ejh`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotations_ts5ejh` (
+  `idnegotations` int(11) NOT NULL AUTO_INCREMENT,
+  `customercontact` varchar(15) NOT NULL,
+  `merchantid` varchar(128) NOT NULL,
+  `geohash` varchar(6) NOT NULL,
+  `minamount` int(4) NOT NULL,
+  `maxamount` int(11) NOT NULL,
+  `DiscountExpectation` int(3) NOT NULL,
+  `ShoppingProbableDates` varchar(45) NOT NULL,
+  `description` varchar(512) DEFAULT NULL,
+  `delivered` int(1) NOT NULL DEFAULT '0',
+  `adnotification` int(11) NOT NULL,
+  PRIMARY KEY (`idnegotations`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotations_ts5ejh`
+--
+
+LOCK TABLES `negotations_ts5ejh` WRITE;
+/*!40000 ALTER TABLE `negotations_ts5ejh` DISABLE KEYS */;
+INSERT INTO `negotations_ts5ejh` VALUES (1,'+918200785387','merchant_70','ts5ejh',33,321,65,'from: 8-9-2018, to: 8-9-2018','ffgg',0,1),(2,'+918200785387','merchant_81','ts5ejh',300,500,25,'from: 9-9-2018, to: 18-9-2018','ggg',0,2),(3,'+918200785387','merchant_83','ts5ejh',3000,5000,15,'from: 11-9-2018, to: 12-9-2018','abcd',0,3),(4,'+918200785387','merchant_83','ts5ejh',50000,100000,35,'from: 12-9-2018, to: 27-9-2018','fhhf',0,3),(5,'+918200785387','merchant_81','ts5ejh',3000,5000,15,'from: 13-9-2018, to: 27-9-2018','hello',0,2),(6,'+918200785387','merchant_81','ts5ejh',16000,24000,60,'from: 3-9-2018, to: 6-9-2018','hrlli',0,2),(7,'+918200785387','merchant_83','ts5ejh',650,1250,12,'from: 13-9-2018, to: 27-9-2018','hellllllllo',0,5),(8,'+918179442558','merchant_81','ts5ejh',1,5000,25,'from: 18-9-2018, to: 20-9-2018','fuu',0,2);
+/*!40000 ALTER TABLE `negotations_ts5ejh` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate`
+--
+
+DROP TABLE IF EXISTS `negotiate`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate`
+--
+
+LOCK TABLES `negotiate` WRITE;
+/*!40000 ALTER TABLE `negotiate` DISABLE KEYS */;
+/*!40000 ALTER TABLE `negotiate` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_`
+--
+
+DROP TABLE IF EXISTS `negotiate_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_`
+--
+
+LOCK TABLES `negotiate_` WRITE;
+/*!40000 ALTER TABLE `negotiate_` DISABLE KEYS */;
+INSERT INTO `negotiate_` VALUES (1,-1,'',0,0),(2,-1,'',0,0),(3,-1,'',0,0),(4,-1,'',0,0);
+/*!40000 ALTER TABLE `negotiate_` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_dpr0kj`
+--
+
+DROP TABLE IF EXISTS `negotiate_dpr0kj`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_dpr0kj` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_dpr0kj`
+--
+
+LOCK TABLES `negotiate_dpr0kj` WRITE;
+/*!40000 ALTER TABLE `negotiate_dpr0kj` DISABLE KEYS */;
+/*!40000 ALTER TABLE `negotiate_dpr0kj` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_tdr1rx`
+--
+
+DROP TABLE IF EXISTS `negotiate_tdr1rx`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_tdr1rx` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_tdr1rx`
+--
+
+LOCK TABLES `negotiate_tdr1rx` WRITE;
+/*!40000 ALTER TABLE `negotiate_tdr1rx` DISABLE KEYS */;
+/*!40000 ALTER TABLE `negotiate_tdr1rx` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_tdr1tv`
+--
+
+DROP TABLE IF EXISTS `negotiate_tdr1tv`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_tdr1tv` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_tdr1tv`
+--
+
+LOCK TABLES `negotiate_tdr1tv` WRITE;
+/*!40000 ALTER TABLE `negotiate_tdr1tv` DISABLE KEYS */;
+INSERT INTO `negotiate_tdr1tv` VALUES (1,1,'tdr1tv',0,0);
+/*!40000 ALTER TABLE `negotiate_tdr1tv` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_tdr1v9`
+--
+
+DROP TABLE IF EXISTS `negotiate_tdr1v9`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_tdr1v9` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_tdr1v9`
+--
+
+LOCK TABLES `negotiate_tdr1v9` WRITE;
+/*!40000 ALTER TABLE `negotiate_tdr1v9` DISABLE KEYS */;
+/*!40000 ALTER TABLE `negotiate_tdr1v9` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_tdr1xp`
+--
+
+DROP TABLE IF EXISTS `negotiate_tdr1xp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_tdr1xp` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_tdr1xp`
+--
+
+LOCK TABLES `negotiate_tdr1xp` WRITE;
+/*!40000 ALTER TABLE `negotiate_tdr1xp` DISABLE KEYS */;
+INSERT INTO `negotiate_tdr1xp` VALUES (1,1,'tdr1xp',0,0);
+/*!40000 ALTER TABLE `negotiate_tdr1xp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_tdr1z2`
+--
+
+DROP TABLE IF EXISTS `negotiate_tdr1z2`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_tdr1z2` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_tdr1z2`
+--
+
+LOCK TABLES `negotiate_tdr1z2` WRITE;
+/*!40000 ALTER TABLE `negotiate_tdr1z2` DISABLE KEYS */;
+/*!40000 ALTER TABLE `negotiate_tdr1z2` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_tdr1z3`
+--
+
+DROP TABLE IF EXISTS `negotiate_tdr1z3`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_tdr1z3` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_tdr1z3`
+--
+
+LOCK TABLES `negotiate_tdr1z3` WRITE;
+/*!40000 ALTER TABLE `negotiate_tdr1z3` DISABLE KEYS */;
+INSERT INTO `negotiate_tdr1z3` VALUES (1,279,'tdr1z3',1,50),(2,280,'tdr1z3',0,0),(3,281,'tdr1z3',1,8000),(4,282,'tdr1z3',0,0),(5,283,'tdr1z3',1,80000),(6,284,'tdr1z3',1,5000),(7,285,'tdr1z3',0,0),(8,286,'tdr1z3',0,0),(9,287,'tdr1z3',1,6000),(10,288,'tdr1z3',1,100),(11,289,'tdr1z3',0,0),(12,290,'tdr1z3',0,0),(13,291,'tdr1z3',0,0),(14,292,'tdr1z3',0,0),(15,293,'tdr1z3',0,0),(16,294,'tdr1z3',0,0),(17,295,'tdr1z3',0,0),(18,296,'tdr1z3',0,0),(19,297,'tdr1z3',0,0),(20,298,'tdr1z3',0,0),(21,299,'tdr1z3',1,8000),(22,300,'tdr1z3',1,8000),(23,301,'tdr1z3',1,5000),(24,302,'tdr1z3',0,0),(25,303,'tdr1z3',0,0),(26,304,'tdr1z3',0,0),(27,305,'tdr1z3',0,0),(28,306,'tdr1z3',0,0),(29,307,'tdr1z3',0,0),(30,308,'tdr1z3',0,0),(31,309,'tdr1z3',0,0),(32,310,'tdr1z3',0,0),(33,311,'tdr1z3',1,5555),(34,312,'tdr1z3',1,8000),(35,313,'tdr1z3',1,6565),(36,314,'tdr1z3',1,2555),(37,315,'tdr1z3',1,600),(38,316,'tdr1z3',1,80000),(39,317,'tdr1z3',1,5000),(40,318,'tdr1z3',1,5000),(41,319,'tdr1z3',1,5000),(42,320,'tdr1z3',1,8000),(43,321,'tdr1z3',0,0),(44,322,'tdr1z3',1,8000),(45,323,'tdr1z3',1,2896),(46,324,'tdr1z3',1,8000),(47,325,'tdr1z3',0,0),(48,326,'tdr1z3',1,8522),(49,327,'tdr1z3',1,1000),(50,328,'tdr1z3',1,8000),(51,329,'tdr1z3',0,0),(52,330,'tdr1z3',1,80000),(53,331,'tdr1z3',0,0),(54,332,'tdr1z3',0,0),(55,333,'tdr1z3',0,0),(56,334,'tdr1z3',0,0),(57,335,'tdr1z3',0,0),(58,336,'tdr1z3',0,0),(59,337,'tdr1z3',0,0),(60,338,'tdr1z3',0,0),(61,339,'tdr1z3',0,0),(62,340,'tdr1z3',0,0),(63,341,'tdr1z3',0,0),(64,342,'tdr1z3',0,0),(65,343,'tdr1z3',0,0),(66,344,'tdr1z3',0,0),(67,345,'tdr1z3',0,0),(68,346,'tdr1z3',0,0),(69,347,'tdr1z3',0,0),(70,348,'tdr1z3',0,0),(71,349,'tdr1z3',0,0),(72,351,'tdr1z3',0,0),(73,352,'tdr1z3',0,0),(74,353,'tdr1z3',0,0),(75,354,'tdr1z3',0,0),(76,355,'tdr1z3',0,0),(77,356,'tdr1z3',0,0),(78,357,'tdr1z3',0,0),(79,358,'tdr1z3',0,0),(80,359,'tdr1z3',0,0),(81,360,'tdr1z3',0,0),(82,361,'tdr1z3',0,0);
+/*!40000 ALTER TABLE `negotiate_tdr1z3` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_tdr1z4`
+--
+
+DROP TABLE IF EXISTS `negotiate_tdr1z4`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_tdr1z4` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_tdr1z4`
+--
+
+LOCK TABLES `negotiate_tdr1z4` WRITE;
+/*!40000 ALTER TABLE `negotiate_tdr1z4` DISABLE KEYS */;
+INSERT INTO `negotiate_tdr1z4` VALUES (1,5,'tdr1z4',1,5523),(2,6,'tdr1z4',1,8000),(3,7,'tdr1z4',1,8566),(4,8,'tdr1z4',1,6000),(5,9,'tdr1z4',1,9000),(6,10,'tdr1z4',1,85556),(7,11,'tdr1z4',1,800),(8,12,'tdr1z4',1,800),(9,13,'tdr1z4',0,0),(10,14,'tdr1z4',1,800),(11,15,'tdr1z4',1,8000),(12,16,'tdr1z4',1,6000),(13,17,'tdr1z4',1,5888),(14,18,'tdr1z4',1,8000),(15,19,'tdr1z4',1,6000),(16,20,'tdr1z4',1,6000),(17,21,'tdr1z4',1,8050),(18,22,'tdr1z4',1,8000),(19,23,'tdr1z4',0,0),(20,24,'tdr1z4',1,800),(21,25,'tdr1z4',1,80),(22,26,'tdr1z4',0,0),(23,27,'tdr1z4',1,2525),(24,28,'tdr1z4',1,200000);
+/*!40000 ALTER TABLE `negotiate_tdr1z4` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_tdr1zj`
+--
+
+DROP TABLE IF EXISTS `negotiate_tdr1zj`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_tdr1zj` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_tdr1zj`
+--
+
+LOCK TABLES `negotiate_tdr1zj` WRITE;
+/*!40000 ALTER TABLE `negotiate_tdr1zj` DISABLE KEYS */;
+/*!40000 ALTER TABLE `negotiate_tdr1zj` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_tdr1zv`
+--
+
+DROP TABLE IF EXISTS `negotiate_tdr1zv`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_tdr1zv` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_tdr1zv`
+--
+
+LOCK TABLES `negotiate_tdr1zv` WRITE;
+/*!40000 ALTER TABLE `negotiate_tdr1zv` DISABLE KEYS */;
+/*!40000 ALTER TABLE `negotiate_tdr1zv` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_tdr3bj`
+--
+
+DROP TABLE IF EXISTS `negotiate_tdr3bj`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_tdr3bj` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_tdr3bj`
+--
+
+LOCK TABLES `negotiate_tdr3bj` WRITE;
+/*!40000 ALTER TABLE `negotiate_tdr3bj` DISABLE KEYS */;
+/*!40000 ALTER TABLE `negotiate_tdr3bj` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_tepexv`
+--
+
+DROP TABLE IF EXISTS `negotiate_tepexv`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_tepexv` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_tepexv`
+--
+
+LOCK TABLES `negotiate_tepexv` WRITE;
+/*!40000 ALTER TABLE `negotiate_tepexv` DISABLE KEYS */;
+INSERT INTO `negotiate_tepexv` VALUES (1,1,'tepexv',1,5),(2,2,'tepexv',0,0),(3,3,'tepexv',1,2),(4,4,'tepexv',0,0),(5,5,'tepexv',0,0),(6,6,'tepexv',0,0),(7,7,'tepexv',0,0),(8,8,'tepexv',0,0),(9,9,'tepexv',0,0),(10,10,'tepexv',1,0),(11,11,'tepexv',0,0),(12,13,'tepexv',0,0),(13,14,'tepexv',0,0),(14,15,'tepexv',0,0),(15,16,'tepexv',0,0),(16,17,'tepexv',0,0);
+/*!40000 ALTER TABLE `negotiate_tepexv` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_tepfc8`
+--
+
+DROP TABLE IF EXISTS `negotiate_tepfc8`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_tepfc8` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_tepfc8`
+--
+
+LOCK TABLES `negotiate_tepfc8` WRITE;
+/*!40000 ALTER TABLE `negotiate_tepfc8` DISABLE KEYS */;
+INSERT INTO `negotiate_tepfc8` VALUES (1,1,'tepfc8',0,0);
+/*!40000 ALTER TABLE `negotiate_tepfc8` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_tf8f5c`
+--
+
+DROP TABLE IF EXISTS `negotiate_tf8f5c`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_tf8f5c` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_tf8f5c`
+--
+
+LOCK TABLES `negotiate_tf8f5c` WRITE;
+/*!40000 ALTER TABLE `negotiate_tf8f5c` DISABLE KEYS */;
+INSERT INTO `negotiate_tf8f5c` VALUES (1,1,'tf8f5c',0,0);
+/*!40000 ALTER TABLE `negotiate_tf8f5c` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_ts5ejh`
+--
+
+DROP TABLE IF EXISTS `negotiate_ts5ejh`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_ts5ejh` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_ts5ejh`
+--
+
+LOCK TABLES `negotiate_ts5ejh` WRITE;
+/*!40000 ALTER TABLE `negotiate_ts5ejh` DISABLE KEYS */;
+INSERT INTO `negotiate_ts5ejh` VALUES (1,2,'ts5ejh',1,1),(2,3,'ts5ejh',1,5),(3,4,'ts5ejh',1,5),(4,5,'ts5ejh',1,8000),(5,6,'ts5ejh',1,5),(6,7,'ts5ejh',1,5),(7,8,'ts5ejh',1,2),(8,9,'ts5ejh',1,5),(9,10,'ts5ejh',1,5),(10,11,'ts5ejh',1,8),(11,12,'ts5ejh',0,0);
+/*!40000 ALTER TABLE `negotiate_ts5ejh` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_ts5ejj`
+--
+
+DROP TABLE IF EXISTS `negotiate_ts5ejj`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_ts5ejj` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_ts5ejj`
+--
+
+LOCK TABLES `negotiate_ts5ejj` WRITE;
+/*!40000 ALTER TABLE `negotiate_ts5ejj` DISABLE KEYS */;
+/*!40000 ALTER TABLE `negotiate_ts5ejj` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_tsmzqq`
+--
+
+DROP TABLE IF EXISTS `negotiate_tsmzqq`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_tsmzqq` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_tsmzqq`
+--
+
+LOCK TABLES `negotiate_tsmzqq` WRITE;
+/*!40000 ALTER TABLE `negotiate_tsmzqq` DISABLE KEYS */;
+INSERT INTO `negotiate_tsmzqq` VALUES (1,1,'tsmzqq',0,0);
+/*!40000 ALTER TABLE `negotiate_tsmzqq` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_tsmzwc`
+--
+
+DROP TABLE IF EXISTS `negotiate_tsmzwc`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_tsmzwc` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_tsmzwc`
+--
+
+LOCK TABLES `negotiate_tsmzwc` WRITE;
+/*!40000 ALTER TABLE `negotiate_tsmzwc` DISABLE KEYS */;
+INSERT INTO `negotiate_tsmzwc` VALUES (1,1,'tsmzwc',0,0),(2,2,'tsmzwc',0,0);
+/*!40000 ALTER TABLE `negotiate_tsmzwc` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_tsvbuw`
+--
+
+DROP TABLE IF EXISTS `negotiate_tsvbuw`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_tsvbuw` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_tsvbuw`
+--
+
+LOCK TABLES `negotiate_tsvbuw` WRITE;
+/*!40000 ALTER TABLE `negotiate_tsvbuw` DISABLE KEYS */;
+INSERT INTO `negotiate_tsvbuw` VALUES (1,1,'tsvbuw',0,0);
+/*!40000 ALTER TABLE `negotiate_tsvbuw` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_ttngjn`
+--
+
+DROP TABLE IF EXISTS `negotiate_ttngjn`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_ttngjn` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_ttngjn`
+--
+
+LOCK TABLES `negotiate_ttngjn` WRITE;
+/*!40000 ALTER TABLE `negotiate_ttngjn` DISABLE KEYS */;
+INSERT INTO `negotiate_ttngjn` VALUES (1,1,'ttngjn',0,0);
+/*!40000 ALTER TABLE `negotiate_ttngjn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiate_ttqwg4`
+--
+
+DROP TABLE IF EXISTS `negotiate_ttqwg4`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiate_ttqwg4` (
+  `idnegotiate` int(11) NOT NULL AUTO_INCREMENT,
+  `adId` int(11) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `cannegotiate` int(1) NOT NULL DEFAULT '0',
+  `minamount` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idnegotiate`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiate_ttqwg4`
+--
+
+LOCK TABLES `negotiate_ttqwg4` WRITE;
+/*!40000 ALTER TABLE `negotiate_ttqwg4` DISABLE KEYS */;
+INSERT INTO `negotiate_ttqwg4` VALUES (1,350,'ttqwg4',0,0),(2,1,'ttqwg4',0,0);
+/*!40000 ALTER TABLE `negotiate_ttqwg4` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiationsresponse`
+--
+
+DROP TABLE IF EXISTS `negotiationsresponse`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiationsresponse` (
+  `idnegotiationsresponse` int(11) NOT NULL AUTO_INCREMENT,
+  `idnegotiations` int(11) NOT NULL,
+  `customercontact` varchar(15) NOT NULL,
+  `merchantid` varchar(128) NOT NULL,
+  `geohash` varchar(6) NOT NULL,
+  `minamount` int(11) DEFAULT NULL,
+  `maxamount` int(11) DEFAULT NULL,
+  `Discount` int(11) NOT NULL DEFAULT '0',
+  `ShoppingallowedDates` varchar(512) DEFAULT NULL,
+  `advanceNeed` int(11) DEFAULT NULL,
+  `description` varchar(512) DEFAULT NULL,
+  `negotiationsresponse` int(1) NOT NULL DEFAULT '0',
+  `respondedon` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `notificationid` int(11) NOT NULL,
+  PRIMARY KEY (`idnegotiationsresponse`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiationsresponse`
+--
+
+LOCK TABLES `negotiationsresponse` WRITE;
+/*!40000 ALTER TABLE `negotiationsresponse` DISABLE KEYS */;
+/*!40000 ALTER TABLE `negotiationsresponse` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiationsresponse_tdr1z3`
+--
+
+DROP TABLE IF EXISTS `negotiationsresponse_tdr1z3`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiationsresponse_tdr1z3` (
+  `idnegotiationsresponse` int(11) NOT NULL AUTO_INCREMENT,
+  `idnegotiations` int(11) NOT NULL,
+  `customercontact` varchar(15) NOT NULL,
+  `merchantid` varchar(128) NOT NULL,
+  `geohash` varchar(6) NOT NULL,
+  `minamount` int(11) DEFAULT NULL,
+  `maxamount` int(11) DEFAULT NULL,
+  `Discount` int(11) NOT NULL DEFAULT '0',
+  `ShoppingallowedDates` varchar(512) DEFAULT NULL,
+  `advanceNeed` int(11) DEFAULT NULL,
+  `description` varchar(512) DEFAULT NULL,
+  `negotiationsresponse` int(1) NOT NULL DEFAULT '0',
+  `respondedon` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `notificationid` int(11) NOT NULL,
+  PRIMARY KEY (`idnegotiationsresponse`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiationsresponse_tdr1z3`
+--
+
+LOCK TABLES `negotiationsresponse_tdr1z3` WRITE;
+/*!40000 ALTER TABLE `negotiationsresponse_tdr1z3` DISABLE KEYS */;
+INSERT INTO `negotiationsresponse_tdr1z3` VALUES (1,6,'+918179442558','merchant_84','tdr1z3',150,2000,21,'dumy',1000,'my',1,'2018-10-12 09:41:52',288),(2,6,'+918179442558','merchant_84','tdr1z3',2000,20000,50,'from: 19-9-2018, to: 27-9-2018',0,'50',3,'2018-10-12 11:28:43',288),(3,7,'+918179442558','merchant_84','tdr1z3',500,5000,20,'dumy',800,'hjj',1,'2018-10-12 21:48:20',299),(4,12,'+918179442558','merchant_84','tdr1z3',50,50000,3,'dumy',1000,'hk',1,'2018-10-13 01:02:23',300),(5,11,'+918179442558','merchant_84','tdr1z3',20,300,25,'dumy',8000,'gh',1,'2018-10-13 01:02:40',300),(6,9,'+918179442558','merchant_84','tdr1z3',80,50000,25,'dumy',5555,'hj',1,'2018-10-13 01:02:52',288),(7,13,'+918179442558','merchant_87','tdr1z3',50,50000,25,'dumy',500,'tt',1,'2018-10-13 21:46:01',311),(8,14,'+918179442558','merchant_88','tdr1z3',2002,5005,25,'dumy',500,'fhhh',1,'2018-10-13 22:30:26',312),(9,15,'+918179442558','merchant_88','tdr1z3',2222,9999,10,'dumy',8888,'yyhu',1,'2018-10-13 22:32:29',313),(10,16,'+918179442558','merchant_88','tdr1z3',200,10000,10,'dumy',500,'cbcv',1,'2018-10-13 22:42:32',314),(11,17,'+918179442558','merchant_89','tdr1z3',500,8000,25,'dumy',5000,'test',1,'2018-10-15 10:33:48',317),(12,17,'+918179442558','merchant_89','tdr1z3',500,8000,25,'dumy',0,'test',1,'2018-10-15 16:08:51',317),(13,17,'+918179442558','merchant_89','tdr1z3',500,8000,25,'dumy',200000,'test',1,'2018-10-17 00:42:54',317),(14,21,'+918179442558','merchant_91','tdr1z3',2896,5000,25,'dumy',8000,'neef',1,'2018-10-17 18:50:21',323),(15,23,'+918179442558','merchant_92','tdr1z3',500,5000,10,'from: 21-9-2018, to: 23-9-2018',0,'10',3,'2018-10-19 19:23:08',326),(16,25,'+918179442558','merchant_92','tdr1z3',10000,20000,25,'dumy',25,'test',1,'2018-10-20 01:22:50',327),(17,26,'+918179442558','merchant_105','tdr1z3',8000,50000,25,'dumy',500,'gj',1,'2018-10-24 17:10:01',328),(18,27,'+918179442558','merchant_105','tdr1z3',2000,50000,20,'from: 28-9-2018, to: 31-9-2018',0,'20',3,'2018-10-27 18:50:05',330),(19,27,'+918179442558','merchant_105','tdr1z3',80000,100000,25,'dumy',88000,'vj',1,'2018-10-27 18:50:46',330);
+/*!40000 ALTER TABLE `negotiationsresponse_tdr1z3` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiationsresponse_tdr1z4`
+--
+
+DROP TABLE IF EXISTS `negotiationsresponse_tdr1z4`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiationsresponse_tdr1z4` (
+  `idnegotiationsresponse` int(11) NOT NULL AUTO_INCREMENT,
+  `idnegotiations` int(11) NOT NULL,
+  `customercontact` varchar(15) NOT NULL,
+  `merchantid` varchar(128) NOT NULL,
+  `geohash` varchar(6) NOT NULL,
+  `minamount` int(11) DEFAULT NULL,
+  `maxamount` int(11) DEFAULT NULL,
+  `Discount` int(11) NOT NULL DEFAULT '0',
+  `ShoppingallowedDates` varchar(512) DEFAULT NULL,
+  `advanceNeed` int(11) DEFAULT NULL,
+  `description` varchar(512) DEFAULT NULL,
+  `negotiationsresponse` int(1) NOT NULL DEFAULT '0',
+  `respondedon` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `notificationid` int(11) NOT NULL,
+  PRIMARY KEY (`idnegotiationsresponse`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiationsresponse_tdr1z4`
+--
+
+LOCK TABLES `negotiationsresponse_tdr1z4` WRITE;
+/*!40000 ALTER TABLE `negotiationsresponse_tdr1z4` DISABLE KEYS */;
+INSERT INTO `negotiationsresponse_tdr1z4` VALUES (1,13,'+918179442558','merchant_82','tdr1z4',80,8000,58,'dumy',8000,'ghh',1,'2018-10-11 01:21:50',17),(2,13,'+918179442558','merchant_82','tdr1z4',80,8000,58,'dumy',1000,'ghh',1,'2018-10-11 12:02:17',17),(3,16,'+918179442558','merchant_82','tdr1z4',90,800,10,'dumy',8000,'gh',1,'2018-10-11 21:08:21',25),(4,16,'+918179442558','merchant_82','tdr1z4',90,800,10,'dumy',8000,'gh',1,'2018-10-11 21:11:41',25),(5,15,'+918179442558','merchant_82','tdr1z4',80,5888,58,'dumy',50000,'vh',1,'2018-10-12 09:08:18',22);
+/*!40000 ALTER TABLE `negotiationsresponse_tdr1z4` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiationsresponse_tepexv`
+--
+
+DROP TABLE IF EXISTS `negotiationsresponse_tepexv`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiationsresponse_tepexv` (
+  `idnegotiationsresponse` int(11) NOT NULL AUTO_INCREMENT,
+  `idnegotiations` int(11) NOT NULL,
+  `customercontact` varchar(15) NOT NULL,
+  `merchantid` varchar(128) NOT NULL,
+  `geohash` varchar(6) NOT NULL,
+  `minamount` int(11) DEFAULT NULL,
+  `maxamount` int(11) DEFAULT NULL,
+  `Discount` int(11) NOT NULL DEFAULT '0',
+  `ShoppingallowedDates` varchar(512) DEFAULT NULL,
+  `advanceNeed` int(11) DEFAULT NULL,
+  `description` varchar(512) DEFAULT NULL,
+  `negotiationsresponse` int(1) NOT NULL DEFAULT '0',
+  `respondedon` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `notificationid` int(11) NOT NULL,
+  PRIMARY KEY (`idnegotiationsresponse`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiationsresponse_tepexv`
+--
+
+LOCK TABLES `negotiationsresponse_tepexv` WRITE;
+/*!40000 ALTER TABLE `negotiationsresponse_tepexv` DISABLE KEYS */;
+INSERT INTO `negotiationsresponse_tepexv` VALUES (1,1,'+918125802142','merchant_90','tepexv',5,9,2,'dumy',0,'hjjn',1,'2018-10-16 00:36:10',1),(2,2,'+919966525464','merchant_97','tepexv',2,5,22,'dumy',50,'sbjz',1,'2018-10-21 23:24:55',3),(3,2,'+919966525464','merchant_97','tepexv',2,5,22,'dumy',50,'sbjz',1,'2018-10-21 23:26:42',3);
+/*!40000 ALTER TABLE `negotiationsresponse_tepexv` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `negotiationsresponse_ts5ejh`
+--
+
+DROP TABLE IF EXISTS `negotiationsresponse_ts5ejh`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `negotiationsresponse_ts5ejh` (
+  `idnegotiationsresponse` int(11) NOT NULL AUTO_INCREMENT,
+  `idnegotiations` int(11) NOT NULL,
+  `customercontact` varchar(15) NOT NULL,
+  `merchantid` varchar(128) NOT NULL,
+  `geohash` varchar(6) NOT NULL,
+  `minamount` int(11) DEFAULT NULL,
+  `maxamount` int(11) DEFAULT NULL,
+  `Discount` int(11) NOT NULL DEFAULT '0',
+  `ShoppingallowedDates` varchar(512) DEFAULT NULL,
+  `advanceNeed` int(11) DEFAULT NULL,
+  `description` varchar(512) DEFAULT NULL,
+  `negotiationsresponse` int(1) NOT NULL DEFAULT '0',
+  `respondedon` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `notificationid` int(11) NOT NULL,
+  PRIMARY KEY (`idnegotiationsresponse`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `negotiationsresponse_ts5ejh`
+--
+
+LOCK TABLES `negotiationsresponse_ts5ejh` WRITE;
+/*!40000 ALTER TABLE `negotiationsresponse_ts5ejh` DISABLE KEYS */;
+INSERT INTO `negotiationsresponse_ts5ejh` VALUES (1,2,'+918200785387','','',300,500,25,'dumy',50,'ggg',1,'2018-10-11 00:22:40',2),(2,2,'+918200785387','','',300,500,25,'dumy',20,'ggg',1,'2018-10-11 00:24:51',2),(3,2,'+918200785387','','',7000,8000,50,'from: 11-9-2018, to: 27-9-2018',0,'50',3,'2018-10-11 00:26:59',2),(4,2,'+918200785387','merchant_81','ts5ejh',300,500,25,'dumy',0,'ggg',1,'2018-10-11 00:30:39',2),(5,3,'+918200785387','merchant_83','ts5ejh',3000,5000,15,'dumy',2000,'abcd',1,'2018-10-11 23:14:13',3),(6,4,'+918200785387','merchant_83','ts5ejh',50000,100000,35,'dumy',500,'fhhf',1,'2018-10-11 23:14:37',3),(7,3,'+918200785387','merchant_83','ts5ejh',3000,5000,15,'dumy',900,'abcd',1,'2018-10-13 11:44:23',3),(8,7,'+918200785387','merchant_83','ts5ejh',650,1250,12,'dumy',400,'hellllllllo',1,'2018-10-13 11:53:36',5);
+/*!40000 ALTER TABLE `negotiationsresponse_ts5ejh` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `offerreach`
+--
+
+DROP TABLE IF EXISTS `offerreach`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `offerreach` (
+  `idofferreach` int(11) NOT NULL AUTO_INCREMENT,
+  `merchantId` varchar(128) NOT NULL,
+  `offercode` varchar(6) NOT NULL,
+  `reached` int(6) NOT NULL DEFAULT '0',
+  `viewed` int(6) NOT NULL DEFAULT '0',
+  `utilized` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idofferreach`)
+) ENGINE=InnoDB AUTO_INCREMENT=384 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `offerreach`
+--
+
+LOCK TABLES `offerreach` WRITE;
+/*!40000 ALTER TABLE `offerreach` DISABLE KEYS */;
+INSERT INTO `offerreach` VALUES (1,'1','1',1,1,1),(2,'merchant_0','adv',0,0,0),(3,'merchant_0','offer',0,0,0),(4,'merchant_0','5655',0,0,0),(5,'merchant_0','upload',0,0,0),(6,'merchant_0','myapp',0,0,0),(7,'merchant_21','saree',0,0,0),(8,'merchant_21','hnshd ',0,0,0),(9,'merchant_23','saree',0,0,0),(10,'merchant_23','06',0,0,0),(11,'merchant_23','07',0,0,0),(12,'merchant_23','08',0,0,0),(13,'merchant_35','delhi',0,0,0),(14,'merchant_23','09',0,0,0),(15,'merchant_23','10',0,0,0),(16,'merchant_35','andhra',0,0,0),(17,'merchant_36','myoffe',0,0,0),(18,'merchant_37','123456',0,0,0),(19,'merchant_39','Myoffe',0,0,0),(20,'merchant_40','46566',0,0,0),(21,'merchant_41','Hdb',0,0,0),(22,'merchant_43','',0,0,0),(23,'merchant_44','',15,0,0),(24,'merchant_42','',0,0,0),(25,'merchant_42','56748',0,0,0),(26,'merchant_42','myoffe',0,0,0),(27,'merchant_45','try',0,0,0),(28,'merchant_45','roti',0,0,0),(29,'merchant_45','6666',0,0,0),(30,'merchant_45','geet',0,0,0),(31,'merchant_44','bed sh',0,0,0),(32,'merchant_47','test',0,0,0),(33,'merchant_45','gjhj g',0,0,0),(34,'merchant_45','ygh',0,0,0),(35,'merchant_45','677',0,0,0),(36,'merchant_47','vrtest',0,0,0),(37,'merchant_51','govrcl',0,0,0),(38,'merchant_51','red',0,0,0),(39,'merchant_52','cc',0,0,0),(40,'merchant_52','fggg',0,0,0),(41,'merchant_52','vh',0,0,0),(42,'merchant_52','fnn',0,0,0),(43,'merchant_45','food',0,0,0),(44,'merchant_52','code',0,0,0),(45,'merchant_53','ghhh',0,0,0),(46,'merchant_58','3dwal',0,0,0),(47,'merchant_58','3d2wl',0,0,0),(48,'merchant_58','coleh',0,0,0),(49,'merchant_57','issues',0,0,0),(50,'merchant_60','tytt',0,0,0),(51,'merchant_57','loc',0,0,0),(52,'merchant_57','offers',0,0,0),(53,'merchant_57','gopi',0,0,0),(54,'merchant_44','godse',0,0,0),(55,'merchant_57','sellin',0,0,0),(56,'merchant_57','gh',0,0,0),(57,'merchant_57','ghj',0,0,0),(58,'merchant_57','gjj h',0,0,0),(59,'merchant_57','gj hj',0,0,0),(60,'merchant_44','vada',15,0,0),(61,'merchant_44','gh',15,0,0),(62,'merchant_44','yuty',0,0,0),(63,'merchant_44','gg',0,0,0),(64,'merchant_44','hh',0,0,0),(65,'merchant_44','hhh',0,0,0),(66,'merchant_52','goldnn',0,0,0),(67,'merchant_44','timeto',0,0,0),(68,'merchant_44','yiu',0,0,0),(69,'merchant_57','5656',1,0,0),(70,'merchant_57','mypic ',1,0,0),(71,'merchant_57','ghh',1,0,0),(72,'merchant_57','ads',142,0,0),(73,'merchant_57','tiffin',1,0,0),(74,'merchant_57','hjh',2,0,0),(75,'merchant_44','hj',2,0,0),(76,'merchant_44','gala',2,0,0),(77,'merchant_44','yuyy7',2,0,0),(78,'merchant_44','bird',2,0,0),(79,'merchant_44','god',3766,0,0),(80,'merchant_44','gjj',2,0,0),(81,'merchant_44','again',2,0,0),(82,'merchant_44','godaga',2,0,0),(83,'merchant_44','birdag',2,0,0),(84,'merchant_44','vada',15,0,0),(85,'merchant_44','mycard',4,0,0),(86,'merchant_44','qr',4,0,0),(87,'merchant_44','offer',4,0,0),(88,'merchant_44','offer1',4,0,0),(89,'merchant_44','galaa',4,0,0),(90,'merchant_44','ads',4,0,0),(91,'merchant_44','ghh',4,0,0),(92,'merchant_44','fjj',4,0,0),(93,'merchant_44','gy',4,0,0),(94,'merchant_44','ggg',127,0,0),(95,'merchant_44','fler',4,0,0),(96,'merchant_44','ggg',127,0,0),(97,'merchant_44','ad',4,0,0),(98,'merchant_44','god',3766,0,0),(99,'merchant_44','polics',4,0,0),(100,'merchant_44','vadaa',4,0,0),(101,'merchant_44','god',3766,0,0),(102,'merchant_44','gk',4,0,0),(103,'merchant_44','gh',15,0,0),(104,'merchant_44','',15,0,0),(105,'merchant_57','55',4,0,0),(106,'merchant_57','murLi',4,0,0),(107,'merchant_57','yy677',4,0,0),(108,'merchant_57','ads',142,0,0),(109,'merchant_57','yuu',4,0,0),(110,'merchant_57','imgs',4,0,0),(111,'merchant_57','doc',4,0,0),(112,'merchant_44','card',4,0,0),(113,'merchant_44','667',4,0,0),(114,'merchant_44','viii',4,0,0),(115,'merchant_44','ogg',4,0,0),(116,'merchant_57','ad',211,0,0),(117,'merchant_57','qrcode',4,0,0),(118,'merchant_57','chk',3,0,0),(119,'merchant_57','ggg',3,0,0),(120,'merchant_57','yy',3,0,0),(121,'merchant_57','gg',3,0,0),(122,'merchant_57','gruha',3,0,0),(123,'merchant_57','',474555362,0,0),(124,'merchant_57','yyyy',3,0,0),(125,'merchant_57','vr',3,0,0),(126,'merchant_53','chinni',31,0,0),(127,'merchant_53','more',3,0,0),(128,'merchant_57','778',3,0,0),(129,'merchant_57','chinni',9,0,0),(130,'merchant_57','',474555362,0,0),(131,'merchant_44','meh',3,0,0),(132,'merchant_53','chinni',31,0,0),(133,'merchant_57','',474555362,0,0),(134,'merchant_53','',382,0,0),(135,'merchant_53','',382,0,0),(136,'merchant_53','gg',2,0,0),(137,'merchant_53','',382,0,0),(138,'merchant_44','ooo',2,0,0),(139,'merchant_44','inkoti',2,0,0),(140,'merchant_53','ghh',11,0,0),(141,'merchant_53','ghh',11,0,0),(142,'merchant_57','y678',1,0,0),(143,'merchant_57','check',1,0,0),(144,'merchant_57','676',1,0,0),(145,'merchant_57','chinni',9,0,0),(146,'merchant_57','chinni',9,0,0),(147,'merchant_57','card',1,0,0),(148,'merchant_57','',474555362,0,0),(149,'merchant_57','6777',1,0,0),(150,'merchant_57','test',79,0,0),(151,'merchant_61','ofcr',12,0,0),(152,'merchant_57','ofrcod',10,0,0),(153,'merchant_62','ghh',10,0,0),(154,'merchant_64','',14,0,0),(155,'merchant_57','ad',211,0,0),(156,'merchant_57','',474555362,0,0),(157,'merchant_57','tuu,',2,0,0),(158,'merchant_57','gala',2,0,0),(159,'merchant_57','my gal',2,0,0),(160,'merchant_44','kid',2,0,0),(161,'merchant_57','codes',2,0,0),(162,'merchant_44','cep ',2,0,0),(163,'merchant_44','laddoo',2,0,0),(164,'merchant_44','msf\nms',2,0,0),(165,'merchant_57','ads',142,0,0),(166,'merchant_57','ad',211,0,0),(167,'merchant_57','7999',7,0,0),(168,'merchant_65','dress',6,0,0),(169,'merchant_65','tyyy',5,0,0),(170,'merchant_65','ghh',5,0,0),(171,'merchant_65','yyy',159,0,0),(172,'merchant_65','yi',5,0,0),(173,'merchant_65','ad',5,0,0),(174,'merchant_65','',1874604862,0,0),(175,'merchant_65','',1874604862,0,0),(176,'merchant_65','yuu',5,0,0),(177,'merchant_65','',1874604862,0,0),(178,'merchant_65','yyy',159,0,0),(179,'merchant_65','',1874604862,0,0),(180,'merchant_65','sale',4,0,0),(181,'merchant_65','',1874604862,0,0),(182,'merchant_65','',1874604862,0,0),(183,'merchant_65','',1874604862,0,0),(184,'merchant_57','test',79,0,0),(185,'merchant_57','venu',4,0,0),(186,'merchant_57','off',2,0,0),(187,'merchant_57','',474555362,0,0),(188,'merchant_57','',474555362,0,0),(189,'merchant_57','',474555362,0,0),(190,'merchant_0','gopi',47,0,0),(191,'merchant_0','gopi',47,0,0),(192,'merchant_0','venu',1,0,0),(193,'merchant_0','test',0,0,0),(194,'merchant_67','ofcr',3,0,0),(195,'merchant_67','test',7,0,0),(196,'merchant_67','gopi',1,0,0),(197,'merchant_67','dharah',1,0,0),(198,'merchant_67','',-1814516161,0,0),(199,'merchant_69','bsgg',1,0,0),(200,'merchant_67','',-1814516161,0,0),(201,'merchant_67','',-1814516161,0,0),(202,'merchant_67','',-1814516161,0,0),(203,'merchant_67','',-1814516161,0,0),(204,'merchant_67','my',1,0,0),(205,'merchant_67','',-1814516161,0,0),(206,'merchant_67','',-1814516161,0,0),(207,'merchant_67','',-1814516161,0,0),(208,'merchant_67','',-1814516161,0,0),(209,'merchant_67','',-1814516161,0,0),(210,'merchant_67','',-1814516161,0,0),(211,'merchant_67','',-1814516161,0,0),(212,'merchant_67','',-1814516161,0,0),(213,'merchant_67','',-1814516161,0,0),(214,'merchant_67','',-1814516161,0,0),(215,'merchant_67','',-1814516161,0,0),(216,'merchant_67','',-1814516161,0,0),(217,'merchant_67','',-1814516161,0,0),(218,'merchant_67','',-1814516161,0,0),(219,'merchant_67','',-1814516161,0,0),(220,'merchant_67','',-1814516161,0,0),(221,'merchant_67','',-1814516161,0,0),(222,'merchant_67','',-1814516161,0,0),(223,'merchant_67','',-1814516161,0,0),(224,'merchant_67','',-1814516161,0,0),(225,'merchant_67','',-1814516161,0,0),(226,'merchant_67','',-1814516161,0,0),(227,'merchant_67','',-1814516161,0,0),(228,'merchant_67','',-1814516161,0,0),(229,'merchant_67','',-1814516161,0,0),(230,'merchant_67','',-1814516161,0,0),(231,'merchant_67','',-1814516161,0,0),(232,'merchant_70','qwert',7,0,0),(233,'merchant_67','',-1814516161,0,0),(234,'merchant_67','',-1814516161,0,0),(235,'merchant_67','',-1814516161,0,0),(236,'merchant_67','',-1814516161,0,0),(237,'merchant_67','',-1814516161,0,0),(238,'merchant_67','',-1814516161,0,0),(239,'merchant_73','576',0,0,0),(240,'merchant_73','',6137,0,0),(241,'merchant_73','',6137,0,0),(242,'merchant_73','',6137,0,0),(243,'merchant_73','',6137,0,0),(244,'merchant_73','',6137,0,0),(245,'merchant_77','code',5,0,0),(246,'merchant_77','',2047,0,0),(247,'merchant_77','',2047,0,0),(248,'merchant_77','',2047,0,0),(249,'merchant_79','',5,0,0),(250,'merchant_79','',5,0,0),(251,'merchant_79','',5,0,0),(252,'merchant_80','',-1750522851,0,0),(253,'merchant_80','',-1750522851,0,0),(254,'merchant_80','',-1750522851,0,0),(255,'merchant_81','556643',5,0,0),(256,'merchant_80','',-1750522851,0,0),(257,'merchant_80','',-1750522851,0,0),(258,'merchant_80','',-1750522851,0,0),(259,'merchant_80','',-1750522851,0,0),(260,'merchant_80','',-1750522851,0,0),(261,'merchant_80','',-1750522851,0,0),(262,'merchant_82','',-271474867,0,0),(263,'merchant_82','',-271474867,0,0),(264,'merchant_82','',-271474867,0,0),(265,'merchant_82','',-271474867,0,0),(266,'merchant_82','\n',1,0,0),(267,'merchant_82','',-271474867,0,0),(268,'merchant_82','',-271474867,0,0),(269,'merchant_82','',-271474867,0,0),(270,'merchant_82','',-271474867,0,0),(271,'merchant_82','',-271474867,0,0),(272,'merchant_83','sdfghj',5,0,0),(273,'merchant_82','',-271474867,0,0),(274,'merchant_82','',-271474867,0,0),(275,'merchant_84','',1171354717,0,0),(276,'merchant_84','',1171354717,0,0),(277,'merchant_84','',1171354717,0,0),(278,'merchant_84','',1171354717,0,0),(279,'merchant_84','',1171354717,0,0),(280,'merchant_84','',1171354717,0,0),(281,'merchant_84','',1171354717,0,0),(282,'merchant_84','',1171354717,0,0),(283,'merchant_84','',1171354717,0,0),(284,'merchant_84','',1171354717,0,0),(285,'merchant_84','',1171354717,0,0),(286,'merchant_84','',1171354717,0,0),(287,'merchant_84','',1171354717,0,0),(288,'merchant_83','999888',3,0,0),(289,'merchant_83','123456',1,0,0),(290,'merchant_86','',234057,0,0),(291,'merchant_86','',234057,0,0),(292,'merchant_86','',234057,0,0),(293,'merchant_86','',234057,0,0),(294,'merchant_86','',234057,0,0),(295,'merchant_86','',234057,0,0),(296,'merchant_86','',234057,0,0),(297,'merchant_86','',234057,0,0),(298,'merchant_87','',13,0,0),(299,'merchant_87','',13,0,0),(300,'merchant_87','',13,0,0),(301,'merchant_88','',81,0,0),(302,'merchant_88','',81,0,0),(303,'merchant_88','',81,0,0),(304,'merchant_88','',81,0,0),(305,'merchant_88','',81,0,0),(306,'merchant_89','gopi',1,0,0),(307,'merchant_89','',-715827935,0,0),(308,'merchant_90','disc',1,0,0),(309,'merchant_90','rrfxc',0,0,0),(310,'merchant_83','qwerty',3,0,0),(311,'merchant_89','',-715827935,0,0),(312,'merchant_83','asdfgh',3,0,0),(313,'merchant_89','',-715827935,0,0),(314,'merchant_89','',-715827935,0,0),(315,'merchant_89','',-715827935,0,0),(316,'merchant_91','code',2,0,0),(317,'merchant_91','yui',5,0,0),(318,'merchant_92','',2,0,0),(319,'merchant_92','gopi',4,0,0),(320,'merchant_92','',2,0,0),(321,'merchant_97','pp',1,0,0),(322,'merchant_105','gopo',4,0,0),(323,'merchant_105','chinni',1,0,0),(324,'merchant_105','gjhi',3,0,0),(325,'merchant_83','987654',1,0,0),(326,'merchant_83','355353',7,0,0),(327,'merchant_83','445556',2,0,0),(328,'merchant_83','chhchc',2,0,0),(329,'merchant_119','',1,0,0),(330,'merchant_123','',1,0,0),(331,'merchant_125','nsnsb',1,0,0),(332,'merchant_133','my cod',1,0,0),(333,'merchant_135','',1,0,0),(334,'merchant_137','',1,0,0),(335,'merchant_139','',1,0,0),(336,'merchant_141','',65,0,0),(337,'merchant_141','',65,0,0),(338,'merchant_141','',65,0,0),(339,'merchant_141','',65,0,0),(340,'merchant_141','',65,0,0),(341,'merchant_143','off',0,0,0),(342,'merchant_147','',-950107501,0,0),(343,'merchant_147','',-950107501,0,0),(344,'merchant_147','677',0,0,0),(345,'merchant_149','jsjsbx',1,0,0),(346,'merchant_149','sed',1,0,0),(347,'merchant_147','',-950107501,0,0),(348,'merchant_147','',-950107501,0,0),(349,'merchant_147','',-950107501,0,0),(350,'merchant_147','',-950107501,0,0),(351,'merchant_147','',-950107501,0,0),(352,'merchant_147','',-950107501,0,0),(353,'merchant_147','',-950107501,0,0),(354,'merchant_147','',-950107501,0,0),(355,'merchant_147','',-950107501,0,0),(356,'merchant_147','',-950107501,0,0),(357,'merchant_147','',-950107501,0,0),(358,'merchant_147','',-950107501,0,0),(359,'merchant_149','',0,0,0),(360,'merchant_151','',1,0,0),(361,'merchant_151','',0,0,0),(362,'merchant_157','off',4,0,0),(363,'merchant_159','',4,0,0),(364,'merchant_164','',2,0,0),(365,'merchant_166','',5,0,0),(366,'merchant_166','',5,0,0),(367,'merchant_166','',5,0,0),(368,'merchant_166','',0,0,0),(369,'merchant_164','',2,0,0),(370,'merchant_164','',2,0,0),(371,'merchant_168','574646',1,0,0),(372,'merchant_164','',2,0,0),(373,'merchant_255','bjhs',0,0,0),(374,'merchant_289','jzix',1,0,0),(375,'merchant_289','dd',1,0,0),(376,'merchant_307','',0,0,0),(377,'merchant_321','',2,0,0),(378,'merchant_321','',2,0,0),(379,'merchant_290','tken',0,0,0),(380,'merchant_304','vghhg',0,0,0),(381,'merchant_304','bh hgg',0,0,0),(382,'merchant_304','gg',0,0,0),(383,'merchant_304','dhv',0,0,0);
+/*!40000 ALTER TABLE `offerreach` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pointstable`
+--
+
+DROP TABLE IF EXISTS `pointstable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pointstable` (
+  `idpoints` int(11) NOT NULL,
+  `merchantType` int(3) DEFAULT '0',
+  `points` int(3) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idpoints`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pointstable`
+--
+
+LOCK TABLES `pointstable` WRITE;
+/*!40000 ALTER TABLE `pointstable` DISABLE KEYS */;
+INSERT INTO `pointstable` VALUES (1,0,10);
+/*!40000 ALTER TABLE `pointstable` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `receipts`
+--
+
+DROP TABLE IF EXISTS `receipts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `receipts` (
+  `idreceipts` int(11) NOT NULL AUTO_INCREMENT,
+  `contact` varchar(45) NOT NULL,
+  `imageurl` varchar(128) NOT NULL,
+  `merchantid` varchar(45) NOT NULL,
+  `date` date NOT NULL,
+  `receiptid` varchar(45) NOT NULL,
+  `type` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`idreceipts`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `receipts`
+--
+
+LOCK TABLES `receipts` WRITE;
+/*!40000 ALTER TABLE `receipts` DISABLE KEYS */;
+INSERT INTO `receipts` VALUES (1,'8125802142','http://res.cloudinary.com/locator/image/upload/v1543175371/merchant_290/uaaemfuuvbv38mgzpgbq.jpg','merchant_290','2018-11-26','',1),(2,'8125802142','http://res.cloudinary.com/locator/image/upload/v1543430034/merchant_290/farrtbbrejdergbnnvdw.jpg','merchant_290','2018-11-29','',1),(3,'8200785387','http://res.cloudinary.com/locator/image/upload/v1543430910/merchant_290/o8b1fx1cgp3f96sdj1s4.jpg','merchant_290','2018-11-29','',1),(4,'+919966525464','http://res.cloudinary.com/locator/image/upload/v1543512522/merchant_290/n6c1axt84rvqiysfhikn.jpg','merchant_290','2018-11-29','',1),(5,'+918179442558','http://res.cloudinary.com/locator/image/upload/v1543519071/merchant_324/sqxowekrodp9y5xeb4fu.jpg','merchant_324','2018-11-30','',1),(6,'+919966525464','http://res.cloudinary.com/locator/image/upload/v1543652571/merchant_290/xkrxyc5qxutk0qh4kjb8.jpg','merchant_290','2018-12-01','',1),(7,'+918125802142','http://res.cloudinary.com/locator/image/upload/v1543652611/merchant_290/qwyumtctcffjsycupqj5.jpg','merchant_290','2018-12-01','',1),(8,'+919703848204','http://res.cloudinary.com/locator/image/upload/v1543653564/merchant_290/dgsg2ript2g70jwes0qr.jpg','merchant_290','2018-12-01','',1),(9,'+919703848204','http://res.cloudinary.com/locator/image/upload/v1543653961/merchant_290/mu0yxjqxgt4wvaigmjnl.jpg','merchant_290','2018-12-01','1',1),(10,'+918125802142','http://res.cloudinary.com/locator/image/upload/v1543654153/merchant_290/al2lnlmtd5clwgogizsi.jpg','merchant_290','2018-12-01','2',1),(11,'8200785387','http://res.cloudinary.com/locator/image/upload/v1543758288/merchant_290/u7yb8ft2bdl2mw58la9z.jpg','merchant_290','2018-12-02','',1),(12,'+918179442558','http://res.cloudinary.com/locator/image/upload/v1543940927/merchant_336/kk5bams2ezuca16pso6j.jpg','merchant_336','2018-12-04','',1),(13,'+918179442558','http://res.cloudinary.com/locator/image/upload/v1543941261/merchant_336/rid31hte7x9jfw44laud.jpg','merchant_336','2018-12-04','',1),(14,'+918179442558','http://res.cloudinary.com/locator/image/upload/v1543941587/merchant_336/wrdk10gnqusfufbctits.jpg','merchant_336','2018-12-04','1',1),(15,'+918125802142','http://res.cloudinary.com/locator/image/upload/v1543949268/merchant_304/ttms2ongegviseghawgp.jpg','merchant_304','2018-12-05','-1',1),(16,'+918125802142','http://res.cloudinary.com/locator/image/upload/v1543949312/merchant_304/imddp7chgb25zekjmvxo.jpg','merchant_304','2018-12-05','0',1),(17,'+918686091898','http://res.cloudinary.com/locator/image/upload/v1544156175/merchant_308/vij0g8ibsnsbrcgee1q4.jpg','merchant_308','2018-12-07','-1',1),(18,'+918125802142','http://res.cloudinary.com/locator/image/upload/v1544954022/merchant_304/u7h5oetbqoponnkrouo5.jpg','merchant_304','2018-12-16','1',1),(19,'+918125802142','http://res.cloudinary.com/locator/image/upload/v1544954255/merchant_304/lbt5gliizdw1ksor4boe.jpg','merchant_304','2018-12-16','2',1),(20,'+918125802142','http://res.cloudinary.com/locator/image/upload/v1545182978/merchant_304/tocmbuxkssohwsewcqnn.jpg','merchant_304','2018-12-19','3',1),(21,'+918179442558','http://res.cloudinary.com/locator/image/upload/v1545397623/merchant_351/or91s0hxbknw6otygn5f.jpg','merchant_351','2018-12-21','-1',1),(22,'+918200785387','http://res.cloudinary.com/locator/image/upload/v1545465301/-1/eqinc4yfixhhtwiam39r.jpg','-1','2018-12-22','-1',1),(23,'+918200785387','http://res.cloudinary.com/locator/image/upload/v1545465507/-1/vn0dre79q9pixgcldcz1.jpg','-1','2018-12-22','0',1),(24,'8179442558','http://res.cloudinary.com/locator/image/upload/v1546262364/merchant_365/oy83w9jqcpkivyvmjzg4.jpg','merchant_365','2018-12-31','-1',1),(25,'8179442558','http://res.cloudinary.com/locator/image/upload/v1546262948/merchant_365/pmv4dwgk2vs7fmvoo3pr.jpg','merchant_365','2018-12-31','0',1);
+/*!40000 ALTER TABLE `receipts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `seghgv_vhik1rf_bjioawgh`
+--
+
+DROP TABLE IF EXISTS `seghgv_vhik1rf_bjioawgh`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `seghgv_vhik1rf_bjioawgh` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(128) NOT NULL,
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `seghgv_vhik1rf_bjioawgh`
+--
+
+LOCK TABLES `seghgv_vhik1rf_bjioawgh` WRITE;
+/*!40000 ALTER TABLE `seghgv_vhik1rf_bjioawgh` DISABLE KEYS */;
+INSERT INTO `seghgv_vhik1rf_bjioawgh` VALUES (1,'seghgv_vhik1rf_bjioawgh_0','tdr1z3',12.9718903,77.6696154,'http://res.cloudinary.com/locator/image/upload/v1532233805/hifyluf3kzwzytpgttzk.jpg','ttghjj','cuiwiwknf','India','2018-07-22T04:30:14.972853400','1','xgjjkn','+918179442558');
+/*!40000 ALTER TABLE `seghgv_vhik1rf_bjioawgh` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sfhh_giqiqe_vjiff`
+--
+
+DROP TABLE IF EXISTS `sfhh_giqiqe_vjiff`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sfhh_giqiqe_vjiff` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(128) NOT NULL,
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sfhh_giqiqe_vjiff`
+--
+
+LOCK TABLES `sfhh_giqiqe_vjiff` WRITE;
+/*!40000 ALTER TABLE `sfhh_giqiqe_vjiff` DISABLE KEYS */;
+INSERT INTO `sfhh_giqiqe_vjiff` VALUES (1,'sfhh_giqiqe_vjiff_0','tdr1z3',12.9718903,77.6696154,'http://res.cloudinary.com/locator/image/upload/v1532234158/s5mp38ygbxfunwdptpvm.jpg','dyiiv','sdgh','India','2018-07-22T04:36:14.144826500','1','fyuhb','+918179442558');
+/*!40000 ALTER TABLE `sfhh_giqiqe_vjiff` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `smsids`
+--
+
+DROP TABLE IF EXISTS `smsids`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `smsids` (
+  `idsmsid` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `active` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`idsmsid`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `smsids`
+--
+
+LOCK TABLES `smsids` WRITE;
+/*!40000 ALTER TABLE `smsids` DISABLE KEYS */;
+INSERT INTO `smsids` VALUES (1,'gopi.komanduri','2013',1),(2,'nearme.gala','2013',0),(3,'locatorlogs','2013',0),(4,'contactsportzclub','2013',1),(6,'krishnakishore','2013',1);
+/*!40000 ALTER TABLE `smsids` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `specificmessages`
+--
+
+DROP TABLE IF EXISTS `specificmessages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `specificmessages` (
+  `idspecificmessages` int(11) NOT NULL AUTO_INCREMENT,
+  `merchantId` varchar(45) NOT NULL,
+  `consumercontact` varchar(45) NOT NULL,
+  `messageurl` varchar(512) NOT NULL,
+  PRIMARY KEY (`idspecificmessages`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `specificmessages`
+--
+
+LOCK TABLES `specificmessages` WRITE;
+/*!40000 ALTER TABLE `specificmessages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `specificmessages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `status`
+--
+
+DROP TABLE IF EXISTS `status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `status` (
+  `idstatus` int(11) NOT NULL AUTO_INCREMENT,
+  `idnotification` int(11) NOT NULL,
+  `validfrom` date NOT NULL,
+  `validto` date NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `canjoin` int(11) NOT NULL DEFAULT '1',
+  `bringcharges` int(11) NOT NULL DEFAULT '0',
+  `registeredcontactnumber` varchar(15) NOT NULL,
+  `finaldiscount` int(11) NOT NULL,
+  `geohash` varchar(45) DEFAULT NULL,
+  `places` varchar(45) DEFAULT NULL,
+  `joinedcount` int(11) NOT NULL DEFAULT '0',
+  `shoppingdate` date NOT NULL,
+  `offerdesc` varchar(128) NOT NULL,
+  `value` int(11) NOT NULL,
+  `flat` int(11) NOT NULL,
+  `ispercentage` int(11) NOT NULL,
+  PRIMARY KEY (`idstatus`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `status`
+--
+
+LOCK TABLES `status` WRITE;
+/*!40000 ALTER TABLE `status` DISABLE KEYS */;
+/*!40000 ALTER TABLE `status` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `status_tdr1xb`
+--
+
+DROP TABLE IF EXISTS `status_tdr1xb`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `status_tdr1xb` (
+  `idstatus` int(11) NOT NULL AUTO_INCREMENT,
+  `idnotification` int(11) NOT NULL,
+  `validfrom` date NOT NULL,
+  `validto` date NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `canjoin` int(11) NOT NULL DEFAULT '1',
+  `bringcharges` int(11) NOT NULL DEFAULT '0',
+  `registeredcontactnumber` varchar(15) NOT NULL,
+  `finaldiscount` int(11) NOT NULL,
+  `geohash` varchar(45) DEFAULT NULL,
+  `places` varchar(45) DEFAULT NULL,
+  `joinedcount` int(11) NOT NULL DEFAULT '0',
+  `shoppingdate` date NOT NULL,
+  `offerdesc` varchar(128) NOT NULL,
+  `value` int(11) NOT NULL,
+  `flat` int(11) NOT NULL,
+  `ispercentage` int(11) NOT NULL,
+  PRIMARY KEY (`idstatus`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `status_tdr1xb`
+--
+
+LOCK TABLES `status_tdr1xb` WRITE;
+/*!40000 ALTER TABLE `status_tdr1xb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `status_tdr1xb` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `status_tdr1z3`
+--
+
+DROP TABLE IF EXISTS `status_tdr1z3`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `status_tdr1z3` (
+  `idstatus` int(11) NOT NULL AUTO_INCREMENT,
+  `idnotification` int(11) NOT NULL,
+  `validfrom` date NOT NULL,
+  `validto` date NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `canjoin` int(11) NOT NULL DEFAULT '1',
+  `bringcharges` int(11) NOT NULL DEFAULT '0',
+  `registeredcontactnumber` varchar(15) NOT NULL,
+  `finaldiscount` int(11) NOT NULL,
+  `geohash` varchar(45) DEFAULT NULL,
+  `places` varchar(45) DEFAULT NULL,
+  `joinedcount` int(11) NOT NULL DEFAULT '0',
+  `shoppingdate` date NOT NULL,
+  `offerdesc` varchar(128) NOT NULL,
+  `value` int(11) NOT NULL,
+  `flat` int(11) NOT NULL,
+  `ispercentage` int(11) NOT NULL,
+  PRIMARY KEY (`idstatus`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `status_tdr1z3`
+--
+
+LOCK TABLES `status_tdr1z3` WRITE;
+/*!40000 ALTER TABLE `status_tdr1z3` DISABLE KEYS */;
+INSERT INTO `status_tdr1z3` VALUES (1,15,'2018-09-21','2018-09-26','8179442558',1,0,'+918179442558',10,'tdr1z3',NULL,0,'2018-10-01','pants',25,0,0),(2,15,'2018-09-25','2018-09-26','+918179442',1,0,'+918179442558',10,'tdr1z3',NULL,0,'2018-09-26','i can give for 10%',25,0,0);
+/*!40000 ALTER TABLE `status_tdr1z3` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `status_tepexv`
+--
+
+DROP TABLE IF EXISTS `status_tepexv`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `status_tepexv` (
+  `idstatus` int(11) NOT NULL AUTO_INCREMENT,
+  `idnotification` int(11) NOT NULL,
+  `validfrom` date NOT NULL,
+  `validto` date NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `canjoin` int(11) NOT NULL DEFAULT '1',
+  `bringcharges` int(11) NOT NULL DEFAULT '0',
+  `registeredcontactnumber` varchar(15) NOT NULL,
+  `finaldiscount` int(11) NOT NULL,
+  `geohash` varchar(45) DEFAULT NULL,
+  `places` varchar(45) DEFAULT NULL,
+  `joinedcount` int(11) NOT NULL DEFAULT '0',
+  `shoppingdate` date NOT NULL,
+  `offerdesc` varchar(128) NOT NULL,
+  `value` int(11) NOT NULL,
+  `flat` int(11) NOT NULL,
+  `ispercentage` int(11) NOT NULL,
+  PRIMARY KEY (`idstatus`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `status_tepexv`
+--
+
+LOCK TABLES `status_tepexv` WRITE;
+/*!40000 ALTER TABLE `status_tepexv` DISABLE KEYS */;
+INSERT INTO `status_tepexv` VALUES (1,2,'2018-09-21','2018-09-21','+919966525',1,0,'+919966525464',22,'tepexv',NULL,0,'2018-09-21','ffbx',25,0,0);
+/*!40000 ALTER TABLE `status_tepexv` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `status_ts5ehg`
+--
+
+DROP TABLE IF EXISTS `status_ts5ehg`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `status_ts5ehg` (
+  `idstatus` int(11) NOT NULL AUTO_INCREMENT,
+  `idnotification` int(11) NOT NULL,
+  `validfrom` date NOT NULL,
+  `validto` date NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `canjoin` int(11) NOT NULL DEFAULT '1',
+  `bringcharges` int(11) NOT NULL DEFAULT '0',
+  `registeredcontactnumber` varchar(15) NOT NULL,
+  `finaldiscount` int(11) NOT NULL,
+  `geohash` varchar(45) DEFAULT NULL,
+  `places` varchar(45) DEFAULT NULL,
+  `joinedcount` int(11) NOT NULL DEFAULT '0',
+  `shoppingdate` date NOT NULL,
+  `offerdesc` varchar(128) NOT NULL,
+  `value` int(11) NOT NULL,
+  `flat` int(11) NOT NULL,
+  `ispercentage` int(11) NOT NULL,
+  PRIMARY KEY (`idstatus`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `status_ts5ehg`
+--
+
+LOCK TABLES `status_ts5ehg` WRITE;
+/*!40000 ALTER TABLE `status_ts5ehg` DISABLE KEYS */;
+/*!40000 ALTER TABLE `status_ts5ehg` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `status_ts5ej5`
+--
+
+DROP TABLE IF EXISTS `status_ts5ej5`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `status_ts5ej5` (
+  `idstatus` int(11) NOT NULL AUTO_INCREMENT,
+  `idnotification` int(11) NOT NULL,
+  `validfrom` date NOT NULL,
+  `validto` date NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `canjoin` int(11) NOT NULL DEFAULT '1',
+  `bringcharges` int(11) NOT NULL DEFAULT '0',
+  `registeredcontactnumber` varchar(15) NOT NULL,
+  `finaldiscount` int(11) NOT NULL,
+  `geohash` varchar(45) DEFAULT NULL,
+  `places` varchar(45) DEFAULT NULL,
+  `joinedcount` int(11) NOT NULL DEFAULT '0',
+  `shoppingdate` date NOT NULL,
+  `offerdesc` varchar(128) NOT NULL,
+  `value` int(11) NOT NULL,
+  `flat` int(11) NOT NULL,
+  `ispercentage` int(11) NOT NULL,
+  PRIMARY KEY (`idstatus`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `status_ts5ej5`
+--
+
+LOCK TABLES `status_ts5ej5` WRITE;
+/*!40000 ALTER TABLE `status_ts5ej5` DISABLE KEYS */;
+/*!40000 ALTER TABLE `status_ts5ej5` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `status_ts5ejh`
+--
+
+DROP TABLE IF EXISTS `status_ts5ejh`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `status_ts5ejh` (
+  `idstatus` int(11) NOT NULL AUTO_INCREMENT,
+  `idnotification` int(11) NOT NULL,
+  `validfrom` date NOT NULL,
+  `validto` date NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `canjoin` int(11) NOT NULL DEFAULT '1',
+  `bringcharges` int(11) NOT NULL DEFAULT '0',
+  `registeredcontactnumber` varchar(15) NOT NULL,
+  `finaldiscount` int(11) NOT NULL,
+  `geohash` varchar(45) DEFAULT NULL,
+  `places` varchar(45) DEFAULT NULL,
+  `joinedcount` int(11) NOT NULL DEFAULT '0',
+  `shoppingdate` date NOT NULL,
+  `offerdesc` varchar(128) NOT NULL,
+  `value` int(11) NOT NULL,
+  `flat` int(11) NOT NULL,
+  `ispercentage` int(11) NOT NULL,
+  PRIMARY KEY (`idstatus`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `status_ts5ejh`
+--
+
+LOCK TABLES `status_ts5ejh` WRITE;
+/*!40000 ALTER TABLE `status_ts5ejh` DISABLE KEYS */;
+INSERT INTO `status_ts5ejh` VALUES (1,8,'2018-09-19','2018-09-27','5757566577',1,0,'+918200785387',12,'ts5ejh',NULL,0,'2018-09-26','yffyhf',656556,1,0),(2,8,'2018-09-20','2018-09-25','5588555555',1,0,'+918200785387',12,'ts5ejh',NULL,0,'2018-09-26','fgf',588,0,0),(3,8,'2018-09-20','2018-10-02','9999999999',1,0,'+918200785387',12,'ts5ejh',NULL,0,'2018-10-22','qwerty',100,1,0);
+/*!40000 ALTER TABLE `status_ts5ejh` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `statusjoineelist`
+--
+
+DROP TABLE IF EXISTS `statusjoineelist`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `statusjoineelist` (
+  `idstatusjoineelist` int(11) NOT NULL AUTO_INCREMENT,
+  `geohash` varchar(45) NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `statusid` int(11) NOT NULL,
+  PRIMARY KEY (`idstatusjoineelist`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `statusjoineelist`
+--
+
+LOCK TABLES `statusjoineelist` WRITE;
+/*!40000 ALTER TABLE `statusjoineelist` DISABLE KEYS */;
+INSERT INTO `statusjoineelist` VALUES (1,'ts5ejh','9928430456',1),(2,'tdr1z3','8247638529',1),(3,'tdr1z3','8179442558',1),(4,'tdr1z3','255555555',1),(5,'tdr1z3','8555',1),(6,'tdr1z3','588888',1),(7,'tdr1z3','88888',1),(8,'tdr1z3','+918179442',1),(9,'ts5ejh','+918200785',2),(10,'tepexv','+919966525',1);
+/*!40000 ALTER TABLE `statusjoineelist` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `subcategory`
+--
+
+DROP TABLE IF EXISTS `subcategory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `subcategory` (
+  `idsubcategory` int(11) NOT NULL AUTO_INCREMENT,
+  `categoryid` int(11) NOT NULL,
+  `subcategoryname` varchar(45) NOT NULL,
+  PRIMARY KEY (`idsubcategory`),
+  KEY `categoryof_idx` (`categoryid`),
+  CONSTRAINT `categoryof` FOREIGN KEY (`categoryid`) REFERENCES `category` (`idcategory`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `subcategory`
+--
+
+LOCK TABLES `subcategory` WRITE;
+/*!40000 ALTER TABLE `subcategory` DISABLE KEYS */;
+/*!40000 ALTER TABLE `subcategory` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `syjdti_suofgj_xjorehj`
+--
+
+DROP TABLE IF EXISTS `syjdti_suofgj_xjorehj`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `syjdti_suofgj_xjorehj` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(128) NOT NULL,
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `syjdti_suofgj_xjorehj`
+--
+
+LOCK TABLES `syjdti_suofgj_xjorehj` WRITE;
+/*!40000 ALTER TABLE `syjdti_suofgj_xjorehj` DISABLE KEYS */;
+INSERT INTO `syjdti_suofgj_xjorehj` VALUES (1,'syjdti_suofgj_xjorehj_0','tdr1z3',12.9718903,77.6696154,'http://res.cloudinary.com/locator/image/upload/v1532234706/knehqnmzdpnhpoy4udvd.jpg','tiofjl','dyjbff','India','2018-07-22T04:45:33.613810800','1','fioddbm','+918179442558');
+/*!40000 ALTER TABLE `syjdti_suofgj_xjorehj` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transactionhistory`
+--
+
+DROP TABLE IF EXISTS `transactionhistory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `transactionhistory` (
+  `idtransactionhistory` int(11) NOT NULL AUTO_INCREMENT,
+  `merchantid` varchar(128) NOT NULL,
+  `usercontact` varchar(45) NOT NULL,
+  `transactiontimestamp` varchar(128) NOT NULL,
+  `transactionid` varchar(512) NOT NULL,
+  `pointstocustomer` int(10) DEFAULT '0',
+  `pointstomerchant` int(10) DEFAULT '0',
+  PRIMARY KEY (`idtransactionhistory`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transactionhistory`
+--
+
+LOCK TABLES `transactionhistory` WRITE;
+/*!40000 ALTER TABLE `transactionhistory` DISABLE KEYS */;
+INSERT INTO `transactionhistory` VALUES (1,'\"merchant_17_+918247638529\"','\"+918179442558\"','16:44:20 2018-08-12','\"merchant_17_+918247638529\":\"+918179442558\":\"qrcode\":16:44:20 2018-08-12',0,0),(2,'\"merchant_17_+918247638529\"','\"+918179442558\"','17:44:01 2018-08-12','\"merchant_17_+918247638529\":\"+918179442558\":\"qrcode\":17:44:01 2018-08-12',0,0),(3,'\"merchant_17_+918247638529\"','\"+918179442558\"','17:45:36 2018-08-12','\"merchant_17_+918247638529\":\"+918179442558\":\"qrcode\":17:45:36 2018-08-12',0,0),(4,'\"merchant_17_+918247638529\"','\"+918179442558\"','17:48:50 2018-08-12','\"merchant_17_+918247638529\":\"+918179442558\":\"qrcode\":17:48:50 2018-08-12',0,0),(5,'\"merchant_17_+918247638529\"','\"+918179442558\"','17:50:47 2018-08-12','\"merchant_17_+918247638529\":\"+918179442558\":\"qrcode\":17:50:47 2018-08-12',0,0),(6,'\"merchant_17\"','\"+918179442558\"','18:11:13 2018-08-12','\"merchant_17\":\"+918179442558\":\"wardro\":18:11:13 2018-08-12',0,0),(7,'\"merchant_17\"','\"+918179442558\"','18:12:02 2018-08-12','\"merchant_17\":\"+918179442558\":\"wardro\":18:12:02 2018-08-12',0,0),(8,'merchant_17','+918179442558','18:20:49 2018-08-12','merchant_17:+918179442558:wardro:18:20:49 2018-08-12',10,0),(9,'merchant_17','+918179442558','18:21:18 2018-08-12','merchant_17:+918179442558:wardro:18:21:18 2018-08-12',10,0),(10,'merchant_17','+918179442558','18:24:38 2018-08-12','merchant_17:+918179442558:wardro:18:24:38 2018-08-12',10,0),(11,'merchant_17','+918179442558','18:26:55 2018-08-12','merchant_17:+918179442558:wardro:18:26:55 2018-08-12',10,0),(12,'merchant_17','+918179442558','18:28:50 2018-08-12','merchant_17:+918179442558:wardro:18:28:50 2018-08-12',10,0),(13,'merchant_17','+918179442558','18:32:17 2018-08-12','merchant_17:+918179442558:wardro:18:32:17 2018-08-12',10,0),(14,'merchant_17','+918179442558','18:35:03 2018-08-12','merchant_17:+918179442558:wardro:18:35:03 2018-08-12',10,0),(15,'merchant_17','+918179442558','18:35:52 2018-08-12','merchant_17:+918179442558:wardro:18:35:52 2018-08-12',10,0),(16,'merchant_17','+918179442558','18:36:53 2018-08-12','merchant_17:+918179442558:wardro:18:36:53 2018-08-12',10,0),(17,'merchant_17','+918179442558','18:45:02 2018-08-12','merchant_17:+918179442558:wardro:18:45:02 2018-08-12',10,0),(18,'merchant_17','+918179442558','18:49:45 2018-08-12','merchant_17:+918179442558:wardro:18:49:45 2018-08-12',10,0),(19,'merchant_17','+918179442558','18:53:40 2018-08-12','merchant_17:+918179442558:wardro:18:53:40 2018-08-12',10,0),(20,'merchant_17','+918179442558','19:01:04 2018-08-12','merchant_17:+918179442558:wardro:19:01:04 2018-08-12',10,0),(21,'merchant_17','+918179442558','19:14:51 2018-08-12','merchant_17:+918179442558:wardro:19:14:51 2018-08-12',10,0),(22,'merchant_17','+918179442558','19:16:02 2018-08-12','merchant_17:+918179442558:wardro:19:16:02 2018-08-12',10,0),(23,'merchant_21','+918639613292','06:34:42 2018-08-16','merchant_21:+918639613292:hnshd :06:34:42 2018-08-16',10,0),(24,'merchant_21','+918639613292','06:34:53 2018-08-16','merchant_21:+918639613292:hnshd :06:34:53 2018-08-16',10,0),(25,'merchant_42','+918686091898','14:00:58 2018-08-21','merchant_42:+918686091898::14:00:58 2018-08-21',10,0),(26,'merchant_51','+918179442558','15:28:12 2018-08-22','merchant_51:+918179442558:govrcl:15:28:12 2018-08-22',10,0),(27,'merchant_51','+918179442558','15:33:21 2018-08-22','merchant_51:+918179442558:red:15:33:21 2018-08-22',10,0),(28,'merchant_58','+917065267973','13:03:55 2018-08-23','merchant_58:+917065267973:3dwal:13:03:55 2018-08-23',10,0),(29,'merchant_58','+917065267973','13:04:06 2018-08-23','merchant_58:+917065267973:3dwal:13:04:06 2018-08-23',10,0),(30,'merchant_58','+917065267973','13:04:44 2018-08-23','merchant_58:+917065267973:3dwal:13:04:44 2018-08-23',10,0),(31,'merchant_58','+917065267973','13:05:21 2018-08-23','merchant_58:+917065267973:3dwal:13:05:21 2018-08-23',10,0),(32,'merchant_58','+917065267973','13:09:29 2018-08-23','merchant_58:+917065267973:3dwal:13:09:29 2018-08-23',10,0),(33,'merchant_44','+918179442558','21:00:27 2018-08-24','merchant_44:+918179442558:godse:21:00:27 2018-08-24',10,0),(34,'merchant_44','+918179442558','21:04:59 2018-08-24','merchant_44:+918179442558:godse:21:04:59 2018-08-24',10,0),(35,'merchant_44','+918179442558','21:11:36 2018-08-24','merchant_44:+918179442558:godse:21:11:36 2018-08-24',10,0),(36,'merchant_44','+918179442558','14:07:35 2018-08-25','merchant_44:+918179442558:timeto:14:07:35 2018-08-25',10,0),(37,'merchant_44','+918179442558','20:43:42 2018-08-25','merchant_44:+918179442558:yiu:20:43:42 2018-08-25',10,0);
+/*!40000 ALTER TABLE `transactionhistory` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `userpoints`
+--
+
+DROP TABLE IF EXISTS `userpoints`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `userpoints` (
+  `iduserpoints` int(11) NOT NULL AUTO_INCREMENT,
+  `usercontact` varchar(45) NOT NULL,
+  `totalpoints` int(10) DEFAULT '0',
+  `existingpoints` int(10) DEFAULT '0',
+  `lastaddedpointson` varchar(45) DEFAULT '""',
+  PRIMARY KEY (`iduserpoints`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `userpoints`
+--
+
+LOCK TABLES `userpoints` WRITE;
+/*!40000 ALTER TABLE `userpoints` DISABLE KEYS */;
+INSERT INTO `userpoints` VALUES (1,'+918179442558',160,10,'20:43:42 2018-08-25'),(2,'+918639613292',20,10,'06:34:53 2018-08-16'),(3,'+918686091898',10,10,'14:00:58 2018-08-21'),(4,'+917065267973',50,10,'13:09:29 2018-08-23');
+/*!40000 ALTER TABLE `userpoints` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `viewers`
+--
+
+DROP TABLE IF EXISTS `viewers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `viewers` (
+  `idcounters` int(11) NOT NULL AUTO_INCREMENT,
+  `counterid` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL DEFAULT '0000',
+  `merchantid` varchar(45) NOT NULL,
+  `createdon` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `closedon` datetime DEFAULT NULL,
+  `role` int(11) NOT NULL DEFAULT '3',
+  PRIMARY KEY (`idcounters`,`counterid`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `viewers`
+--
+
+LOCK TABLES `viewers` WRITE;
+/*!40000 ALTER TABLE `viewers` DISABLE KEYS */;
+INSERT INTO `viewers` VALUES (1,'merchant_354_1_viewers','0000','merchant_354','2018-12-25 19:14:47',NULL,3),(2,'merchant_354_1_viewers','0000','merchant_354','2018-12-25 19:14:53',NULL,3),(3,'merchant_354_1_viewers','0000','merchant_354','2018-12-25 22:24:14',NULL,3),(4,'merchant_354_1_viewers','0000','merchant_354','2018-12-25 22:24:27',NULL,3),(5,'merchant_365_1_viewers','0000','merchant_365','2018-12-27 01:55:28',NULL,3),(6,'merchant_365_1_viewers','0000','merchant_365','2018-12-27 09:09:13',NULL,3),(7,'merchant_365_1_viewers','0000','merchant_365','2018-12-27 11:48:31',NULL,3),(8,'merchant_379_1_viewers','0000','merchant_379','2018-12-27 23:21:25',NULL,3),(9,'merchant_347_1_viewers','0000','merchant_347','2018-12-27 23:29:00',NULL,3),(10,'merchant_379_1_viewers','0000','merchant_379','2018-12-28 09:39:45',NULL,3),(11,'merchant_379_1_viewers','0000','merchant_379','2018-12-28 09:39:54',NULL,3),(12,'merchant_387_1_viewers','0000','merchant_387','2018-12-29 00:15:01',NULL,3),(13,'merchant_387_1_viewers','0000','merchant_387','2018-12-29 00:15:06',NULL,3),(14,'merchant_347_1_viewers','0000','merchant_347','2018-12-29 00:16:48',NULL,3),(15,'merchant_347_1_viewers','0000','merchant_347','2018-12-29 00:17:10',NULL,3),(16,'merchant_347_1_viewers','0000','merchant_347','2018-12-29 00:17:14',NULL,3),(17,'merchant_347_1_viewers','0000','merchant_347','2018-12-29 00:17:17',NULL,3),(18,'mechant_365_1_vid','0000','merchant_365','2018-12-31 10:55:21',NULL,3),(19,'merchant_365_1_viewers','0000','merchant_365','2018-12-31 18:58:13',NULL,3),(20,'merchant_387_1_viewers','0000','merchant_387','2019-01-03 23:22:50',NULL,3),(21,'merchant_387_1_viewers','0000','merchant_387','2019-01-08 22:11:29',NULL,3),(22,'merchant_387_1_viewers','0000','merchant_387','2019-01-12 00:12:16',NULL,3);
+/*!40000 ALTER TABLE `viewers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vjkass_hjisjed_goonaa`
+--
+
+DROP TABLE IF EXISTS `vjkass_hjisjed_goonaa`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vjkass_hjisjed_goonaa` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(128) NOT NULL,
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vjkass_hjisjed_goonaa`
+--
+
+LOCK TABLES `vjkass_hjisjed_goonaa` WRITE;
+/*!40000 ALTER TABLE `vjkass_hjisjed_goonaa` DISABLE KEYS */;
+INSERT INTO `vjkass_hjisjed_goonaa` VALUES (1,'vjkass_hjisjed_goonaa_0','tdr1z3',12.9718903,77.6696154,'http://res.cloudinary.com/locator/image/upload/v1532236962/bul7ued8tmkk7d9braup.jpg','kabbdf','kkvcxd','India','2018-07-22T05:22:47.677209600','1','hwjakf','+918179442558');
+/*!40000 ALTER TABLE `vjkass_hjisjed_goonaa` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vkkee_cjjwd_fjasv`
+--
+
+DROP TABLE IF EXISTS `vkkee_cjjwd_fjasv`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vkkee_cjjwd_fjasv` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(128) NOT NULL,
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vkkee_cjjwd_fjasv`
+--
+
+LOCK TABLES `vkkee_cjjwd_fjasv` WRITE;
+/*!40000 ALTER TABLE `vkkee_cjjwd_fjasv` DISABLE KEYS */;
+INSERT INTO `vkkee_cjjwd_fjasv` VALUES (1,'vkkee_cjjwd_fjasv_0','tdr1z3',12.9718903,77.6696154,'http://res.cloudinary.com/locator/image/upload/v1532206544/iifbzuog6tywdql2gjga.jpg','hjwkf','vkk2ac','India','2018-07-21T20:55:58.239303400','1','uijsd','+918179442558');
+/*!40000 ALTER TABLE `vkkee_cjjwd_fjasv` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `wghh_fyuub_sdhh`
+--
+
+DROP TABLE IF EXISTS `wghh_fyuub_sdhh`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `wghh_fyuub_sdhh` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(128) NOT NULL,
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wghh_fyuub_sdhh`
+--
+
+LOCK TABLES `wghh_fyuub_sdhh` WRITE;
+/*!40000 ALTER TABLE `wghh_fyuub_sdhh` DISABLE KEYS */;
+INSERT INTO `wghh_fyuub_sdhh` VALUES (1,'wghh_fyuub_sdhh_0','tdr1z3',12.9718903,77.6696154,'http://res.cloudinary.com/locator/image/upload/v1532204808/e6kfdw5d9kqxz6fj5kgb.jpg','dyhj','guiknv','India','2018-07-21T20:26:59.488674100','1','wtgg','+918179442558');
+/*!40000 ALTER TABLE `wghh_fyuub_sdhh` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `yuhff_dghh_dgjj`
+--
+
+DROP TABLE IF EXISTS `yuhff_dghh_dgjj`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `yuhff_dghh_dgjj` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `MerchantId` varchar(128) NOT NULL,
+  `geohash` varchar(12) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `MerchantName` varchar(32) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `country` varchar(128) NOT NULL DEFAULT 'INDIA',
+  `registeredon` varchar(128) NOT NULL,
+  `isactive` varchar(2) NOT NULL DEFAULT '1',
+  `shopNo` varchar(45) DEFAULT NULL,
+  `MerchantContact` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `yuhff_dghh_dgjj`
+--
+
+LOCK TABLES `yuhff_dghh_dgjj` WRITE;
+/*!40000 ALTER TABLE `yuhff_dghh_dgjj` DISABLE KEYS */;
+INSERT INTO `yuhff_dghh_dgjj` VALUES (1,'yuhff_dghh_dgjj_0','tdr1z3',12.9718903,77.6696154,'http://res.cloudinary.com/locator/image/upload/v1532206792/krspu6cwvrlbxsin2rfp.jpg','uwiekfn','yjhg','India','2018-07-21T21:00:04.114467500','1','sdhh','+918179442558');
+/*!40000 ALTER TABLE `yuhff_dghh_dgjj` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping events for database 'nearmegala'
+--
+/*!50106 SET @save_time_zone= @@TIME_ZONE */ ;
+/*!50106 DROP EVENT IF EXISTS `birthdayfetch` */;
+DELIMITER ;;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+/*!50003 SET character_set_client  = utf8 */ ;;
+/*!50003 SET character_set_results = utf8 */ ;;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;;
+/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+/*!50106 CREATE*/ /*!50117 DEFINER=`nearme`@`localhost`*/ /*!50106 EVENT `birthdayfetch` ON SCHEDULE EVERY 1 DAY STARTS '2018-11-01 00:00:00' ON COMPLETION PRESERVE ENABLE DO BEGIN
+	truncate birthdays;
+    
+     insert into birthdays (contact)  SELECT contact 
+  FROM nearmegala.consumers
+  WHERE 
+    ( DATE_FORMAT((DOB),'%d-%m') = DATE_FORMAT(NOW(),'%m-%d') )
+     OR (
+               ( DATE_FORMAT(NOW(),'%Y') % 4 <> 0
+                OR (
+                        DATE_FORMAT(NOW(),'%Y') % 100 = 0
+                        AND DATE_FORMAT(NOW(),'%Y') % 400 <> 0
+                    ) )         
+            AND DATE_FORMAT(NOW(),'%m-%d') = '03-01'
+            AND DATE_FORMAT((DOB),'%m-%d') = '02-29'
+        );
+        
+    END */ ;;
+/*!50003 SET time_zone             = @saved_time_zone */ ;;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;;
+/*!50003 SET character_set_results = @saved_cs_results */ ;;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+DELIMITER ;
+/*!50106 SET TIME_ZONE= @save_time_zone */ ;
+
+--
+-- Dumping routines for database 'nearmegala'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-01-13 13:14:47

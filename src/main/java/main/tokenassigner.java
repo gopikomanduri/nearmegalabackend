@@ -367,6 +367,7 @@ public class tokenassigner {
 
 
 
+        System.out.println("In sendMsgToNumber");
         if(Util.isNumeric(contact) == false)
             return "1";
 
@@ -385,6 +386,8 @@ public class tokenassigner {
 
 
             String smsid = smsobj.getnextsmsid(smsindex);
+            System.out.println("In sendMsgToNumber . smsid is "+smsid);
+
             ++smsindex;
 
             String myPasscode = "2013";
@@ -392,17 +395,26 @@ public class tokenassigner {
             String toPhoneNumber = contact;
             if(merDetails.merchantname.length() == 0)
             {
+                System.out.println("In sendMsgToNumber . merDetails.merchantname is null");
+
                 String merchantName = MySQLAccess.dbObj.getMerchantNameForId(merchantId);
                 String dpimg = MySQLAccess.dbObj.getMerchantDpForId(merchantId);
                 merDetails.merchantname = merchantName;
                 merDetails.merchanturl = dpimg;
+                System.out.println("In sendMsgToNumber . merDetails.merchantname is "+merDetails.merchantname);
+
             }
             String myMessage = merDetails.merchantname + "_" + msg;
+
+            System.out.println("In sendMsgToNumber .myMessage "+myMessage);
+
 
             HttpClient client = new DefaultHttpClient();
 
             String connmsg = "http://cloud.fowiz.com/api/message_http_api.php?username=" + myUsername +
                     "&phonenumber=" + toPhoneNumber + "&message=" + myMessage + "&passcode=" + myPasscode;
+
+            System.out.println("the following is the connmsg "+connmsg);
             System.out.println("after waiting for 1 sec .. sending following message " + connmsg);
 
             HttpGet request = new HttpGet(connmsg);

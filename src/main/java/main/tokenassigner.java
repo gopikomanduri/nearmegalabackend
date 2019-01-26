@@ -498,6 +498,8 @@ public class tokenassigner {
             }
             String myMessage = merDetails.merchantname+"_"+msg;
 
+            try {
+                
             HttpClient client = new DefaultHttpClient();
 
             String connmsg = "http://cloud.fowiz.com/api/message_http_api.php?username=" + myUsername +
@@ -506,7 +508,7 @@ public class tokenassigner {
 
 
             HttpGet request = new HttpGet(connmsg);
-            try {
+
                 HttpResponse response = client.execute(request);
 
 

@@ -875,7 +875,7 @@ password varchar(45)
         List<String> ids = new LinkedList<>();
         try
         {
-            if(connect.isClosed() == true)
+             if((connect == null) || (connect.isClosed() == true))
                 connect = initConnection();
 
 
@@ -900,7 +900,7 @@ password varchar(45)
         }
         catch(Exception ex)
         {
-            System.out.println("exception while fetching smsids ");
+            System.out.println("exception while fetching smsids . exception is "+ex.getMessage());
             return ids;
         }
     }

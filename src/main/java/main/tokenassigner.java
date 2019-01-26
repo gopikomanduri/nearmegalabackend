@@ -367,7 +367,7 @@ public class tokenassigner {
 
 
 
-        System.out.println("In sendMsgToNumber");
+	    System.out.println("In sendMsgToNumber");
         if(Util.isNumeric(contact) == false)
             return "1";
 
@@ -389,6 +389,8 @@ public class tokenassigner {
             System.out.println("In sendMsgToNumber . smsid is "+smsid);
 
             ++smsindex;
+     
+	        System.out.println("In sendMsgToNumber .. smsid is "+smsid);
 
             String myPasscode = "2013";
             String myUsername = smsid;

@@ -15,7 +15,7 @@ import static spark.Spark.post;
 
 public class main {
 
-    private static final ExecutorService threadpool =  Executors.newCachedThreadPool();
+//    private static final ExecutorService threadpool =  Executors.newCachedThreadPool();
     public static void main( String[] args) {
 
 
@@ -155,14 +155,15 @@ public class main {
         });
 
         post("/latestversionconsumer", (request, response) -> {
-            response.type("application/json");
+          System.out.println("in latestversionconsumer");
+	      	response.type("application/json");
 
             //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
 
 //            String lng = request.queryParams("lng");
 //            String lastId = request.queryParams("lastId");
             BufferedReader br = new BufferedReader(
-                    new FileReader("C:\\Users\\locatorlogs\\Downloads\\server code-20180517T185758Z-001\\server code\\server\\nearme\\src\\main\\java\\main\\latestversion.json"));
+                    new FileReader("src/main/java/main/latestversion.json"));
 
             versionclass ver = new Gson().fromJson(br, versionclass.class);
 
@@ -178,14 +179,16 @@ public class main {
         });
 
         post("/latestversionmerchant", (request, response) -> {
-            response.type("application/json");
+        
+		System.out.println("in latestversionmerchant");
+	    	response.type("application/json");
 
             //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
 
 //            String lng = request.queryParams("lng");
 //            String lastId = request.queryParams("lastId");
             BufferedReader br = new BufferedReader(
-                    new FileReader("C:\\Users\\locatorlogs\\Downloads\\server code-20180517T185758Z-001\\server code\\server\\nearme\\src\\main\\java\\main\\latestversionmerchant.json"));
+                    new FileReader("src/main/java/main/latestversionmerchant.json"));
 
             versionclass temp = MySQLAccess.dbObj.getMerchantLatest();
 
@@ -1290,12 +1293,12 @@ public class main {
 
 
 
-        MySQLAccess dao = new MySQLAccess();
+       /* MySQLAccess dao = new MySQLAccess();
         try {
             dao.readDataBase();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 }

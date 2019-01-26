@@ -38,17 +38,22 @@ public class MySQLAccess {
         try {
 
 
-            if(connect == null || connect.isClosed() == true) {
+ System.out.println("in initConnection");
+
+ if((connect == null) || (connect.isClosed() == true)) {
+	 System.out.println("connect is NULL, so establishing connection");
                 Class.forName("com.mysql.jdbc.Driver");
                 // Setup the connection with the DB
                 connect = DriverManager
                         .getConnection("jdbc:mysql://localhost/nearmegala?"
                                 + "user=nearme&password=nearme");
             }
+ System.out.println("returning connect");
             return connect;
         }
         catch (Exception ex)
         {
+		 System.out.println("In exception of initConnection "+ex.getMessage());
             return null;
         }
 
@@ -81,7 +86,8 @@ public class MySQLAccess {
     public void createAdsTableIfNotExist(String geohash)
     {
         try {
-            if(connect.isClosed() == true)
+            if((connect == null) || (connect.isClosed() == true))
+
                 connect = initConnection();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,7 +120,7 @@ public class MySQLAccess {
     public String getGeoHashForMerchant(String MerchantId)
     {
         try {
-            if(connect.isClosed() == true)
+            if((connect == null) || (connect.isClosed() == true))
                 connect = initConnection();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -142,7 +148,7 @@ public class MySQLAccess {
     {
 
         try {
-            if(connect.isClosed() == true)
+            if((connect == null) || (connect.isClosed() == true))
                 connect = initConnection();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -172,7 +178,7 @@ public class MySQLAccess {
         String geohash = "";
 
         try {
-            if(connect.isClosed() == true)
+            if((connect == null ) || (connect.isClosed() == true))
                 connect = initConnection();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1388,7 +1394,7 @@ utilized int(6)
         try {
             // This will load the MySQL driver, each DB has its own driver
             // Setup the connection with the DB
-            if(connect.isClosed() == true)
+            if((connect == null) || (connect.isClosed() == true))
             connect = initConnection();
 
             // Statements allow to issue SQL queries to the database
@@ -2781,10 +2787,10 @@ ispercentage int(11)
 
         try
         {
-            if(connect.isClosed() == true)
+            if((connect == null ) || (connect.isClosed() == true))
                 connect = initConnection();
 
-
+        System.out.println("connect is established");
             PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
 
             //  stmnt.executeQuery();
@@ -2797,6 +2803,7 @@ ispercentage int(11)
         }
         catch(Exception ex)
         {
+		System.out.println("In exception of getMerchantLatest "+ex.getMessage());
             return obj;
         }
 

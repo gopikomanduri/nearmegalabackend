@@ -1,0 +1,46 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+configurations {
+    providedCompile
+}
+sourceSets {
+    main {
+        java.srcDirs = ['src/main/java']
+        //other typical sourceSets stuff
+    }
+
+}
+sourceSets.main.compileClasspath += configurations.providedCompile
+
+dependencies {
+    providedCompile 'org.projectlombok:lombok:1.18.2'
+  compile "com.google.guava:guava:16+"
+compile 'com.google.code.gson:gson:2.2.4'
+    compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
+compile "com.sparkjava:spark-core:2.7.2" // add to build.gradle (for Java users)
+compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+}
+allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
+}
+
+task(runSimple, dependsOn: 'classes', type: JavaExec) {
+main = 'main.main'
+classpath = sourceSets.main.runtimeClasspath
+    systemProperty 'simple.message', 'Hello '
+jvmArgs '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005'
+}
+defaultTasks 'runSimple'
+

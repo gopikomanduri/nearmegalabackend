@@ -496,7 +496,8 @@ public class tokenassigner {
                 merDetails.merchantname = merchantName;
                 merDetails.merchanturl = dpimg;
             }
-            String myMessage = merDetails.merchantname+"' '"+msg;
+
+            String myMessage = merDetails.merchantname+"%20"+msg;
 
             try {
 

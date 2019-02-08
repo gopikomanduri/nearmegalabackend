@@ -3037,7 +3037,53 @@ imgurl varchar(128
     }
 
 
-    public String sendMsgToNumber(String merchantId, String contact, String msgurl, String receiptid) {
+
+
+
+    public String sendBillToNumber(String merchantId, String contact, String msgurl, String receiptid) {
+/*
+
+idreceipts int(11) AI PK
+contact varchar(45)
+imageurl varchar(128)
+merchantid varchar(45)
+date date
+ */
+
+        String tableName = "receipts";
+        Integer generatedKey = -1;
+        try {
+            String sql = "INSERT INTO "+tableName+" (contact, imageurl, merchantid, date, receiptid)" +
+                    "VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, contact);
+            preparedStatement.setString(2,msgurl);
+            preparedStatement.setString(3,merchantId);
+            preparedStatement.setDate(4, Util.getCurrentDate());
+            preparedStatement.setString(5,receiptid);
+
+
+            preparedStatement.executeUpdate();
+
+
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()) {
+                generatedKey = rs.getInt(1);
+            }            preparedStatement.close();
+            return generatedKey.toString();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return generatedKey.toString();
+        }
+    }
+
+
+
+
+
+
+    public String sendMsgToNumber(String merchantId, String contact, String msgurl, String receiptid, String billamount) {
 /*
 
 idreceipts int(11) AI PK
@@ -3058,6 +3104,7 @@ String tableName = "receipts";
             preparedStatement.setString(3,merchantId);
             preparedStatement.setDate(4, Util.getCurrentDate());
             preparedStatement.setString(5,receiptid);
+            preparedStatement.setString(6,billamount);
 
 
             preparedStatement.executeUpdate();

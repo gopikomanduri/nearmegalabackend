@@ -448,10 +448,100 @@ public class tokenassigner {
 
     }
 
+    public synchronized String sendBillToNumber(String merchantId, String contact, String msg,
+                                                String type, String receiptid,
+                                                String billamount )
+    {
+
+        String ret = "0";
+
+
+        if(Util.isNumeric(contact) == false)
+            return ret;
 
 
 
-    public synchronized String sendMsgToNumber(String merchantId, String contact, String msg, String type, String receiptid)
+        //   String merchantName = MySQLAccess.dbObj.getMerchantNameForId(merchantId);
+        // Integer generatedNum =   MySQLAccess.dbObj.sendMsgToNumber( merchantId,  contact,msg);
+        // String msgUrl = "http://cloud.fowiz.com/api/message_http_api.php?username=gopi.komanduri&phonenumber=+918686091898&message= "+merchantName+" "+msg+"&passcode=2013";
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            System.out.println("IN sendmsgtoNumber second.. exception "+e.getMessage());
+            e.printStackTrace();
+        }
+
+        Integer itype = Integer.valueOf(type);
+        if(itype == 0)
+        {
+            sendMsgToNumber(merchantId, contact, msg);
+        }
+        else {
+
+
+            MySQLAccess.dbObj.sendMsgToNumber(merchantId, contact, msg, receiptid, billamount);
+
+            String myPasscode = "2013";
+            String smsid = smsobj.getnextsmsid(smsindex);
+            ++smsindex;
+            String myUsername = smsid;
+            String toPhoneNumber = contact;
+
+            if(merDetails.merchantname.length() == 0)
+            {
+                String merchantName = MySQLAccess.dbObj.getMerchantNameForId(merchantId);
+                String dpimg = MySQLAccess.dbObj.getMerchantDpForId(merchantId);
+                merDetails.merchantname = merchantName;
+                merDetails.merchanturl = dpimg;
+            }
+
+            String myMessage = merDetails.merchantname+"%20"+msg;
+
+            try {
+
+                HttpClient client = new DefaultHttpClient();
+
+                String connmsg = "http://cloud.fowiz.com/api/message_http_api.php?username=" + myUsername +
+                        "&phonenumber=" + toPhoneNumber + "&message=" + myMessage + "&passcode=" + myPasscode;
+                System.out.println("sending following message " + connmsg);
+
+
+                HttpGet request = new HttpGet(connmsg);
+
+                HttpResponse response = client.execute(request);
+
+
+                BufferedReader rd = new BufferedReader
+                        (new InputStreamReader(response.getEntity().getContent()));
+
+                String line = "";
+                //  StringBuffer myres = new StringBuffer();
+                while ((line = rd.readLine()) != null) {
+                    if(line.contains("\"success\":1"))
+                    {
+                        ret = "1";
+                    }
+                    //  myres.append(line);
+                }
+
+                return ret;
+
+            } catch (Exception ex) {
+                System.out.println("Unable to send message " + ex.getMessage());
+                return "0";
+            }
+
+
+        }
+
+        return ret;
+
+
+    }
+
+
+    public synchronized String sendMsgToNumber(String merchantId, String contact, String msg, String type, String receiptid, String billamount)
     {
 
         String ret = "0";
@@ -481,7 +571,7 @@ public class tokenassigner {
         else {
 
 
-            MySQLAccess.dbObj.sendMsgToNumber(merchantId, contact, msg, receiptid);
+            MySQLAccess.dbObj.sendMsgToNumber(merchantId, contact, msg, receiptid, billamount);
 
             String myPasscode = "2013";
             String smsid = smsobj.getnextsmsid(smsindex);

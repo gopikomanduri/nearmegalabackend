@@ -738,8 +738,7 @@ public class main {
 
 
 
-
-        post("/posttospecificcontact", (request, response) -> {
+        post("/sendbilltospecificcontact", (request, response) -> {
 
 
             response.type("application/json");
@@ -747,6 +746,8 @@ public class main {
             String contact = request.queryParams("contact");
             String img = request.queryParams("msgurl");
             String type = request.queryParams("type");
+            String billamount = request.queryParams("billamount");
+
             String receiptid = "";
             if(type != "0")
             {
@@ -754,8 +755,9 @@ public class main {
             }
 
 
-            System.out.println("for /posttospecificcontact .. request received merchantid "+merchantid+" " +
-                    "counterid  =  "+contact+"  for type "+type+" imgurl is "+img+" receiptid is "+receiptid);
+            System.out.println("for /sendbilltospecificcontact .. request received merchantid "+merchantid+" " +
+                    "counterid  =  "+contact+"  for type "+type+" imgurl is "+img+" bill id is "+receiptid
+                    +" merchant id ="+merchantid+" bill amount ="+billamount);
 
             //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
 
@@ -772,7 +774,59 @@ public class main {
                 tkobj = new tokenassigner(merchantid);
                 merchantstokens.put(merchantid, tkobj);
             }
-          String str =   tkobj.sendMsgToNumber(merchantid, contact,  img,  type,  receiptid);
+            String str =   tkobj.sendBillToNumber(merchantid, contact,  img,  type,  receiptid, billamount);
+
+
+            System.out.println("for sendbilltospecificcontact returning "+str);
+
+            return str;
+
+
+            //  return "Gopi";
+        });
+
+
+        post("/posttospecificcontact", (request, response) -> {
+
+
+            response.type("application/json");
+            String merchantid = request.queryParams("merchantid");
+            String contact = request.queryParams("contact");
+            String img = request.queryParams("msgurl");
+            String type = request.queryParams("type");
+            String receiptid = "";
+            String billamount = "0";
+            if(type != "0")
+            {
+                receiptid = request.queryParams("receiptid");
+                billamount = request.queryParams("billamount");
+                System.out.println("for /posttospecificcontact .. request received merchantid "+merchantid+" " +
+                        "counterid  =  "+contact+"  for type "+type+" imgurl is "+img+" receiptid is "+receiptid
+                +" bill amount ="+billamount);
+
+
+            }
+
+
+            System.out.println("for /posttospecificcontact .. request received merchantid "+merchantid+" " +
+                    "counterid  =  "+contact+"  for type "+type+" imgurl is "+img);
+
+            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
+
+//            String lng = request.queryParams("lng");
+//            String lastId = request.queryParams("lastId");
+            tokenassigner tkobj = null;
+
+            if(merchantstokens.containsKey(merchantid) == true)
+            {
+                tkobj = merchantstokens.get(merchantid);
+            }
+            else
+            {
+                tkobj = new tokenassigner(merchantid);
+                merchantstokens.put(merchantid, tkobj);
+            }
+          String str =   tkobj.sendMsgToNumber(merchantid, contact,  img,  type,  receiptid, billamount);
 
 
             System.out.println("for posttospecificcontact returning "+str);

@@ -3203,6 +3203,7 @@ type int(11)
                 obj.merchantname = this.getMerchantNameForId(resultSet.getString("merchantid"));
                 obj.date = resultSet.getDate("date").toString();
                 obj.merchantreceiptid = resultSet.getString("receiptid");
+                obj.billamount = resultSet.getString("billamount");
 
                 response.add(obj);
             }

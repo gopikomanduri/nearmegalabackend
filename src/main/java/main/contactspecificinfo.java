@@ -7,5 +7,6 @@ public class contactspecificinfo {
     String date;
     String merchantreceiptid;
     Integer Id;
+    String billamount;
 
 }

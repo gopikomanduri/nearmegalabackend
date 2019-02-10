@@ -3096,8 +3096,8 @@ date date
 String tableName = "receipts";
         Integer generatedKey = -1;
         try {
-            String sql = "INSERT INTO "+tableName+" (contact, imageurl, merchantid, date, receiptid)" +
-                    "VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO "+tableName+" (contact, imageurl, merchantid, date, receiptid, billamount)" +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, contact);
             preparedStatement.setString(2,msgurl);

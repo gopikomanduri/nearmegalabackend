@@ -3023,8 +3023,13 @@ imgurl varchar(128
                 }
 
                 //String nextIdstr = receiptid.substring(3,)
-                if((receiptid == null) || (receiptid.length() == 0))
+                if((receiptid == null)) {
                     return "1";
+                }
+                if(receiptid.length() == 0)
+                {
+                    return "1";
+                }
                 Integer val = Integer.valueOf(receiptid);
                 ++val;
                 return val.toString();

@@ -846,6 +846,7 @@ public class main {
 
 
 
+
             System.out.println("for /getnextreceiptid .. request received contact "+merchantid);
 
             //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);

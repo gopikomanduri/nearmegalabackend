@@ -587,6 +587,10 @@ public class tokenassigner {
                 merDetails.merchanturl = dpimg;
             }
 
+            if(merDetails.merchantname.contains(" "))
+            {
+                merDetails.merchantname.replaceAll(" ","%20");
+            }
             String myMessage = merDetails.merchantname+"%20"+msg;
 
             try {

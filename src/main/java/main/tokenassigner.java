@@ -589,7 +589,11 @@ public class tokenassigner {
 
             if(merDetails.merchantname.contains(" "))
             {
-                merDetails.merchantname.replaceAll(" ","%20");
+                merDetails.merchantname = merDetails.merchantname.replaceAll(" ","%20");
+            }
+            if(msg.contains(" "))
+            {
+                msg = msg.replaceAll(" ","%20");
             }
             String myMessage = merDetails.merchantname+"%20"+msg;
 

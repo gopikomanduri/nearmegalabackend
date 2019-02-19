@@ -406,6 +406,15 @@ public class tokenassigner {
                 System.out.println("In sendMsgToNumber . merDetails.merchantname is "+merDetails.merchantname);
 
             }
+            if(merDetails.merchantname.contains(" "))
+            {
+                merDetails.merchantname = merDetails.merchantname.replaceAll(" ","%20");
+            }
+
+            if(msg.contains(" "))
+            {
+                msg = msg.replaceAll(" ","%20");
+            }
             String myMessage = merDetails.merchantname + "_" + msg;
 
             System.out.println("In sendMsgToNumber .myMessage "+myMessage);

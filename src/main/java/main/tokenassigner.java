@@ -368,19 +368,11 @@ public class tokenassigner {
 
 
 	    System.out.println("In sendMsgToNumber");
-
-	    if(contact.length() != 10)
-	        return "1";
-	    for(int i = 0;i<10;i++)
-        {
-            if(('a'< contact.charAt(i) ) || ( contact.charAt(i) < 'z') || ('A' < contact.charAt(i) ) || (contact.charAt(i)< 'Z'))
-                return "1";
-        }
-
         if(Util.isNumeric(contact) == false)
             return "1";
 
-
+        if(contact.length() != 10)
+            return "1";
 
         try {
             Thread.sleep(500);
@@ -391,7 +383,6 @@ public class tokenassigner {
 
 
         Integer success = 0;
-        int trying = 0;
         do {
 
 
@@ -452,23 +443,16 @@ public class tokenassigner {
 
                     if (line.contains("\"success\":1") == true) {
                         success = 1;
-                        trying = 0;
-                        break;
                     }
                     //   myres.append(line);
                 }
 
 
             } catch (Exception ex) {
-                trying++;
                 success = 0;
                 System.out.println("Unable to send message " + ex.getMessage());
             }
-            if(trying == 3)
-            {
-                break;
-            }
-        } while(success == 0);
+        }while(success == 0);
 
         return "1";
 
@@ -573,17 +557,9 @@ public class tokenassigner {
         String ret = "0";
 
 
-        System.out.println("In sendMsgToNumber");
-
-        if(contact.length() != 10)
-            return "1";
-        for(int i = 0;i<10;i++)
-        {
-            if(('a'< contact.charAt(i) ) || ( contact.charAt(i) < 'z') || ('A' < contact.charAt(i) ) || (contact.charAt(i)< 'Z'))
-                return "1";
-        }
-
         if(Util.isNumeric(contact) == false)
+            return ret;
+        if(contact.length() != 10)
             return "1";
 
 

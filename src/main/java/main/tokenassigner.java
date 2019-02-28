@@ -573,8 +573,18 @@ public class tokenassigner {
         String ret = "0";
 
 
+        System.out.println("In sendMsgToNumber");
+
+        if(contact.length() != 10)
+            return "1";
+        for(int i = 0;i<10;i++)
+        {
+            if(('a'< contact.charAt(i) ) || ( contact.charAt(i) < 'z') || ('A' < contact.charAt(i) ) || (contact.charAt(i)< 'Z'))
+                return "1";
+        }
+
         if(Util.isNumeric(contact) == false)
-            return ret;
+            return "1";
 
 
 

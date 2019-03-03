@@ -536,7 +536,7 @@ public class main {
             response.type("application/json");
             String contact = request.queryParams("merchantcontact");
 
-            System.out.println("for /getmerchantdetails .. request received merchantcontact "+contact);
+            System.out.println("for /getmerchantcounterdetails .. request received merchantcontact "+contact);
 
 
             counterandhelper obj = new counterandhelper();

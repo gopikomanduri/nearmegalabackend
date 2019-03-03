@@ -1030,12 +1030,14 @@ merchantDetails temp = new merchantDetails();
 //                temp.area = resultSet.getString("area");
 //                temp.city=resultSet.getString("city");
 //                temp.state = resultSet.getString("state");
+                temp.geoHash = resultSet.getString("geohash");
                 temp.country = resultSet.getString("country");
 
             }
 
-            System.out.println("returning role is "+temp.toString());
-            return new Gson().toJson(temp);
+            String merchantjson = new Gson().toJson(temp);
+            System.out.println("returning merchant details  "+merchantjson.toString());
+            return merchantjson;
         }
         catch(Exception ex)
         {

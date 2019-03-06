@@ -588,6 +588,69 @@ postedon DATE
 
     }
 
+    public String getUserDetails(String number)
+    {
+        consumerpayload temp = new consumerpayload();
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+
+            String merchantQuery = "SELECT * FROM consumers where  contact like %'"+number+"'% order by Id DESC";
+
+
+            System.out.println("query executing is "+merchantQuery);
+            statement = connect.createStatement();
+
+            // Result set get the result of the SQL query
+            resultSet = statement
+                    .executeQuery(merchantQuery);
+
+                    /*
+consumername varchar(128)
+contact varchar(15)
+DOB date
+dpurl varchar(256)
+registeredon datetime
+status int(11)
+sex int(11)
+         */
+
+
+
+
+
+
+
+
+
+            if(resultSet.next()) {
+
+                temp.consumername = resultSet.getString("consumername");
+                temp.contact = resultSet.getString("contact");
+                temp.dob = resultSet.getDate("DOB").toString();
+                temp.dpurl = resultSet.getString("dpurl");
+                temp.sex = resultSet.getInt("sex");
+            }
+
+            String merchantjson = new Gson().toJson(temp);
+            System.out.println("returning user details  "+merchantjson.toString());
+            return merchantjson;
+        }
+
+
+
+
+
+
+
+         catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String merchantjson = new Gson().toJson(temp);
+
+        return merchantjson;
+    }
+
     public String insertIntoUser(consumerpayload obj)
     {
         LocalDateTime now = LocalDateTime.now();

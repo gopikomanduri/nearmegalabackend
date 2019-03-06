@@ -351,6 +351,22 @@ public class main {
             //  return "Gopi";
         });
 
+        post("/LoginUser", (request, response) -> {
+            response.type("application/json");
+            String dataReceived = request.queryParams("consumerpayload");
+            System.out.println("for /LoginUser .. request received "+dataReceived);
+
+            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
+
+//            String lng = request.queryParams("lng");
+//            String lastId = request.queryParams("lastId");
+            consumer reg = new consumer();
+            String consumerId =  reg.getUserDetails(dataReceived);
+            System.out.println("for /RegUser .. response sent "+consumerId);
+            return consumerId;
+
+            //  return "Gopi";
+        });
 
 
 

@@ -9,4 +9,8 @@ public class consumer {
         return MySQLAccess.dbObj.insertIntoUser(obj);
 
     }
+    public String getUserDetails(String str)
+    {
+        return MySQLAccess.dbObj.getUserDetails(str);
+    }
 }

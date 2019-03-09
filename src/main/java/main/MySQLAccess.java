@@ -595,7 +595,7 @@ postedon DATE
             if(connect.isClosed() == true)
                 connect = initConnection();
 
-            String merchantQuery = "SELECT * FROM consumers where  contact like %'"+number+"'% order by Id DESC";
+            String merchantQuery = "SELECT * FROM consumers where  contact like '%"+number+"%' order by idconsumers DESC";
 
 
             System.out.println("query executing is "+merchantQuery);

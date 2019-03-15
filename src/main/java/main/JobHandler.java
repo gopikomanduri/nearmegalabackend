@@ -36,6 +36,7 @@ public class JobHandler implements Callable {
 
     public void insertJob(JobPayLoad obj)
     {
+        System.out.println("In inserjob method. lat is "+obj.lng+" lng is "+obj.lng);
         MySQLAccess.dbObj.insertJob(obj);
     }
 

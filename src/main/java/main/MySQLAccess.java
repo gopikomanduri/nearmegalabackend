@@ -526,10 +526,12 @@ lat VARCHAR(10)
 LNG VARCHAR(10)
          */
 
+        System.out.println("the lat received for job is "+obj.lat+" \n the lng received for job is "+obj.lng);
+
         try {
             String sql = "INSERT INTO "+tableName+" (employername, employerlocationurl, jobDescription, locationLandmark, offeringpost," +
-                    "educationQualification, experienceReq, sex, ageLimitation, contact, emailId, interviewDate,shiftTimings, salary, postedon , lat, lng)" +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?)";
+                    "educationQualification, experienceReq, sex, ageLimitation, contact, emailId, interviewDate,shiftTimings, salary,  lat, lng, postedon)" +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, obj.employername);
             preparedStatement.setString(2, obj.employerlocationurl);
@@ -545,14 +547,13 @@ LNG VARCHAR(10)
             preparedStatement.setString(12, obj.interviewDate);
             preparedStatement.setString(13, obj.shiftTimings);
             preparedStatement.setString(14, obj.salary);
-            preparedStatement.setDate(15, Util.getCurrentDate());
-            preparedStatement.setString(16, obj.lat);
-            preparedStatement.setString(17, obj.lng);
+            preparedStatement.setString(15, obj.lat);
+            preparedStatement.setString(16, obj.lng);
+            preparedStatement.setDate(17, Util.getCurrentDate());
 
 
 
             preparedStatement.executeUpdate();
-
 
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()) {

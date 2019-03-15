@@ -62,6 +62,9 @@ public class main {
 
             JobPayLoad jobreceived = new Gson().fromJson(dataReceived, JobPayLoad.class);
             JobHandler jobHandler = new JobHandler(jobreceived);
+
+            System.out.println("In pushjob method. lat is "+jobreceived.lng+" lng is "+jobreceived.lng);
+
             //   Future ft = threadpool.submit(adHandler);
             jobHandler.insertJob(jobreceived);
 

@@ -21,4 +21,6 @@ public class JobPayLoad {
     public String shiftTimings;
     public String salary;
     public String postedon;
+    public String lat;
+    public String lng;
 }

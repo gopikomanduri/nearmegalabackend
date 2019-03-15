@@ -522,12 +522,14 @@ interviewDate varchar(45)
 shiftTimings varchar(45)
 salary varchar(45)
 postedon DATE
+lat VARCHAR(10)
+LNG VARCHAR(10)
          */
 
         try {
             String sql = "INSERT INTO "+tableName+" (employername, employerlocationurl, jobDescription, locationLandmark, offeringpost," +
-                    "educationQualification, experienceReq, sex, ageLimitation, contact, emailId, interviewDate,shiftTimings, salary, postedon )" +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+                    "educationQualification, experienceReq, sex, ageLimitation, contact, emailId, interviewDate,shiftTimings, salary, postedon , lat, lng)" +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?)";
             PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, obj.employername);
             preparedStatement.setString(2, obj.employerlocationurl);
@@ -544,6 +546,8 @@ postedon DATE
             preparedStatement.setString(13, obj.shiftTimings);
             preparedStatement.setString(14, obj.salary);
             preparedStatement.setDate(15, Util.getCurrentDate());
+            preparedStatement.setString(16, obj.lat);
+            preparedStatement.setString(17, obj.lng);
 
 
 
@@ -1646,6 +1650,8 @@ interviewDate varchar(45)
 shiftTimings varchar(45)
 salary varchar(45)
 postedon datetime
+lat varchar(10)
+lng varchar(10)
 
          */
         try
@@ -1672,6 +1678,8 @@ postedon datetime
 
                 obj.salary = resultSet.getString("salary");
                 obj.postedon = resultSet.getString("postedon");
+                 obj.lat = resultSet.getString("lat");
+                 obj.lng = resultSet.getString("lng");
 
 
                 response.add(obj);

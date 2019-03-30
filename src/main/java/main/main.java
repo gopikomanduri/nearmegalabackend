@@ -73,11 +73,10 @@ public class main {
         });
 
         post("/getjobsaround", (request, response) -> {
-            //      System.out.println("pushing ad  : "+request.toString());
+            //      System.out.println("pushing adzz  : "+request.toStringz());
             response.type("application/json");
             String dataReceived = request.queryParams("geohash");
             System.out.println("fetching jobs around  : "+dataReceived);
-
             JobHandler jobHandler = new JobHandler();
             //   Future ft = threadpool.submit(adHandler);
            String str = jobHandler.getJobsAround(dataReceived);

@@ -22,4 +22,7 @@ public class AdPayLoad {
     public String shopname;
   public Integer negotiate;
   public Integer minBusiness;
+  public String mindiscount;
+  public String maxdiscount;
+  public String discdesc;
 }

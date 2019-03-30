@@ -1375,6 +1375,103 @@ utilized int(6)
         }
     }
 
+    public Integer insertAd(String MerchantId, String category, String vd, String vm, String vy, String imgurl,String itemdesc,String offercode, String geohash
+    , String mindiscount, String maxdiscount, String discdesc)
+    {
+
+        /*
+
+
+        +----------------+--------------+------+-----+-----------+----------------+
+| Field          | Type         | Null | Key | Default   | Extra          |
++----------------+--------------+------+-----+-----------+----------------+
+| Id             | int(11)      | NO   | PRI | NULL      | auto_increment |
+| MerchantId     | varchar(45)  | NO   |     | NULL      |                |
+| Category       | int(10)      | YES  |     | NULL      |                |
+| ValidTillDate  | int(2)       | YES  |     | NULL      |                |
+| ValidTillMonth | int(2)       | YES  |     | NULL      |                |
+| ValidTillYear  | int(4)       | YES  |     | NULL      |                |
+| ValidFromDate  | int(2)       | YES  |     | NULL      |                |
+| ValidFromMonth | int(2)       | YES  |     | NULL      |                |
+| ValidFromYear  | int(4)       | YES  |     | NULL      |                |
+| adimgurl       | varchar(128) | YES  |     | NULL      |                |
+| itemdesc       | varchar(512) | YES  |     | NULL      |                |
+| receivedOn     | varchar(45)  | YES  |     | NULL      |                |
+| offercode      | varchar(6)   | YES  |     | NULL      |                |
+| shopname       | varchar(45)  | YES  |     | shop name |                |
+| mindiscount    | varchar(10)  | YES  |     | 0         |                |
+| maxdiscount    | varchar(10)  | YES  |     | 0         |                |
+| discdesc       | varchar(512) | YES  |     | 0         |                |
++----------------+--------------+------+-----+-----------+----------------+
+
+         */
+
+        Integer generatedKey = -1;
+
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        LocalDateTime now = LocalDateTime.now();
+
+        String merchantGeoHash = getGeoHashForMerchant(MerchantId);
+        String receivedOn = Util.getTimestamp(now);
+        Integer vad = Util.getCurrentDay(now);
+        Integer vam = Util.getCurrentMonth(now);
+        Integer vay = Util.getCurrentYear(now);
+//        int vtd =  Integer.parseInt(vd);
+//        int vtm = Integer.parseInt(vm);
+//        int vty = Integer.parseInt(vy);
+
+
+        if(merchantGeoHash.length() < 6)
+            return -1;
+
+        try {
+            String sql = "INSERT INTO ad_"+geohash+" (MerchantId, category, validtilldate, validtillmonth, validtillyear," +
+                    "validfromdate, validfrommonth, validfromyear, adimgurl, itemdesc, receivedon, offercode, mindiscount,maxdiscount,discdesc)" +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connect.prepareStatement(sql,  Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, MerchantId);
+            preparedStatement.setString(2, category);
+            preparedStatement.setString(3, vd);
+            preparedStatement.setString(4, vm);
+            preparedStatement.setString(5, vy);
+            preparedStatement.setString(6, vad.toString());
+            preparedStatement.setString(7, vam.toString());
+            preparedStatement.setString(8, vay.toString());
+            preparedStatement.setString(9, imgurl);
+            preparedStatement.setString(10, itemdesc);
+            preparedStatement.setString(11, receivedOn);
+            preparedStatement.setString(12, offercode);
+            preparedStatement.setString(13, mindiscount);
+            preparedStatement.setString(14, maxdiscount);
+            preparedStatement.setString(15, discdesc);
+
+
+            preparedStatement.executeUpdate();
+
+
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()) {
+                generatedKey = rs.getInt(1);
+            }            preparedStatement.close();
+
+            preparedStatement.close();
+
+
+            System.out.println("command executed is "+sql);
+            insertIntoOfferReach(MerchantId,offercode);
+            return generatedKey;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return generatedKey;
+        }
+    }
+
     /*
 
      {"name":"Id", "type":"varchar(12)"},

@@ -1100,6 +1100,7 @@ merchantDetails temp = new merchantDetails();
 //                temp.state = resultSet.getString("state");
                 temp.geoHash = resultSet.getString("geohash");
                 temp.country = resultSet.getString("country");
+                temp.role =  resultSet.getInt("role");
 
             }
 

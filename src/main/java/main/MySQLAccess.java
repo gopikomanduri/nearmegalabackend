@@ -1377,7 +1377,8 @@ utilized int(6)
     }
 
     public Integer insertAd(String MerchantId, String category, String vd, String vm, String vy, String imgurl,String itemdesc,String offercode, String geohash
-    , String mindiscount, String maxdiscount, String discdesc)
+    , String mindiscount, String maxdiscount, String discdesc,
+                            double latitude, double longitude)
     {
 
         /*
@@ -1432,8 +1433,9 @@ utilized int(6)
 
         try {
             String sql = "INSERT INTO ad_"+geohash+" (MerchantId, category, validtilldate, validtillmonth, validtillyear," +
-                    "validfromdate, validfrommonth, validfromyear, adimgurl, itemdesc, receivedon, offercode, mindiscount,maxdiscount,discdesc)" +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "validfromdate, validfrommonth, validfromyear, adimgurl, itemdesc, receivedon, offercode, mindiscount,maxdiscount,discdesc," +
+                    "latitude, longitude)" +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connect.prepareStatement(sql,  Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, MerchantId);
             preparedStatement.setString(2, category);
@@ -1450,7 +1452,8 @@ utilized int(6)
             preparedStatement.setString(13, mindiscount);
             preparedStatement.setString(14, maxdiscount);
             preparedStatement.setString(15, discdesc);
-
+            preparedStatement.setDouble(16, latitude);
+            preparedStatement.setDouble(17, longitude);
 
             preparedStatement.executeUpdate();
 
@@ -1934,21 +1937,23 @@ groupdesc varchar(256)
                 obj.shopname="Name:"+merchantName+" ShopNo :"+shopno;
                 obj.negotiate = resultSet.getInt("B.cannegotiate");
                 obj.minBusiness=resultSet.getInt("B.minamount");
-            LatLng temp = null;
-//            temp.lng = 0.0;
-//            temp.lat = 0.0;
-            obj.lng = 0.0;
-            obj.lat = 0.0;
-
-                if((temp = merchantLatLngs.get(obj.merchantid)) == null)
-                {
-                     temp = getLatLatForMerchant(obj.merchantid, geoHash);
-                }
-                if(temp != null) {
-                    obj.lat = temp.lat;
-                    obj.lng = temp.lng;
-                }
-            merchantLatLngs.put(obj.merchantid, temp);
+                obj.lat = resultSet.getDouble("A.latitude");
+                obj.lng = resultSet.getDouble("A.longitude");
+//            LatLng temp = null;
+////            temp.lng = 0.0;
+////            temp.lat = 0.0;
+//            obj.lng = 0.0;
+//            obj.lat = 0.0;
+//
+//                if((temp = merchantLatLngs.get(obj.merchantid)) == null)
+//                {
+//                     temp = getLatLatForMerchant(obj.merchantid, geoHash);
+//                }
+//                if(temp != null) {
+//                    obj.lat = temp.lat;
+//                    obj.lng = temp.lng;
+//                }
+//            merchantLatLngs.put(obj.merchantid, temp);
             updateOfferReach(obj.merchantid, obj.offercode,1,0,0);
                 response.add(obj);
         }

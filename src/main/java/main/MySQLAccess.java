@@ -2384,6 +2384,8 @@ delivered int(1)
 
             preparedStatement.executeUpdate();
 
+            System.out.println("executing following query "+sql);
+
 
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()) {

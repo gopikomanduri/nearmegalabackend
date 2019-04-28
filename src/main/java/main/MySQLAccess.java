@@ -2342,7 +2342,7 @@ rootmsg  INT
     public String AddNewNegotations(NegotationPayLoad obj)
     {
 
-        String tableName = "Negotations_"+obj.geohash;
+        String tableName = "negotations_"+obj.geohash;
         Integer generatedKey = -1;
         try {
 
@@ -2489,7 +2489,7 @@ minamount int(6)
 
             // String sqlcmd = "select * from job_" + geohash+" where idjobs > ? AND postedon >= ? ";
 
-            String sqlcmd = "select * from negotations_" + geohash+" where idnegotations > "+maxJobIdReceived+"  AND merchantid = '"+merchantId+"' ";
+            String sqlcmd = "select * from negotations_" + geohash+" where idnegotations > "+maxJobIdReceived+"  AND merchantid  like '"+merchantId+"' ";
 
 
             if(connect.isClosed() == true)

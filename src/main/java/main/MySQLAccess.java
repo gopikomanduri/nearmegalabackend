@@ -2198,8 +2198,14 @@ pointstomerchant int(10)
                 createNegotiateRequestTableIfNotExist(geohash);
 
                 // Result set get the result of the SQL query
+//                String sqlcmd= "select * from ad_"+geohash+" as A LEFT JOIN  negotiate_"+geohash+" as B on  A.Id = B.adId where A.Id > "+intLastId+" " +
+//                        "AND A.ValidTillDate >= "+vad+" AND A.ValidTillMonth >= "+vam+" AND A.ValidTillYear >= "+vay ;
+
                 String sqlcmd= "select * from ad_"+geohash+" as A LEFT JOIN  negotiate_"+geohash+" as B on  A.Id = B.adId where A.Id > "+intLastId+" " +
-                        "AND A.ValidTillDate >= "+vad+" AND A.ValidTillMonth >= "+vam+" AND A.ValidTillYear >= "+vay ;
+                        "AND ( (A.ValidTillYear > "+vay+" ) OR (A.ValidTillYear = "+vay+" AND A.ValidTillMonth > "+vam+" ) " +
+                        "OR (A.ValidTillYear = "+vay+" AND A.ValidTillMonth = "+vam+"  AND A.ValidTillDate >= "+vad+"))" ;
+
+
 
                 System.out.println("cmd executed is : "+sqlcmd);
 
@@ -2632,6 +2638,9 @@ notificationid int(11)
 
     public List<NegotationPayLoadResponse> fetchNegotiationResponses(String customercontact, List<Integer> lastResponsesReceived, List<String> negotiationsareas)
     {
+
+        System.out.println("In fetchNegotiationResponses .. ");
+
         List<NegotationPayLoadResponse> rs = new ArrayList<NegotationPayLoadResponse>();
         for(int i=0;i<lastResponsesReceived.size();i++)
         {

@@ -374,7 +374,7 @@ public class MySQLAccess {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        int Id = 0;
+        int Id = 1;
         try {
             statement = connect.createStatement();
 
@@ -394,6 +394,7 @@ public class MySQLAccess {
                 while (resultSet.next()) {
                     Id = resultSet.getInt("Id");
                 }
+                Id = Id+1;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1174,6 +1175,8 @@ merchantDetails temp = new merchantDetails();
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
+            System.out.println("In regMerchant .. command executing is "+preparedStatement.toString()+" .. and returning "+obj.merchantId);
+
             return obj.merchantId;
 
         } catch (SQLException e) {

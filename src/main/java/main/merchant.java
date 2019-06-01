@@ -16,10 +16,13 @@ public class merchant {
     }
     public  String registerMerchant(String regDetails)
     {
+        System.out.println("In registerMechant");
         Gson gson = new Gson();
         merchantDetails obj = gson.fromJson(regDetails, merchantDetails.class);
       //  MySQLAccess.dbObj.createMerchantAreaTableIfNotExist(obj.city, obj.area, obj.landMark);
         String MId = MySQLAccess.dbObj.getMaxIdInMerchantTable("merchant");
+        System.out.println("In registerMechant . Next Id is "+MId);
+
 
         obj.merchantId = MId;
 

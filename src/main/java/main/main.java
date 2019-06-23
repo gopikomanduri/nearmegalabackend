@@ -756,7 +756,7 @@ public class main {
 
 
 
-        post("/sendbilltospecificcontact", (request, response) -> {
+        post("/", (request, response) -> {
 
 
             response.type("application/json");
@@ -798,6 +798,48 @@ public class main {
             System.out.println("for sendbilltospecificcontact returning "+str);
 
             return str;
+
+
+            //  return "Gopi";
+        });
+
+
+
+        post("/postoffertospecificcontact", (request, response) -> {
+
+
+            response.type("application/json");
+            String merchantid = request.queryParams("merchantid");
+            String contact = request.queryParams("contact");
+            String ladtReceivedId = request.queryParams("lastid");
+            String img = request.queryParams("msgurl");
+
+
+            System.out.println("for /postoffertospecificcontact .. request received merchantid "+merchantid+" " +
+                    "counterid  =  "+contact+"  for ladtReceivedId "+ladtReceivedId+" imgurl is "+img);
+
+            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
+
+//            String lng = request.queryParams("lng");
+//            String lastId = request.queryParams("lastId");
+            tokenassigner tkobj = null;
+
+            if(merchantstokens.containsKey(merchantid) == true)
+            {
+                tkobj = merchantstokens.get(merchantid);
+            }
+            else
+            {
+                tkobj = new tokenassigner(merchantid);
+                merchantstokens.put(merchantid, tkobj);
+            }
+        //    String str =   tkobj.sendMsgToNumber(merchantid, contact,  img,  type,  receiptid, billamount);
+
+
+         //   System.out.println("for posttospecificcontact returning "+str);
+
+          //  return str;
+            return null;
 
 
             //  return "Gopi";
@@ -1125,7 +1167,7 @@ public class main {
                 List<CategoryPayLoad> temp =  MySQLAccess.dbObj.getSupportedCategories();
                 String str = new Gson().toJson(temp);
 
-            System.out.println("for /fetchacategories .. response sent "+str);
+          //  System.out.println("for /fetchacategories .. response sent "+str);
             return str;
 
             //  return "Gopi";

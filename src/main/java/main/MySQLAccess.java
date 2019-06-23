@@ -788,8 +788,9 @@ Integer generatedKey = -1;
             Date shoppingdate = Util.stringToDate(obj.shoppingdate);
 
             String sql = "INSERT INTO "+table+" (idnotification, validfrom,  validto, contact, canjoin, " +
-                    "bringcharges, registeredcontactnumber, finaldiscount, geohash, shoppingdate, offerdesc, value, flat, ispercentage)" +
-                    " VALUES (?, ?, ? ,? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "bringcharges, registeredcontactnumber, finaldiscount, geohash, shoppingdate, offerdesc, value, flat, ispercentage," +
+                    "imgurl)" +
+                    " VALUES (?, ?, ? ,? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connect.prepareStatement(sql,  Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, obj.idnotification);
             preparedStatement.setDate(2, validFrom);
@@ -805,6 +806,7 @@ Integer generatedKey = -1;
             preparedStatement.setInt(12, obj.value);
             preparedStatement.setInt(13, obj.flat);
             preparedStatement.setInt(14, obj.ispercentage);
+            preparedStatement.setString(15, obj.imgurl);
 
 
             System.out.println(preparedStatement.toString());
@@ -2905,6 +2907,7 @@ offerdesc varchar(128)
 value int(11)
 flat int(11)
 ispercentage int(11)
+imgurl varchar(128)
              */
             while(resultSet.next()) {
 
@@ -2925,6 +2928,7 @@ ispercentage int(11)
                 obj.value = resultSet.getInt("value");
                 obj.flat = resultSet.getInt("flat");
                 obj.ispercentage = resultSet.getInt("ispercentage");
+                obj.imgurl = resultSet.getString("imgurl");
 
                 response.add(obj);
             }

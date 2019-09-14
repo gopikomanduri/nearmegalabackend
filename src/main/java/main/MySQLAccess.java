@@ -2820,8 +2820,8 @@ notificationid int(11)
 
             try {
 
-                int lastNegotiationResponse = lastResponsesReceived.get(0);
-                String tableName = "negotiationsresponse_"+negotiationsareas.get(0);
+                int lastNegotiationResponse = lastResponsesReceived.get(i);
+                String tableName = "negotiationsresponse_"+negotiationsareas.get(i);
 
 
 

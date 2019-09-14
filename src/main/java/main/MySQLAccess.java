@@ -1020,6 +1020,29 @@ closedon datetime
         }
     }
 
+    public String changeMerchantPwd(String merchantContact, String pwd)
+    {
+
+        try {
+            if (connect.isClosed() == true)
+                connect = initConnection();
+
+            PreparedStatement update = connect.prepareStatement
+                    ("UPDATE merchant SET password = ? WHERE MerchantContact = ? ");
+
+            update.setString(1, pwd);
+            update.setString(2, merchantContact);
+
+            update.executeUpdate();
+            return "1";
+
+        }
+        catch (Exception ex)
+        {
+            return "0";
+        }
+        }
+
     public String getMerchantDetails(String merchantContact)
     {
         try
@@ -1041,6 +1064,29 @@ closedon datetime
 
 
 /*
+
++-----------------+--------------+------+-----+-------------------+----------------+
+| Field           | Type         | Null | Key | Default           | Extra          |
++-----------------+--------------+------+-----+-------------------+----------------+
+| Id              | int(11)      | NO   | PRI | NULL              | auto_increment |
+| MerchantId      | varchar(128) | NO   |     | NULL              |                |
+| geohash         | varchar(12)  | NO   |     | NULL              |                |
+| latitude        | double       | NO   |     | 0                 |                |
+| longitude       | double       | NO   |     | 0                 |                |
+| imgurl          | varchar(100) | YES  |     | NULL              |                |
+| MerchantName    | varchar(32)  | NO   |     | NULL              |                |
+| state           | varchar(128) | YES  |     | Karnataka         |                |
+| country         | varchar(128) | NO   |     | INDIA             |                |
+| registeredon    | varchar(128) | NO   |     | CURRENT_TIMESTAMP |                |
+| isactive        | varchar(2)   | NO   |     | 1                 |                |
+| shopNo          | varchar(45)  | YES  |     | NULL              |                |
+| MerchantContact | varchar(45)  | NO   |     | 0000000000        |                |
+| MerchantType    | int(3)       | NO   |     | 0                 |                |
+| password        | varchar(15)  | NO   |     | 0000              |                |
+| role            | int(11)      | NO   |     | 0                 |                |
+| govtid          | varchar(128) | YES  |     | NULL              |                |
+| govtidimgurl    | varchar(256) | YES  |     | NULL              |                |
++-----------------+--------------+------+-----+-------------------+----------------+
 
 public class merchantDetails {
  public String merchantName;
@@ -1083,6 +1129,29 @@ MerchantContact varchar(45)
 MerchantType int(3)
 password varchar(15)
 role int(11)
+
++-----------------+--------------+------+-----+-------------------+----------------+
+| Field           | Type         | Null | Key | Default           | Extra          |
++-----------------+--------------+------+-----+-------------------+----------------+
+| Id              | int(11)      | NO   | PRI | NULL              | auto_increment |
+| MerchantId      | varchar(128) | NO   |     | NULL              |                |
+| geohash         | varchar(12)  | NO   |     | NULL              |                |
+| latitude        | double       | NO   |     | 0                 |                |
+| longitude       | double       | NO   |     | 0                 |                |
+| imgurl          | varchar(100) | YES  |     | NULL              |                |
+| MerchantName    | varchar(32)  | NO   |     | NULL              |                |
+| state           | varchar(128) | YES  |     | Karnataka         |                |
+| country         | varchar(128) | NO   |     | INDIA             |                |
+| registeredon    | varchar(128) | NO   |     | CURRENT_TIMESTAMP |                |
+| isactive        | varchar(2)   | NO   |     | 1                 |                |
+| shopNo          | varchar(45)  | YES  |     | NULL              |                |
+| MerchantContact | varchar(45)  | NO   |     | 0000000000        |                |
+| MerchantType    | int(3)       | NO   |     | 0                 |                |
+| password        | varchar(15)  | NO   |     | 0000              |                |
+| role            | int(11)      | NO   |     | 0                 |                |
+| govtid          | varchar(128) | YES  |     | NULL              |                |
+| govtidimgurl    | varchar(256) | YES  |     | NULL              |                |
++-----------------+--------------+------+-----+-------------------+----------------+
  */
 
 
@@ -1104,6 +1173,8 @@ merchantDetails temp = new merchantDetails();
                 temp.geoHash = resultSet.getString("geohash");
                 temp.country = resultSet.getString("country");
                 temp.role =  resultSet.getInt("role");
+                temp.merchantIdProof = resultSet.getString("govtid");
+                temp.merchantIdProofUri = resultSet.getString("govtidimgurl");
 
             }
 
@@ -1117,6 +1188,79 @@ merchantDetails temp = new merchantDetails();
             merchantDetails temp = new merchantDetails();
 
             return new Gson().toJson(temp);
+        }
+    }
+
+    public merchantDetails fetchMerchantDetails(String  contact)
+    {
+        /*
+
+mysql> describe merchant;
++-----------------+--------------+------+-----+-------------------+----------------+
+| Field           | Type         | Null | Key | Default           | Extra          |
++-----------------+--------------+------+-----+-------------------+----------------+
+| Id              | int(11)      | NO   | PRI | NULL              | auto_increment |
+| MerchantId      | varchar(128) | NO   |     | NULL              |                |
+| geohash         | varchar(12)  | NO   |     | NULL              |                |
+| latitude        | double       | NO   |     | 0                 |                |
+| longitude       | double       | NO   |     | 0                 |                |
+| imgurl          | varchar(100) | YES  |     | NULL              |                |
+| MerchantName    | varchar(32)  | NO   |     | NULL              |                |
+| state           | varchar(128) | YES  |     | Karnataka         |                |
+| country         | varchar(128) | NO   |     | INDIA             |                |
+| registeredon    | varchar(128) | NO   |     | CURRENT_TIMESTAMP |                |
+| isactive        | varchar(2)   | NO   |     | 1                 |                |
+| shopNo          | varchar(45)  | YES  |     | NULL              |                |
+| MerchantContact | varchar(45)  | NO   |     | 0000000000        |                |
+| MerchantType    | int(3)       | NO   |     | 0                 |                |
+| password        | varchar(15)  | NO   |     | 0000              |                |
+| role            | int(11)      | NO   |     | 0                 |                |
+| govtid          | varchar(128) | YES  |     | NULL              |                |
+| govtidimgurl    | varchar(256) | YES  |     | NULL              |                |
++-----------------+--------------+------+-----+-------------------+----------------+
+
+         */
+        String tableName = "merchant";
+        String mId = "0";
+        String sqlcmd = "select MerchantId from "+tableName+" where MerchantContact='"+contact+"' order by Id desc";
+        merchantDetails obj = new merchantDetails();
+        try
+        {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+
+
+            PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
+
+            //  stmnt.executeQuery();
+
+            resultSet = stmnt
+                    .executeQuery(sqlcmd);
+
+            if(resultSet.next())
+            {
+                obj.merchantId = resultSet.getString("MerchantId");
+                obj.geoHash = resultSet.getString("geohash");
+                obj.latitude = resultSet.getDouble("latitude");
+                obj.longitude = resultSet.getDouble("longitude");
+                obj.imgurl = resultSet.getString("imgurl");
+                obj.merchantName = resultSet.getString("MerchantName");
+                obj.state = resultSet.getString("state");
+                obj.country = resultSet.getString("country");
+                obj.registeredOn = resultSet.getString("registeredon");
+                obj.isActive = resultSet.getString("isactive");
+                obj.shopNo = resultSet.getString("shopNo");
+                obj.merchantPhn = resultSet.getString("MerchantContact");
+                obj.merchantIdProof = resultSet.getString("govtid");
+                obj.merchantIdProofUri= resultSet.getString("govtidimgurl");
+                return obj;
+
+            }
+            return obj;
+        }
+        catch(Exception ex)
+        {
+            return obj;
         }
     }
 
@@ -1159,6 +1303,9 @@ merchantDetails temp = new merchantDetails();
                     "MerchantName, state, country, registeredon, isactive, shopNo, MerchantContact, password,role)" +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connect.prepareStatement(sql);
+
+         //   PreparedStatement preparedStatement = connect.prepareStatement(sql,  Statement.RETURN_GENERATED_KEYS);
+
             preparedStatement.setString(1, obj.merchantId);
             preparedStatement.setString(2, obj.geoHash);
             preparedStatement.setDouble(3, obj.latitude);

@@ -19,7 +19,15 @@ public class merchant {
         System.out.println("In registerMechant");
         Gson gson = new Gson();
         merchantDetails obj = gson.fromJson(regDetails, merchantDetails.class);
-      //  MySQLAccess.dbObj.createMerchantAreaTableIfNotExist(obj.city, obj.area, obj.landMark);
+        String curMid = MySQLAccess.dbObj.getMerchantIdFromContact(obj.merchantPhn);
+        if(curMid.equalsIgnoreCase("0") == false)
+        {
+            return MySQLAccess.dbObj.getMerchantDetails(obj.merchantPhn);
+//            String res= gson.toJson(obj,merchantDetails.class);
+//            return res;
+        }
+
+        //  MySQLAccess.dbObj.createMerchantAreaTableIfNotExist(obj.city, obj.area, obj.landMark);
         String MId = MySQLAccess.dbObj.getMaxIdInMerchantTable("merchant");
         System.out.println("In registerMechant . Next Id is "+MId);
 
@@ -42,11 +50,13 @@ public class merchant {
          return res;
     }
 
+
     public String isValidMerchant(String merchantId, String password)
     {
         Integer MId = MySQLAccess.dbObj.isValidUser(merchantId, password);
         return MId.toString();
     }
+
 
     public String getMerchantDetails(String contact)
     {

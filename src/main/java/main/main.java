@@ -72,6 +72,10 @@ public class main {
                     .toJson(new adpostresponse(StatusResponse.SUCCESS));
         });
 
+
+
+
+
         post("/getjobsaround", (request, response) -> {
             //      System.out.println("pushing adzz  : "+request.toStringz());
             response.type("application/json");
@@ -247,6 +251,22 @@ public class main {
             //  return "Gopi";
         });
 
+
+        post("/MerchantChangePwd", (request, response) -> {
+            response.type("application/json");
+            String merchantid = request.queryParams("merchantid");
+            String password = request.queryParams("password");
+            System.out.println("for /MerchantChangePwd .. request received  merchantid = "+merchantid+" password ="+password);
+
+
+            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
+
+//            String lng = request.queryParams("lng");
+//            String lastId = request.queryParams("lastId");
+            return MySQLAccess.dbObj.changeMerchantPwd(merchantid, password);
+
+            //  return "Gopi";
+        });
 
         post("/RegMerchant", (request, response) -> {
             response.type("application/json");
@@ -1405,6 +1425,13 @@ public class main {
 
             //  return "Gopi";
         });
+
+
+
+
+
+
+
 
 
 

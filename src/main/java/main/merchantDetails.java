@@ -39,4 +39,6 @@ public class merchantDetails {
     public String city;
     public String password;
     public Integer role;
+    public String merchantIdProof;
+    public String merchantIdProofUri;
 }

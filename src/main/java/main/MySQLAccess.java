@@ -1296,12 +1296,15 @@ mysql> describe merchant;
              `MerchantName`,
               `state`,
                `country`, `registeredon`, `isactive`, `shopNo`
+
+               | Id | MerchantId  | geohash | latitude           | longitude         | imgurl
+ | MerchantName | state | country | registeredon               | isactive | shopNo   | MerchantContact | MerchantType | password | role | govtid | govtidimgurl |
          */
 
         try {
             String sql = "INSERT INTO "+tableName+" (MerchantId, geohash, latitude, longitude, imgurl," +
-                    "MerchantName, state, country, registeredon, isactive, shopNo, MerchantContact, password,role)" +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "MerchantName, state, country, registeredon, isactive, shopNo, MerchantContact, password,role, govtid, govtidimgurl)" +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connect.prepareStatement(sql);
 
          //   PreparedStatement preparedStatement = connect.prepareStatement(sql,  Statement.RETURN_GENERATED_KEYS);
@@ -1320,7 +1323,8 @@ mysql> describe merchant;
             preparedStatement.setString(12, obj.merchantPhn);
             preparedStatement.setString(13, obj.password);
             preparedStatement.setInt(14, obj.role);
-
+            preparedStatement.setString(15, obj.merchantIdProof);
+            preparedStatement.setString(16, obj.merchantIdProofUri);
 
             preparedStatement.executeUpdate();
             preparedStatement.close();

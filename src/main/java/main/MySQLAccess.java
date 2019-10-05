@@ -3644,4 +3644,163 @@ type int(11)
             return str;
         }
     }
+    private ArrayList<supportedsubjobs> resultSetToSupportedSubJobspayload(ResultSet resultSet)
+    {
+        /*
+
+        mysql> desc supportedsubjobs;
++-------------------+---------------+------+-----+---------+-------+
+| Field             | Type          | Null | Key | Default | Extra |
++-------------------+---------------+------+-----+---------+-------+
+| subjobtypeid      | int(11)       | NO   | PRI | NULL    |       |
+| subjobname        | varchar(256)  | YES  |     | NULL    |       |
+| subjobdescription | varchar(1024) | YES  |     | NULL    |       |
+| mandatory         | int(11)       | YES  |     | 0       |       |
++-------------------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+         */
+        ArrayList<supportedsubjobs> response = new ArrayList<supportedsubjobs>();
+
+
+        try
+        {
+
+
+            while(resultSet.next()) {
+
+                supportedsubjobs obj = new supportedsubjobs();
+                obj.subjobtypeid = String.valueOf(resultSet.getInt("subjobtypeid"));
+                obj.subjobname = resultSet.getString("subjobname");
+                obj.subjobdescription = resultSet.getString("subjobdescription");
+                obj.mandatory = String.valueOf(resultSet.getInt("mandatory"));
+
+                response.add(obj);
+            }
+
+            return response;
+        }
+        catch (Exception ex)
+        {
+            return response;
+        }
+
+
+    }
+
+    private ArrayList<supportedjobs> resultSetToSupportedJobspayload(ResultSet resultSet)
+    {
+
+        /*
+
+        mysql> desc supportedjobs;
++----------------+---------------+------+-----+---------+----------------+
+| Field          | Type          | Null | Key | Default | Extra          |
++----------------+---------------+------+-----+---------+----------------+
+| jobtypeid      | int(11)       | NO   | PRI | NULL    | auto_increment |
+| jobname        | varchar(256)  | YES  |     | NULL    |                |
+| jobdescription | varchar(1024) | YES  |     | NULL    |                |
++----------------+---------------+------+-----+---------+----------------+
+
+         */
+        ArrayList<supportedjobs> response = new ArrayList<supportedjobs>();
+
+
+        try
+        {
+
+            /*
+idcategory int(11) AI PK
+type varchar(45)
+imgurl varchar(128
+             */
+            while(resultSet.next()) {
+
+                supportedjobs obj = new supportedjobs();
+                obj.JobId = String.valueOf(resultSet.getInt("jobtypeid"));
+                obj.Jobtype = resultSet.getString("jobname");
+                obj.jobdescription = resultSet.getString("jobdescription");
+                obj.subjobs = getSupportedSubJobs(obj.Jobtype);
+                response.add(obj);
+            }
+
+            return response;
+        }
+        catch (Exception ex)
+        {
+            return response;
+        }
+
+
+    }
+
+    public ArrayList<supportedsubjobs> getSupportedSubJobs(String tablePrefix) {
+
+        String tableName = tablePrefix+"_subtype";
+
+
+
+
+        String sqlcmd = "select * from "+tableName+" order by subjobtypeid";
+        ArrayList<supportedsubjobs> supportedsubJobs = new ArrayList<>();
+        try
+        {
+
+            if(connect.isClosed() == true)
+                connect = initConnection();
+
+            DatabaseMetaData dmd = null;
+            try {
+                dmd = connect.getMetaData();
+                ResultSet tables = dmd.getTables(null, null, tableName, null);
+                if(tables.next() == false)
+                    return supportedsubJobs;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return supportedsubJobs;
+            }
+
+
+            PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
+
+            //  stmnt.executeQuery();
+
+            resultSet = stmnt
+                    .executeQuery(sqlcmd);
+            supportedsubJobs =  resultSetToSupportedSubJobspayload(resultSet);
+
+            return supportedsubJobs;
+        }
+        catch(Exception ex)
+        {
+            return supportedsubJobs;
+        }
+    }
+
+    public List<supportedjobs> getSupportedJobs() {
+
+        String tableName = "supportedjobs";
+        String sqlcmd = "select * from "+tableName+" order by jobtypeid";
+        List<supportedjobs> supportedJobs = new ArrayList<>();
+        try
+        {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+
+
+            PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
+
+            //  stmnt.executeQuery();
+
+            resultSet = stmnt
+                    .executeQuery(sqlcmd);
+            supportedJobs =  resultSetToSupportedJobspayload(resultSet);
+
+            return supportedJobs;
+        }
+        catch(Exception ex)
+        {
+            return supportedJobs;
+        }
+    }
 }

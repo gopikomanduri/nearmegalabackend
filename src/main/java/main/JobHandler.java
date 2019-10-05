@@ -33,6 +33,11 @@ public class JobHandler implements Callable {
         String str = new Gson().toJson(adRes.toArray(),JobPayLoad[].class);
         return str;
     }
+    public String getSupportedJobs()
+    {
+        String str = new Gson().toJson(MySQLAccess.dbObj.getSupportedJobs().toArray(),supportedjobs[].class);
+        return str;
+    }
 
     public void insertJob(JobPayLoad obj)
     {

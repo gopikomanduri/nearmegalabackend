@@ -1423,7 +1423,30 @@ public class main {
             System.out.println("for /fetchnegotiationresponse .. response sent "+res);
             return res;
 
-            //  return "Gopi";
+        });
+
+        post("/getsupportedjobs", (request, response) -> {
+            response.type("application/json");
+
+
+
+           String res = new JobHandler().getSupportedJobs();
+            System.out.println("for /fetchnegotiationresponse .. response sent "+res);
+            return res;
+
+        });
+
+        post("/postlogs", (request, response) -> {
+            response.type("application/json");
+            String logs = request.queryParams("logs");
+            System.out.println("Logs received ++++++++++");
+            System.out.println(logs);
+            System.out.println("Logs received  ended __________");
+
+
+            String res = new String("");
+            return res;
+
         });
 
 

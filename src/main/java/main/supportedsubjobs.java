@@ -6,3 +6,4 @@ public class supportedsubjobs {
     public String subjobdescription;
     public String mandatory;
 }
+

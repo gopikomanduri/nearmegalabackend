@@ -3693,13 +3693,14 @@ type int(11)
 
         /*
 
-        mysql> desc supportedjobs;
+mysql> desc supportedjobs;
 +----------------+---------------+------+-----+---------+----------------+
 | Field          | Type          | Null | Key | Default | Extra          |
 +----------------+---------------+------+-----+---------+----------------+
 | jobtypeid      | int(11)       | NO   | PRI | NULL    | auto_increment |
 | jobname        | varchar(256)  | YES  |     | NULL    |                |
 | jobdescription | varchar(1024) | YES  |     | NULL    |                |
+| jobimg         | varchar(256)  | YES  |     | NULL    |                |
 +----------------+---------------+------+-----+---------+----------------+
 
          */
@@ -3720,6 +3721,7 @@ imgurl varchar(128
                 obj.JobId = String.valueOf(resultSet.getInt("jobtypeid"));
                 obj.Jobtype = resultSet.getString("jobname");
                 obj.jobdescription = resultSet.getString("jobdescription");
+                obj.jobimgurl = resultSet.getString("jobimg");
                 obj.subjobs = getSupportedSubJobs(obj.Jobtype);
                 response.add(obj);
             }

@@ -73,6 +73,38 @@ public class main {
         });
 
 
+post("/getjobsaroundbasedoncategory", (request, response) -> {
+            //      System.out.println("pushing adzz  : "+request.toStringz());
+            response.type("application/json");
+            String geohashRecived = request.queryParams("geohash");
+            String CatId= request.queryParams("categoryid");
+            String SubCatId= request.queryParams("subcategoryid");
+            String lastJobID= request.queryParams("lastjobid");
+            System.out.println("fetching jobs around  : "+geohashRecived);
+            JobHandler jobHandler = new JobHandler();
+            //   Future ft = threadpool.submit(adHandler);
+            String str = jobHandler.getJobsAroundBasedOnCategory(CatId,SubCatId,lastJobID,geohashRecived);
+
+            return str;
+        });
+
+        post("/postjobsaroundbasedoncategory", (request, response) -> {
+            //      System.out.println("pushing adzz  : "+request.toStringz());
+            response.type("application/json");
+
+//            JSONObject jsonObj = new JSONObject(request.body());
+
+            String geohashRecived = request.queryParams("geohash");
+            String CatId= request.queryParams("categoryid");
+            String SubCatId= request.queryParams("subcategoryids");//make it array of ids
+            //get job details
+            System.out.println("fetching jobs around  : "+geohashRecived);
+            JobHandler jobHandler = new JobHandler();
+            //   Future ft = threadpool.submit(adHandler);
+            String str = jobHandler.postJobsAroundBasedOnCategory(CatId,SubCatId,geohashRecived);
+
+            return str;
+        });
 
 
 

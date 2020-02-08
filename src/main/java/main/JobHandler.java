@@ -33,6 +33,37 @@ public class JobHandler implements Callable {
         String str = new Gson().toJson(adRes.toArray(),JobPayLoad[].class);
         return str;
     }
+    public String getJobsAroundBasedOnCategory(String CatId,String SubCatId,String lastJobID,String geohashRecived)
+    {
+
+        lastReceivedJobStruct[] lastReceivedAdDetails = new Gson().fromJson(geohashRecived,lastReceivedJobStruct[].class);
+        List<JobPayLoad> adRes = new ArrayList<>();
+
+        for(int i=0;i<lastReceivedAdDetails.length;i++)
+        {
+            lastReceivedJobStruct temp = lastReceivedAdDetails[i];//need to check this
+            adRes.addAll(MySQLAccess.dbObj.getJobsAroundBasedOnCategory(CatId,SubCatId, lastJobID,geohashRecived));
+        }
+
+        String str = new Gson().toJson(adRes.toArray(),JobPayLoad[].class);
+        return str;
+    }
+
+    public String postJobsAroundBasedOnCategory(String CatId,String SubCatId,String geohashRecived)
+    {
+
+        lastReceivedJobStruct[] lastReceivedAdDetails = new Gson().fromJson(geohashRecived,lastReceivedJobStruct[].class);
+        List<JobPayLoad> adRes = new ArrayList<>();
+
+        for(int i=0;i<lastReceivedAdDetails.length;i++)
+        {
+            lastReceivedJobStruct temp = lastReceivedAdDetails[i];//need to check this
+            adRes.addAll(MySQLAccess.dbObj.postJobsAroundBasedOnCategory(CatId,SubCatId, geohashRecived));
+        }
+
+        String str = new Gson().toJson(adRes.toArray(),JobPayLoad[].class);
+        return str;
+    }
     public String getSupportedJobs()
     {
         String str = new Gson().toJson(MySQLAccess.dbObj.getSupportedJobs().toArray(),supportedjobs[].class);

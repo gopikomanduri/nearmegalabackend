@@ -443,7 +443,148 @@ public class MySQLAccess {
         return Mid;
     }
 
+    public List<JobPayLoad> postJobsAroundBasedOnCategory(String CatId,String SubCatId,String geohashRecived)
+    {
 
+        List<JobPayLoad> jobs = new ArrayList<JobPayLoad>();
+        String CatName ="-1";
+        String SubCatName ="-1";
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+            String sqlgetCatName = "Select jobname from supportedjobs where jobtypeid="+CatId+"";
+            PreparedStatement stmnt1 = connect.prepareStatement(sqlgetCatName);
+            stmnt1.executeQuery();
+
+            System.out.println("cmd executed is : " + sqlgetCatName);
+
+
+            try {
+                CatName = statement
+                        .executeQuery(sqlgetCatName).getNString(0);
+            }
+            catch(Exception ex){
+
+            }
+            //retrive subcatname
+            if(CatName!="-1") {
+                String sqlgetSubCatName = "Select subjobname from " + CatName + "_subtype where subjobtypeid =" + SubCatId + "";
+
+                PreparedStatement stmnt2 = connect.prepareStatement(sqlgetSubCatName);
+                stmnt2.executeQuery();
+
+                System.out.println("cmd executed is : " + sqlgetSubCatName);
+
+
+                try {
+                    SubCatName = statement
+                            .executeQuery(sqlgetSubCatName).getNString(0);
+                } catch (Exception ex) {
+
+                }
+            }
+
+            // String sqlcmd = "select * from job_" + geohash+" where idjobs > ? AND postedon >= ? ";
+
+//            String sqlcmd = "select * from job_" + geohashRecived+"_"+CatName+"_"+SubCatName+" where idjobs > "+maxJobIdReceived+"  AND postedon >= '"+Util.getCurrentDate()+"' ";
+            String sqlcmd = "CREATE TABLE job_"+ geohashRecived+"_"+CatName+"_"+SubCatName+"  LIKE jobs;";
+
+
+
+            PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
+            //   stmnt.setInt(1, maxJobIdReceived);
+            //  stmnt.setDate(2, Util.getCurrentDate());
+            stmnt.executeQuery();
+
+
+
+            System.out.println("cmd executed is : " + sqlcmd);
+
+
+            resultSet = statement
+                    .executeQuery(sqlcmd);
+
+            return resultSetToJobPayLoad(resultSet, geohashRecived);
+        }
+        catch(Exception ex)
+        {
+            return jobs;
+        }
+    }
+
+    public List<JobPayLoad> getJobsAroundBasedOnCategory(String CatId,String SubCatId,String lastJobID,String geohashRecived)
+    {
+
+        List<JobPayLoad> jobs = new ArrayList<JobPayLoad>();
+        String CatName ="-1";
+        String SubCatName ="-1";
+        try {
+
+            Integer maxJobIdReceived = Integer.valueOf(lastJobID);
+
+            if(connect.isClosed() == true)
+                connect = initConnection();
+            //retrive jobname based on catid
+            String sqlgetCatName = "Select jobname from supportedjobs where jobtypeid="+CatId+"";
+
+            PreparedStatement stmnt1 = connect.prepareStatement(sqlgetCatName);
+            stmnt1.executeQuery();
+
+            System.out.println("cmd executed is : " + sqlgetCatName);
+
+
+            try {
+                CatName = statement
+                        .executeQuery(sqlgetCatName).getNString(0);
+            }
+            catch(Exception ex){
+
+            }
+            //retrive subcatname
+            if(CatName!="-1") {
+                String sqlgetSubCatName = "Select subjobname from " + CatName + "_subtype where subjobtypeid =" + SubCatId + "";
+
+                PreparedStatement stmnt2 = connect.prepareStatement(sqlgetSubCatName);
+                stmnt2.executeQuery();
+
+                System.out.println("cmd executed is : " + sqlgetSubCatName);
+
+
+                try {
+                    SubCatName = statement
+                            .executeQuery(sqlgetSubCatName).getNString(0);
+                } catch (Exception ex) {
+
+                }
+            }
+
+            // String sqlcmd = "select * from job_" + geohash+" where idjobs > ? AND postedon >= ? ";
+
+            String sqlcmd = "select * from job_" + geohashRecived+"_"+CatName+"_"+SubCatName+" where idjobs > "+maxJobIdReceived+"  AND postedon >= '"+Util.getCurrentDate()+"' ";
+
+
+
+
+            PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
+            //   stmnt.setInt(1, maxJobIdReceived);
+            //  stmnt.setDate(2, Util.getCurrentDate());
+            stmnt.executeQuery();
+
+
+
+            System.out.println("cmd executed is : " + sqlcmd);
+
+
+            resultSet = statement
+                    .executeQuery(sqlcmd);
+
+            return resultSetToJobPayLoad(resultSet, geohashRecived);
+        }
+        catch(Exception ex)
+        {
+            return jobs;
+        }
+    }
     public List<JobPayLoad> getJobsAround(String geohash, String lastJobId)
     {
 
@@ -824,6 +965,15 @@ Integer generatedKey = -1;
 
 
             System.out.println("command executed is "+sql);
+            System.out.println("Update Status Visibility in negotiationsresponse");
+//
+
+           String nego_sql =  "UPDATE negotiationsresponse_"+obj.geohashes +"SET canPostToStatus = 0 WHERE notificationid="+obj.idnotification;
+            System.out.println("negotiationsresponse is "+nego_sql);
+            preparedStatement = connect
+                    .prepareStatement(nego_sql);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
             return generatedKey.toString();
 
         } catch (SQLException e) {
@@ -2775,7 +2925,7 @@ notificationid int(11)
                 obj.ShoppingProbableDates = resultSet.getString("ShoppingallowedDates");
                 obj.advanceNeeded = resultSet.getInt("advanceNeed");
                 obj.negotiationresponse = resultSet.getInt("negotiationsresponse");;
-
+                obj.canPostToStatus = resultSet.getInt("canPostToStatus");;
 
 
 
@@ -2889,8 +3039,8 @@ notificationid int(11)
              */
 
             String sql = "INSERT INTO "+tableName+" (idnegotiations,customercontact, merchantid, geohash, minamount," +
-                    "maxamount,Discount,ShoppingallowedDates,advanceNeed,description,negotiationsresponse,notificationid)"+
-                    "VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "maxamount,Discount,ShoppingallowedDates,advanceNeed,description,negotiationsresponse,notificationid,canPostToStatus)"+
+                    "VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
             PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, negotiationDetails.idnegotations);
             preparedStatement.setString(2, negotiationDetails.customercontact);
@@ -2906,7 +3056,7 @@ notificationid int(11)
             preparedStatement.setString(10, negotiationDetails.description);
             preparedStatement.setInt(11, negotiationDetails.response);
             preparedStatement.setInt(12, negotiationDetails.notificationid);
-
+            preparedStatement.setInt(13, 1);
             preparedStatement.executeUpdate();
 
 

@@ -968,7 +968,7 @@ Integer generatedKey = -1;
             System.out.println("Update Status Visibility in negotiationsresponse");
 //
 
-           String nego_sql =  "UPDATE negotiationsresponse_"+obj.geohashes +"SET canPostToStatus = 0 WHERE notificationid="+obj.idnotification;
+           String nego_sql =  "UPDATE negotiationsresponse_"+obj.geohashes +" SET canPostToStatus = 0 WHERE notificationid="+obj.idnotification;
             System.out.println("negotiationsresponse is "+nego_sql);
             preparedStatement = connect
                     .prepareStatement(nego_sql);

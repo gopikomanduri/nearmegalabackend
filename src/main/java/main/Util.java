@@ -1,5 +1,7 @@
 package main;
 
+
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
@@ -62,9 +64,13 @@ public class Util {
         return new java.sql.Date(today.getTime());
     }
 
-    public static java.sql.Date stringToDate(String datestr)
+    public static java.sql.Date stringToDate(String datestr,String pattern )
     {
-        SimpleDateFormat format = new SimpleDateFormat("dd:MM:yyyy");
+        if(pattern == null)
+        {
+            pattern="dd:MM:yyyy";
+        }
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
 
         try {
             java.util.Date utilDate = format.parse(datestr);

@@ -826,7 +826,7 @@ sex int(11)
 
         try {
 
-            Date dateval = Util.stringToDate(obj.dob);
+            Date dateval = Util.stringToDate(obj.dob,null);
             String sql = "INSERT INTO consumers (consumername, contact,  DOB, dpurl, sex)" +
                     "VALUES (?, ?, ? ,? ,?)";
             PreparedStatement preparedStatement = connect.prepareStatement(sql,  Statement.RETURN_GENERATED_KEYS);
@@ -924,9 +924,9 @@ ispercentage int(11)
 Integer generatedKey = -1;
         try {
 
-            Date validFrom = Util.stringToDate(obj.validfrom);
-            Date validTo = Util.stringToDate(obj.validto);
-            Date shoppingdate = Util.stringToDate(obj.shoppingdate);
+            Date validFrom = Util.stringToDate(obj.validfrom,"dd-mm-yyyy");
+            Date validTo = Util.stringToDate(obj.validto,"dd-mm-yyyy");
+            Date shoppingdate = Util.stringToDate(obj.shoppingdate,"dd-mm-yyyy");
 
             String sql = "INSERT INTO "+table+" (idnotification, validfrom,  validto, contact, canjoin, " +
                     "bringcharges, registeredcontactnumber, finaldiscount, geohash, shoppingdate, offerdesc, value, flat, ispercentage," +

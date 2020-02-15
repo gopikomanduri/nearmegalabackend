@@ -16,37 +16,73 @@ public class merchant {
     }
     public  String registerMerchant(String regDetails)
     {
-        System.out.println("In registerMechant");
+        String res="";
         Gson gson = new Gson();
         merchantDetails obj = gson.fromJson(regDetails, merchantDetails.class);
-        String curMid = MySQLAccess.dbObj.getMerchantIdFromContact(obj.merchantPhn);
-        if(curMid.equalsIgnoreCase("0") == false)
-        {
-            return MySQLAccess.dbObj.getMerchantDetails(obj.merchantPhn);
+        try {
+            System.out.println("In registerMechant");
+
+            String curMid = MySQLAccess.dbObj.getMerchantIdFromContact(obj.merchantPhn);
+            if (curMid.equalsIgnoreCase("0") == false) {
+
+                obj.merchantId = "-1";
+
+
+                LocalDateTime now = LocalDateTime.now();
+
+                String receivedOn = Util.getTimestamp(now);
+                Integer vad = Util.getCurrentDay(now);
+                Integer vam = Util.getCurrentMonth(now);
+                Integer vay = Util.getCurrentYear(now);
+                obj.registeredOn = now.toString();
+                obj.isActive = "0";
+                res = gson.toJson(obj, merchantDetails.class);
+//            return MySQLAccess.dbObj.getMerchantDetails(obj.merchantPhn);
 //            String res= gson.toJson(obj,merchantDetails.class);
-//            return res;
+                System.out.println("In registerMechant . Next Id is " + obj.merchantId );
+                return res;
+            }
+
+            //  MySQLAccess.dbObj.createMerchantAreaTableIfNotExist(obj.city, obj.area, obj.landMark);
+            String MId = MySQLAccess.dbObj.getMaxIdInMerchantTable("merchant");
+            System.out.println("In registerMechant . Next Id is " + MId);
+
+
+            obj.merchantId = MId;
+
+
+            LocalDateTime now = LocalDateTime.now();
+
+            String receivedOn = Util.getTimestamp(now);
+            Integer vad = Util.getCurrentDay(now);
+            Integer vam = Util.getCurrentMonth(now);
+            Integer vay = Util.getCurrentYear(now);
+            obj.registeredOn = now.toString();
+            obj.isActive = "1";
+
+
+            MySQLAccess.dbObj.insertIntoMerchant(obj);
+            res= gson.toJson(obj, merchantDetails.class);
         }
-
-        //  MySQLAccess.dbObj.createMerchantAreaTableIfNotExist(obj.city, obj.area, obj.landMark);
-        String MId = MySQLAccess.dbObj.getMaxIdInMerchantTable("merchant");
-        System.out.println("In registerMechant . Next Id is "+MId);
-
-
-        obj.merchantId = MId;
+        catch (Exception ex)
+        {
+            obj.merchantId = "-2";
 
 
-        LocalDateTime now = LocalDateTime.now();
+            LocalDateTime now = LocalDateTime.now();
 
-        String receivedOn = Util.getTimestamp(now);
-        Integer vad = Util.getCurrentDay(now);
-        Integer vam = Util.getCurrentMonth(now);
-        Integer vay = Util.getCurrentYear(now);
-        obj.registeredOn = now.toString();
-        obj.isActive = "1";
-
-
-         MySQLAccess.dbObj.insertIntoMerchant(obj);
-         String res= gson.toJson(obj,merchantDetails.class);
+            String receivedOn = Util.getTimestamp(now);
+            Integer vad = Util.getCurrentDay(now);
+            Integer vam = Util.getCurrentMonth(now);
+            Integer vay = Util.getCurrentYear(now);
+            obj.registeredOn = now.toString();
+            obj.isActive = "0";
+            res = gson.toJson(obj, merchantDetails.class);
+//            return MySQLAccess.dbObj.getMerchantDetails(obj.merchantPhn);
+//            String res= gson.toJson(obj,merchantDetails.class);
+            System.out.println("In registerMechant . Next Id is " + obj.merchantId );
+            return res;
+        }
          return res;
     }
 

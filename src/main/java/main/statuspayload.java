@@ -2,8 +2,6 @@ package main;
 
 import lombok.Data;
 
-import java.security.PublicKey;
-
 @Data
 public class statuspayload {
 
@@ -66,5 +64,6 @@ idstatus                | int(11)      | NO   | PRI | NULL    | auto_increment |
     public Integer value;
     public Integer flat;
     public Integer ispercentage;
+    public Integer isalreadyJoined;
 
 }

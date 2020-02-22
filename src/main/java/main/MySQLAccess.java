@@ -3075,7 +3075,7 @@ notificationid int(11)
 
 
 
-    public String insertStatusJoinee(Integer statusid, String contact, String geohash) {
+    public String insertStatusJoinee(Integer statusid, Integer userid) {
         /*
         geohash varchar(45)
 contact varchar(15)
@@ -3086,12 +3086,21 @@ statusid int(11)
         try
         {
 
-        String sql = "INSERT INTO statusjoineelist (geohash,contact, statusid)"+
-                "VALUES (?,?, ?)";
+//        String sql = "INSERT INTO statusjoineelist (geohash,contact, statusid)"+
+//                "VALUES (?,?, ?)";
+//        PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//        preparedStatement.setString(1, geohash);
+//        preparedStatement.setString(2, contact);
+//        preparedStatement.setInt(3, statusid);
+//        preparedStatement.executeUpdate();
+
+
+        String sql = "INSERT INTO ad_join (statusid,userid)"+
+                "VALUES (?,?)";
         PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        preparedStatement.setString(1, geohash);
-        preparedStatement.setString(2, contact);
-        preparedStatement.setInt(3, statusid);
+//        preparedStatement.setString(1, geohash);
+        preparedStatement.setInt(1, statusid);
+        preparedStatement.setInt(2, userid);
         preparedStatement.executeUpdate();
 
 
@@ -3107,19 +3116,19 @@ statusid int(11)
     }
     }
 
-    public String fetchjoineecount(Integer statusid, String geohash) {
+    public String fetchjoineecount(Integer statusid, Integer userID) {
 
         Integer count = 0;
 
         try {
 
-            String tableName = "status_"+geohash;
+            String tableName = "ad_join";
 
 
 
             // String sqlcmd = "select * from job_" + geohash+" where idjobs > ? AND postedon >= ? ";
 
-            String sqlcmd = "select count(*) from "+tableName+" where idstatus="+statusid;
+            String sqlcmd = "select count(*) from "+tableName+" where statusId="+statusid +" AND userid="+userID ;
 
 
             if(connect.isClosed() == true)
@@ -3150,10 +3159,10 @@ statusid int(11)
 
     }
 
-    public List<String> fetchalljoinees(Integer statusid, String geohash) {
+    public List<String> fetchalljoinees(Integer statusid, Integer userid) {
 
-        String tableName = "status_"+geohash;
-        String sqlcmd = "select contact from "+tableName+" where idstatus="+statusid;
+        String tableName = "ad_join";
+        String sqlcmd = "select contact from "+tableName+" where statusId="+statusid;
         List<String> contacts = new ArrayList<>();
         try
         {

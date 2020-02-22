@@ -7,8 +7,6 @@ import java.io.FileReader;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import static spark.Spark.port;
 import static spark.Spark.post;
@@ -20,7 +18,8 @@ public class main {
 
 
 
-
+//        Date validFrom = Util.stringToDate("02-02-1999","dd-mm-yyyy");
+//        Date validto = Util.stringToDate("02:02:1999","dd:mm:yyyy");
         port(5556);
         final String[] responseJson = new String[1];
         tokenregistrationpayload emptyone = new tokenregistrationpayload();
@@ -441,11 +440,35 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             //  return "Gopi";
         });
 
+        post("/joinad", (request, response) -> {
+            response.type("application/json");
+            String dataReceived = request.queryParams("joincountpayload");
+            System.out.println("for /joinad .. request received "+dataReceived);
+
+            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
+
+//            String lng = request.queryParams("lng");
+//            String lastId = request.queryParams("lastId");
+            statusHandler obj = new statusHandler();
+            String statusId =  obj.updateStatusJoinee(dataReceived);
+            System.out.println("for /joinad .. response sent "+statusId);
+            return statusId;
+
+            //  return "Gopi";
+        });
+
         post("/fetchstatuses", (request, response) -> {
             response.type("application/json");
             String dataReceived = request.queryParams("geohash");
             String lastreceivedstatusid = request.queryParams("lastreceivedstatusid");
-
+            Integer userID=0;
+            try {
+                userID = Integer.parseInt(request.queryParams("userID"));
+            }
+            catch(Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
             System.out.println("for /fetchstatus .. request received "+dataReceived+" lastreceivedstatusid "+lastreceivedstatusid);
 
             //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
@@ -453,7 +476,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 //            String lng = request.queryParams("lng");
 //            String lastId = request.queryParams("lastId");
             statusHandler obj = new statusHandler();
-            String statuses =  obj.fetchallstatuses(dataReceived,Integer.valueOf(lastreceivedstatusid));
+            String statuses =  obj.fetchallstatuses(dataReceived,Integer.valueOf(lastreceivedstatusid),userID);
             System.out.println("for /fetchstatus .. response sent "+statuses);
             return statuses;
 
@@ -1135,8 +1158,9 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 //            String lng = request.queryParams("lng");
 //            String lastId = request.queryParams("lastId");
             statusHandler obj = new statusHandler();
-            String statuses =  obj.updateStatusJoinee(Integer.valueOf(statusId),contact,geohash);
-            System.out.println("for /respondtostatus .. response sent "+statuses);
+//            String statuses =  obj.updateStatusJoinee(Integer.valueOf(statusId),contact,geohash);
+            String statuses ="commented API";
+                    System.out.println("for /respondtostatus .. response sent "+statuses);
             return statuses;
 
             //  return "Gopi";
@@ -1161,7 +1185,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 //            String lng = request.queryParams("lng");
 //            String lastId = request.queryParams("lastId");
             statusHandler obj = new statusHandler();
-            String statuses =  obj.fetchjoineecount(Integer.valueOf(statusId),geohash);
+            String statuses =  obj.fetchjoineecount(Integer.valueOf(statusId),0);
             System.out.println("for /respondtostatus .. response sent "+statuses);
             return statuses;
 
@@ -1185,7 +1209,8 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 //            String lng = request.queryParams("lng");
 //            String lastId = request.queryParams("lastId");
             statusHandler obj = new statusHandler();
-            String statuses =  obj.fetchalljoinees(Integer.valueOf(statusId),geohash);
+//            String statuses =  obj.fetchalljoinees(Integer.valueOf(statusId),geohash);
+            String statuses ="Commented API";
             System.out.println("for /respondtostatus .. response sent "+statuses);
             return statuses;
 

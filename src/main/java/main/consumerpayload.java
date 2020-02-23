@@ -15,6 +15,7 @@ dpurl varchar(256)
 registeredon varchar(45)
 status int(11)
      */
+    public Integer idconsumers;
 public String consumername;
 public String contact;
 public String dob;

@@ -771,7 +771,7 @@ sex int(11)
 
 
             if(resultSet.next()) {
-
+                temp.idconsumers=resultSet.getInt("idconsumers");
                 temp.consumername = resultSet.getString("consumername");
                 temp.contact = resultSet.getString("contact");
                 temp.dob = resultSet.getDate("DOB").toString();

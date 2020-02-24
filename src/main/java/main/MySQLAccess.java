@@ -3128,7 +3128,9 @@ statusid int(11)
 
             // String sqlcmd = "select * from job_" + geohash+" where idjobs > ? AND postedon >= ? ";
 
-            String sqlcmd = "select count(*) from "+tableName+" where statusId="+statusid +" AND userid="+userID ;
+            String sqlcmd = "select count(*) from "+tableName+" where statusId="+statusid ;
+            if(userID!=-1)
+            sqlcmd+=" AND userid="+userID ;
 
 
             if(connect.isClosed() == true)

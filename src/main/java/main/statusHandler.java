@@ -54,6 +54,20 @@ public class statusHandler {
             {
                 statuses.get(i).isalreadyJoined=0;//not joined
             }
+
+//            if(Integer.valueOf(MySQLAccess.dbObj.fetchjoineecount(statuses.get(i).idstatus,-1) )>0)
+//            {
+            try{
+                statuses.get(i).joinedcount=Integer.valueOf(MySQLAccess.dbObj.fetchjoineecount(statuses.get(i).idstatus,-1) );//joined
+            }
+            catch (Exception ex)
+            {
+
+            }
+//            else
+//            {
+//                statuses.get(i).isalreadyJoined=0;//not joined
+//            }
 //            statuses.get(i).idstatus
         }
         String str = new Gson().toJson(statuses);

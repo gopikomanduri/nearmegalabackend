@@ -171,7 +171,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
         post("/ads", (request, response) -> {
             response.type("application/json");
             String dataReceived = request.queryParams("geohash");
-            System.out.println("for /ads .. request received "+dataReceived);
+            System.out.println("for /ads .. requestRegUser received "+dataReceived);
 
             //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
 
@@ -1359,7 +1359,24 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
             //  return "Gopi";
         });
+        post("/fetchConsumernegotiations", (request, response) -> {
+            response.type("application/json");
+            String customerContact = request.queryParams("customerContact");
+            String lastId = request.queryParams("lastid");
 
+            System.out.println("for /Negotiate .. request received "+customerContact+"  geohash is all");
+
+            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
+
+//            String lng = request.queryParams("lng");
+//            String lastId = request.queryParams("lastId");
+            NegotiationHandler obj = new NegotiationHandler();
+            String res =  obj.fetchconsumerNegotiations(customerContact, Integer.valueOf(lastId));
+            System.out.println("for /fetchnegotiations .. response sent "+res);
+            return res;
+
+            //  return "Gopi";
+        });
         post("/negotiationresponse", (request, response) -> {
             response.type("application/json");
             String merchantId = request.queryParams("merchantid");

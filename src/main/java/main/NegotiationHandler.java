@@ -21,6 +21,13 @@ public class NegotiationHandler {
         return str;
     }
 
+    public String fetchconsumerNegotiations(String customercontact, Integer lastNegId)
+    {
+        List<NegotationPayLoad> res =  MySQLAccess.dbObj.fetchConsumerNegotiations(customercontact, lastNegId);
+        String str = new Gson().toJson(res.toArray(),NegotationPayLoad[].class);
+        return str;
+    }
+
     public String NegotiationResponse(String str)
     {
         return "";

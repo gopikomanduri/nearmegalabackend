@@ -2151,6 +2151,55 @@ adnotification int(11)
 
     }
 
+    private NegotationPayLoad resultSetToNegotiationsPayLoad(ResultSet resultSet)
+    {
+        Gson gson = new Gson();
+
+
+
+        try
+        {
+
+            /*
+
+idnegotations int(11) AI PK
+customercontact varchar(15)
+merchantid varchar(128)
+geohash varchar(6)
+minamount int(4)
+maxamount int(11)
+DiscountExpectation int(3)
+ShoppingProbableDates varchar(45)
+description varchar(512)
+delivered int(1)
+adnotification int(11)
+             */
+            NegotationPayLoad obj = new NegotationPayLoad();
+            while(resultSet.next()) {
+
+                obj.idnegotations = resultSet.getInt("idnegotations");
+                obj.merchantid = resultSet.getString("merchantid");
+                obj.geohash = resultSet.getString("geohash");
+                obj.minamount = resultSet.getInt("minamount");
+                obj.maxamount = resultSet.getInt("maxamount");
+                obj.DiscountExpectation = resultSet.getInt("DiscountExpectation");
+                obj.description = resultSet.getString("description");
+                obj.notificationid = resultSet.getInt("adnotification");
+                obj.customercontact = resultSet.getString("customercontact");
+                obj.ShoppingProbableDates = resultSet.getString("ShoppingProbableDates");
+
+            }
+
+            return obj;
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+
+
+    }
+
 
 
     private List<GroupPayLoad> resultSetToGroupPayLoad(ResultSet resultSet, String geoHash)
@@ -2787,6 +2836,60 @@ minamount int(6)
 
     }
 
+//    customercontact
+
+    public List<NegotationPayLoad> fetchConsumerNegotiations(String customercontact,Integer lastReceivedNegId) {
+        List<NegotationPayLoad> jobs = new ArrayList<NegotationPayLoad>();
+
+        try {
+
+
+
+
+            Integer maxJobIdReceived = lastReceivedNegId;
+
+
+            String sqltblcmd = "SELECT TABLE_NAME  FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='nearmegala'  AND TABLE_NAME like 'negotations_%'";
+            PreparedStatement tstmnt = connect.prepareStatement(sqltblcmd);
+            if(connect.isClosed() == true)
+                connect = initConnection();
+            resultSet = statement
+                    .executeQuery(sqltblcmd);
+            List<NegotationPayLoad> response = new ArrayList<NegotationPayLoad>();
+            while(resultSet.next()) {
+                String sqlcmd = "select * from " + resultSet.getString("TABLE_NAME") + " where idnegotations > " + maxJobIdReceived + "  AND customercontact  like '" + customercontact + "' ";
+                if(connect.isClosed() == true)
+                    connect = initConnection();
+                PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
+                //   stmnt.setInt(1, maxJobIdReceived);
+                //  stmnt.setDate(2, Util.getCurrentDate());
+                stmnt.executeQuery();
+                resultSet = statement
+                        .executeQuery(sqlcmd);
+                NegotationPayLoad obj= resultSetToNegotiationsPayLoad(resultSet);
+                if(obj!=null)
+                    response.add(obj);
+                System.out.println("cmd executed is : " + sqlcmd);
+            }
+
+
+
+
+
+
+
+
+
+
+
+            return response;
+        }
+        catch(Exception ex)
+        {
+            return jobs;
+        }
+
+    }
 
     public List<NegotationPayLoad> fetchNegotiations(String merchantId, String geohash, Integer lastReceivedNegId) {
         List<NegotationPayLoad> jobs = new ArrayList<NegotationPayLoad>();

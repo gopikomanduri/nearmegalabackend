@@ -1359,9 +1359,9 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
             //  return "Gopi";
         });
-        post("/fetchConsumernegotiations", (request, response) -> {
+        post("/fetchconsumernegotiations", (request, response) -> {
             response.type("application/json");
-            String customerContact = request.queryParams("customerContact");
+            String customerContact = request.queryParams("contact");
             String lastId = request.queryParams("lastid");
 
             System.out.println("for /Negotiate .. request received "+customerContact+"  geohash is all");

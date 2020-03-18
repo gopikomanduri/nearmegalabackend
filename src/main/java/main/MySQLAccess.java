@@ -2853,11 +2853,11 @@ minamount int(6)
             PreparedStatement tstmnt = connect.prepareStatement(sqltblcmd);
             if(connect.isClosed() == true)
                 connect = initConnection();
-            resultSet = statement
+            ResultSet tables = statement
                     .executeQuery(sqltblcmd);
             List<NegotationPayLoad> response = new ArrayList<NegotationPayLoad>();
-            while(resultSet.next()) {
-                String sqlcmd = "select * from " + resultSet.getString("TABLE_NAME") + " where idnegotations > " + maxJobIdReceived + "  AND customercontact  like '" + customercontact + "' ";
+            while(tables.next()) {
+                String sqlcmd = "select * from " + tables.getString("TABLE_NAME") + " where idnegotations > " + maxJobIdReceived + "  AND customercontact  like '" + customercontact + "' ";
                 if(connect.isClosed() == true)
                     connect = initConnection();
                 PreparedStatement stmnt = connect.prepareStatement(sqlcmd);

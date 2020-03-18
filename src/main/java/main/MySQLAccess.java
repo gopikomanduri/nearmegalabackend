@@ -2858,9 +2858,16 @@ minamount int(6)
             ResultSet tables = statement
                     .executeQuery(sqltblcmd);
             List<NegotationPayLoad> response = new ArrayList<NegotationPayLoad>();
+            List<String> tablesnames=new ArrayList<>();
             while(tables.next()) {
-                String sqlcmd = "select * from " + tables.getString("TABLE_NAME") + " where idnegotations > " + maxJobIdReceived + "  AND customercontact  like '" + customercontact + "' ";
-                if(connect.isClosed() == true)
+                tablesnames.add(tables.getString("TABLE_NAME") );
+                System.out.println("adding  " + tables.getString("TABLE_NAME"));
+            }
+            for  (int i = 0; i<= tablesnames.size()-1; i++) {
+                System.out.println("Column " + i + " " + tablesnames.get(i));
+
+                String sqlcmd = "select * from " + tablesnames.get(i) + " where idnegotations > " + maxJobIdReceived + "  AND customercontact  like '" + customercontact + "' ";
+                if (connect.isClosed() == true)
                     connect = initConnection();
                 PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
                 //   stmnt.setInt(1, maxJobIdReceived);
@@ -2868,21 +2875,11 @@ minamount int(6)
                 stmnt.executeQuery();
                 resultSet = statement
                         .executeQuery(sqlcmd);
-                NegotationPayLoad obj= resultSetToNegotiationsPayLoad(resultSet);
-                if(obj!=null)
+                NegotationPayLoad obj = resultSetToNegotiationsPayLoad(resultSet);
+                if (obj != null)
                     response.add(obj);
                 System.out.println("cmd executed is : " + sqlcmd);
             }
-
-
-
-
-
-
-
-
-
-
 
             return response;
         }

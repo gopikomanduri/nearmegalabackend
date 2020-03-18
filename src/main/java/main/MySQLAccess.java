@@ -2853,6 +2853,8 @@ minamount int(6)
             PreparedStatement tstmnt = connect.prepareStatement(sqltblcmd);
             if(connect.isClosed() == true)
                 connect = initConnection();
+
+            tstmnt.executeQuery();
             ResultSet tables = statement
                     .executeQuery(sqltblcmd);
             List<NegotationPayLoad> response = new ArrayList<NegotationPayLoad>();

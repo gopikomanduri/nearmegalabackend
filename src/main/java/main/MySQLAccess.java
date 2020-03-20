@@ -2904,7 +2904,7 @@ minamount int(6)
 //    customercontact
 
     public List<NegotationPayLoad> fetchConsumerNegotiations(String customercontact,Integer lastReceivedNegId) {
-        List<NegotationPayLoad> response = new ArrayList<NegotationPayLoad>();
+        List<NegotationPayLoad> jobs = new ArrayList<NegotationPayLoad>();
         try {
 
 
@@ -2921,7 +2921,7 @@ minamount int(6)
             tstmnt.executeQuery();
             ResultSet tables = statement
                     .executeQuery(sqltblcmd);
-
+            List<NegotationPayLoad>  response = new ArrayList<NegotationPayLoad>();
             List<String> tablesnames=new ArrayList<>();
             while(tables.next()) {
                 tablesnames.add(tables.getString("TABLE_NAME") );
@@ -2953,7 +2953,7 @@ minamount int(6)
         }
         catch(Exception ex)
         {
-            return response;
+            return jobs;
         }
 
     }

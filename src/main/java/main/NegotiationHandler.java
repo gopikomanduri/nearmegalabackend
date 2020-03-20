@@ -25,6 +25,7 @@ public class NegotiationHandler {
     {
         List<NegotationPayLoad> res =  MySQLAccess.dbObj.fetchConsumerNegotiations(customercontact, lastNegId);
         String str = new Gson().toJson(res.toArray(),NegotationPayLoad[].class);
+        System.out.println("response in json  " + str);
         return str;
     }
 

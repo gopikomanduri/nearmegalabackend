@@ -2001,6 +2001,70 @@ lastaddedpointson varchar(45)
 
     }
 
+    public AdPayLoad getAdDetails(int ID,String GeoHash)
+    {
+        AdPayLoad obj = new AdPayLoad();
+        try {
+            String sql = "Select * from ad_"+GeoHash+"Where Id="+ID;
+            if(connect.isClosed() == true)
+                connect = initConnection();
+            statement = connect.createStatement();
+
+            // Result set get the result of the SQL query
+            resultSet = statement
+                    .executeQuery(sql);
+
+
+            while (resultSet.next()) {
+ /*
+
+
+        +----------------+--------------+------+-----+-----------+----------------+
+| Field          | Type         | Null | Key | Default   | Extra          |
++----------------+--------------+------+-----+-----------+----------------+
+| Id             | int(11)      | NO   | PRI | NULL      | auto_increment |
+| MerchantId     | varchar(45)  | NO   |     | NULL      |                |
+| Category       | int(10)      | YES  |     | NULL      |                |
+| ValidTillDate  | int(2)       | YES  |     | NULL      |                |
+| ValidTillMonth | int(2)       | YES  |     | NULL      |                |
+| ValidTillYear  | int(4)       | YES  |     | NULL      |                |
+| ValidFromDate  | int(2)       | YES  |     | NULL      |                |
+| ValidFromMonth | int(2)       | YES  |     | NULL      |                |
+| ValidFromYear  | int(4)       | YES  |     | NULL      |                |
+| adimgurl       | varchar(128) | YES  |     | NULL      |                |
+| itemdesc       | varchar(512) | YES  |     | NULL      |                |
+| receivedOn     | varchar(45)  | YES  |     | NULL      |                |
+| offercode      | varchar(6)   | YES  |     | NULL      |                |
+| shopname       | varchar(45)  | YES  |     | shop name |                |
+| mindiscount    | varchar(10)  | YES  |     | 0         |                |
+| maxdiscount    | varchar(10)  | YES  |     | 0         |                |
+| discdesc       | varchar(512) | YES  |     | 0         |                |
++----------------+--------------+------+-----+-----------+----------------+
+
+         */
+                obj.geo = GeoHash;
+                obj.merchantid = resultSet.getString("MerchantId");
+                obj.cat= resultSet.getString("Category");
+                obj. tilldate= resultSet.getString("ValidTillDate");
+                obj.tillmonth= resultSet.getString("ValidTillMonth");
+                obj.tillyear= resultSet.getString("ValidTillYear");
+                obj. fromdate= resultSet.getString("ValidFromDate");
+                obj. frommonth= resultSet.getString("ValidFromMonth");
+                obj. fromyear= resultSet.getString("ValidFromYear");
+                obj. offercode= resultSet.getString("offercode");
+                obj. itemdesc= resultSet.getString("itemdesc");
+                obj. imgUrl= resultSet.getString("adimgurl");
+                obj.shopDp= resultSet.getString("totalpoints");
+                obj.shopname= resultSet.getString("totalpoints");
+
+            }
+            return obj;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return obj;
+        }
+    }
     private void writeMetaData(ResultSet resultSet) throws SQLException {
         //  Now get some metadata from the database
         // Result set get the result of the SQL query
@@ -2809,6 +2873,7 @@ minamount int(6)
 
 
     }
+
     public void createNegotiateRequestTableIfNotExist( String geo) {
 
         try {
@@ -2839,8 +2904,7 @@ minamount int(6)
 //    customercontact
 
     public List<NegotationPayLoad> fetchConsumerNegotiations(String customercontact,Integer lastReceivedNegId) {
-        List<NegotationPayLoad> jobs = new ArrayList<NegotationPayLoad>();
-
+        List<NegotationPayLoad> response = new ArrayList<NegotationPayLoad>();
         try {
 
 
@@ -2857,7 +2921,7 @@ minamount int(6)
             tstmnt.executeQuery();
             ResultSet tables = statement
                     .executeQuery(sqltblcmd);
-            List<NegotationPayLoad> response = new ArrayList<NegotationPayLoad>();
+
             List<String> tablesnames=new ArrayList<>();
             while(tables.next()) {
                 tablesnames.add(tables.getString("TABLE_NAME") );
@@ -2876,7 +2940,11 @@ minamount int(6)
                 resultSet = statement
                         .executeQuery(sqlcmd);
                 NegotationPayLoad obj = resultSetToNegotiationsPayLoad(resultSet);
-                if (obj != null)
+
+                AdPayLoad adDetail =  getAdDetails(obj.notificationid,obj.geohash);
+                if(adDetail!=null)
+                    obj.adObj=adDetail;
+                if (obj != null && (obj.idnegotations!=null || obj.idnegotations!=0))// to ensure there is some data inside
                     response.add(obj);
                 System.out.println("cmd executed is : " + sqlcmd);
             }
@@ -2885,7 +2953,7 @@ minamount int(6)
         }
         catch(Exception ex)
         {
-            return jobs;
+            return response;
         }
 
     }

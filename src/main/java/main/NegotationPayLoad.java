@@ -15,4 +15,7 @@ public class NegotationPayLoad {
     public Integer idnegotations;
     public Integer advance;
     public String respondedOn;
+
+    public AdPayLoad adObj;
+//    public a respondedOn;
 }

@@ -2065,7 +2065,7 @@ lastaddedpointson varchar(45)
                 obj. itemdesc= resultSet.getString("itemdesc");
                 obj. imgUrl= resultSet.getString("adimgurl");
                 obj.shopDp= resultSet.getString("totalpoints");
-                obj.shopname= resultSet.getString("totalpoints");
+                obj.shopname= resultSet.getString("shopname");
 
             }
             return obj;

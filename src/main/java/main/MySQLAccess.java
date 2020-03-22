@@ -2007,13 +2007,21 @@ lastaddedpointson varchar(45)
         try {
             String sql = "Select * from ad_"+GeoHash+" Where Id="+String.valueOf(ID);
             System.out.println(sql);
+            PreparedStatement tstmnt = connect.prepareStatement(sql);
             if(connect.isClosed() == true)
                 connect = initConnection();
-            statement = connect.createStatement();
-            System.out.println("reached here");
-            // Result set get the result of the SQL query
+
+            tstmnt.executeQuery();
             resultSet = statement
                     .executeQuery(sql);
+
+//            if(connect.isClosed() == true)
+//                connect = initConnection();
+//            statement = connect.createStatement();
+//            System.out.println("reached here");
+//            // Result set get the result of the SQL query
+//            resultSet = statement
+//                    .executeQuery(sql);
 
 
             while (resultSet.next()) {
@@ -2934,6 +2942,9 @@ minamount int(6)
 
                 String sqlcmd = "select * from " + tablesnames.get(i) + " where idnegotations > " + maxJobIdReceived + "  AND customercontact  like '" + customercontact + "' ";
                 System.out.println(sqlcmd);
+
+
+
                 if (connect.isClosed() == true)
                     connect = initConnection();
                 PreparedStatement stmnt = connect.prepareStatement(sqlcmd);

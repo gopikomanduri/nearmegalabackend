@@ -2949,29 +2949,32 @@ minamount int(6)
                     connect = initConnection();
                 PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
                 stmnt.executeQuery();
-                resultSet = statement
+                ResultSet result = statement
                         .executeQuery(sqlcmd);
-                NegotationPayLoad obj = resultSetToNegotiationsPayLoad(resultSet);
+
+                NegotationPayLoad obj = resultSetToNegotiationsPayLoad(result);
                 System.out.println("completed nego");
 
                 System.out.println("geohash is : "+ obj.geohash);
                 System.out.println("notifi id is : "+ obj.notificationid);
-                AdPayLoad adDetail =  getAdDetails(obj.notificationid,obj.geohash);
-                if(adDetail!=null) {
-                    System.out.println("recived ad details");
-                    obj.adObj = new AdPayLoad();
-                    obj.adObj = adDetail;
-                }
-                else {
-                    System.out.println("recived null details");
-                }
-                if (obj != null && (obj.idnegotations!=null || obj.idnegotations!=0))// to ensure there is some data inside
-                {
-                    System.out.println("updated ad details");
-                    response.add(obj);
+                if(obj.geohash!=null && obj.notificationid!=null) {
+                    AdPayLoad adDetail = getAdDetails(obj.notificationid, obj.geohash);
+                    if (adDetail != null) {
+                        System.out.println("recived ad details");
+                        obj.adObj = new AdPayLoad();
+                        obj.adObj = adDetail;
+                    } else {
+                        System.out.println("recived null details");
+                    }
+                    if (obj != null && (obj.idnegotations != null || obj.idnegotations != 0))// to ensure there is some data inside
+                    {
+                        System.out.println("updated ad details");
+                        response.add(obj);
+                    }
                 }
                 System.out.println("cmd executed is : " + sqlcmd);
             }
+
 
             return response;
         }

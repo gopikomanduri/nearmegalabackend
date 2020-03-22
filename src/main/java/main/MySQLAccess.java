@@ -2005,7 +2005,7 @@ lastaddedpointson varchar(45)
     {
         AdPayLoad obj = new AdPayLoad();
         try {
-            String sql = "Select * from ad_"+GeoHash+"Where Id="+String.valueOf(ID);
+            String sql = "Select * from ad_"+GeoHash+" Where Id="+String.valueOf(ID);
             if(connect.isClosed() == true)
                 connect = initConnection();
             statement = connect.createStatement();

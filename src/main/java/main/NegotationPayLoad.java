@@ -17,5 +17,9 @@ public class NegotationPayLoad {
     public String respondedOn;
 
     public AdPayLoad adObj;
+    public NegotationPayLoad()
+    {
+        adObj=new AdPayLoad();
+    }
 //    public a respondedOn;
 }

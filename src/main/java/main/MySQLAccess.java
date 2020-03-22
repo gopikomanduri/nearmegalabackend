@@ -2043,6 +2043,7 @@ lastaddedpointson varchar(45)
 
          */
                 obj.geo = GeoHash;
+                
                 obj.merchantid = resultSet.getString("MerchantId");
                 obj.cat= resultSet.getString("Category");
                 obj. tilldate= resultSet.getString("ValidTillDate");
@@ -2061,7 +2062,7 @@ lastaddedpointson varchar(45)
             return obj;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return obj;
         }
     }
@@ -2945,6 +2946,9 @@ minamount int(6)
                     System.out.println("recived ad details");
                     obj.adObj = new AdPayLoad();
                     obj.adObj = adDetail;
+                }
+                else {
+                    System.out.println("recived null details");
                 }
                 if (obj != null && (obj.idnegotations!=null || obj.idnegotations!=0))// to ensure there is some data inside
                 {

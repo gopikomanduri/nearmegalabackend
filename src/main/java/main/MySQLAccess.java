@@ -2006,10 +2006,11 @@ lastaddedpointson varchar(45)
         AdPayLoad obj = new AdPayLoad();
         try {
             String sql = "Select * from ad_"+GeoHash+" Where Id="+String.valueOf(ID);
+            System.out.println(sql);
             if(connect.isClosed() == true)
                 connect = initConnection();
             statement = connect.createStatement();
-            System.out.println(sql);
+            System.out.println("reached here");
             // Result set get the result of the SQL query
             resultSet = statement
                     .executeQuery(sql);
@@ -2941,6 +2942,9 @@ minamount int(6)
                         .executeQuery(sqlcmd);
                 NegotationPayLoad obj = resultSetToNegotiationsPayLoad(resultSet);
                 System.out.println("completed nego");
+
+                System.out.println("geohash is : "+ obj.geohash);
+                System.out.println("notifi id is : "+ obj.notificationid);
                 AdPayLoad adDetail =  getAdDetails(obj.notificationid,obj.geohash);
                 if(adDetail!=null) {
                     System.out.println("recived ad details");

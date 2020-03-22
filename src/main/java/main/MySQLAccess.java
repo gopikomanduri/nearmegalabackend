@@ -2009,7 +2009,7 @@ lastaddedpointson varchar(45)
             if(connect.isClosed() == true)
                 connect = initConnection();
             statement = connect.createStatement();
-
+            System.out.println(sql);
             // Result set get the result of the SQL query
             resultSet = statement
                     .executeQuery(sql);
@@ -2931,21 +2931,26 @@ minamount int(6)
                 System.out.println("Column " + i + " " + tablesnames.get(i));
 
                 String sqlcmd = "select * from " + tablesnames.get(i) + " where idnegotations > " + maxJobIdReceived + "  AND customercontact  like '" + customercontact + "' ";
+                System.out.println(sqlcmd);
                 if (connect.isClosed() == true)
                     connect = initConnection();
                 PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
-                //   stmnt.setInt(1, maxJobIdReceived);
-                //  stmnt.setDate(2, Util.getCurrentDate());
                 stmnt.executeQuery();
                 resultSet = statement
                         .executeQuery(sqlcmd);
                 NegotationPayLoad obj = resultSetToNegotiationsPayLoad(resultSet);
 
                 AdPayLoad adDetail =  getAdDetails(obj.notificationid,obj.geohash);
-                if(adDetail!=null)
-                    obj.adObj=adDetail;
+                if(adDetail!=null) {
+                    System.out.println("recived ad details");
+                    obj.adObj = new AdPayLoad();
+                    obj.adObj = adDetail;
+                }
                 if (obj != null && (obj.idnegotations!=null || obj.idnegotations!=0))// to ensure there is some data inside
+                {
+                    System.out.println("updated ad details");
                     response.add(obj);
+                }
                 System.out.println("cmd executed is : " + sqlcmd);
             }
 

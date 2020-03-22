@@ -2005,7 +2005,7 @@ lastaddedpointson varchar(45)
     {
         AdPayLoad obj = new AdPayLoad();
         try {
-            String sql = "Select * from ad_"+GeoHash+"Where Id="+ID;
+            String sql = "Select * from ad_"+GeoHash+"Where Id="+String.valueOf(ID);
             if(connect.isClosed() == true)
                 connect = initConnection();
             statement = connect.createStatement();
@@ -2043,7 +2043,7 @@ lastaddedpointson varchar(45)
 
          */
                 obj.geo = GeoHash;
-                
+
                 obj.merchantid = resultSet.getString("MerchantId");
                 obj.cat= resultSet.getString("Category");
                 obj. tilldate= resultSet.getString("ValidTillDate");

@@ -2220,7 +2220,7 @@ adnotification int(11)
     {
         Gson gson = new Gson();
 
-
+        System.out.println("into nego obj creattion");
 
         try
         {
@@ -2940,7 +2940,7 @@ minamount int(6)
                 resultSet = statement
                         .executeQuery(sqlcmd);
                 NegotationPayLoad obj = resultSetToNegotiationsPayLoad(resultSet);
-
+                System.out.println("completed nego");
                 AdPayLoad adDetail =  getAdDetails(obj.notificationid,obj.geohash);
                 if(adDetail!=null) {
                     System.out.println("recived ad details");

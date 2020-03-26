@@ -627,7 +627,43 @@ public class MySQLAccess {
         }
     }
 
+    public List<AdPayLoadResponse> getAdsAround(String geohash, String MerchantID,String lastAdId )
+    {
 
+        List<AdPayLoadResponse> jobs = new ArrayList<AdPayLoadResponse>();
+
+        try {
+             Integer maxAdIdReceived = Integer.valueOf(lastAdId);
+
+
+            // String sqlcmd = "select * from job_" + geohash+" where idjobs > ? AND postedon >= ? ";
+
+            String sqlcmd = "select * from ad_" + geohash+" where Id > "+maxAdIdReceived+"  AND MerchantId = '"+MerchantID+"' ";
+
+
+            if(connect.isClosed() == true)
+                connect = initConnection();
+
+            PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
+            //   stmnt.setInt(1, maxJobIdReceived);
+            //  stmnt.setDate(2, Util.getCurrentDate());
+            stmnt.executeQuery();
+
+
+
+            System.out.println("cmd executed is : " + sqlcmd);
+
+
+            resultSet = statement
+                    .executeQuery(sqlcmd);
+
+            return resultSetToAdPayLoad(resultSet, geohash);
+        }
+        catch(Exception ex)
+        {
+            return jobs;
+        }
+    }
 
     public String insertJob(JobPayLoad obj)
     {
@@ -2173,7 +2209,71 @@ lng varchar(10)
             return null;
         }
     }
+    private List<AdPayLoadResponse> resultSetToAdPayLoad(ResultSet resultSet, String geoHash)
+    {
+        Gson gson = new Gson();
+        List<AdPayLoadResponse> response = new ArrayList<AdPayLoadResponse>();
 
+        /*
+
+employername varchar(512)
+employerlocationurl varchar(256)
+jobDescription varchar(256)
+locationLandmark varchar(128)
+offeringpost varchar(64)
+educationQualification varchar(64)
+experienceReq varchar(26)
+sex varchar(10)
+ageLimitation varchar(10)
+contact varchar(16)
+emailId varchar(128)
+interviewDate varchar(45)
+shiftTimings varchar(45)
+salary varchar(45)
+postedon datetime
+lat varchar(10)
+lng varchar(10)
+
+         */
+        try
+        {
+            while(resultSet.next()) {
+                AdPayLoadResponse obj = new AdPayLoadResponse();
+                obj.Id = resultSet.getInt("Id");
+                obj.merchantid   = resultSet.getString("MerchantId");
+                obj.cat  = resultSet.getString("Category");
+                obj.tilldate  = resultSet.getString("ValidTillDate");
+                obj.tillmonth  = resultSet.getString("ValidTillMonth");
+                obj.tillyear  = resultSet.getString("ValidTillYear");
+                obj.fromdate  = resultSet.getString("ValidFromDate");
+                obj.frommonth  = resultSet.getString("ValidFromMonth");
+                obj.fromyear  = resultSet.getString("ValidFromYear");
+                obj.imgUrl= resultSet.getString("adimgurl");
+                obj.itemdesc  = resultSet.getString("itemdesc");
+                obj.offercode  = resultSet.getString("offercode ");
+                obj.shopname   = resultSet.getString("shopname  ");
+
+                obj.mindiscount  = resultSet.getString("mindiscount ");
+                obj.maxdiscount  = resultSet.getString("maxdiscount ");
+                obj.discdesc   = resultSet.getString("discdesc  ");
+                try {
+                    obj.lat = Double.parseDouble(resultSet.getString("latitude"));
+                    obj.lng = Double.parseDouble(resultSet.getString("longitude"));
+                }
+                catch (Exception e)
+                {
+
+                }
+
+                response.add(obj);
+            }
+            return response;
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
     private List<NegotationPayLoad> resultSetToNegotiationsPayLoad(ResultSet resultSet, String geoHash)
     {
         Gson gson = new Gson();

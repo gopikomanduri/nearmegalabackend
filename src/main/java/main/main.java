@@ -118,7 +118,20 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
             return str;
         });
+        post("/getadsaround", (request, response) -> {
+            //      System.out.println("pushing adzz  : "+request.toStringz());
+            response.type("application/json");
+            String geohash = request.queryParams("geohash");
+            String lastAdID = request.queryParams("lastAdID");
+            String merID = request.queryParams("merchantID");
+            System.out.println("fetching ads around  geohash is: "+geohash+" merchant ID is : "+merID);
+            AdHandler adHandler = new AdHandler(null);
 
+            //   Future ft = threadpool.submit(adHandler);
+            String str = adHandler.getAdsAround(lastAdID,geohash,merID);
+
+            return str;
+        });
 
         post("/pushgroup", (request, response) -> {
             //      System.out.println("pushing ad  : "+request.toString());

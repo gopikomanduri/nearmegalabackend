@@ -2694,7 +2694,7 @@ pointstomerchant int(10)
         }
     }
 
-    public List<AdPayLoadResponse> fetchAd(String geohash, int lastId) {
+    public List<AdPayLoadResponse> fetchAd(String geohash, int lastId,String merchantid) {
 
         String ads = "";
 
@@ -2728,9 +2728,9 @@ pointstomerchant int(10)
 
                 // Result set get the result of the SQL query
 //                String sqlcmd= "select * from ad_"+geohash+" as A LEFT JOIN  negotiate_"+geohash+" as B on  A.Id = B.adId where A.Id > "+intLastId+" " +
-//                        "AND A.ValidTillDate >= "+vad+" AND A.ValidTillMonth >= "+vam+" AND A.ValidTillYear >= "+vay ;
+//                        "AND A.ValidTillDate >= "+vad+" AND A.ValidTillMonth >= "+vam+" AND A.ValidTillYear >= "+vay ;AND MerchantId = '"+MerchantID+"'
 
-                String sqlcmd= "select * from ad_"+geohash+" as A LEFT JOIN  negotiate_"+geohash+" as B on  A.Id = B.adId where A.Id > "+intLastId+" " +
+                String sqlcmd= "select * from ad_"+geohash+" as A LEFT JOIN  negotiate_"+geohash+" as B on  A.Id = B.adId where A.MerchantId ='"+merchantid+"' AND "+" A.Id > "+intLastId+" " +
                         "AND ( (A.ValidTillYear > "+vay+" ) OR (A.ValidTillYear = "+vay+" AND A.ValidTillMonth > "+vam+" ) " +
                         "OR (A.ValidTillYear = "+vay+" AND A.ValidTillMonth = "+vam+"  AND A.ValidTillDate >= "+vad+"))" ;
 
@@ -2753,7 +2753,37 @@ pointstomerchant int(10)
     }
 
 
+    public List<LastReceivedAdStruct> fetchMerchantGeoHashes(String merchantId) {
+        List<LastReceivedAdStruct> mergeoIDS = new ArrayList<LastReceivedAdStruct>();
 
+        try {
+            String sqlcmd = "select merchant_geohash from merchant_geohases_Storage where merchant_geohash like '"+merchantId+"_%' ";
+
+            if(connect.isClosed() == true)
+                connect = initConnection();
+
+            PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
+            stmnt.executeQuery();
+            System.out.println("cmd executed is : " + sqlcmd);
+            resultSet = statement
+                    .executeQuery(sqlcmd);
+            while(resultSet.next()) {
+                LastReceivedAdStruct obj = new LastReceivedAdStruct();
+
+                String geoID = resultSet.getString("merchant_geohash");
+                obj.geoHash = geoID.split("_")[2];
+                obj.lastReceivedAdId = -1;
+
+                mergeoIDS.add(obj);
+            }
+            return mergeoIDS;
+        }
+        catch(Exception ex)
+        {
+            return mergeoIDS;
+        }
+
+    }
 
     public String AddMsgToGroup(String groupName, String name, String msg, String sex, String dp, Integer parentMsg, Integer rootMsg) {
 
@@ -2982,6 +3012,19 @@ minamount int(6)
 
 
 
+    }
+
+    public void insertIntomerchantGeohashesStore(String mID,String geo) {
+        try {
+
+            String sql = "INSERT INTO merchant_geohases_Storage (merchant_geohash) VALUES (?)";
+            PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, mID + "_" + geo);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void createNegotiateRequestTableIfNotExist( String geo) {

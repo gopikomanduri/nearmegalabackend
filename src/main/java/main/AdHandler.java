@@ -30,7 +30,7 @@ public class AdHandler implements Callable {
             );
 
     MySQLAccess.dbObj.insertIntoNegotiateOffer(adId,receivedAd.geo,receivedAd.negotiate, receivedAd.minBusiness);
-
+    MySQLAccess.dbObj.insertIntomerchantGeohashesStore(receivedAd.merchantid,receivedAd.geo);
     return adId.toString();
 
 

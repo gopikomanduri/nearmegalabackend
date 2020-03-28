@@ -20,6 +20,8 @@ public class main {
 
 //        Date validFrom = Util.stringToDate("02-02-1999","dd-mm-yyyy");
 //        Date validto = Util.stringToDate("02:02:1999","dd:mm:yyyy");
+        String testee="merchant_98_tepexv";
+        testee=testee.split("_")[2];
         port(5556);
         final String[] responseJson = new String[1];
         tokenregistrationpayload emptyone = new tokenregistrationpayload();
@@ -183,6 +185,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
         post("/ads", (request, response) -> {
             response.type("application/json");
+            String merchantid = request.queryParams("merchantid");
             String dataReceived = request.queryParams("geohash");
             System.out.println("for /ads .. requestRegUser received "+dataReceived);
 
@@ -194,7 +197,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 //            Future ft = threadpool.submit(adPusher);
 //            while(ft.isDone() == false);
             //   return ft.get().toString();
-            responseJson[0] = adPusher.call(dataReceived).toString();
+            responseJson[0] = adPusher.call(dataReceived,merchantid).toString();
 
 //            String str = adPusher.call(responseJson[0]).toString();
 //            System.out.println("for /ads .. response sent "+str);

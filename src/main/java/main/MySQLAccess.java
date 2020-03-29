@@ -2411,7 +2411,7 @@ groupdesc varchar(256)
         }
     }
 
-    private List<AdPayLoadResponse> resultSetToString(ResultSet resultSet, String geoHash)
+    private List<AdPayLoadResponse> resultSetToString(ResultSet resultSet, String geoHash,boolean ignoreB)
     {
         Gson gson = new Gson();
         String jsonInString = "";
@@ -2464,8 +2464,10 @@ groupdesc varchar(256)
                 obj.fromyear=resultSet.getString("A.ValidFromYear");
                 obj.offercode=resultSet.getString("A.offercode");
                 obj.shopname="Name:"+merchantName+" ShopNo :"+shopno;
-                obj.negotiate = resultSet.getInt("B.cannegotiate");
-                obj.minBusiness=resultSet.getInt("B.minamount");
+                if(!ignoreB) {
+                    obj.negotiate = resultSet.getInt("B.cannegotiate");
+                    obj.minBusiness = resultSet.getInt("B.minamount");
+                }
                 obj.lat = resultSet.getDouble("A.latitude");
                 obj.lng = resultSet.getDouble("A.longitude");
 //            LatLng temp = null;
@@ -2725,7 +2727,7 @@ pointstomerchant int(10)
                 Integer vay = Util.getCurrentYear(now);
 
                 createNegotiateRequestTableIfNotExist(geohash);
-
+                boolean ignoreB=false;
                 // Result set get the result of the SQL query
 //                String sqlcmd= "select * from ad_"+geohash+" as A LEFT JOIN  negotiate_"+geohash+" as B on  A.Id = B.adId where A.Id > "+intLastId+" " +
 //                        "AND A.ValidTillDate >= "+vad+" AND A.ValidTillMonth >= "+vam+" AND A.ValidTillYear >= "+vay ;AND MerchantId = '"+MerchantID+"'
@@ -2736,6 +2738,7 @@ pointstomerchant int(10)
                 if(merchantid!=null) {
                     sqlcmd = "select * from ad_" + geohash + " as A where A.MerchantId ='" + merchantid + "' AND " + " A.Id > " + intLastId ;
 
+                    ignoreB=true;
                 }
 
 
@@ -2743,7 +2746,7 @@ pointstomerchant int(10)
 
                 resultSet = statement
                         .executeQuery(sqlcmd);
-                Lads = resultSetToString(resultSet, geohash);
+                Lads = resultSetToString(resultSet, geohash,ignoreB);
 
             }
               } catch (SQLException e) {

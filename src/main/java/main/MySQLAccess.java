@@ -2729,11 +2729,16 @@ pointstomerchant int(10)
                 // Result set get the result of the SQL query
 //                String sqlcmd= "select * from ad_"+geohash+" as A LEFT JOIN  negotiate_"+geohash+" as B on  A.Id = B.adId where A.Id > "+intLastId+" " +
 //                        "AND A.ValidTillDate >= "+vad+" AND A.ValidTillMonth >= "+vam+" AND A.ValidTillYear >= "+vay ;AND MerchantId = '"+MerchantID+"'
-
-                String sqlcmd= "select * from ad_"+geohash+" as A LEFT JOIN  negotiate_"+geohash+" as B on  A.Id = B.adId where A.MerchantId ='"+merchantid+"' AND "+" A.Id > "+intLastId+" " +
+                String sqlcmd= "select * from ad_"+geohash+" as A LEFT JOIN  negotiate_"+geohash+" as B on  A.Id = B.adId where A.Id > "+intLastId+" " +
                         "AND ( (A.ValidTillYear > "+vay+" ) OR (A.ValidTillYear = "+vay+" AND A.ValidTillMonth > "+vam+" ) " +
                         "OR (A.ValidTillYear = "+vay+" AND A.ValidTillMonth = "+vam+"  AND A.ValidTillDate >= "+vad+"))" ;
 
+                if(merchantid!=null) {
+                    sqlcmd = "select * from ad_" + geohash + " as A LEFT JOIN  negotiate_" + geohash + " as B on  A.Id = B.adId where A.MerchantId ='" + merchantid + "' AND " + " A.Id > " + intLastId + " " +
+                            "AND ( (A.ValidTillYear > " + vay + " ) OR (A.ValidTillYear = " + vay + " AND A.ValidTillMonth > " + vam + " ) " +
+                            "OR (A.ValidTillYear = " + vay + " AND A.ValidTillMonth = " + vam + "  AND A.ValidTillDate >= " + vad + "))";
+
+                }
 
 
                 System.out.println("cmd executed is : "+sqlcmd);
@@ -3014,6 +3019,7 @@ minamount int(6)
 
     }
 
+    //
     public void insertIntomerchantGeohashesStore(String mID,String geo) {
         try {
 

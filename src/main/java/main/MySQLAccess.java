@@ -2734,7 +2734,7 @@ pointstomerchant int(10)
                         "OR (A.ValidTillYear = "+vay+" AND A.ValidTillMonth = "+vam+"  AND A.ValidTillDate >= "+vad+"))" ;
 
                 if(merchantid!=null) {
-                    sqlcmd = "select * from ad_" + geohash + " as A LEFT JOIN  negotiate_" + geohash + " as B on  A.Id = B.adId where A.MerchantId ='" + merchantid + "' AND " + " A.Id > " + intLastId ;
+                    sqlcmd = "select * from ad_" + geohash + " as A where A.MerchantId ='" + merchantid + "' AND " + " A.Id > " + intLastId ;
 
                 }
 

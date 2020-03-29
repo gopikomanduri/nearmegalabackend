@@ -20,8 +20,8 @@ public class main {
 
 //        Date validFrom = Util.stringToDate("02-02-1999","dd-mm-yyyy");
 //        Date validto = Util.stringToDate("02:02:1999","dd:mm:yyyy");
-        String testee="merchant_98_tepexv";
-        testee=testee.split("_")[2];
+//        String testee="merchant_98_tepexv";
+//        testee=testee.split("_")[2];
         port(5556);
         final String[] responseJson = new String[1];
         tokenregistrationpayload emptyone = new tokenregistrationpayload();

@@ -771,7 +771,7 @@ LNG VARCHAR(10)
 
     }
 
-    public String getUserDetails(String number)
+    public String getUserDetails(String number,consumerFirebasepayload _firePayload)
     {
         consumerpayload temp = new consumerpayload();
         try {
@@ -783,11 +783,9 @@ LNG VARCHAR(10)
 
             System.out.println("query executing is "+merchantQuery);
             statement = connect.createStatement();
-
             // Result set get the result of the SQL query
             resultSet = statement
                     .executeQuery(merchantQuery);
-
                     /*
 consumername varchar(128)
 contact varchar(15)
@@ -797,15 +795,6 @@ registeredon datetime
 status int(11)
 sex int(11)
          */
-
-
-
-
-
-
-
-
-
             if(resultSet.next()) {
                 temp.idconsumers=resultSet.getInt("idconsumers");
                 temp.consumername = resultSet.getString("consumername");
@@ -814,18 +803,16 @@ sex int(11)
                 temp.dpurl = resultSet.getString("dpurl");
                 temp.sex = resultSet.getInt("sex");
             }
+            if(temp.idconsumers!=null && _firePayload!=null) {
+                try{insertIntoFirebaseDetails(temp.idconsumers,_firePayload,true);}
+                catch (Exception ex) {
 
+                }
+            }
             String merchantjson = new Gson().toJson(temp);
             System.out.println("returning user details  "+merchantjson.toString());
             return merchantjson;
         }
-
-
-
-
-
-
-
          catch (SQLException e) {
             e.printStackTrace();
         }
@@ -834,6 +821,45 @@ sex int(11)
         return merchantjson;
     }
 
+    public String getUserFireDetails(int consumerID)
+    {
+        consumerFirebasepayload temp = new consumerFirebasepayload();
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+
+            String merchantQuery = "SELECT * FROM consumerFireIDs where  consumerID ="+consumerID;
+
+
+            System.out.println("query executing is "+merchantQuery);
+            statement = connect.createStatement();
+            // Result set get the result of the SQL query
+            resultSet = statement
+                    .executeQuery(merchantQuery);
+                    /*
+consumername varchar(128)
+contact varchar(15)
+DOB date
+dpurl varchar(256)
+registeredon datetime
+status int(11)
+sex int(11)
+         */
+            if(resultSet.next()) {
+                temp.FirebaseInstanceID=resultSet.getString("FirebaseInstanceID");
+            }
+
+            String merchantjson = new Gson().toJson(temp);
+            System.out.println("returning user details  "+merchantjson.toString());
+            return merchantjson;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String merchantjson = new Gson().toJson(temp);
+
+        return merchantjson;
+    }
     public String insertIntoUser(consumerpayload obj)
     {
         LocalDateTime now = LocalDateTime.now();
@@ -884,7 +910,10 @@ sex int(11)
 
             preparedStatement.close();
 
+            try{insertIntoFirebaseDetails(generatedKey,obj.FirebaseDetails,false);}
+            catch (Exception ex) {
 
+            }
             System.out.println("command executed is "+sql);
             return generatedKey.toString();
 
@@ -893,7 +922,47 @@ sex int(11)
             return generatedKey.toString();
         }
     }
+    public String insertIntoFirebaseDetails(int consumerID,consumerFirebasepayload FirebaseInstanceID,boolean isUpdate)
+    {
 
+        String sql = "INSERT INTO consumerFireIDs (consumerID,FirebaseInstanceID)" +
+                "VALUES (?,?)";
+        if(isUpdate){
+            sql = "UPDATE consumerFireIDs SET FirebaseInstanceID = "+FirebaseInstanceID.FirebaseInstanceID +"Where consumerID = "+consumerID;
+
+//            String nego_sql =  "UPDATE negotiationsresponse_"+obj.geohashes +" SET canPostToStatus = 0 WHERE notificationid="+obj.idnotification;
+
+        }
+        Integer retVal = -1;
+        try {
+            PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            if(isUpdate){
+                preparedStatement = connect
+                        .prepareStatement(sql);
+                preparedStatement.executeUpdate();
+            }else {
+                preparedStatement.setInt(1, consumerID);
+                preparedStatement.setString(2, FirebaseInstanceID.FirebaseInstanceID);
+                preparedStatement.executeUpdate();
+
+
+                ResultSet rs = preparedStatement.getGeneratedKeys();
+                if (rs.next()) {
+                    retVal = rs.getInt(1);
+                }
+                preparedStatement.close();
+
+            }
+            preparedStatement.close();
+            System.out.println("command executed is "+sql);
+            return retVal.toString();
+        }
+        catch(Exception ex)
+        {
+            return retVal.toString();
+        }
+
+    }
     public String insertIntoBirthdays(String contact)
     {
         String sql = "INSERT INTO birthdays (contact)" +

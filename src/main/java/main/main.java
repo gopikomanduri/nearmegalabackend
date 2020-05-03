@@ -444,14 +444,22 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
         post("/LoginUser", (request, response) -> {
             response.type("application/json");
             String dataReceived = request.queryParams("consumerpayload");
-            System.out.println("for /LoginUser .. request received "+dataReceived);
+            String FirebaseReceiveddata=null;
+            try {
+                FirebaseReceiveddata = request.queryParams("consumerFirebasepayload");
+            }
+            catch (Exception ex)
+            {
+
+            }
+            System.out.println("for /LoginUser .. request received "+dataReceived+ " "+FirebaseReceiveddata);
 
             //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
 
 //            String lng = request.queryParams("lng");
 //            String lastId = request.queryParams("lastId");
             consumer reg = new consumer();
-            String consumerId =  reg.getUserDetails(dataReceived);
+            String consumerId =  reg.getUserDetails(dataReceived,FirebaseReceiveddata);
             System.out.println("for /RegUser .. response sent "+consumerId);
             return consumerId;
 

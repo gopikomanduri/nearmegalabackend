@@ -21,4 +21,5 @@ public String contact;
 public String dob;
 public String dpurl;
 public Integer sex;
+public consumerFirebasepayload FirebaseDetails;
 }

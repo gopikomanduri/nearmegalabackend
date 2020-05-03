@@ -9,8 +9,10 @@ public class consumer {
         return MySQLAccess.dbObj.insertIntoUser(obj);
 
     }
-    public String getUserDetails(String str)
+    public String getUserDetails(String str,String FirebaseReceiveddata)
     {
-        return MySQLAccess.dbObj.getUserDetails(str);
+        consumerFirebasepayload obj = new Gson().fromJson(FirebaseReceiveddata, consumerFirebasepayload.class);
+
+        return MySQLAccess.dbObj.getUserDetails(str,obj);
     }
 }

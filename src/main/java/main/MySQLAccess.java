@@ -928,7 +928,7 @@ sex int(11)
         String sql = "INSERT INTO consumerFireIDs (consumerID,FirebaseInstanceID)" +
                 "VALUES (?,?)";
         if(isUpdate){
-            sql = "UPDATE consumerFireIDs SET FirebaseInstanceID = "+FirebaseInstanceID.FirebaseInstanceID +"Where consumerID = "+consumerID;
+            sql = "UPDATE consumerFireIDs SET FirebaseInstanceID = "+FirebaseInstanceID.FirebaseInstanceID +" Where consumerID = "+consumerID;
 
 //            String nego_sql =  "UPDATE negotiationsresponse_"+obj.geohashes +" SET canPostToStatus = 0 WHERE notificationid="+obj.idnotification;
 

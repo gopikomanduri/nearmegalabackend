@@ -840,11 +840,9 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             String[] fireID = reg.getUSerFireID(contact);
             System.out.println("obtained fire details and sending to  " + fireID[0] );
             if(fireID[0]!=null) {
-                msg.addRegistrationToken(fireID[0]);
-//            msg.addRegistrationToken("eXo49MLuJGE:APA91bEE4zMCQ_lnNst9Fw-cBAfgiyYsdxHdQ7TW1w5JDOZya9holq1KQWC3-nZ_7SRpGqeqC_ZgtvaPjj9QTMCQqsmoUiH-jMdzU_F14b8Vcic20Vztk3RChoE66EzskArJzVKj1_wu");
-//            msg.addRegistrationToken("fEXJFJ7kysc:APA91bEaEh-Dhtv9vQIueCPs7tjeJLMFV7_4cZUL2lDyMJPUlZdbRSqDkJULfLvMOP6nxIjw0RMCFEknPhFYqtsI66JJb3anuPW--QMpi5R8EekamYQSmMUluTGcndfGmF7SZsMJl_O7");
-                // Add key value pair into payload
-                msg.putStringData("title", "Hello " + fireID[1]);
+                msg.addRegistrationToken(fireID[0].toString());
+
+                msg.putStringData("title", "Hello " + fireID[1].toString());
                 msg.putStringData("body", "Your Token is " + GeneratedToken);
                 System.out.println("created FCM message");
                 // push

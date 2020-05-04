@@ -849,13 +849,14 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 System.out.println("created FCM message");
                 // push
                 try {
-                    if (client != null) {
-                        System.out.println(" achived client connection. message is being pushed ");
-                        FcmResponse res = client.pushToEntities(msg);
-                        System.out.println(res);
-                        System.out.println("message pushed ");
-                    }
-                    else{
+//                    if (client != null) {
+//                        System.out.println(" achived client connection. message is being pushed ");
+//                        FcmResponse res = client.pushToEntities(msg);
+//                        System.out.println(res);
+//                        System.out.println("message pushed ");
+//                    }
+//                    else
+                        {
                         FirebaseMessagingClient clients =new FirebaseMessagingClient();
                         try {//
                             clients.setAPIKey("AAAAJVsTN2U:APA91bFaQC_HMm4r6-oSXNXddODyjE89YbZmrCeZm7dRJ7hKMfDTh073GnUkjoLz2YfEMJRPxcFH8xaOJsyO5ILUmoHwSsXXiiHFHyUg5vDhSB18XK7pZSWT15PPE2SREr1yInn7bqF9");

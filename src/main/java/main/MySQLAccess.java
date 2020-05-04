@@ -849,7 +849,7 @@ sex int(11)
                 temp.FirebaseInstanceID=resultSet.getString("FirebaseInstanceID");
             }
 
-            String merchantjson = new Gson().toJson(temp);
+            String merchantjson = temp.FirebaseInstanceID;
             System.out.println("returning user details  "+merchantjson.toString());
             return merchantjson;
         }

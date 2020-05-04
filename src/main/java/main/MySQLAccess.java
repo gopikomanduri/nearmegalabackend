@@ -856,7 +856,7 @@ sex int(11)
         catch (SQLException e) {
             e.printStackTrace();
         }
-        String merchantjson = new Gson().toJson(temp);
+        String merchantjson = temp.FirebaseInstanceID;
 
         return merchantjson;
     }

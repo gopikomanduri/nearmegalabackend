@@ -376,7 +376,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
        ConcurrentHashMap<String , tokenassigner> merchantstokens = new ConcurrentHashMap<String, tokenassigner>();
 
 
-        post("RegUser", (request, response) -> {
+        post("/login", (request, response) -> {
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
             String password = request.queryParams("password");

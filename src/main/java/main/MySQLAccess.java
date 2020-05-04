@@ -940,6 +940,7 @@ sex int(11)
                 preparedStatement = connect
                         .prepareStatement(sql);
                 preparedStatement.executeUpdate();
+                retVal = consumerID;
             }else {
                 preparedStatement.setInt(1, consumerID);
                 preparedStatement.setString(2, FirebaseInstanceID.FirebaseInstanceID);

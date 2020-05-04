@@ -18,11 +18,31 @@ public class main {
 
 
 
-//        Date validFrom = Util.stringToDate("02-02-1999","dd-mm-yyyy");
-//        Date validto = Util.stringToDate("02:02:1999","dd:mm:yyyy");
-//        String testee="merchant_98_tepexv";
-//        testee=testee.split("_")[2];
+
         port(5556);
+        final FirebaseMessagingClient client =new FirebaseMessagingClient();
+        try {
+//            client = new FirebaseMessagingClient();
+            client.setAPIKey("AAAAJVsTN2U:APA91bFaQC_HMm4r6-oSXNXddODyjE89YbZmrCeZm7dRJ7hKMfDTh073GnUkjoLz2YfEMJRPxcFH8xaOJsyO5ILUmoHwSsXXiiHFHyUg5vDhSB18XK7pZSWT15PPE2SREr1yInn7bqF9");
+//            // Data model for sending messages to specific entity(mobile devices,browser front-end apps)s
+//            EntityMessage msg = new EntityMessage();
+//
+//            // Set registration token that can be retrieved
+//            // from Android entity(mobile devices,browser front-end apps) when calling
+//            // FirebaseInstanceId.getInstance().getToken();
+//            msg.addRegistrationToken("eXo49MLuJGE:APA91bEE4zMCQ_lnNst9Fw-cBAfgiyYsdxHdQ7TW1w5JDOZya9holq1KQWC3-nZ_7SRpGqeqC_ZgtvaPjj9QTMCQqsmoUiH-jMdzU_F14b8Vcic20Vztk3RChoE66EzskArJzVKj1_wu");
+//            msg.addRegistrationToken("fEXJFJ7kysc:APA91bEaEh-Dhtv9vQIueCPs7tjeJLMFV7_4cZUL2lDyMJPUlZdbRSqDkJULfLvMOP6nxIjw0RMCFEknPhFYqtsI66JJb3anuPW--QMpi5R8EekamYQSmMUluTGcndfGmF7SZsMJl_O7");
+//            // Add key value pair into payload
+//            msg.putStringData("title", "tetete");
+//            msg.putStringData("body", "myValue2");
+//
+//            // push
+//            FcmResponse res = client.pushToEntities(msg);
+
+//            System.out.println(res);
+        }catch (Exception ex){
+
+        }
         final String[] responseJson = new String[1];
         tokenregistrationpayload emptyone = new tokenregistrationpayload();
 
@@ -356,7 +376,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
        ConcurrentHashMap<String , tokenassigner> merchantstokens = new ConcurrentHashMap<String, tokenassigner>();
 
 
-        post("/login", (request, response) -> {
+        post("RegUser", (request, response) -> {
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
             String password = request.queryParams("password");
@@ -610,7 +630,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             String timeserved = request.queryParams("timeserved");
             String starttime = request.queryParams("starttime");
                     String endTime = request.queryParams("endTime");
-
+            String GeneratedToken=emptystr;
             System.out.println("for /getnexttoken .. request received merchantid "+merchantid+" counter  =  "+counter
             +"existingtoken  = "+existingtoken+" timeserved ="+timeserved+" starttime = "+starttime
             +"endtime = "+endTime);
@@ -619,21 +639,48 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
 //            String lng = request.queryParams("lng");
 //            String lastId = request.queryParams("lastId");
+//            body
             tokenassigner tkobj = null;
 
             if(merchantstokens.containsKey(merchantid) == true)
             {
                 tkobj = merchantstokens.get(merchantid);
-                return tkobj.getNextToken(merchantid,Integer.valueOf(counter), Integer.valueOf(existingtoken),
+                GeneratedToken =  tkobj.getNextToken(merchantid,Integer.valueOf(counter), Integer.valueOf(existingtoken),
                         Double.valueOf(timeserved), starttime, endTime);
+
             }
             else
             {
                 System.out.println("for /getmerchanttokendetails ..counters not yet opened   "+merchantid+"  returning empty details");
-
-                return emptystr;
-
             }
+
+//            // Data model for sending messages to specific entity(mobile devices,browser front-end apps)s
+//            EntityMessage msg = new EntityMessage();
+//
+//            // Set registration token that can be retrieved
+//            // from Android entity(mobile devices,browser front-end apps) when calling
+//            // FirebaseInstanceId.getInstance().getToken();
+//            msg.addRegistrationToken("eXo49MLuJGE:APA91bEE4zMCQ_lnNst9Fw-cBAfgiyYsdxHdQ7TW1w5JDOZya9holq1KQWC3-nZ_7SRpGqeqC_ZgtvaPjj9QTMCQqsmoUiH-jMdzU_F14b8Vcic20Vztk3RChoE66EzskArJzVKj1_wu");
+//            msg.addRegistrationToken("fEXJFJ7kysc:APA91bEaEh-Dhtv9vQIueCPs7tjeJLMFV7_4cZUL2lDyMJPUlZdbRSqDkJULfLvMOP6nxIjw0RMCFEknPhFYqtsI66JJb3anuPW--QMpi5R8EekamYQSmMUluTGcndfGmF7SZsMJl_O7");
+//            // Add key value pair into payload
+//            msg.putStringData("title", "Hello ");
+//            msg.putStringData("body", "Your Token is "+GeneratedToken);
+//
+//            // push
+//            try {
+//                if (client != null) {
+//                    FcmResponse res = client.pushToEntities(msg);
+//                    System.out.println(res);
+//                }
+//
+//            }
+//            catch (Exception ex)
+//            {
+//
+//            }
+            return  GeneratedToken;
+
+
 //            else
 //            {
 //                tkobj = new tokenassigner();
@@ -729,7 +776,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
             String token = request.queryParams("token");
-
+            String GeneratedToken = "-2";
             String contact  = request.queryParams("contact");
             String existingStatus = request.queryParams("existingStatus");
 
@@ -748,7 +795,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 String str = tkobj.getTokenStatus(merchantid,Integer.valueOf(token), contact, existingStatus,-1);
 
                 System.out.println("for gettokenstatus , returning "+str);
-                return str;
+                GeneratedToken =  str;
             }
             else
             {
@@ -758,10 +805,34 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 System.out.println("for gettokenstatus for merchatid "+merchantid+", returning -2 ");
 
 
-                return "-2";
+                GeneratedToken =  "-2";
             }
 
-
+            EntityMessage msg = new EntityMessage();
+            consumer reg = new consumer();
+            System.out.println("reached to obtain fire details ");
+            String[] fireID = reg.getUSerFireID(contact);
+            System.out.println("obtained fire details and sending to  " + fireID[0] );
+            if(fireID[0]!=null) {
+                msg.addRegistrationToken(fireID[0]);
+//            msg.addRegistrationToken("eXo49MLuJGE:APA91bEE4zMCQ_lnNst9Fw-cBAfgiyYsdxHdQ7TW1w5JDOZya9holq1KQWC3-nZ_7SRpGqeqC_ZgtvaPjj9QTMCQqsmoUiH-jMdzU_F14b8Vcic20Vztk3RChoE66EzskArJzVKj1_wu");
+//            msg.addRegistrationToken("fEXJFJ7kysc:APA91bEaEh-Dhtv9vQIueCPs7tjeJLMFV7_4cZUL2lDyMJPUlZdbRSqDkJULfLvMOP6nxIjw0RMCFEknPhFYqtsI66JJb3anuPW--QMpi5R8EekamYQSmMUluTGcndfGmF7SZsMJl_O7");
+                // Add key value pair into payload
+                msg.putStringData("title", "Hello " + fireID[1]);
+                msg.putStringData("body", "Your Token is " + GeneratedToken);
+                System.out.println("created FCM message");
+                // push
+                try {
+                    if (client != null) {
+                        System.out.println(" achived client connection. message is being pushed ");
+                        FcmResponse res = client.pushToEntities(msg);
+                        System.out.println(res);
+                        System.out.println("message pushed ");
+                    }
+                } catch (Exception ex) {
+                }
+            }
+            return GeneratedToken;
 
 
             //  return "Gopi";
@@ -1155,31 +1226,49 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
             String consumercontact = request.queryParams("consumercontact");
-
-            System.out.println("for /registerfortoken .. request received merchantid "+merchantid+" consumercontact  =  "+consumercontact);
+            String GeneratedToken = "-10";
+            System.out.println("for /registerfortoken .. request received merchantid " + merchantid + " consumercontact  =  " + consumercontact);
 
             //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
 
 //            String lng = request.queryParams("lng");
 //            String lastId = request.queryParams("lastId");
-           tokenassigner tkobj = null;
+            tokenassigner tkobj = null;
 
-            if((tkobj = merchantstokens.get(merchantid)) != null)
-            {
-               // tkobj = new tokenassigner();
-                merchantstokens.put(merchantid,tkobj);
-                return tkobj.createnewtokenWithContact(merchantid, consumercontact, false);
-            }
-            else
-            {
-                System.out.println("for /getmerchanttokendetails ..counters not yet opened   "+merchantid+"  returning empty details");
-                return "-10";
+            if ((tkobj = merchantstokens.get(merchantid)) != null) {
+                // tkobj = new tokenassigner();
+                merchantstokens.put(merchantid, tkobj);
+                GeneratedToken = tkobj.createnewtokenWithContact(merchantid, consumercontact, false);
+            } else {
+                System.out.println("for /getmerchanttokendetails ..counters not yet opened   " + merchantid + "  returning empty details");
+//                return "-10";
             }
 
-            //   return tkobj.createnewtoken(merchantid);
-
-
-            //  return "Gopi";
+            EntityMessage msg = new EntityMessage();
+            consumer reg = new consumer();
+            System.out.println("reached to obtain fire details ");
+            String[] fireID = reg.getUSerFireID(consumercontact);
+            System.out.println("obtained fire details and sending to  " + fireID[0] );
+            if(fireID[0]!=null) {
+                msg.addRegistrationToken(fireID[0]);
+//            msg.addRegistrationToken("eXo49MLuJGE:APA91bEE4zMCQ_lnNst9Fw-cBAfgiyYsdxHdQ7TW1w5JDOZya9holq1KQWC3-nZ_7SRpGqeqC_ZgtvaPjj9QTMCQqsmoUiH-jMdzU_F14b8Vcic20Vztk3RChoE66EzskArJzVKj1_wu");
+//            msg.addRegistrationToken("fEXJFJ7kysc:APA91bEaEh-Dhtv9vQIueCPs7tjeJLMFV7_4cZUL2lDyMJPUlZdbRSqDkJULfLvMOP6nxIjw0RMCFEknPhFYqtsI66JJb3anuPW--QMpi5R8EekamYQSmMUluTGcndfGmF7SZsMJl_O7");
+                // Add key value pair into payload
+                msg.putStringData("title", "Hello " + fireID[1]);
+                msg.putStringData("body", "Your Token is " + GeneratedToken);
+                System.out.println("created FCM message");
+                // push
+                try {
+                    if (client != null) {
+                        System.out.println(" achived client connection. message is being pushed ");
+                        FcmResponse res = client.pushToEntities(msg);
+                        System.out.println(res);
+                        System.out.println("message pushed ");
+                    }
+                } catch (Exception ex) {
+                }
+            }
+            return GeneratedToken;
         });
 
 

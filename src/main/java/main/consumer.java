@@ -11,8 +11,20 @@ public class consumer {
     }
     public String getUserDetails(String str,String FirebaseReceiveddata)
     {
-        consumerFirebasepayload obj = new Gson().fromJson(FirebaseReceiveddata, consumerFirebasepayload.class);
+        consumerFirebasepayload obj =null;
+        if(FirebaseReceiveddata!=null)
+             obj = new Gson().fromJson(FirebaseReceiveddata, consumerFirebasepayload.class);
 
         return MySQLAccess.dbObj.getUserDetails(str,obj);
+    }
+    public String[] getUSerFireID(String contact)
+    {
+        String FireID[]=new String[2];
+        consumerpayload cc =new Gson().fromJson(MySQLAccess.dbObj.getUserDetails(contact,null),consumerpayload.class);
+        if(cc!=null) {
+            FireID[0] = MySQLAccess.dbObj.getUserFireDetails(cc.idconsumers);
+            FireID[1] = cc.consumername;
+        }
+        return  FireID;
     }
 }

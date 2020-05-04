@@ -43,6 +43,32 @@ public class main {
         }catch (Exception ex){
 
         }
+        EntityMessage msgr = new EntityMessage();
+//        consumer reg = new consumer();
+        System.out.println("reached to obtain fire details ");
+//        String[] fireID = reg.getUSerFireID(contact);
+//        System.out.println("obtained fire details and sending to  " + fireID[0] );
+//        if(fireID[0]!=null)
+        {
+//            msg.addRegistrationToken(fireID[0]);
+            msgr.addRegistrationToken("eXo49MLuJGE:APA91bEE4zMCQ_lnNst9Fw-cBAfgiyYsdxHdQ7TW1w5JDOZya9holq1KQWC3-nZ_7SRpGqeqC_ZgtvaPjj9QTMCQqsmoUiH-jMdzU_F14b8Vcic20Vztk3RChoE66EzskArJzVKj1_wu");
+            msgr.addRegistrationToken("fEXJFJ7kysc:APA91bEaEh-Dhtv9vQIueCPs7tjeJLMFV7_4cZUL2lDyMJPUlZdbRSqDkJULfLvMOP6nxIjw0RMCFEknPhFYqtsI66JJb3anuPW--QMpi5R8EekamYQSmMUluTGcndfGmF7SZsMJl_O7");
+            // Add key value pair into payload
+            msgr.putStringData("title", "Hello ");
+            msgr.putStringData("body", "test" );
+            System.out.println("created FCM message");
+            // push
+            try {
+                if (client != null) {
+                    System.out.println(" achived client connection. message is being pushed ");
+                    FcmResponse res = client.pushToEntities(msgr);
+                    System.out.println(res);
+                    System.out.println("message pushed ");
+                }
+            } catch (Exception ex) {
+            }
+        }
+
         final String[] responseJson = new String[1];
         tokenregistrationpayload emptyone = new tokenregistrationpayload();
 
@@ -828,6 +854,34 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                         FcmResponse res = client.pushToEntities(msg);
                         System.out.println(res);
                         System.out.println("message pushed ");
+                    }
+                    else{
+                        FirebaseMessagingClient clients =new FirebaseMessagingClient();
+                        try {//
+                            clients.setAPIKey("AAAAJVsTN2U:APA91bFaQC_HMm4r6-oSXNXddODyjE89YbZmrCeZm7dRJ7hKMfDTh073GnUkjoLz2YfEMJRPxcFH8xaOJsyO5ILUmoHwSsXXiiHFHyUg5vDhSB18XK7pZSWT15PPE2SREr1yInn7bqF9");
+//            // Data model for sending messages to specific entity(mobile devices,browser front-end apps)s
+//            EntityMessage msg = new EntityMessage();
+//
+//            // Set registration token that can be retrieved
+//            // from Android entity(mobile devices,browser front-end apps) when calling
+//            // FirebaseInstanceId.getInstance().getToken();
+//            msg.addRegistrationToken("eXo49MLuJGE:APA91bEE4zMCQ_lnNst9Fw-cBAfgiyYsdxHdQ7TW1w5JDOZya9holq1KQWC3-nZ_7SRpGqeqC_ZgtvaPjj9QTMCQqsmoUiH-jMdzU_F14b8Vcic20Vztk3RChoE66EzskArJzVKj1_wu");
+//            msg.addRegistrationToken("fEXJFJ7kysc:APA91bEaEh-Dhtv9vQIueCPs7tjeJLMFV7_4cZUL2lDyMJPUlZdbRSqDkJULfLvMOP6nxIjw0RMCFEknPhFYqtsI66JJb3anuPW--QMpi5R8EekamYQSmMUluTGcndfGmF7SZsMJl_O7");
+//            // Add key value pair into payload
+//            msg.putStringData("title", "tetete");
+//            msg.putStringData("body", "myValue2");
+//
+//            // push
+//            FcmResponse res = client.pushToEntities(msg);
+
+//            System.out.println(res);
+                            System.out.println(" achived client connection. message is being pushed ");
+                            FcmResponse res = clients.pushToEntities(msg);
+                            System.out.println(res);
+                            System.out.println("message pushed from else");
+                        }catch (Exception ex){
+
+                        }
                     }
                 } catch (Exception ex) {
                 }

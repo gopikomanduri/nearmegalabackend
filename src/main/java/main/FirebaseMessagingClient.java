@@ -114,6 +114,7 @@ public class FirebaseMessagingClient {
             con.setInstanceFollowRedirects(false);
             // connect
             con.connect();
+            System.out.println("Authorization key=" + mFcmServerAPIKey);
 
             os = con.getOutputStream();
             osw = new OutputStreamWriter(os, "UTF-8");

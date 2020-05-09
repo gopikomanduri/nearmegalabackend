@@ -803,8 +803,14 @@ sex int(11)
                 temp.dpurl = resultSet.getString("dpurl");
                 temp.sex = resultSet.getInt("sex");
             }
-            if(temp.idconsumers!=null && _firePayload!=null) {
-                try{insertIntoFirebaseDetails(temp.idconsumers,_firePayload,true);}
+            if(temp.idconsumers!=null ) {
+                try {
+//                    if (_firePayload != null) {
+                        insertIntoFirebaseDetails(temp.idconsumers, _firePayload, true);
+//                    } else {
+//                        insertIntoFirebaseDetails(temp.idconsumers, _firePayload, false);
+//                    }
+                }
                 catch (Exception ex) {
 
                 }

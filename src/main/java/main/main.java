@@ -891,6 +891,45 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             //  return "Gopi";
         });
 
+        post("/getalltokenstatus", (request, response) -> {
+
+            /*
+            \
+            \
+            String merchantId, String counter, Integer existingtoken, Double timeserved, String starttime, String endTime
+             */
+            response.type("application/json");
+
+            String _tokenstatuspayload = request.queryParams("tokenstatuspayload");
+            tokenstatuspayload[] obj = new Gson().fromJson(_tokenstatuspayload,tokenstatuspayload[].class);
+            for (int i = 0; i < obj.length; i++) {
+
+//                tokenstatuspayload
+                String merchantid = obj[i].merchantid; //request.queryParams("merchantid");
+                String token = obj[i].token; //request.queryParams("token");
+                obj[i].GeneratedToken = "-2";
+                String contact = obj[i].contact; //request.queryParams("contact");
+                String existingStatus = obj[i].existingStatus; //request.queryParams("existingStatus");
+
+                System.out.println("for /gettokenstatus .. request received merchantid " + merchantid + "" +
+                        " token  =  " + token + "  contact = " + contact + "  existingstatus = " + existingStatus);
+                tokenassigner tkobj = null;
+
+                if (merchantstokens.containsKey(merchantid) == true) {
+                    tkobj = merchantstokens.get(merchantid);
+                    String str = tkobj.getTokenStatus(merchantid, Integer.valueOf(token), contact, existingStatus, -1);
+
+                    System.out.println("for gettokenstatus , returning " + str);
+                    obj[i].GeneratedToken = str;
+                } else {
+                    System.out.println("for gettokenstatus for merchatid " + merchantid + ", returning -2 ");
+                    obj[i].GeneratedToken = "-2";
+                }
+            }
+            _tokenstatuspayload = new Gson().toJson(obj);
+            return _tokenstatuspayload;
+        });
+
         post("/renewtoken", (request, response) -> {
 
             /*

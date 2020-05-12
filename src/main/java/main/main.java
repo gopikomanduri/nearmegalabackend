@@ -899,11 +899,12 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             String merchantId, String counter, Integer existingtoken, Double timeserved, String starttime, String endTime
              */
             response.type("application/json");
-
+            System.out.println("Just recived package");
             String _tokenstatuspayload = request.queryParams("tokenstatuspayload");
             tokenstatuspayload[] obj = new Gson().fromJson(_tokenstatuspayload,tokenstatuspayload[].class);
+            System.out.println("recived payload " +_tokenstatuspayload);
             for (int i = 0; i < obj.length; i++) {
-
+                System.out.println("Just entered into loop");
 //                tokenstatuspayload
                 String merchantid = obj[i].merchantid; //request.queryParams("merchantid");
                 String token = obj[i].token; //request.queryParams("token");

@@ -18,14 +18,14 @@ public class main {
 
 
 
-        if(args[0]!=null && args[0]!="")
-        {
+//        if(args[0]!=null && args[0]!="")
+//        {
+//            port(5557);
+//
+//            System.out.println("running on 557");
+//        }else {
             port(5557);
-
-            System.out.println("running on 557");
-        }else {
-            port(5556);
-        }
+//        }
         final FirebaseMessagingClient client =new FirebaseMessagingClient();
         try {
 //            client = new FirebaseMessagingClient();

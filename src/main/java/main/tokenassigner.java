@@ -219,7 +219,7 @@ public class tokenassigner {
     {
 
         System.out.println("createcounters for merchantId :"+merchantId+" counterscount = "+counterscount.toString());
-        String tName = merchantId +"token_log";
+        String tName = merchantId +"_token_log";
         MySQLAccess.dbObj.createLikeTableIfNotExistGeneric(tName,"merchant_token_log ");
 
         List<counteremppayload> existingids =  MySQLAccess.dbObj.getmerchantcounterdetails(merchantId, tableName);

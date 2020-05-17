@@ -47,5 +47,11 @@ classpath = sourceSets.main.runtimeClasspath
     systemProperty 'simple.message', 'Hello '
 jvmArgs '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005'
 }
-defaultTasks 'runSimple'
+task(runDebug, dependsOn: 'classes', type: JavaExec) {
+    main = 'main.main'
+    classpath = sourceSets.main.runtimeClasspath
+    systemProperty 'simple.message', 'Hello '
+    jvmArgs '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5006'
+}
+defaultTasks 'runDebug'
 

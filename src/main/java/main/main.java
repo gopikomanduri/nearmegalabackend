@@ -688,7 +688,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                             System.out.println("obtained fire details and sending to  " + _curtoken.FirebaseID);
                             msg.addRegistrationToken( _curtoken.FirebaseID);
                             msg.putStringData("title", "Hello " );
-                            msg.putStringData("body", "Your Token is " +  _curtoken.token_id);
+                            msg.putStringData("body", String.valueOf(_curtoken.token_id));
                             System.out.println("created FCM message");
                             // push
                             try {
@@ -885,7 +885,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 msg.addRegistrationToken(fireID[0].toString());
 
                 msg.putStringData("title", "Hello " + fireID[1].toString());
-                msg.putStringData("body", "Your Token is " + GeneratedToken);
+                msg.putStringData("body",  GeneratedToken);
                 System.out.println("created FCM message");
                 // push
                 try {
@@ -1383,7 +1383,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 //            msg.addRegistrationToken("fEXJFJ7kysc:APA91bEaEh-Dhtv9vQIueCPs7tjeJLMFV7_4cZUL2lDyMJPUlZdbRSqDkJULfLvMOP6nxIjw0RMCFEknPhFYqtsI66JJb3anuPW--QMpi5R8EekamYQSmMUluTGcndfGmF7SZsMJl_O7");
                 // Add key value pair into payload
                 msg.putStringData("title", "Hello " + fireID[1]);
-                msg.putStringData("body", "Your Token is " + GeneratedToken);
+                msg.putStringData("body",  GeneratedToken);
                 System.out.println("created FCM message");
                 // push
                 try {

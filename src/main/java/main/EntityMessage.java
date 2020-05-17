@@ -142,7 +142,7 @@ public class EntityMessage {
         }
 //        tjson.accumulate("title","Gala Notify Testing");
 //        tjson.accumulate("body","Hello This is notification test from FCM");
-        json.accumulate("notification",tjson);
+        json.accumulate("data",tjson);
         return json;
     }
 

@@ -18,8 +18,14 @@ public class main {
 
 
 
+        if(args[0]!=null && args[0]!="")
+        {
+            port(5557);
 
-        port(5556);
+            System.out.println("running on 557");
+        }else {
+            port(5556);
+        }
         final FirebaseMessagingClient client =new FirebaseMessagingClient();
         try {
 //            client = new FirebaseMessagingClient();
@@ -673,6 +679,42 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 tkobj = merchantstokens.get(merchantid);
                 GeneratedToken =  tkobj.getNextToken(merchantid,Integer.valueOf(counter), Integer.valueOf(existingtoken),
                         Double.valueOf(timeserved), starttime, endTime);
+                try {
+                    List<token> tokens = tkobj.getNextTokensinwait(merchantid, Integer.parseInt(GeneratedToken), 3);
+                    if (tokens != null) {
+                        for (token _curtoken : tokens) {
+                            EntityMessage msg = new EntityMessage();
+                            System.out.println("reached to obtain fire details ");
+                            System.out.println("obtained fire details and sending to  " + _curtoken.FirebaseID);
+                            msg.addRegistrationToken( _curtoken.FirebaseID);
+                            msg.putStringData("title", "Hello " );
+                            msg.putStringData("body", "Your Token is " +  _curtoken.token_id);
+                            System.out.println("created FCM message");
+                            // push
+                            try {
+                                if (client != null) {
+                                    System.out.println(" achived client connection. message is being pushed ");
+                                    FcmResponse res = client.pushToEntities(msg);
+                                    System.out.println(res);
+                                    System.out.println("message pushed ");
+                                } else {
+                                    FirebaseMessagingClient clients = new FirebaseMessagingClient();
+                                    clients.setAPIKey("AAAAJVsTN2U:APA91bFaQC_HMm4r6-oSXNXddODyjE89YbZmrCeZm7dRJ7hKMfDTh073GnUkjoLz2YfEMJRPxcFH8xaOJsyO5ILUmoHwSsXXiiHFHyUg5vDhSB18XK7pZSWT15PPE2SREr1yInn7bqF9");
+                                    System.out.println(" achived client connection. message is being pushed ");
+                                    FcmResponse res = clients.pushToEntities(msg);
+                                    System.out.println(res);
+                                    System.out.println("message pushed from else");
+
+                                }
+                            } catch (Exception ex) {
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
 
             }
             else
@@ -964,10 +1006,6 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             //  return "Gopi";
         });
 
-
-
-
-
         post("/getbdaycount", (request, response) -> {
 
             response.type("application/json");
@@ -1019,6 +1057,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
             String contact = request.queryParams("contact");
+            String firebaseID = request.queryParams("firebaseID");
             String existingtoken = request.queryParams("existingtoken");
 
 
@@ -1033,12 +1072,10 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             }
             tkobj = merchantstokens.get(merchantid);
 
-            return tkobj.deregistercustomer(contact, existingtoken);
+            return tkobj.deregistercustomer(contact, existingtoken,firebaseID,merchantid);
 
             //  return "Gopi";
         });
-
-
 
         post("/", (request, response) -> {
 
@@ -1087,8 +1124,6 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             //  return "Gopi";
         });
 
-
-
         post("/postoffertospecificcontact", (request, response) -> {
 
 
@@ -1128,7 +1163,6 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
             //  return "Gopi";
         });
-
 
         post("/posttospecificcontact", (request, response) -> {
 
@@ -1181,7 +1215,6 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             //  return "Gopi";
         });
 
-
         post("/getnextreceiptid", (request, response) -> {
 
 
@@ -1233,9 +1266,6 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             //  return "Gopi";
         });
 
-
-
-
         post("/gettokenlogforcounter", (request, response) -> {
 
             /*
@@ -1269,7 +1299,6 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             //  return "Gopi";
         });
 
-
         post("/registerfortokenthruhelper", (request, response) -> {
 
             /*
@@ -1280,7 +1309,12 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
             String consumercontact = request.queryParams("consumercontact");
-
+            String consumerFireID = "";
+            consumer con=new consumer();
+            String[] UserFireDetails = con.getUSerFireID(consumercontact);
+            if(UserFireDetails!=null){
+                consumerFireID = UserFireDetails[0];
+            }
             System.out.println("for /registerfortokenthruhelper .. request received merchantid "+merchantid+" consumercontact  =  "+consumercontact);
 
             //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
@@ -1294,7 +1328,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 // tkobj = new tokenassigner();
                 //Gopi.. commented on 24th dec
             //    merchantstokens.put(merchantid,tkobj);
-                return tkobj.createnewtokenWithContact(merchantid, consumercontact, true);
+                return tkobj.createnewtokenWithContact(merchantid, consumercontact, consumerFireID,true);
             }
             else
             {
@@ -1308,7 +1342,6 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             //  return "Gopi";
         });
 
-
         post("/registerfortoken", (request, response) -> {
 
             /*
@@ -1319,6 +1352,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
             String consumercontact = request.queryParams("consumercontact");
+            String consumerFirebaseID = request.queryParams("consumerFireID");
             String GeneratedToken = "-10";
             System.out.println("for /registerfortoken .. request received merchantid " + merchantid + " consumercontact  =  " + consumercontact);
 
@@ -1330,8 +1364,9 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
             if ((tkobj = merchantstokens.get(merchantid)) != null) {
                 // tkobj = new tokenassigner();
+
                 merchantstokens.put(merchantid, tkobj);
-                GeneratedToken = tkobj.createnewtokenWithContact(merchantid, consumercontact, false);
+                GeneratedToken = tkobj.createnewtokenWithContact(merchantid, consumercontact,consumerFirebaseID, false);
             } else {
                 System.out.println("for /getmerchanttokendetails ..counters not yet opened   " + merchantid + "  returning empty details");
 //                return "-10";
@@ -1364,9 +1399,6 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             return GeneratedToken;
         });
 
-
-
-
         post("/respondtostatus", (request, response) -> {
 
             /*
@@ -1392,8 +1424,6 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
             //  return "Gopi";
         });
-
-
 
         post("/fetchjoineescount", (request, response) -> {
 

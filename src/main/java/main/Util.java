@@ -83,6 +83,10 @@ public class Util {
             return null;
         }
     }
-
+    static  enum CRUD{
+        INSERT,
+        UPDATE,
+        DELETE
+    }
 
 }

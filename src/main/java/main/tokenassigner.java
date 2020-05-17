@@ -93,7 +93,7 @@ public class tokenassigner {
         merDetails.merchanturl = dpimg;
     }
 
-    public synchronized String deregistercustomer(String contact, String existingtoken) {
+    public synchronized String deregistercustomer(String contact, String existingtoken,String consumerFirebaseID,String merchantId) {
 
         Integer iexistingToken = Integer.valueOf(existingtoken);
 //        if(currentMinPendingToken.get() > iexistingToken)
@@ -105,6 +105,11 @@ public class tokenassigner {
 //        {
 //
 //        }
+        token dbTokenObj = new token();
+        dbTokenObj.FirebaseID=consumerFirebaseID;
+        dbTokenObj.position = -1;
+        dbTokenObj.token_id=Integer.parseInt(existingtoken);
+        MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj,merchantId, Util.CRUD.DELETE);
 
         deregisterset.add(iexistingToken);
         return "0";
@@ -214,7 +219,8 @@ public class tokenassigner {
     {
 
         System.out.println("createcounters for merchantId :"+merchantId+" counterscount = "+counterscount.toString());
-
+        String tName = merchantId +"token_log";
+        MySQLAccess.dbObj.createLikeTableIfNotExistGeneric(tName,"merchant_token_log ");
 
         List<counteremppayload> existingids =  MySQLAccess.dbObj.getmerchantcounterdetails(merchantId, tableName);
 
@@ -320,37 +326,41 @@ public class tokenassigner {
         return obj;
     }
 
-    public synchronized String createnewtokenWithContact(String merchantId, String contact, boolean helper)
-    {
+    public synchronized String createnewtokenWithContact(String merchantId, String contact,String consumerFirebaseID, boolean helper) {
 //        currentMaxToken++;
 //        pendingTokens.add(currentMaxToken);
 //
 //        String str =  currentMaxToken.toString();
+        //Insert into token DB
 
-        tokenstatus tok =  createnewtoken(merchantId);
-        if(registeredContacts.contains(contact) == false) {
+        tokenstatus tok = createnewtoken(merchantId);
+        if (registeredContacts.contains(contact) == false) {
             registeredContacts.add(contact);
         }
-            pendingNumbers.add(contact);
-
+        pendingNumbers.add(contact);
+        //Insert into merchant_token_log
+        token dbTokenObj = new token();
+        dbTokenObj.FirebaseID=consumerFirebaseID;
+        dbTokenObj.position = tok.youareat;
+        dbTokenObj.token_id=tok.token;
+        MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj,merchantId, Util.CRUD.INSERT);
         CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
             // Simulate a long-running Job
             try {
-                sendMsgToNumber(merchantId, contact, "your_token_is_"+tok.token+"_you_are_at_"+tok.youareat);
+                sendMsgToNumber(merchantId, contact, "your_token_is_" + tok.token + "_you_are_at_" + tok.youareat);
 
             } catch (Exception e) {
-                System.out.println("exception in future.. in creating new token "+e.getMessage());
+                System.out.println("exception in future.. in creating new token " + e.getMessage());
             }
             System.out.println("I'll run in a separate thread than the main thread.");
         });
 
 
-            if(helper == true)
-            {
-                currentsmstokens.put(tok.token,contact);
-            }
+        if (helper == true) {
+            currentsmstokens.put(tok.token, contact);
+        }
 
-        System.out.println("created new token for contact "+contact+" . Token is "+tok.token+"  waiting at "+tok.youareat);
+        System.out.println("created new token for contact " + contact + " . Token is " + tok.token + "  waiting at " + tok.youareat);
         return new Gson().toJson(tok);
     }
 
@@ -945,7 +955,14 @@ public class tokenassigner {
                 try {
 
 
-                    getTokenStatus(merchantId, key, value, "-1", counter);
+                    String stat = getTokenStatus(merchantId, key, value, "-1", counter);
+
+                    token dbTokenObj = new token();
+                    dbTokenObj.FirebaseID="";
+                    dbTokenObj.position = Integer.parseInt(stat);
+                    dbTokenObj.token_id=key;
+
+                    MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj,merchantId, Util.CRUD.UPDATE);
                 }
                 catch(Exception ex)
                 {
@@ -967,10 +984,14 @@ public class tokenassigner {
 
         runningTokens.put(counter,tok.toString());
 
+
+
         return tok.toString();
 
     }
-
+    public List<token> getNextTokensinwait(String merchantID,int FromToken,int upto){
+        return  MySQLAccess.dbObj.getNextTokensinwait(merchantID,FromToken,upto);
+    }
     public synchronized String currentTokenForCounter(Integer counter)
     {
 

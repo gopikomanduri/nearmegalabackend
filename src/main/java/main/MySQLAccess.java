@@ -866,6 +866,77 @@ sex int(11)
 
         return merchantjson;
     }
+
+
+    public String crudMerchantsTokens(token obj,String merchantID,Util.CRUD crudOperation) {
+        Integer generatedKey = -1;
+        try {
+            if (connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            String sql = "";
+            if (crudOperation == Util.CRUD.INSERT) {
+                sql = "INSERT INTO " + merchantID + "_token_log" + " (TokenID , Position ,  FirebaseID ) " +
+                        "VALUES (?, ?, ?)";
+            } else if (crudOperation == Util.CRUD.UPDATE) {
+                sql = "UPDATE " + merchantID + "_token_log" + "SET Position = " + obj.position + " Where TokenID  = " + obj.token_id;
+
+            } else if (crudOperation == Util.CRUD.DELETE) {
+                sql = "DELETE from  " + merchantID + "_token_log" + " Where TokenID  = " + obj.token_id;
+
+            }
+            PreparedStatement preparedStatement = connect.prepareStatement(sql);
+            if (crudOperation == Util.CRUD.INSERT) {
+                preparedStatement.setInt(1, obj.token_id);
+                preparedStatement.setInt(2, obj.position);
+                preparedStatement.setString(3, obj.FirebaseID);
+            }
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            generatedKey = obj.token_id;
+            System.out.println("command executed is " + sql);
+            return generatedKey.toString();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return generatedKey.toString();
+        }
+    }
+    public List<token> getNextTokensinwait(String merchantID,int FromToken,int upto) {
+        List<token> fireIds = null;
+        try {
+            if (connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            String sql = "Select * from "+merchantID+"_token_log where TokenID > "+FromToken+" LIMIT "+upto;;
+
+            statement = connect.createStatement();
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                token tkObj=new token();
+                tkObj.token_id= resultSet.getInt("TokenID");
+                tkObj.position= resultSet.getInt("Position");
+                tkObj.FirebaseID= resultSet.getString("FirebaseID");
+                if(fireIds==null){
+                    fireIds=new ArrayList<token>();
+                }
+                fireIds.add(tkObj);
+            }
+            System.out.println("command executed is " + sql);
+            return fireIds;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return fireIds;
+        }
+    }
     public String insertIntoUser(consumerpayload obj)
     {
         LocalDateTime now = LocalDateTime.now();
@@ -3278,7 +3349,28 @@ minamount int(6)
         }
 
     }
+    public void createLikeTableIfNotExistGeneric( String tableName, String liketablename) {
 
+        try {
+            DatabaseMetaData dmd = connect.getMetaData();
+
+
+            ResultSet tables = dmd.getTables(null, null, tableName, null);
+            if (tables.next()) {
+                // Table exists
+            } else {
+                // CREATE TABLE new_tbl LIKE orig_tbl;
+                statement = connect.createStatement();
+                String createStatement = "CREATE TABLE "+tableName+"  LIKE "+liketablename+" ;";
+                statement.executeUpdate(createStatement);
+                //   statement.close();
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
     public void createTableIfNotExistGeneric( String tableName, String geo) {
 
         try {

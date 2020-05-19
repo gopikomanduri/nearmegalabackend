@@ -356,9 +356,9 @@ public class tokenassigner {
         });
 
 
-        if (helper == true) {
+//        if (helper == true) {
             currentsmstokens.put(tok.token, contact);
-        }
+//        }
 
         System.out.println("created new token for contact " + contact + " . Token is " + tok.token + "  waiting at " + tok.youareat);
         return new Gson().toJson(tok);
@@ -825,16 +825,15 @@ public class tokenassigner {
 //
 //    }
 
-    public synchronized String getNextToken(String merchantId, Integer counter, Integer existingtoken, Double timeserved, String starttime, String endTime)
-    {
+    public synchronized String getNextToken(String merchantId, Integer counter, Integer existingtoken, Double timeserved, String starttime, String endTime) {
 
         LocalDateTime now1 = LocalDateTime.now();
 
-        System.out.println("start time "+Util.getTimestamp(now1));
-        System.out.println("getNextToken   merchantId  = "+merchantId.toString()+" " +
-                "existingtoken ="+existingtoken.toString()+" ");
+        System.out.println("start time " + Util.getTimestamp(now1));
+        System.out.println("getNextToken   merchantId  = " + merchantId.toString() + " " +
+                "existingtoken =" + existingtoken.toString() + " ");
 
-        if(existingtoken != 0) {
+        if (existingtoken != 0) {
 
             Integer nextToken = 1;
             tokenDone temp = new tokenDone();
@@ -848,7 +847,7 @@ public class tokenassigner {
             temp.token = existingtoken;
             doneTokens.add(temp);
             totalTime.getAndAdd(temp.timeServed);
-            avgTime.set(totalTime.get()/doneTokens.size());
+            avgTime.set(totalTime.get() / doneTokens.size());
 
             ConcurrentLinkedQueue<tokenDone> doneDetails;
 
@@ -862,37 +861,45 @@ public class tokenassigner {
                 doneDetails = new ConcurrentLinkedQueue<>();
             }
             doneDetails.add(temp);
+
+            token dbTokenObj = new token();
+            dbTokenObj.FirebaseID = "";
+            dbTokenObj.position = 0;
+            dbTokenObj.token_id = temp.token;
+
+            MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj, merchantId, Util.CRUD.DELETE);
+
             countersDoneDetails.put(counter, doneDetails);
 
             if (currentMaxDoneToken.get() < existingtoken)
                 currentMaxDoneToken.set(existingtoken);
         }
 
-       // }
+        // }
 
-      if(pendingTokens.size() == 0)
-      {
-          System.out.println("getNextToken   merchantId  = "+merchantId.toString()+" counter  "+counter+" no tokens available . returning -1 = "+currentMaxToken);
-          return "-1".toString();
-      }
+        if (pendingTokens.size() == 0) {
+            System.out.println("getNextToken   merchantId  = " + merchantId.toString() + " counter  " + counter + " no tokens available . returning -1 = " + currentMaxToken);
+            return "-1".toString();
+        }
 
 
-      System.out.println("The followoing are penidng tokens");
+        System.out.println("The followoing are penidng tokens");
 
 //        for(Integer u : pendingTokens){
 //           System.out.println("token is :"+u.toString());
 //        }
-        System.out.println("getNextToken   merchantId  = "+merchantId.toString()+" counter  "+counter+"pendingTokens size is  = "+pendingTokens.size());
+        System.out.println("getNextToken   merchantId  = " + merchantId.toString() + " counter  " + counter + "pendingTokens size is  = " + pendingTokens.size());
 
         Integer tok = -1;
 
-     //   do {
+        //   do {
 
-             tok = pendingTokens.element();
+        tok = pendingTokens.element();
 
-            pendingTokens.remove();
-            if(pendingTokens.size() > 0)
-                currentMinPendingToken.set(pendingTokens.element());
+        pendingTokens.remove();
+        if (pendingTokens.size() > 0) {
+            currentMinPendingToken.set(pendingTokens.element());
+        }
 
 //        for(Map.Entry<Integer,String> entry : currentsmstokens.entrySet()) {
 //            Integer key = entry.getKey();
@@ -903,37 +910,37 @@ public class tokenassigner {
 //            System.out.println(key + " => " + value);
 //        }
 
-        System.out.println("smstoken count is "+currentsmstokens.size());
+        System.out.println("smstoken count is " + currentsmstokens.size());
 
-            if(currentsmstokens.containsKey(tok) == true) {
-
-
-                Integer finalTok = tok;
-                CompletableFuture<Void> future1 = CompletableFuture.runAsync(() -> {
-                    // Simulate a long-running Job
-                    try {
-                        String msg = "Please_proceed_to_counter_"+counter.toString();
-                        sendMsgToNumber(merchantId, currentsmstokens.get(finalTok),msg);
-
-                    } catch (Exception e) {
-                        System.out.println("exception in future..in getnexttoken when number is matched "+e.getMessage());
-                    }
-                    currentsmstokens.remove(finalTok);
-
-                    System.out.println("I'll run in a separate thread than the main thread.");
-                });
+        if (currentsmstokens.containsKey(tok) == true) {
 
 
-          //      getTokenStatus(merchantId,tok, currentsmstokens.get(tok), "-1");
+            Integer finalTok = tok;
+            CompletableFuture<Void> future1 = CompletableFuture.runAsync(() -> {
+                // Simulate a long-running Job
+                try {
+                    String msg = "Please_proceed_to_counter_" + counter.toString();
+                    sendMsgToNumber(merchantId, currentsmstokens.get(finalTok), msg);
 
-            }
-    //    }while(deregisterset.contains(tok) == true);
+                } catch (Exception e) {
+                    System.out.println("exception in future..in getnexttoken when number is matched " + e.getMessage());
+                }
+                currentsmstokens.remove(finalTok);
 
-   //     deregisterset.remove(tok);
+                System.out.println("I'll run in a separate thread than the main thread.");
+            });
+
+
+            //      getTokenStatus(merchantId,tok, currentsmstokens.get(tok), "-1");
+
+        }
+        //    }while(deregisterset.contains(tok) == true);
+
+        //     deregisterset.remove(tok);
 
         tokenserving obj = new tokenserving();
         obj.token = tok;
-        System.out.println("getNextToken   merchantId  = "+merchantId.toString()+" counter  "+counter+" returning token  = "+tok);
+        System.out.println("getNextToken   merchantId  = " + merchantId.toString() + " counter  " + counter + " returning token  = " + tok);
 
 //        for(Map.Entry<Integer,String> entry : currentsmstokens.entrySet()) {
 //            Integer key = entry.getKey();
@@ -945,45 +952,42 @@ public class tokenassigner {
 //        }
 
         // Using Lambda Expression
-            // Simulate a long-running Job
-            try {
-        for(Map.Entry<Integer,String> entry : currentsmstokens.entrySet()) {
-            Integer key = entry.getKey();
-            String value = entry.getValue();
+        // Simulate a long-running Job
+        try {
+            for (Map.Entry<Integer, String> entry : currentsmstokens.entrySet()) {
+                Integer key = entry.getKey();
+                String value = entry.getValue();
 
-            CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
-                try {
+                CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+                    try {
 
 
-                    String stat = getTokenStatus(merchantId, key, value, "-1", counter);
+                        String stat = getTokenStatus(merchantId, key, value, "-1", counter);
 
-                    token dbTokenObj = new token();
-                    dbTokenObj.FirebaseID="";
-                    dbTokenObj.position = Integer.parseInt(stat);
-                    dbTokenObj.token_id=key;
+                        token dbTokenObj = new token();
+                        dbTokenObj.FirebaseID = "";
+                        dbTokenObj.position = Integer.parseInt(stat);
+                        dbTokenObj.token_id = key;
 
-                    MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj,merchantId, Util.CRUD.UPDATE);
-                }
-                catch(Exception ex)
-                {
-                    System.out.println("exception in future.."+ex.getMessage());
-                }
-                    });
+                        MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj, merchantId, Util.CRUD.UPDATE);
+                    } catch (Exception ex) {
+                        System.out.println("exception in future.." + ex.getMessage());
+                    }
+                });
 
-            System.out.println(key + " => " + value);
-        }
-           } catch (Exception e) {
-                System.out.println("exception in for loop.."+e.getMessage());
+                System.out.println(key + " => " + value);
             }
-            System.out.println("I'll run in a separate thread than the main thread.");
+        } catch (Exception e) {
+            System.out.println("exception in for loop.." + e.getMessage());
+        }
+        System.out.println("I'll run in a separate thread than the main thread.");
 
         LocalDateTime now2 = LocalDateTime.now();
 
-        System.out.println("end time "+Util.getTimestamp(now2));
+        System.out.println("end time " + Util.getTimestamp(now2));
 
 
-        runningTokens.put(counter,tok.toString());
-
+        runningTokens.put(counter, tok.toString());
 
 
         return tok.toString();

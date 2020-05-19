@@ -679,87 +679,48 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 tkobj = merchantstokens.get(merchantid);
                 GeneratedToken =  tkobj.getNextToken(merchantid,Integer.valueOf(counter), Integer.valueOf(existingtoken),
                         Double.valueOf(timeserved), starttime, endTime);
-                try {
-                    List<token> tokens = tkobj.getNextTokensinwait(merchantid, Integer.parseInt(GeneratedToken), 3);
-                    if (tokens != null) {
-                        for (token _curtoken : tokens) {
-                            EntityMessage msg = new EntityMessage();
-                            System.out.println("reached to obtain fire details ");
-                            System.out.println("obtained fire details and sending to  " + _curtoken.FirebaseID);
-                            msg.addRegistrationToken( _curtoken.FirebaseID);
-                            msg.putStringData("title", "Hello " );
-                            msg.putStringData("body", String.valueOf(_curtoken.token_id));
-                            System.out.println("created FCM message");
-                            // push
-                            try {
-                                if (client != null) {
-                                    System.out.println(" achived client connection. message is being pushed ");
-                                    FcmResponse res = client.pushToEntities(msg);
-                                    System.out.println(res);
-                                    System.out.println("message pushed ");
-                                } else {
-                                    FirebaseMessagingClient clients = new FirebaseMessagingClient();
-                                    clients.setAPIKey("AAAAJVsTN2U:APA91bFaQC_HMm4r6-oSXNXddODyjE89YbZmrCeZm7dRJ7hKMfDTh073GnUkjoLz2YfEMJRPxcFH8xaOJsyO5ILUmoHwSsXXiiHFHyUg5vDhSB18XK7pZSWT15PPE2SREr1yInn7bqF9");
-                                    System.out.println(" achived client connection. message is being pushed ");
-                                    FcmResponse res = clients.pushToEntities(msg);
-                                    System.out.println(res);
-                                    System.out.println("message pushed from else");
-
-                                }
-                            } catch (Exception ex) {
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-
-                }
-
             }
             else
             {
                 System.out.println("for /getmerchanttokendetails ..counters not yet opened   "+merchantid+"  returning empty details");
             }
+            try {
+                List<token> tokens = tkobj.getNextTokensinwait(merchantid, Integer.parseInt(GeneratedToken), 3);
+                if (tokens != null) {
+                    for (token _curtoken : tokens) {
+                        EntityMessage msg = new EntityMessage();
+                        System.out.println("reached to obtain fire details ");
+                        System.out.println("obtained fire details and sending to  " + _curtoken.FirebaseID);
+                        msg.addRegistrationToken( _curtoken.FirebaseID);
+                        msg.putStringData("title", "Hello " );
+                        msg.putStringData("body", String.valueOf(_curtoken.token_id));
+                        System.out.println("created FCM message");
+                        // push
+                        try {
+                            if (client != null) {
+                                System.out.println(" achived client connection. message is being pushed ");
+                                FcmResponse res = client.pushToEntities(msg);
+                                System.out.println(res);
+                                System.out.println("message pushed ");
+                            } else {
+                                FirebaseMessagingClient clients = new FirebaseMessagingClient();
+                                clients.setAPIKey("AAAAJVsTN2U:APA91bFaQC_HMm4r6-oSXNXddODyjE89YbZmrCeZm7dRJ7hKMfDTh073GnUkjoLz2YfEMJRPxcFH8xaOJsyO5ILUmoHwSsXXiiHFHyUg5vDhSB18XK7pZSWT15PPE2SREr1yInn7bqF9");
+                                System.out.println(" achived client connection. message is being pushed ");
+                                FcmResponse res = clients.pushToEntities(msg);
+                                System.out.println(res);
+                                System.out.println("message pushed from else");
 
-//            // Data model for sending messages to specific entity(mobile devices,browser front-end apps)s
-//            EntityMessage msg = new EntityMessage();
-//
-//            // Set registration token that can be retrieved
-//            // from Android entity(mobile devices,browser front-end apps) when calling
-//            // FirebaseInstanceId.getInstance().getToken();
-//            msg.addRegistrationToken("eXo49MLuJGE:APA91bEE4zMCQ_lnNst9Fw-cBAfgiyYsdxHdQ7TW1w5JDOZya9holq1KQWC3-nZ_7SRpGqeqC_ZgtvaPjj9QTMCQqsmoUiH-jMdzU_F14b8Vcic20Vztk3RChoE66EzskArJzVKj1_wu");
-//            msg.addRegistrationToken("fEXJFJ7kysc:APA91bEaEh-Dhtv9vQIueCPs7tjeJLMFV7_4cZUL2lDyMJPUlZdbRSqDkJULfLvMOP6nxIjw0RMCFEknPhFYqtsI66JJb3anuPW--QMpi5R8EekamYQSmMUluTGcndfGmF7SZsMJl_O7");
-//            // Add key value pair into payload
-//            msg.putStringData("title", "Hello ");
-//            msg.putStringData("body", "Your Token is "+GeneratedToken);
-//
-//            // push
-//            try {
-//                if (client != null) {
-//                    FcmResponse res = client.pushToEntities(msg);
-//                    System.out.println(res);
-//                }
-//
-//            }
-//            catch (Exception ex)
-//            {
-//
-//            }
+                            }
+                        } catch (Exception ex) {
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
             return  GeneratedToken;
-
-
-//            else
-//            {
-//                tkobj = new tokenassigner();
-//                merchantstokens.put(merchantid,tkobj);
-//            }
-
-          //  tkobj.createTestData();
-
-
-
-            //  return "Gopi";
         });
 
         post("/getmerchantdetails", (request, response) -> {

@@ -905,7 +905,7 @@ sex int(11)
                 sql = "INSERT INTO " + merchantID + "_token_log" + " (TokenID , Position ,  FirebaseID ,contact) " +
                         "VALUES (?, ?, ?,?)";
             } else if (crudOperation == Util.CRUD.UPDATE) {
-                sql = "UPDATE " + merchantID + "_token_log" + "SET Position = " + obj.position + " Where TokenID  = " + obj.token_id;
+                sql = "UPDATE " + merchantID + "_token_log" + " SET Position = " + obj.position + " Where TokenID  = " + obj.token_id;
 
             } else if (crudOperation == Util.CRUD.DELETE) {
                 sql = "DELETE from  " + merchantID + "_token_log" + " Where TokenID  = " + obj.token_id;

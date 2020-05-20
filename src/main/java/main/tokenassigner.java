@@ -343,6 +343,7 @@ public class tokenassigner {
         dbTokenObj.FirebaseID=consumerFirebaseID;
         dbTokenObj.position = tok.youareat;
         dbTokenObj.token_id=tok.token;
+        dbTokenObj.contact = contact;
         MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj,merchantId, Util.CRUD.INSERT);
         CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
             // Simulate a long-running Job
@@ -356,9 +357,9 @@ public class tokenassigner {
         });
 
 
-//        if (helper == true) {
+        if (helper == true) {
             currentsmstokens.put(tok.token, contact);
-//        }
+        }
 
         System.out.println("created new token for contact " + contact + " . Token is " + tok.token + "  waiting at " + tok.youareat);
         return new Gson().toJson(tok);
@@ -723,6 +724,7 @@ public class tokenassigner {
 
 
         System.out.println("for getTokenStatus . returning "+status);
+
         return status;
     }
 
@@ -953,6 +955,8 @@ public class tokenassigner {
 
         // Using Lambda Expression
         // Simulate a long-running Job
+
+
         try {
             for (Map.Entry<Integer, String> entry : currentsmstokens.entrySet()) {
                 Integer key = entry.getKey();
@@ -960,16 +964,7 @@ public class tokenassigner {
 
                 CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
                     try {
-
-
-                        String stat = getTokenStatus(merchantId, key, value, "-1", counter);
-
-                        token dbTokenObj = new token();
-                        dbTokenObj.FirebaseID = "";
-                        dbTokenObj.position = Integer.parseInt(stat);
-                        dbTokenObj.token_id = key;
-
-                        MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj, merchantId, Util.CRUD.UPDATE);
+                        getTokenStatus(merchantId, key, value, "-1", counter);
                     } catch (Exception ex) {
                         System.out.println("exception in future.." + ex.getMessage());
                     }
@@ -980,12 +975,28 @@ public class tokenassigner {
         } catch (Exception e) {
             System.out.println("exception in for loop.." + e.getMessage());
         }
+
+        String TokenContact = MySQLAccess.dbObj.getTokenContact(merchantId, tok);
+        if (TokenContact != null) {
+            String stat = getTokenStatus(merchantId, tok, TokenContact, "-1", counter);
+
+            token dbTokenObj = new token();
+            dbTokenObj.FirebaseID = "";
+            dbTokenObj.position = Integer.parseInt(stat);
+            dbTokenObj.token_id = tok;
+
+            MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj, merchantId, Util.CRUD.UPDATE);
+
+            System.out.println("Updated Token " + tok + "status to " + stat);
+        }
+        else {
+            System.out.println("unable to update Token " + tok + "status");
+        }
         System.out.println("I'll run in a separate thread than the main thread.");
 
         LocalDateTime now2 = LocalDateTime.now();
 
         System.out.println("end time " + Util.getTimestamp(now2));
-
 
         runningTokens.put(counter, tok.toString());
 

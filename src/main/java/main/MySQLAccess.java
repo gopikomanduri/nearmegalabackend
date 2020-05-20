@@ -867,7 +867,30 @@ sex int(11)
         return merchantjson;
     }
 
+    public String getTokenContact(String merchantID,int token){
+        String token_contact=null;
+        try {
+            if (connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            String sql = "Select contact from "+merchantID+"_token_log where TokenID = "+token;;
 
+            statement = connect.createStatement();
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                token_contact = resultSet.getString("contact");
+            }
+            System.out.println("command executed is " + sql);
+            return token_contact;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return token_contact;
+        }
+    }
     public String crudMerchantsTokens(token obj,String merchantID,Util.CRUD crudOperation) {
         Integer generatedKey = -1;
         try {
@@ -879,8 +902,8 @@ sex int(11)
         try {
             String sql = "";
             if (crudOperation == Util.CRUD.INSERT) {
-                sql = "INSERT INTO " + merchantID + "_token_log" + " (TokenID , Position ,  FirebaseID ) " +
-                        "VALUES (?, ?, ?)";
+                sql = "INSERT INTO " + merchantID + "_token_log" + " (TokenID , Position ,  FirebaseID ,contact) " +
+                        "VALUES (?, ?, ?,?)";
             } else if (crudOperation == Util.CRUD.UPDATE) {
                 sql = "UPDATE " + merchantID + "_token_log" + "SET Position = " + obj.position + " Where TokenID  = " + obj.token_id;
 
@@ -893,6 +916,7 @@ sex int(11)
                 preparedStatement.setInt(1, obj.token_id);
                 preparedStatement.setInt(2, obj.position);
                 preparedStatement.setString(3, obj.FirebaseID);
+                preparedStatement.setString(4, obj.contact);
             }
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -924,6 +948,7 @@ sex int(11)
                 tkObj.token_id= resultSet.getInt("TokenID");
                 tkObj.position= resultSet.getInt("Position");
                 tkObj.FirebaseID= resultSet.getString("FirebaseID");
+                tkObj.contact= resultSet.getString("contact");
                 if(fireIds==null){
                     fireIds=new ArrayList<token>();
                 }

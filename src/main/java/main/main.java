@@ -693,7 +693,12 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                         System.out.println("obtained fire details and sending to  " + _curtoken.FirebaseID);
                         msg.addRegistrationToken( _curtoken.FirebaseID);
                         msg.putStringData("title", "Hello " );
-                        msg.putStringData("body", String.valueOf(_curtoken.token_id));
+                        tokenstatus tok =new tokenstatus();
+                        tok.token = _curtoken.token_id;
+                        tok.youareat =_curtoken.position;
+
+//
+                        msg.putStringData("body", new Gson().toJson(tok));
                         System.out.println("created FCM message");
                         // push
                         try {

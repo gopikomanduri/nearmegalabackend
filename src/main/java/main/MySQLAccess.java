@@ -929,7 +929,33 @@ sex int(11)
             return generatedKey.toString();
         }
     }
-    public List<token> getNextTokensinwait(String merchantID,int FromToken,int upto) {
+    public int getTokenCompletedCustomersCount(String merchantID){
+
+    int count=-1;
+        try {
+            if (connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            String sql = "COUNT  (*) from " + merchantID + "_token_log where Position < 0 ";
+
+            statement = connect.createStatement();
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                count = resultSet.getInt("COUNT(*)");
+            }
+            System.out.println("command executed is " + sql);
+            System.out.println("Count received  is " + count);
+        }
+        catch (Exception ex)
+        {
+
+        }
+        return count;
+    }
+    public List<token> getNextTokensinwait(String merchantID,int FromToken,int upto, int limitto) {
         List<token> fireIds = null;
         try {
             if (connect.isClosed() == true)
@@ -938,6 +964,7 @@ sex int(11)
             e.printStackTrace();
         }
         try {
+            int currentTokenPosition =getTokenCompletedCustomersCount(merchantID);
             String sql = "Select * from "+merchantID+"_token_log where TokenID > "+FromToken+" LIMIT "+upto;;
 
             statement = connect.createStatement();
@@ -946,13 +973,16 @@ sex int(11)
             while (resultSet.next()) {
                 token tkObj=new token();
                 tkObj.token_id= resultSet.getInt("TokenID");
-                tkObj.position= resultSet.getInt("Position");
+                tkObj.position= tkObj.token_id -currentTokenPosition; //resultSet.getInt("Position");
                 tkObj.FirebaseID= resultSet.getString("FirebaseID");
                 tkObj.contact= resultSet.getString("contact");
                 if(fireIds==null){
                     fireIds=new ArrayList<token>();
                 }
                 fireIds.add(tkObj);
+                if(fireIds.size() == limitto){
+                    break;
+                }
             }
             System.out.println("command executed is " + sql);
             return fireIds;

@@ -685,7 +685,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 System.out.println("for /getmerchanttokendetails ..counters not yet opened   "+merchantid+"  returning empty details");
             }
             try {
-                List<token> tokens = tkobj.getNextTokensinwait(merchantid, Integer.parseInt(GeneratedToken), 3);
+                List<token> tokens = tkobj.getNextTokensinwait(merchantid, Integer.parseInt(GeneratedToken), 10,3);
                 if (tokens != null) {
                     for (token _curtoken : tokens) {
                         EntityMessage msg = new EntityMessage();

@@ -107,9 +107,9 @@ public class tokenassigner {
 //        }
         token dbTokenObj = new token();
         dbTokenObj.FirebaseID=consumerFirebaseID;
-        dbTokenObj.position = -1;
+        dbTokenObj.position = -6; //-6 is unregistered customer
         dbTokenObj.token_id=Integer.parseInt(existingtoken);
-        MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj,merchantId, Util.CRUD.DELETE);
+        MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj,merchantId, Util.CRUD.UPDATE);
 
         deregisterset.add(iexistingToken);
         return "0";
@@ -764,6 +764,23 @@ public class tokenassigner {
             System.out.println("getTokenStatus token is already served r currently serving . hence returning -1 = "+token.toString()
                     +" .. current penidng one is "+currentMinPendingToken);
 
+//            String TokenContact = MySQLAccess.dbObj.getTokenContact(merchantId, token);
+//            if (TokenContact != null) {
+//                String stat = getTokenStatus(merchantId, tok, TokenContact, "-1", counter);
+
+                token dbTokenObj = new token();
+                dbTokenObj.FirebaseID = "";
+                dbTokenObj.position = -5;
+                dbTokenObj.token_id = token;
+
+                MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj, merchantId, Util.CRUD.UPDATE);
+
+                System.out.println("Updated Token " + token + "status to deleted as it is being served");
+//            }
+//            else {
+//                System.out.println("unable to update Token " + tok + "status");
+//            }
+
             return "-1";
         }
 
@@ -774,6 +791,15 @@ public class tokenassigner {
 
 
         System.out.println("getTokenStatus  "+token+"  to be served at position  = "+pos.toString());
+
+        token dbTokenObj = new token();
+        dbTokenObj.FirebaseID = "";
+        dbTokenObj.position = pos;
+        dbTokenObj.token_id = token;
+
+        MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj, merchantId, Util.CRUD.UPDATE);
+
+        System.out.println("Updated Token " + token + "status to deleted as it is being served");
 
 
 //        while (itr.hasNext() && count < 4)
@@ -866,10 +892,10 @@ public class tokenassigner {
 
             token dbTokenObj = new token();
             dbTokenObj.FirebaseID = "";
-            dbTokenObj.position = 0;
+            dbTokenObj.position = -5; //-5 is done token
             dbTokenObj.token_id = temp.token;
 
-            MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj, merchantId, Util.CRUD.DELETE);
+            MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj, merchantId, Util.CRUD.UPDATE);
 
             countersDoneDetails.put(counter, doneDetails);
 
@@ -976,22 +1002,22 @@ public class tokenassigner {
             System.out.println("exception in for loop.." + e.getMessage());
         }
 
-        String TokenContact = MySQLAccess.dbObj.getTokenContact(merchantId, tok);
-        if (TokenContact != null) {
-            String stat = getTokenStatus(merchantId, tok, TokenContact, "-1", counter);
-
-            token dbTokenObj = new token();
-            dbTokenObj.FirebaseID = "";
-            dbTokenObj.position = Integer.parseInt(stat);
-            dbTokenObj.token_id = tok;
-
-            MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj, merchantId, Util.CRUD.UPDATE);
-
-            System.out.println("Updated Token " + tok + "status to " + stat);
-        }
-        else {
-            System.out.println("unable to update Token " + tok + "status");
-        }
+//        String TokenContact = MySQLAccess.dbObj.getTokenContact(merchantId, tok);
+//        if (TokenContact != "-1") {
+//            String stat = getTokenStatus(merchantId, tok, TokenContact, "-1", counter);
+//
+//            token dbTokenObj = new token();
+//            dbTokenObj.FirebaseID = "";
+//            dbTokenObj.position = Integer.parseInt(stat);
+//            dbTokenObj.token_id = tok;
+//
+//            MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj, merchantId, Util.CRUD.UPDATE);
+//
+//            System.out.println("Updated Token " + tok + "status to " + stat);
+//        }
+//        else {
+//            System.out.println("unable to update Token " + tok + "status");
+//        }
         System.out.println("I'll run in a separate thread than the main thread.");
 
         LocalDateTime now2 = LocalDateTime.now();
@@ -1004,8 +1030,8 @@ public class tokenassigner {
         return tok.toString();
 
     }
-    public List<token> getNextTokensinwait(String merchantID,int FromToken,int upto){
-        return  MySQLAccess.dbObj.getNextTokensinwait(merchantID,FromToken,upto);
+    public List<token> getNextTokensinwait(String merchantID,int FromToken,int upto,int limito){
+        return  MySQLAccess.dbObj.getNextTokensinwait(merchantID,FromToken,upto, limito);
     }
     public synchronized String currentTokenForCounter(Integer counter)
     {

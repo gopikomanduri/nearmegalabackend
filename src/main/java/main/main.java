@@ -685,38 +685,40 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 System.out.println("for /getmerchanttokendetails ..counters not yet opened   "+merchantid+"  returning empty details");
             }
             try {
-                List<token> tokens = tkobj.getNextTokensinwait(merchantid, Integer.parseInt(GeneratedToken)-1, 10,4);
-                if (tokens != null) {
-                    for (token _curtoken : tokens) {
-                        EntityMessage msg = new EntityMessage();
-                        System.out.println("reached to obtain fire details ");
-                        System.out.println("obtained fire details and sending to  " + _curtoken.FirebaseID);
-                        msg.addRegistrationToken( _curtoken.FirebaseID);
-                        msg.putStringData("title", "Hello " );
-                        tokenstatus tok =new tokenstatus();
-                        tok.token = _curtoken.token_id;
-                        tok.youareat =_curtoken.position -1;
+                if (Integer.parseInt(GeneratedToken)  > 0) {
+                    List<token> tokens = tkobj.getNextTokensinwait(merchantid, Integer.parseInt(GeneratedToken) - 1, 10, 4);
+                    if (tokens != null) {
+                        for (token _curtoken : tokens) {
+                            EntityMessage msg = new EntityMessage();
+                            System.out.println("reached to obtain fire details ");
+                            System.out.println("obtained fire details and sending to  " + _curtoken.FirebaseID);
+                            msg.addRegistrationToken(_curtoken.FirebaseID);
+                            msg.putStringData("title", "Hello ");
+                            tokenstatus tok = new tokenstatus();
+                            tok.token = _curtoken.token_id;
+                            tok.youareat = _curtoken.position - 1;
 
 //
-                        msg.putStringData("body", new Gson().toJson(tok));
-                        System.out.println("created FCM message");
-                        // push
-                        try {
-                            if (client != null) {
-                                System.out.println(" achived client connection. message is being pushed ");
-                                FcmResponse res = client.pushToEntities(msg);
-                                System.out.println(res);
-                                System.out.println("message pushed ");
-                            } else {
-                                FirebaseMessagingClient clients = new FirebaseMessagingClient();
-                                clients.setAPIKey("AAAAJVsTN2U:APA91bFaQC_HMm4r6-oSXNXddODyjE89YbZmrCeZm7dRJ7hKMfDTh073GnUkjoLz2YfEMJRPxcFH8xaOJsyO5ILUmoHwSsXXiiHFHyUg5vDhSB18XK7pZSWT15PPE2SREr1yInn7bqF9");
-                                System.out.println(" achived client connection. message is being pushed ");
-                                FcmResponse res = clients.pushToEntities(msg);
-                                System.out.println(res);
-                                System.out.println("message pushed from else");
+                            msg.putStringData("body", new Gson().toJson(tok));
+                            System.out.println("created FCM message");
+                            // push
+                            try {
+                                if (client != null) {
+                                    System.out.println(" achived client connection. message is being pushed ");
+                                    FcmResponse res = client.pushToEntities(msg);
+                                    System.out.println(res);
+                                    System.out.println("message pushed ");
+                                } else {
+                                    FirebaseMessagingClient clients = new FirebaseMessagingClient();
+                                    clients.setAPIKey("AAAAJVsTN2U:APA91bFaQC_HMm4r6-oSXNXddODyjE89YbZmrCeZm7dRJ7hKMfDTh073GnUkjoLz2YfEMJRPxcFH8xaOJsyO5ILUmoHwSsXXiiHFHyUg5vDhSB18XK7pZSWT15PPE2SREr1yInn7bqF9");
+                                    System.out.println(" achived client connection. message is being pushed ");
+                                    FcmResponse res = clients.pushToEntities(msg);
+                                    System.out.println(res);
+                                    System.out.println("message pushed from else");
 
+                                }
+                            } catch (Exception ex) {
                             }
-                        } catch (Exception ex) {
                         }
                     }
                 }

@@ -133,6 +133,7 @@ public class EntityMessage {
 
         final JSONObject json = new JSONObject();
         JSONObject tjson = new JSONObject();
+        JSONObject atjson = new JSONObject();
         final String[] registrationIds = mRegistrationTokenList.toArray(new String[] {});
 
         json.accumulate("content_available", true);
@@ -146,9 +147,13 @@ public class EntityMessage {
 //            fMess ="Your position updated to " +entry
             tjson.accumulate(entry.getKey(),entry.getValue());
         }
-//        tjson.accumulate("title","Gala Notify Testing");
-//        tjson.accumulate("body","Hello This is notification test from FCM");
-        json.accumulate("notification",tjson);
+        if(fMess.size()>0) {
+            atjson.accumulate("title", "Hello");
+            atjson.accumulate("body", fMess.get(0));
+            json.accumulate("notification",atjson);
+            fMess.clear();
+        }
+
         json.accumulate("data",tjson);
 
         return json;

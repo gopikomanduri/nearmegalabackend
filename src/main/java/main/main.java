@@ -697,8 +697,12 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                             tokenstatus tok = new tokenstatus();
                             tok.token = _curtoken.token_id;
                             tok.youareat = _curtoken.position - 1;
-                            msg.putStringMess("Hello Your Token current position is "+tok.youareat);
-
+                            if(tok.youareat == 0)
+                            {
+                                msg.putStringMess("Hello Please proceed to counter your token arrived ");
+                            }else {
+                                msg.putStringMess("Hello Your Token current position is " + tok.youareat);
+                            }
                             msg.putStringData("body", new Gson().toJson(tok));
                             System.out.println("created FCM message");
                             // push

@@ -695,7 +695,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                         msg.putStringData("title", "Hello " );
                         tokenstatus tok =new tokenstatus();
                         tok.token = _curtoken.token_id;
-                        tok.youareat =_curtoken.position;
+                        tok.youareat =_curtoken.position -1;
 
 //
                         msg.putStringData("body", new Gson().toJson(tok));

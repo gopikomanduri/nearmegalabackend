@@ -50,6 +50,7 @@ import java.util.Map;
 public class EntityMessage {
 
     private final Map<String, Object> mDataMap = new LinkedHashMap<String, Object>();
+    private  final  List<String> fMess=new ArrayList<String>();
     private final List<String> mRegistrationTokenList = new ArrayList<String>();
 
     /**
@@ -60,6 +61,9 @@ public class EntityMessage {
      */
     public void putStringData(String key, String value) {
         putData(key, value);
+    }
+    public void putStringMess(String value) {
+        fMess.add(value);
     }
 
     /**
@@ -136,13 +140,18 @@ public class EntityMessage {
 //        json.accumulate("to", "eXo49MLuJGE:APA91bEE4zMCQ_lnNst9Fw-cBAfgiyYsdxHdQ7TW1w5JDOZya9holq1KQWC3-nZ_7SRpGqeqC_ZgtvaPjj9QTMCQqsmoUiH-jMdzU_F14b8Vcic20Vztk3RChoE66EzskArJzVKj1_wu");
 //        json.accumulate("to","fEXJFJ7kysc:APA91bEaEh-Dhtv9vQIueCPs7tjeJLMFV7_4cZUL2lDyMJPUlZdbRSqDkJULfLvMOP6nxIjw0RMCFEknPhFYqtsI66JJb3anuPW--QMpi5R8EekamYQSmMUluTGcndfGmF7SZsMJl_O7");
         json.accumulate("registration_ids",mRegistrationTokenList);
+//        fMess ="Your position updated to ";
         for (Map.Entry<String, Object> entry : mDataMap.entrySet()) {
             System.out.println("[Key] : " + entry.getKey() + " [Value] : " + entry.getValue());
+//            fMess ="Your position updated to " +entry
             tjson.accumulate(entry.getKey(),entry.getValue());
         }
 //        tjson.accumulate("title","Gala Notify Testing");
 //        tjson.accumulate("body","Hello This is notification test from FCM");
+        if(fMess.size()>0)
+            json.accumulate("notification",fMess.get(0));
         json.accumulate("data",tjson);
+
         return json;
     }
 

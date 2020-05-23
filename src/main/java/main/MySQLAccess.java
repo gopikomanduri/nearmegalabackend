@@ -939,12 +939,12 @@ sex int(11)
             e.printStackTrace();
         }
         try {
-            String sql = "COUNT  (*) from " + merchantID + "_token_log where Position < 0 ";
+            String sql = "SELECT COUNT(*) as count from " + merchantID + "_token_log where Position < 0 ";
 
             statement = connect.createStatement();
             resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                count = resultSet.getInt("COUNT(*)");
+                count = resultSet.getInt("count");
             }
             System.out.println("command executed is " + sql);
             System.out.println("Count received  is " + count);

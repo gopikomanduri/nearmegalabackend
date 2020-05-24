@@ -1356,6 +1356,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 // Add key value pair into payload
                 msg.putStringData("title", "Hello " + fireID[1]);
                 msg.putStringData("body",  GeneratedToken);
+                msg.putStringMess("Your Token is registered successfully and you are at ");
                 System.out.println("created FCM message");
                 // push
                 try {

@@ -969,8 +969,9 @@ sex int(11)
 
             statement = connect.createStatement();
             resultSet = statement.executeQuery(sql);
-
+            int index=0;
             while (resultSet.next()) {
+                index++;
                 token tkObj=new token();
                 tkObj.token_id= resultSet.getInt("TokenID");
                 tkObj.position= tkObj.token_id -currentTokenPosition; //resultSet.getInt("Position");
@@ -979,10 +980,29 @@ sex int(11)
                 if(fireIds==null){
                     fireIds=new ArrayList<token>();
                 }
-                fireIds.add(tkObj);
-                if(fireIds.size() == limitto){
-                    break;
+                boolean isSatisfactoryCondition=false;
+                if(index<=10) { //first ten tokens
+                    isSatisfactoryCondition=true;
                 }
+                else if (index<=50 && index%2==0) //for next 50 tokens it is %2 all even
+                {
+                    isSatisfactoryCondition=true;
+                }
+                else if (index<=100 && index%5==0) //for next 50 tokens it is %5 all even
+                {
+                    isSatisfactoryCondition=true;
+                }
+                else if (index<=1000 && index%10==0) //for next 1000 tokens it is %10 all even
+                {
+                    isSatisfactoryCondition=true;
+                }
+                if(isSatisfactoryCondition)
+                {
+                    fireIds.add(tkObj);
+                }
+//                if(fireIds.size() == limitto){
+//                    break;
+//                }
             }
             System.out.println("command executed is " + sql);
             return fireIds;

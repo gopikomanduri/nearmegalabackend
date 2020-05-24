@@ -686,7 +686,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             }
             try {
                 if (Integer.parseInt(GeneratedToken)  > 0) {
-                    List<token> tokens = tkobj.getNextTokensinwait(merchantid, Integer.parseInt(GeneratedToken) - 1, 10, 4);
+                    List<token> tokens = tkobj.getNextTokensinwait(merchantid, Integer.parseInt(GeneratedToken) - 1, 1000, 4);
                     if (tokens != null) {
                         for (token _curtoken : tokens) {
                             EntityMessage msg = new EntityMessage();

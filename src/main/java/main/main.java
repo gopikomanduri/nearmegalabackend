@@ -699,9 +699,9 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                             tok.youareat = _curtoken.position - 1;
                             if(tok.youareat == 0)
                             {
-                                msg.putStringMess("Hello Please proceed to counter your token arrived ");
+                                msg.putStringMess("Hello Please proceed to counter your token arrived"+" for "+merchantid);
                             }else {
-                                msg.putStringMess("Hello Your Token current position is " + tok.youareat);
+                                msg.putStringMess("Hello Your Token current position is " + tok.youareat+" for "+merchantid);
                             }
                             msg.putStringData("body", new Gson().toJson(tok));
                             System.out.println("created FCM message");

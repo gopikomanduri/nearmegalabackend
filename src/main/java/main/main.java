@@ -24,7 +24,7 @@ public class main {
 //
 //            System.out.println("running on 557");
 //        }else {
-            port(5556);
+            port(5557);
 //        }
         final FirebaseMessagingClient client =new FirebaseMessagingClient();
         try {

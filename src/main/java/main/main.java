@@ -406,6 +406,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
         });
 
        ConcurrentHashMap<String , tokenassigner> merchantstokens = new ConcurrentHashMap<String, tokenassigner>();
+        ConcurrentHashMap<String , slotManager> merchantsSlotwiseTokens = new ConcurrentHashMap<String, slotManager>();
 
 
         post("/login", (request, response) -> {
@@ -518,8 +519,6 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             //  return "Gopi";
         });
 
-
-
         post("/pushstatus", (request, response) -> {
             response.type("application/json");
             String dataReceived = request.queryParams("status");
@@ -611,7 +610,6 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             //  return "Gopi";
         });
 
-
         post("/getmerchanttokendetails", (request, response) -> {
 
             String str = "";
@@ -651,7 +649,6 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
             //  return "Gopi";
         });
-
 
         post("/getnexttoken", (request, response) -> {
 
@@ -753,7 +750,6 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
             //  return "Gopi";
         });
-
 
         post("/getmerchantcounterdetails", (request, response) -> {
 
@@ -1313,6 +1309,98 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
             //  return "Gopi";
         });
+
+        post("/registerMerchantSlots", (request, response) -> {
+            String dataReceived= request.queryParams("slotDetails");
+
+
+            slotPayload slotRecived = new Gson().fromJson(dataReceived, slotPayload.class);
+            slotManager curSlotManager;
+            if (!merchantsSlotwiseTokens.containsKey(slotRecived.MerchantID)) {
+                curSlotManager = new slotManager(slotRecived);
+                merchantsSlotwiseTokens.put(slotRecived.MerchantID,curSlotManager);
+            }
+            else
+            {
+                curSlotManager = merchantsSlotwiseTokens.get(slotRecived.MerchantID);
+            }
+            if(curSlotManager!=null) {
+                return new Gson().toJson(curSlotManager.CompleteRegistration(slotRecived.MerchantID));
+            }
+            return  "-1";
+            //return curSlotManager.CompleteRegistration(slotRecived.MerchantID);
+        });
+
+        post("/getMerchantSlots", (request, response) -> {
+            String MID= request.queryParams("MerchantID");
+            String fDate= request.queryParams("FromTime");
+            String tDate= request.queryParams("toTime");
+
+            slotManager curSlotManager;
+            if (!merchantsSlotwiseTokens.containsKey(MID)) {
+                slotPayload slotRecived =new slotPayload();
+                slotRecived.MerchantID=MID;
+                curSlotManager = new slotManager(slotRecived);
+                merchantsSlotwiseTokens.put(MID,curSlotManager);
+            }
+            else
+            {
+                curSlotManager = merchantsSlotwiseTokens.get(MID);
+            }
+            if(curSlotManager!=null) {
+                return curSlotManager.getSlots(MID,fDate,tDate);
+            }
+            return  "-1";
+        });
+
+        post("/registerTokenforSlot", (request, response) -> {
+
+            response.type("application/json");
+            String merchantid = request.queryParams("merchantid");
+            String consumercontact = request.queryParams("consumercontact");
+            String epochID = request.queryParams("epochID");
+            String EpochStarttime = request.queryParams("EpochStarttime");
+            String tokensrequested= request.queryParams("tokensrequested");
+            String GeneratedToken = "-10";
+            System.out.println("for /registerfortoken .. request received merchantid " + merchantid + " consumercontact  =" +
+                    "  " + consumercontact);
+            slotManager tkobj = null;
+
+            if ((tkobj = merchantsSlotwiseTokens.get(merchantid)) != null) {
+                GeneratedToken = tkobj.RegisterUsertoSlot(merchantid,Integer.parseInt(epochID),EpochStarttime,Integer.parseInt(tokensrequested),consumercontact);
+
+            } else {
+//                tkobj=new slotManager();
+//                merchantsSlotwiseTokens.put(merchantid, tkobj);,
+            }
+            //region-- FCM Push
+            EntityMessage msg = new EntityMessage();
+            consumer reg = new consumer();
+            System.out.println("reached to obtain fire details ");
+            String[] fireID = reg.getUSerFireID(consumercontact);
+            System.out.println("obtained fire details and sending to  " + fireID[0] );
+            if(fireID[0]!=null) {
+                msg.addRegistrationToken(fireID[0]);
+                // Add key value pair into payload
+                msg.putStringData("title", "Hello " + fireID[1]);
+                msg.putStringData("body",  GeneratedToken);
+                msg.putStringMess("Your Token is registered successfully");
+                System.out.println("created FCM message");
+                // push
+                try {
+                    if (client != null) {
+                        System.out.println(" achived client connection. message is being pushed ");
+                        FcmResponse res = client.pushToEntities(msg);
+                        System.out.println(res);
+                        System.out.println("message pushed ");
+                    }
+                } catch (Exception ex) {
+                }
+            }
+            //FCM Push End
+            return GeneratedToken;
+        });
+
 
         post("/registerfortoken", (request, response) -> {
 

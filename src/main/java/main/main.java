@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -1331,7 +1332,10 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             return  "-1";
             //return curSlotManager.CompleteRegistration(slotRecived.MerchantID);
         });
-
+        post("/getMerchantsAround", (request, response) -> {
+            String geohashes = request.queryParams("geohashes");
+            return MySQLAccess.dbObj.getMerchantsAround(new Gson().fromJson(geohashes, ArrayList.class));
+        });
         post("/getMerchantSlots", (request, response) -> {
             String MID= request.queryParams("MerchantID");
             String fDate= request.queryParams("FromTime");

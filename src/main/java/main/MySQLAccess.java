@@ -143,6 +143,34 @@ public class MySQLAccess {
         }
     }
 
+    public String getMerchantsAround(ArrayList<String> geohashes)
+    {
+        List<String> _merchants=new ArrayList<>();
+        try {
+            if((connect == null) || (connect.isClosed() == true))
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+//        String merchantID = "";
+        try {
+            for(int i=0;i<geohashes.size();i++) {
+                preparedStatement = connect
+                        .prepareStatement("SELECT MerchantId  from merchant where geohash like '" + geohashes.get(i)+ "'");
+                resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    _merchants.add(resultSet.getString("geohash"));
+//                    _merchants.add(merchantID);
+                }
+            }
+            return new Gson().toJson(_merchants);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 
     public LatLng getLatLatForMerchant(String MerchantId, String geoHash)
     {

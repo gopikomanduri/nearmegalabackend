@@ -918,6 +918,7 @@ LNG VARCHAR(10)
                 mSlot.ToTime = resultSet.getString("ToEpoHash");
                 mSlot.MerchantId = MerchantID;
                 mSlot.CurToken = resultSet.getInt("CURTOKEN");
+                objList.add(mSlot);
             }
 
             merchantjson = new Gson().toJson(objList);

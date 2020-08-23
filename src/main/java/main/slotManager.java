@@ -68,9 +68,16 @@ public class slotManager {
         //;;return  "";
     }
 
-    public String getSlots(String MerchantId,String FromTime,String toTime){
-        return MySQLAccess.dbObj.getMerchantSlots(MerchantId,FromTime,toTime);
-        //return  "";
+    public String getSlots(String MerchantId,String fromTime,String toTime){
+        try {
+            Date _fromTime = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(fromTime);
+            Date _toTime = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(toTime);
+            return MySQLAccess.dbObj.getMerchantSlots(MerchantId, String.valueOf(_fromTime.getTime() / 1000),String.valueOf(_toTime.getTime() / 1000));
+        }
+        catch (Exception ex) {
+            //return  "";
+        }
+        return "-1";
     }
 
 }

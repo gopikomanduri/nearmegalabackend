@@ -26,22 +26,29 @@ public class slotManager {
             slotPayload curSlotDeatils = countersDoneDetails.get(MerchantID);
             for (int index = 0; index < curSlotDeatils.FromTime.size(); index++) {
                 Date fromDate=new SimpleDateFormat("MM/dd/yyyy").parse(curSlotDeatils.FromDate);
+
                 Date fromTime=new SimpleDateFormat("HH:mm:ss").parse(curSlotDeatils.FromTime.get(index));
+                System.out.println("registartion details from time "+fromTime.toString());
 
                 fromDate = DateUtils.addHours(fromDate, fromTime.getHours());
                 fromDate = DateUtils.addMinutes(fromDate, fromTime.getMinutes());
+                System.out.println("registartion details from date"+fromDate.toString());
 
                 Date toDate=new SimpleDateFormat("MM/dd/yyyy").parse(curSlotDeatils.ToDate);
                 Date toTime=new SimpleDateFormat("HH:mm:ss").parse(curSlotDeatils.ToTime.get(index));
 
                 toDate = DateUtils.addHours(toDate, toTime.getHours());
                 toDate = DateUtils.addMinutes(toDate, toTime.getMinutes());
+                System.out.println("registartion details to time "+toTime.toString());
+
                 //Converting to epoch
                 mSlot.FromTime = String.valueOf(fromDate.getTime() / 1000);//new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(fromDate);
                 mSlot.ToTime =  String.valueOf(toDate.getTime() / 1000);
                 mSlot.MaxToken = curSlotDeatils.MaxToken.get(index);
                 mSlot.CurToken= curSlotDeatils.MaxToken.get(index);
+                System.out.println("rInserting  "+toDate.toString());
                 mSlot.Slot_ID = MySQLAccess.dbObj.insertMerchantSlot(mSlot);
+                System.out.println("success slot   "+ String.valueOf(mSlot.Slot_ID));
                 if(mSlot.Slot_ID ==-1)
                 {
                     return  mSlots;
@@ -51,6 +58,7 @@ public class slotManager {
         }
         catch (Exception ex)
         {
+            System.out.println("registartion failed in try");
             return  mSlots;
         }
         return  mSlots;

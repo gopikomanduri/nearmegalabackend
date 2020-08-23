@@ -1313,7 +1313,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
         post("/registerMerchantSlots", (request, response) -> {
             String dataReceived= request.queryParams("slotDetails");
 
-
+            System.out.println("for /registerMerchantSlots .. request received "+ dataReceived);
             slotPayload slotRecived = new Gson().fromJson(dataReceived, slotPayload.class);
             slotManager curSlotManager;
             if (!merchantsSlotwiseTokens.containsKey(slotRecived.MerchantID)) {
@@ -1325,6 +1325,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 curSlotManager = merchantsSlotwiseTokens.get(slotRecived.MerchantID);
             }
             if(curSlotManager!=null) {
+                System.out.println("registartion started ");
                 return new Gson().toJson(curSlotManager.CompleteRegistration(slotRecived.MerchantID));
             }
             return  "-1";

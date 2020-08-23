@@ -895,7 +895,7 @@ LNG VARCHAR(10)
 
     public String getMerchantSlots(String MerchantID,String FromTime,String toTime) {
         List<Merchantslot> objList = new ArrayList<Merchantslot>();
-        String merchantjson = new Gson().toJson(objList);
+        String merchantjson="";
         try {
             if (connect.isClosed() == true)
                 connect = initConnection();
@@ -910,14 +910,16 @@ LNG VARCHAR(10)
             resultSet = statement
                     .executeQuery(merchantQuery);
 
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 Merchantslot mSlot = new Merchantslot();
+
                 mSlot.Slot_ID = resultSet.getInt("EPOCHID");
                 mSlot.MaxToken = resultSet.getInt("MAXTOKEN");
                 mSlot.FromTime = resultSet.getString("FromEpoHash");
                 mSlot.ToTime = resultSet.getString("ToEpoHash");
                 mSlot.MerchantId = MerchantID;
                 mSlot.CurToken = resultSet.getInt("CURTOKEN");
+
                 objList.add(mSlot);
             }
 

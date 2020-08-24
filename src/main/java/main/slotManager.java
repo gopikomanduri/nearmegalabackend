@@ -53,7 +53,7 @@ public class slotManager {
                     }
                     catch (Exception ex)
                     {
-                        System.out.println("first fial details from time " + fromDate.toString());
+                        System.out.println(ex.getMessage());
                     }
                     String _dt= listOfDates.get(days).getMonthValue()+"/"
                             +listOfDates.get(days).getDayOfMonth()+"/"+listOfDates.get(days).getYear();

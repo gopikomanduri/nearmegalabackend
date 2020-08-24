@@ -4,6 +4,7 @@ import org.apache.commons.lang3.time.DateUtils;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,8 +32,9 @@ public class slotManager {
             System.out.println("SLOT payload found");
 
             //Parsing the date
-            LocalDate startDate = LocalDate.parse(curSlotDeatils.FromDate);
-            LocalDate endDate = LocalDate.parse(curSlotDeatils.ToDate);
+            DateTimeFormatter df = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            LocalDate startDate = LocalDate.parse(curSlotDeatils.FromDate,df);
+            LocalDate endDate = LocalDate.parse(curSlotDeatils.ToDate,df);
             System.out.println("processed local dates");
             //calculating number of days in between
             long numOfDays = ChronoUnit.DAYS.between(startDate, endDate);

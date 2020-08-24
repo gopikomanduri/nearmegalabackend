@@ -47,8 +47,19 @@ public class slotManager {
             System.out.println("registartion for days: " +  String.valueOf(numOfDays));
             for(int days=0; days<numOfDays;days++) {
                 for (int index = 0; index < curSlotDeatils.FromTime.size(); index++) {
-                    Date fromDate=new SimpleDateFormat("MM/dd/yyyy").parse(listOfDates.get(days).plusYears(2000).toString());//day1
-
+                    Date fromDate=null;
+                    try {
+                        fromDate = new SimpleDateFormat("MM/dd/yyyy").parse(listOfDates.get(days).plusYears(1900).toString());//day1
+                    }
+                    catch (Exception ex)
+                    {
+                        System.out.println("first fial details from time " + fromDate.toString());
+                    }
+                    String _dt= listOfDates.get(days).getMonthValue()+"/"
+                            +listOfDates.get(days).getDayOfMonth()+"/"+listOfDates.get(days).getYear();
+                    System.out.println("processed date" + _dt);
+                    fromDate=new SimpleDateFormat("MM/dd/yyyy").
+                                    parse(_dt);//day1
                     Date fromTime = new SimpleDateFormat("HH:mm:ss").parse(curSlotDeatils.FromTime.get(index));//day1 fromtime
                     System.out.println("registartion details from time " + fromTime.toString());
 
@@ -56,7 +67,7 @@ public class slotManager {
                     fromDate = DateUtils.addMinutes(fromDate, fromTime.getMinutes());
                     System.out.println("registartion details from date" + fromDate.toString());
 
-                    Date toDate=new SimpleDateFormat("MM/dd/yyyy").parse(listOfDates.get(days).plusYears(2000).toString());
+                    Date toDate=new SimpleDateFormat("MM/dd/yyyy").parse(_dt);
                     Date toTime = new SimpleDateFormat("HH:mm:ss").parse(curSlotDeatils.ToTime.get(index));
 
                     toDate = DateUtils.addHours(toDate, toTime.getHours());

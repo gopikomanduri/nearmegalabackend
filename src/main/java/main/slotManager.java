@@ -33,16 +33,15 @@ public class slotManager {
             //Parsing the date
             LocalDate startDate = LocalDate.parse(curSlotDeatils.FromDate);
             LocalDate endDate = LocalDate.parse(curSlotDeatils.ToDate);
-
+            System.out.println("processed local dates");
             //calculating number of days in between
-            long noOfDaysBetween = ChronoUnit.DAYS.between(startDate, endDate);
             long numOfDays = ChronoUnit.DAYS.between(startDate, endDate);
-
+            System.out.println("got num days");
             List<LocalDate> listOfDates = Stream.iterate(startDate, date -> date.plusDays(1))
                     .limit(numOfDays)
                     .collect(Collectors.toList());
             System.out.println("registartion for days: " +  String.valueOf(numOfDays));
-            for(int days=0; days<noOfDaysBetween;days++) {
+            for(int days=0; days<numOfDays;days++) {
                 for (int index = 0; index < curSlotDeatils.FromTime.size(); index++) {
                     Date fromDate=new SimpleDateFormat("MM/dd/yyyy").parse(listOfDates.get(days).toString());//day1
 
@@ -77,6 +76,7 @@ public class slotManager {
         }
         catch (Exception ex)
         {
+            System.out.println(ex.getMessage());
             System.out.println("registartion failed in try");
             return  mSlots;
         }

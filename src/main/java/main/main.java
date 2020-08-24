@@ -1318,12 +1318,14 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             slotPayload slotRecived = new Gson().fromJson(dataReceived, slotPayload.class);
             slotManager curSlotManager;
             if (!merchantsSlotwiseTokens.containsKey(slotRecived.MerchantID)) {
-                curSlotManager = new slotManager(slotRecived);
+                curSlotManager = new slotManager();
+                curSlotManager.countersDoneDetails.put(slotRecived.MerchantID, slotRecived);
                 merchantsSlotwiseTokens.put(slotRecived.MerchantID,curSlotManager);
             }
             else
             {
                 curSlotManager = merchantsSlotwiseTokens.get(slotRecived.MerchantID);
+                curSlotManager.countersDoneDetails.putIfAbsent(slotRecived.MerchantID, slotRecived);
             }
             if(curSlotManager!=null) {
                 System.out.println("registartion started ");
@@ -1345,7 +1347,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             if (!merchantsSlotwiseTokens.containsKey(MID)) {
                 slotPayload slotRecived =new slotPayload();
                 slotRecived.MerchantID=MID;
-                curSlotManager = new slotManager(slotRecived);
+                curSlotManager = new slotManager();
                 merchantsSlotwiseTokens.put(MID,curSlotManager);
             }
             else

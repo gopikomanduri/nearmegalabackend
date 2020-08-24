@@ -26,8 +26,9 @@ public class slotManager {
         try {
             Merchantslot mSlot = new Merchantslot();
             mSlot.MerchantId = MerchantID;
+            System.out.println("SLOT payload trying");
             slotPayload curSlotDeatils = countersDoneDetails.get(MerchantID);
-
+            System.out.println("SLOT payload found");
 
             //Parsing the date
             LocalDate startDate = LocalDate.parse(curSlotDeatils.FromDate);

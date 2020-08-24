@@ -1319,16 +1319,30 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             slotManager curSlotManager;
             if (!merchantsSlotwiseTokens.containsKey(slotRecived.MerchantID)) {
                 curSlotManager = new slotManager();
-                curSlotManager.countersDoneDetails.put(slotRecived.MerchantID, slotRecived);
-                merchantsSlotwiseTokens.put(slotRecived.MerchantID,curSlotManager);
             }
             else
             {
                 curSlotManager = merchantsSlotwiseTokens.get(slotRecived.MerchantID);
-                curSlotManager.countersDoneDetails.putIfAbsent(slotRecived.MerchantID, slotRecived);
             }
+            merchantsSlotwiseTokens.putIfAbsent(slotRecived.MerchantID,curSlotManager);
+            if(merchantsSlotwiseTokens.containsKey(slotRecived.MerchantID)){
+                merchantsSlotwiseTokens.replace(slotRecived.MerchantID,curSlotManager);
+            }
+            else
+            {
+                merchantsSlotwiseTokens.put(slotRecived.MerchantID,curSlotManager);
+            }
+
             if(curSlotManager!=null) {
                 System.out.println("registartion started ");
+                if(curSlotManager.countersDoneDetails.containsKey(slotRecived.MerchantID)){
+                    curSlotManager.countersDoneDetails.replace(slotRecived.MerchantID,slotRecived);
+                }
+                else
+                {
+                    curSlotManager.countersDoneDetails.put(slotRecived.MerchantID,slotRecived);
+                }
+                System.out.println("Inserted Slot Details ");
                 return new Gson().toJson(curSlotManager.CompleteRegistration(slotRecived.MerchantID));
             }
             return  "-1";

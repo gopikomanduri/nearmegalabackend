@@ -3,8 +3,6 @@ package main;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -33,12 +31,10 @@ public class slotManager {
             Date _fromDt=new SimpleDateFormat("MM/dd/yyyy").parse(curSlotDeatils.FromDate);
             Date _toDt=new SimpleDateFormat("MM/dd/yyyy").parse(curSlotDeatils.ToDate);
 
-            LocalDate startDate = LocalDate.of(_fromDt.getYear(),_fromDt.getMonth(),_fromDt.getDay());
-            LocalDate endDate = LocalDate.of(_toDt.getYear(),_toDt.getMonth(),_toDt.getDay());//
-            // LocalDate.parse(curSlotDeatils.ToDate,df);
+
             System.out.println("processed local dates");
             //calculating number of days in between
-            long numOfDays = ChronoUnit.DAYS.between(startDate, endDate);
+            long numOfDays = (_fromDt.getTime()-_toDt.getTime())/ (1000 * 3600 * 24);
             System.out.println("registartion for days: " +  String.valueOf(numOfDays));
 
             for(int days=0; days<numOfDays;days++) {

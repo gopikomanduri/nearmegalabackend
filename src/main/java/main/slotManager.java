@@ -34,7 +34,7 @@ public class slotManager {
 
             System.out.println("processed local dates");
             //calculating number of days in between
-            long numOfDays = (_fromDt.getTime()-_toDt.getTime())/ (1000 * 3600 * 24);
+            long numOfDays = (_toDt.getTime()-_fromDt.getTime())/ (1000 * 3600 * 24);
             System.out.println("registartion for days: " +  String.valueOf(numOfDays));
 
             for(int days=0; days<numOfDays;days++) {

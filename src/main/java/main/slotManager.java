@@ -30,9 +30,6 @@ public class slotManager {
             //Parsing the date
             Date _fromDt=new SimpleDateFormat("MM/dd/yyyy").parse(curSlotDeatils.FromDate);
             Date _toDt=new SimpleDateFormat("MM/dd/yyyy").parse(curSlotDeatils.ToDate);
-
-
-            System.out.println("processed local dates");
             //calculating number of days in between
             long numOfDays = (_toDt.getTime()-_fromDt.getTime())/ (1000 * 3600 * 24);
             System.out.println("registartion for days: " +  String.valueOf(numOfDays));
@@ -41,12 +38,17 @@ public class slotManager {
                 for (int index = 0; index < curSlotDeatils.FromTime.size(); index++) {
                     Date fromDate=null;
                     try {
-                        fromDate = new SimpleDateFormat("MM/dd/yyyy").parse(getNextDate(curSlotDeatils.FromDate,days+1));//day1
+                        fromDate = getNextDate(curSlotDeatils.FromDate,days+1);//day1
+                        if(fromDate==null)
+                        {
+                            break;
+                        }
                     }
                     catch (Exception ex)
                     {
                         System.out.println(ex.getMessage());
                     }
+
                     Date fromTime = new SimpleDateFormat("HH:mm:ss").parse(curSlotDeatils.FromTime.get(index));//day1 fromtime
                     System.out.println("registartion details from time " + fromTime.toString());
 
@@ -54,7 +56,11 @@ public class slotManager {
                     fromDate = DateUtils.addMinutes(fromDate, fromTime.getMinutes());
                     System.out.println("registartion details from date" + fromDate.toString());
 
-                    Date toDate=new SimpleDateFormat("MM/dd/yyyy").parse(getNextDate(curSlotDeatils.FromDate,days+1));
+                    Date toDate= getNextDate(curSlotDeatils.FromDate,days+1);
+                    if(toDate==null)
+                    {
+                        break;
+                    }
                     Date toTime = new SimpleDateFormat("HH:mm:ss").parse(curSlotDeatils.ToTime.get(index));
 
                     toDate = DateUtils.addHours(toDate, toTime.getHours());
@@ -100,19 +106,19 @@ public class slotManager {
         }
         return "-1";
     }
-    private static String getNextDate(String  curDate, int numDaysToadd) {
+    private static Date getNextDate(String  curDate, int numDaysToadd) {
         try {
             final SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
             final Date date = format.parse(curDate);
             final Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             calendar.add(Calendar.DAY_OF_YEAR, numDaysToadd);
-            return format.format(calendar.getTime());
+            return calendar.getTime();
         }
         catch (Exception ex)
         {
 
         }
-        return "";
+        return null;
     }
 }

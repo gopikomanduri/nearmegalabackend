@@ -34,11 +34,11 @@ public class slotManager {
             long numOfDays = (_toDt.getTime()-_fromDt.getTime())/ (1000 * 3600 * 24);
             System.out.println("registartion for days: " +  String.valueOf(numOfDays));
 
-            for(int days=0; days<numOfDays;days++) {
+            for(int days=0; days<=numOfDays;days++) {
                 for (int index = 0; index < curSlotDeatils.FromTime.size(); index++) {
                     Date fromDate=null;
                     try {
-                        fromDate = getNextDate(curSlotDeatils.FromDate,days+1);//day1
+                        fromDate = getNextDate(curSlotDeatils.FromDate,days);//day1
                         if(fromDate==null)
                         {
                             break;
@@ -56,7 +56,7 @@ public class slotManager {
                     fromDate = DateUtils.addMinutes(fromDate, fromTime.getMinutes());
                     System.out.println("registartion details from date" + fromDate.toString());
 
-                    Date toDate= getNextDate(curSlotDeatils.FromDate,days+1);
+                    Date toDate= getNextDate(curSlotDeatils.FromDate,days);
                     if(toDate==null)
                     {
                         break;

@@ -25,7 +25,8 @@ public class main {
 //            System.out.println("running on 557");
 //        }else {
             port(5557);
-
+            CorsFilter corsFilter =new CorsFilter();
+            corsFilter.apply();
             options("/*",
                 (request, response) -> {
 

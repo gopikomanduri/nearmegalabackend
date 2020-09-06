@@ -931,7 +931,7 @@ LNG VARCHAR(10)
                     sql = "UPDATE " + tableName + " SET MAXTOKEN = " +
                             (curMaxToken-TokensRequested) + " Where EPOCHID  = " + epochID;
 
-                    PreparedStatement preparedStatement = connect.prepareStatement(sql);
+                    PreparedStatement preparedStatement = connect.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
                     preparedStatement.executeUpdate();
 
                     ResultSet rs = preparedStatement.getGeneratedKeys();

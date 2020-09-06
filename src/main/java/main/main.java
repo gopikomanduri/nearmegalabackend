@@ -1424,12 +1424,14 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                     "  " + consumercontact);
             slotManager tkobj = null;
 
-            if ((tkobj = merchantsSlotwiseTokens.get(merchantid)) != null) {
+            if (merchantsSlotwiseTokens.containsKey(merchantid)) {
+                tkobj =merchantsSlotwiseTokens.get(merchantid);
                 GeneratedToken = tkobj.RegisterUsertoSlot(merchantid,Integer.parseInt(epochID),EpochStarttime,Integer.parseInt(tokensrequested),consumercontact);
 
             } else {
-//                tkobj=new slotManager();
-//                merchantsSlotwiseTokens.put(merchantid, tkobj);,
+                tkobj=new slotManager();
+                merchantsSlotwiseTokens.put(merchantid, tkobj);
+                GeneratedToken = tkobj.RegisterUsertoSlot(merchantid,Integer.parseInt(epochID),EpochStarttime,Integer.parseInt(tokensrequested),consumercontact);
             }
             //region-- FCM Push
             try {

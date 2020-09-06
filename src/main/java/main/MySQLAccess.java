@@ -979,10 +979,13 @@ LNG VARCHAR(10)
                 uSlot.tokensRequested = resultSet.getInt("NoofTokens");
                 try {
                     Merchantslot mslot = getMerchantSlotDetails(uSlot.MerchantId, epoch);//Move this by maintaing in FreqUsed collection
-                    String mDet = MySQLAccess.dbObj.getMerchantDetails(contact);//Move this by maintaing in FreqUsed collection
-                    merchantDetails merObj = new Gson().fromJson(mDet, merchantDetails.class);
+                    System.out.println("failed extacting slot details ");
                     uSlot.selectedSlotEndHash = mslot.ToTime;
                     uSlot.selectedSlotStartHash = mslot.FromTime;
+
+                    String mDet = getMerchantDetails(contact);//Move this by maintaing in FreqUsed collection
+                    merchantDetails merObj = new Gson().fromJson(mDet, merchantDetails.class);
+                    System.out.println("failed extacting merch details ");
                     uSlot.MerchantName = merObj.merchantId;
                     uSlot.MerchantLat = merObj.latitude.toString();
                     uSlot.MerchantLng = merObj.longitude.toString();

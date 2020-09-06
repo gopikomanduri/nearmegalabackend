@@ -106,11 +106,11 @@ public class slotManager {
         }
         return "-1";
     }
-    public String getUserSlots(String UserID,String fromTime,String toTime){
+    public String getUserSlots(String UserID,String fromTime,String toTime,String contact){
         try {
             Date _fromTime = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(fromTime);
             Date _toTime = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(toTime);
-            return MySQLAccess.dbObj.getUserSlots(UserID, String.valueOf(_fromTime.getTime() / 1000),String.valueOf(_toTime.getTime() / 1000));
+            return MySQLAccess.dbObj.getUserSlots(UserID, String.valueOf(_fromTime.getTime() / 1000),String.valueOf(_toTime.getTime() / 1000),contact);
         }
         catch (Exception ex) {
             //return  "";

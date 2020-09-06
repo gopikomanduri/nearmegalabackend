@@ -953,7 +953,7 @@ LNG VARCHAR(10)
         return generatedKey.toString();
     }
 
-    public String getUserSlots(String userID,String FromTime,String toTime) {
+    public String getUserSlots(String userID,String FromTime,String toTime,String contact) {
         List<UserSlot> objList = new ArrayList<UserSlot>();
         String merchantjson="";
         try {
@@ -979,7 +979,7 @@ LNG VARCHAR(10)
                 uSlot.tokensRequested = resultSet.getInt("NoofTokens");
                 try {
                     Merchantslot mslot = getMerchantSlotDetails(uSlot.MerchantId, epoch);//Move this by maintaing in FreqUsed collection
-                    String mDet = MySQLAccess.dbObj.getMerchantDetails(userID);//Move this by maintaing in FreqUsed collection
+                    String mDet = MySQLAccess.dbObj.getMerchantDetails(contact);//Move this by maintaing in FreqUsed collection
                     merchantDetails merObj = new Gson().fromJson(mDet, merchantDetails.class);
                     uSlot.selectedSlotEndHash = mslot.ToTime;
                     uSlot.selectedSlotStartHash = mslot.FromTime;

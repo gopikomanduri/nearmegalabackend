@@ -1395,21 +1395,21 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             return  "-1";
         });
         post("/getUserSlots", (request, response) -> {
-            String UID= request.queryParams("UserID");
+            String UserContact= request.queryParams("UserContact");
             String fDate= request.queryParams("FromTime");
             String tDate= request.queryParams("toTime");
 
             consumer reg = new consumer();
-            String resUID = reg.getUSerFireID(UID)[2];
+            String resUID = reg.getUSerFireID(UserContact)[2];
             //redundant to create objects here
             // TODO: replace with single instance for user
             if(userSlots.containsKey(resUID)) {
-                return userSlots.get(resUID).getUserSlots(resUID,fDate,tDate);
+                return userSlots.get(resUID).getUserSlots(resUID,fDate,tDate,UserContact);
             }
             else
             {
                 userSlots.put(resUID,new slotManager());
-                return userSlots.get(resUID).getUserSlots(resUID,fDate,tDate);
+                return userSlots.get(resUID).getUserSlots(resUID,fDate,tDate,UserContact);
             }
             //return  "-1";
         });

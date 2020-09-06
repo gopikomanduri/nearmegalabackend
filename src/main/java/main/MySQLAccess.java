@@ -974,8 +974,23 @@ LNG VARCHAR(10)
 
                 uSlot.id = resultSet.getInt("id");
                 uSlot.MerchantId = resultSet.getString("Merchant_id");
-                uSlot.selectedSlotEpochHash = resultSet.getString("selectedSlotEpochHash");
+                String epoch = resultSet.getString("selectedSlotEpochHash");
                 uSlot.tokensRequested = resultSet.getInt("NoofTokens");
+                try {
+                    Merchantslot mslot = getMerchantSlotDetails(uSlot.MerchantId, epoch);//Move this by maintaing in FreqUsed collection
+                    String mDet = MySQLAccess.dbObj.getMerchantDetails(userID);//Move this by maintaing in FreqUsed collection
+                    merchantDetails merObj = new Gson().fromJson(mDet, merchantDetails.class);
+                    uSlot.selectedSlotEndHash = mslot.ToTime;
+                    uSlot.selectedSlotStartHash = mslot.FromTime;
+                    uSlot.MerchantName = merObj.merchantId;
+                    uSlot.MerchantLat = merObj.latitude.toString();
+                    uSlot.MerchantLng = merObj.longitude.toString();
+                }
+                catch (Exception ex)
+                {
+                    System.out.println("failed extacting user details ");
+                }
+
 
                 objList.add(uSlot);
             }
@@ -1027,6 +1042,45 @@ LNG VARCHAR(10)
         }
         return merchantjson;
     }
+
+    public Merchantslot getMerchantSlotDetails(String MerchantID,String EpochID) {
+        Merchantslot obj= null;
+        String merchantjson="";
+        try {
+            if (connect.isClosed() == true)
+                connect = initConnection();
+            String slotTable = MerchantID + "_slots";
+
+            String merchantQuery = "SELECT * FROM " + slotTable + " where  EPOCHID =" + EpochID ;
+
+
+            System.out.println("query executing is " + merchantQuery);
+            statement = connect.createStatement();
+            // Result set get the result of the SQL query
+            resultSet = statement
+                    .executeQuery(merchantQuery);
+
+            while (resultSet.next()) {
+                Merchantslot mSlot = new Merchantslot();
+
+                mSlot.Slot_ID = resultSet.getInt("EPOCHID");
+                mSlot.MaxToken = resultSet.getInt("MAXTOKEN");
+                mSlot.FromTime = resultSet.getString("FromEpoHash");
+                mSlot.ToTime = resultSet.getString("ToEpoHash");
+                mSlot.MerchantId = MerchantID;
+                mSlot.CurToken = resultSet.getInt("CURTOKEN");
+
+                obj=mSlot;
+            }
+
+
+            return obj;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+
     public int createMerchantSlotTable(String merchantID) {
         int out=-1;
         try {

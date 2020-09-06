@@ -3,6 +3,11 @@ package main;
 public class UserSlot {
     int id;
     String MerchantId;
-    String selectedSlotEpochHash ;
+    String MerchantName;
+    String MerchantLat;
+    String MerchantLng;
+    String selectedSlotStartHash;
+    String selectedSlotEndHash;
     int tokensRequested;
+
 }

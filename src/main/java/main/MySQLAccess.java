@@ -852,12 +852,12 @@ LNG VARCHAR(10)
 
     public Integer insertUserSlot(String userID,String Merchant_id,String selectedSlotEpochHash,int NoofTokens)
     {
-
+        System.out.println("registering user into slot in userslot_table"+userID);
         Integer generatedKey = -1;
 
         int isCreated = createUserSlotTable(userID);
 
-        String slotTable = userID+"_Slots";
+        String slotTable = "User_"+userID+"_Slots";
 
         String tableName = slotTable;
 
@@ -939,9 +939,9 @@ LNG VARCHAR(10)
                         generatedKey = rs.getInt(1);
                     }
                     preparedStatement.close();
-                    if(generatedKey!=-1){
-                        insertUserSlot(UserID,MerchantID,selectedSlotEpochHash,TokensRequested);
-                    }
+                    //if(generatedKey!=-1){
+                    generatedKey = insertUserSlot(UserID,MerchantID,selectedSlotEpochHash,TokensRequested);
+                    //}
                     return generatedKey.toString();
                 }
             } catch (SQLException e) {
@@ -958,7 +958,7 @@ LNG VARCHAR(10)
         try {
             if (connect.isClosed() == true)
                 connect = initConnection();
-            String slotTable = userID + "_Slots";
+            String slotTable = "User_"+userID + "_Slots";
 
             String merchantQuery = "SELECT * FROM " + slotTable + " where  selectedSlotEpochHash  >=" + FromTime + " AND selectedSlotEpochHash  <=" + toTime + " order by id DESC";
 
@@ -1113,7 +1113,7 @@ LNG VARCHAR(10)
         int out=-1;
         try {
 
-            String tableName = userID+"_Slots";
+            String tableName = "User_"+userID+"_Slots";
             DatabaseMetaData dmd = connect.getMetaData();
 
 

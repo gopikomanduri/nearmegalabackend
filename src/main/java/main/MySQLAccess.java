@@ -1055,7 +1055,7 @@ LNG VARCHAR(10)
                 connect = initConnection();
             String slotTable = MerchantID + "_slots";
 
-            String merchantQuery = "SELECT * FROM " + slotTable + " where  EPOCHID =" + EpochID ;
+            String merchantQuery = "SELECT * FROM " + slotTable + " where  FromEpoHash =" + EpochID ;
 
 
             System.out.println("query executing is " + merchantQuery);
@@ -1073,8 +1073,9 @@ LNG VARCHAR(10)
                 mSlot.ToTime = resultSet.getString("ToEpoHash");
                 mSlot.MerchantId = MerchantID;
                 mSlot.CurToken = resultSet.getInt("CURTOKEN");
-
-                obj=mSlot;
+                System.out.println("recived details ");
+                if(obj==null)
+                    obj=mSlot;
             }
 
 

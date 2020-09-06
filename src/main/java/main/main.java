@@ -1399,15 +1399,17 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             String fDate= request.queryParams("FromTime");
             String tDate= request.queryParams("toTime");
 
+            consumer reg = new consumer();
+            String resUID = reg.getUSerFireID(UID)[2];
             //redundant to create objects here
             // TODO: replace with single instance for user
-            if(userSlots.containsKey(UID)) {
-                return userSlots.get(UID).getUserSlots(UID,fDate,tDate);
+            if(userSlots.containsKey(resUID)) {
+                return userSlots.get(resUID).getUserSlots(resUID,fDate,tDate);
             }
             else
             {
-                userSlots.put(UID,new slotManager());
-                return userSlots.get(UID).getUserSlots(UID,fDate,tDate);
+                userSlots.put(resUID,new slotManager());
+                return userSlots.get(resUID).getUserSlots(resUID,fDate,tDate);
             }
             //return  "-1";
         });
@@ -1423,22 +1425,24 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             System.out.println("for /registerfortoken .. request received merchantid " + merchantid + " consumercontact  =" +
                     "  " + consumercontact);
             slotManager tkobj = null;
+            consumer reg = new consumer();
+            String[] fireID = reg.getUSerFireID(consumercontact);
 
             if (merchantsSlotwiseTokens.containsKey(merchantid)) {
                 tkobj =merchantsSlotwiseTokens.get(merchantid);
-                GeneratedToken = tkobj.RegisterUsertoSlot(merchantid,Integer.parseInt(epochID),EpochStarttime,Integer.parseInt(tokensrequested),consumercontact);
+                GeneratedToken = tkobj.RegisterUsertoSlot(merchantid,Integer.parseInt(epochID),EpochStarttime,Integer.parseInt(tokensrequested),fireID[2]);
 
             } else {
                 tkobj=new slotManager();
                 merchantsSlotwiseTokens.put(merchantid, tkobj);
-                GeneratedToken = tkobj.RegisterUsertoSlot(merchantid,Integer.parseInt(epochID),EpochStarttime,Integer.parseInt(tokensrequested),consumercontact);
+                GeneratedToken = tkobj.RegisterUsertoSlot(merchantid,Integer.parseInt(epochID),EpochStarttime,Integer.parseInt(tokensrequested),fireID[2]);
             }
             //region-- FCM Push
             try {
                 EntityMessage msg = new EntityMessage();
-                consumer reg = new consumer();
+
                 System.out.println("reached to obtain fire details ");
-                String[] fireID = reg.getUSerFireID(consumercontact);
+
                 System.out.println("obtained fire details and sending to  " + fireID[0]);
                 if (fireID[0] != null) {
                     msg.addRegistrationToken(fireID[0]);

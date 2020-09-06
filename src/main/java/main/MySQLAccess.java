@@ -941,8 +941,9 @@ LNG VARCHAR(10)
                     preparedStatement.close();
                     //if(generatedKey!=-1){
                     generatedKey = insertUserSlot(UserID,MerchantID,selectedSlotEpochHash,TokensRequested);
+                    System.out.println("the slot received for user is genreated key is "+generatedKey.toString());
                     //}
-                    return generatedKey.toString();
+                    return "Success";
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

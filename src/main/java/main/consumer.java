@@ -19,11 +19,12 @@ public class consumer {
     }
     public String[] getUSerFireID(String contact)
     {
-        String FireID[]=new String[2];
+        String FireID[]=new String[3];
         consumerpayload cc =new Gson().fromJson(MySQLAccess.dbObj.getUserDetails(contact,null),consumerpayload.class);
         if(cc!=null) {
             FireID[0] = MySQLAccess.dbObj.getUserFireDetails(cc.idconsumers);
             FireID[1] = cc.consumername;
+            FireID[2] = cc.idconsumers.toString();
         }
         return  FireID;
     }

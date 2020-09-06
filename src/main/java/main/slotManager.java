@@ -106,6 +106,17 @@ public class slotManager {
         }
         return "-1";
     }
+    public String getUserSlots(String UserID,String fromTime,String toTime){
+        try {
+            Date _fromTime = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(fromTime);
+            Date _toTime = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(toTime);
+            return MySQLAccess.dbObj.getUserSlots(UserID, String.valueOf(_fromTime.getTime() / 1000),String.valueOf(_toTime.getTime() / 1000));
+        }
+        catch (Exception ex) {
+            //return  "";
+        }
+        return "-1";
+    }
     private static Date getNextDate(String  curDate, int numDaysToadd) {
         try {
             final SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");

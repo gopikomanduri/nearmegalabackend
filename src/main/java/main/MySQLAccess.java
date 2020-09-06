@@ -823,28 +823,6 @@ LNG VARCHAR(10)
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        /*
-
-employername varchar(512)
-employerlocationurl varchar(256)
-jobDescription varchar(256)
-locationLandmark varchar(128)
-offeringpost varchar(64)
-educationQualification varchar(64)
-experienceReq varchar(26)
-sex varchar(10)
-ageLimitation varchar(10)
-contact varchar(16)
-emailId varchar(128)
-interviewDate varchar(45)
-shiftTimings varchar(45)
-salary varchar(45)
-postedon DATE
-lat VARCHAR(10)
-LNG VARCHAR(10)
-         */
-
         System.out.println("the slot received for merchant is "+obj.MerchantId+" \n is "+obj.FromTime);
         if(isCreated!=-1) {
             try {
@@ -855,6 +833,49 @@ LNG VARCHAR(10)
                 preparedStatement.setString(2, obj.ToTime);
                 preparedStatement.setInt(3, obj.MaxToken);
                 preparedStatement.setInt(4, obj.MaxToken);
+                preparedStatement.executeUpdate();
+
+                ResultSet rs = preparedStatement.getGeneratedKeys();
+                if (rs.next()) {
+                    generatedKey = rs.getInt(1);
+                }
+                preparedStatement.close();
+                return generatedKey;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return generatedKey;
+            }
+        }
+        return generatedKey;
+    }
+
+    public Integer insertUserSlot(String userID,String Merchant_id,String selectedSlotEpochHash,int NoofTokens)
+    {
+
+        Integer generatedKey = -1;
+
+        int isCreated = createUserSlotTable(userID);
+
+        String slotTable = userID+"_Slots";
+
+        String tableName = slotTable;
+
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("the slot received for user is "+userID);
+        if(isCreated!=-1) {
+            try {
+                String sql = "INSERT INTO " + tableName + " (Merchant_id, selectedSlotEpochHash, NoofTokens)" +
+                        "VALUES (?, ?, ?)";
+                PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setString(1, Merchant_id);
+                preparedStatement.setString(2, selectedSlotEpochHash);
+                preparedStatement.setInt(3, NoofTokens);
                 preparedStatement.executeUpdate();
 
                 ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -918,6 +939,9 @@ LNG VARCHAR(10)
                         generatedKey = rs.getInt(1);
                     }
                     preparedStatement.close();
+                    if(generatedKey!=-1){
+                        insertUserSlot(UserID,MerchantID,selectedSlotEpochHash,TokensRequested);
+                    }
                     return generatedKey.toString();
                 }
             } catch (SQLException e) {
@@ -926,6 +950,43 @@ LNG VARCHAR(10)
             }
         }
         return generatedKey.toString();
+    }
+
+    public String getUserSlots(String userID,String FromTime,String toTime) {
+        List<UserSlot> objList = new ArrayList<UserSlot>();
+        String merchantjson="";
+        try {
+            if (connect.isClosed() == true)
+                connect = initConnection();
+            String slotTable = userID + "_Slots";
+
+            String merchantQuery = "SELECT * FROM " + slotTable + " where  selectedSlotEpochHash  >=" + FromTime + " AND selectedSlotEpochHash  <=" + toTime + " order by id DESC";
+
+
+            System.out.println("query executing is " + merchantQuery);
+            statement = connect.createStatement();
+            // Result set get the result of the SQL query
+            resultSet = statement
+                    .executeQuery(merchantQuery);
+
+            while (resultSet.next()) {
+                UserSlot uSlot = new UserSlot();
+
+                uSlot.id = resultSet.getInt("id");
+                uSlot.MerchantId = resultSet.getString("Merchant_id");
+                uSlot.selectedSlotEpochHash = resultSet.getString("selectedSlotEpochHash");
+                uSlot.tokensRequested = resultSet.getInt("NoofTokens");
+
+                objList.add(uSlot);
+            }
+
+            merchantjson = new Gson().toJson(objList);
+            System.out.println("returning user details  " + merchantjson.toString());
+            return merchantjson;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return merchantjson;
     }
 
     public String getMerchantSlots(String MerchantID,String FromTime,String toTime) {
@@ -982,6 +1043,34 @@ LNG VARCHAR(10)
                 // CREATE TABLE new_tbl LIKE orig_tbl;
                 statement = connect.createStatement();
                 String createStatement = "CREATE TABLE "+tableName+"  LIKE Merchant_slots;";
+                statement.executeUpdate(createStatement);
+                statement.close();
+                out=0;
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+        return  out;
+    }
+
+    public int createUserSlotTable(String userID) {
+        int out=-1;
+        try {
+
+            String tableName = userID+"_Slots";
+            DatabaseMetaData dmd = connect.getMetaData();
+
+
+            ResultSet tables = dmd.getTables(null, null, tableName, null);
+            if (tables.next()) {
+                // Table exists
+                out=1;
+            } else {
+                // CREATE TABLE new_tbl LIKE orig_tbl;
+                statement = connect.createStatement();
+                String createStatement = "CREATE TABLE "+tableName+"  LIKE user_Slots;";
                 statement.executeUpdate(createStatement);
                 statement.close();
                 out=0;

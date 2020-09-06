@@ -426,8 +426,9 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             //  return "Gopi";
         });
 
-       ConcurrentHashMap<String , tokenassigner> merchantstokens = new ConcurrentHashMap<String, tokenassigner>();
+        ConcurrentHashMap<String , tokenassigner> merchantstokens = new ConcurrentHashMap<String, tokenassigner>();
         ConcurrentHashMap<String , slotManager> merchantsSlotwiseTokens = new ConcurrentHashMap<String, slotManager>();
+        ConcurrentHashMap<String , slotManager> userSlots = new ConcurrentHashMap<String, slotManager>();
 
 
         post("/login", (request, response) -> {
@@ -1393,7 +1394,23 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             }
             return  "-1";
         });
+        post("/getUserSlots", (request, response) -> {
+            String UID= request.queryParams("UserID");
+            String fDate= request.queryParams("FromTime");
+            String tDate= request.queryParams("toTime");
 
+            //redundant to create objects here
+            // TODO: replace with single instance for user
+            if(userSlots.containsKey(UID)) {
+                return userSlots.get(UID).getUserSlots(UID,fDate,tDate);
+            }
+            else
+            {
+                userSlots.put(UID,new slotManager());
+                return userSlots.get(UID).getUserSlots(UID,fDate,tDate);
+            }
+            //return  "-1";
+        });
         post("/registerTokenforSlot", (request, response) -> {
 
             response.type("application/json");

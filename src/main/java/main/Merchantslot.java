@@ -10,3 +10,4 @@ public class Merchantslot {
     int MaxToken;
     int CurToken;
 }
+

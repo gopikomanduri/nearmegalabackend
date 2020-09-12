@@ -1415,7 +1415,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
         });
         post("/registerTokenforSlot", (request, response) -> {
 
-            response.type("application/json");
+//            response.type("application/json");
             String merchantid = request.queryParams("merchantid");
             String consumercontact = request.queryParams("consumercontact");
             String epochID = request.queryParams("epochID");

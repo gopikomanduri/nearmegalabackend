@@ -907,6 +907,15 @@ LNG VARCHAR(10)
             isRedisAvailable =true;
             System.out.println("redis started");
         }
+        else
+        {
+            System.out.println("redis not started");
+            redisManager.StartServer();
+            if(redisManager.PingRedis())
+            {
+                System.out.println("redis started now");
+            }
+        }
         try {
             if(connect.isClosed() == true)
                 connect = initConnection();

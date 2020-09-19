@@ -9,7 +9,7 @@ public class RedisManager {
     public boolean StartServer() {
         //Connecting to Redis server on localhost
         jedis = new Jedis("localhost");
-        System.out.println("Connection to server sucessfully");
+        System.out.println("Connection to redis server sucessfully************************************************************************");
 
         return PingRedis();
     }

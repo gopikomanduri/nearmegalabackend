@@ -8,13 +8,18 @@ public class RedisManager {
     private Jedis jedis;
     public boolean StartServer() {
         //Connecting to Redis server on localhost
-        jedis = new Jedis("localhost");
-        System.out.println("Connection to redis server sucessfully************************************************************************");
-
+            jedis = new Jedis("localhost");
+            System.out.println("Connection to redis server sucessfully************************************************************************");
         return PingRedis();
     }
     public boolean PingRedis(){
-        return jedis.ping().equals("PONG");
+        try{
+        return jedis.ping().equals("PONG");}
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return false;
     }
     public boolean insertStringToCache(String key,String value)
     {

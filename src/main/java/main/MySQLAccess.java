@@ -22,12 +22,12 @@ public class MySQLAccess {
     public static MySQLAccess dbObj = new MySQLAccess();
     public static HashMap<String,LatLng> merchantLatLngs = new HashMap<>();
     public static HashMap<String,String> merchantDp = new HashMap<>();
-
+    private final static String REDIS_FAIL_VALUE = "FAIL";
     public Connection getConnection()
     {
         return connect;
     }
-
+    private RedisManager redisManager;
     public MySQLAccess()
     {
         initConnection();
@@ -48,7 +48,9 @@ public class MySQLAccess {
                         .getConnection("jdbc:mysql://localhost/nearmegala?"
                                 + "user=nearme&password=nearme");
             }
- System.out.println("returning connect");
+            System.out.println("returning connect");
+            redisManager= new RedisManager();
+            redisManager.StartServer();
             return connect;
         }
         catch (Exception ex)
@@ -899,7 +901,12 @@ LNG VARCHAR(10)
         Integer generatedKey = -1;
         boolean isMerchantOpen=false;
         String tableName = MerchantID+"_slots";
-
+        boolean isRedisAvailable=false;
+        if(redisManager.PingRedis())
+        {
+            isRedisAvailable =true;
+            System.out.println("redis started");
+        }
         try {
             if(connect.isClosed() == true)
                 connect = initConnection();
@@ -916,17 +923,28 @@ LNG VARCHAR(10)
         int curMaxToken=-1;
         if(isMerchantOpen) {
             try {
-                String sql = "Select MAXTOKEN from " + tableName+" where EPOCHID="+epochID+" and FromEpoHash="+selectedSlotEpochHash;
-                System.out.println("query executing is "+sql);
-                statement = connect.createStatement();
-                // Result set get the result of the SQL query
-                resultSet = statement
-                        .executeQuery(sql);
+                String cachedValue =  redisManager.getCachedValue(MerchantID+"_"+epochID+"_"+selectedSlotEpochHash).toString();
+                String sql;
+                if(!cachedValue.equals(REDIS_FAIL_VALUE)) {
+                    sql = "Select MAXTOKEN from " + tableName + " where EPOCHID=" + epochID + " and FromEpoHash=" + selectedSlotEpochHash;
+                    System.out.println("query executing is " + sql);
+                    statement = connect.createStatement();
+                    // Result set get the result of the SQL query
+                    resultSet = statement
+                            .executeQuery(sql);
 
-                if(resultSet.next()) {
-                    curMaxToken = resultSet.getInt("MAXTOKEN");
+                    if (resultSet.next()) {
+                        curMaxToken = resultSet.getInt("MAXTOKEN");
+                        redisManager.insertStringToCache(MerchantID+"_"+epochID+"_"+selectedSlotEpochHash,String.valueOf(curMaxToken));
+                    }
+                }
+                else
+                {
+                    //Take Cached Value
+                    curMaxToken=Integer.parseInt(cachedValue);
                 }
                 System.out.println("the curMax Token received for merchant is "+MerchantID+" \n is "+curMaxToken);
+                redisManager.insertStringToCache(MerchantID+"_"+epochID+"_"+selectedSlotEpochHash,String.valueOf(curMaxToken-TokensRequested));
                 if(curMaxToken>0 && (curMaxToken-TokensRequested)>=0) {
                     sql = "UPDATE " + tableName + " SET MAXTOKEN = " +
                             (curMaxToken-TokensRequested) + " Where EPOCHID  = " + epochID;
@@ -941,6 +959,7 @@ LNG VARCHAR(10)
                     preparedStatement.close();
                     //if(generatedKey!=-1){
                     generatedKey = insertUserSlot(UserID,MerchantID,selectedSlotEpochHash,TokensRequested);
+
                     System.out.println("the slot received for user is genreated key is "+generatedKey.toString());
                     //}
                     return "Success";

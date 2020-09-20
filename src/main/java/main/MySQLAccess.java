@@ -1101,7 +1101,7 @@ LNG VARCHAR(10)
                     uSlot.selectedSlotEndHash = mslot.ToTime;
                     uSlot.selectedSlotStartHash = mslot.FromTime;
 
-                    String mDet = getMerchantDetails(contact);//Move this by maintaing in FreqUsed collection
+                    String mDet = getMerchantDetails(uSlot.MerchantId);//Move this by maintaing in FreqUsed collection
                     merchantDetails merObj = new Gson().fromJson(mDet, merchantDetails.class);
                     System.out.println("failed extacting merch details ");
                     uSlot.MerchantName = merObj.merchantId;

@@ -1392,7 +1392,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             if(curSlotManager!=null) {
                 return curSlotManager.getSlots(MID,fDate,tDate);
             }
-            return  "-1";
+            return  new Gson().toJson("-1");
         });
         post("/getUserSlots", (request, response) -> {
             String UserContact= request.queryParams("UserContact");
@@ -1468,7 +1468,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 System.out.println("message not being pushed ");
             }
             //FCM Push End
-            return GeneratedToken;
+            return  new Gson().toJson(GeneratedToken);
         });
 
 

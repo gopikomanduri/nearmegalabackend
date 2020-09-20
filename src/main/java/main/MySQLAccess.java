@@ -896,7 +896,7 @@ LNG VARCHAR(10)
         return slotExist;
     }
 
-    public boolean CheckIfUserExistInSlot(String MerchantID, String UserID,int Epoch)
+    public boolean CheckIfUserExistInSlot(String MerchantID, String UserID,String Epoch)
     {
 
         boolean userExist = false;
@@ -914,7 +914,7 @@ LNG VARCHAR(10)
         System.out.println("the slot received for user verification is");
         if(isCreated!=-1) {
             try {
-                String sql = "SELECT count(*) as count FROM " + slotTable + " where Merchant_id  = " + MerchantID+ " and selectedSlotEpochHash = " +Epoch;
+                String sql = "SELECT count(*) as count FROM " + slotTable + " where Merchant_id  = '" + MerchantID+ "' and selectedSlotEpochHash = " +Epoch;
                 System.out.println("query executing is " + sql);
                 statement = connect.createStatement();
                 // Result set get the result of the SQL query
@@ -1016,7 +1016,7 @@ LNG VARCHAR(10)
             e.printStackTrace();
         }
         int curMaxToken=-1;
-        if(isMerchantOpen && CheckIfUserExistInSlot(MerchantID,UserID,epochID)) {
+        if(isMerchantOpen && CheckIfUserExistInSlot(MerchantID,UserID,selectedSlotEpochHash)) {
             try {
 //                String cachedValue =  redisManager.getCachedValue(MerchantID+"_"+epochID+"_"+selectedSlotEpochHash).toString();
                 String sql;

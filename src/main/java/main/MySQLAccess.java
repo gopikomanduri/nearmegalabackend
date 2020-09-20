@@ -1016,7 +1016,7 @@ LNG VARCHAR(10)
             e.printStackTrace();
         }
         int curMaxToken=-1;
-        if(isMerchantOpen && CheckIfUserExistInSlot(MerchantID,UserID,selectedSlotEpochHash)) {
+        if(isMerchantOpen && !CheckIfUserExistInSlot(MerchantID,UserID,selectedSlotEpochHash)) {
             try {
 //                String cachedValue =  redisManager.getCachedValue(MerchantID+"_"+epochID+"_"+selectedSlotEpochHash).toString();
                 String sql;

@@ -1468,7 +1468,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 System.out.println("message not being pushed ");
             }
             //FCM Push End
-            return  new Gson().toJson(GeneratedToken);
+            return GeneratedToken;
         });
 
 

@@ -852,9 +852,9 @@ LNG VARCHAR(10)
         return generatedKey;
     }
 
-    public Integer CheckIfSlotMatches(Merchantslot obj)
+    public boolean CheckIfSlotMatches(Merchantslot obj)
     {
-
+        boolean slotExist = false;
         Integer generatedKey = -1;
 
         int isCreated = createMerchantSlotTable(obj.MerchantId,false);
@@ -870,7 +870,9 @@ LNG VARCHAR(10)
         System.out.println("the slot received for merchant is "+obj.MerchantId+" \n is "+obj.FromTime);
         if(isCreated!=-1) {
             try {
-                String sql = "SELECT  FROM " + slotTable + " where FromEpoHash >= " + obj.FromTime+ " and ToEpoHash<= " +obj.ToTime;
+                //EXTRACT(DATE FROM TIMESTAMP_MILLIS(ToEpoHash))
+
+                String sql = "SELECT count(*) as count FROM " + slotTable + " where EXTRACT(DATE FROM TIMESTAMP_MILLIS(FromEpoHash)) >= EXTRACT(DATE FROM TIMESTAMP_MILLIS(" + obj.FromTime+ ")) and EXTRACT(DATE FROM TIMESTAMP_MILLIS(ToEpoHash))< EXTRACT(DATE FROM TIMESTAMP_MILLIS(" + obj.FromTime+ "))";
                 System.out.println("query executing is " + sql);
                 statement = connect.createStatement();
                 // Result set get the result of the SQL query
@@ -878,17 +880,20 @@ LNG VARCHAR(10)
                         .executeQuery(sql);
 
                 if (resultSet.next()) {
-
+                    if(resultSet.getInt("count")>0)
+                    {
+                        slotExist=true;
+                    }
                 }
                 statement.close();
-                return generatedKey;
+                return slotExist;
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                return generatedKey;
+                return slotExist;
             }
         }
-        return generatedKey;
+        return slotExist;
     }
 
     public boolean CheckIfUserExistInSlot(String MerchantID, String UserID,int Epoch)

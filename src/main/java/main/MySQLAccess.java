@@ -1085,16 +1085,15 @@ LNG VARCHAR(10)
             System.out.println("query executing is " + merchantQuery);
             statement = connect.createStatement();
             // Result set get the result of the SQL query
-            resultSet = statement
+            ResultSet _resultSet = statement
                     .executeQuery(merchantQuery);
 
-            while (resultSet.next()) {
+            while (_resultSet.next()) {
                 UserSlot uSlot = new UserSlot();
-
-                uSlot.id = resultSet.getInt("id");
-                uSlot.MerchantId = resultSet.getString("Merchant_id");
-                String epoch = resultSet.getString("selectedSlotEpochHash");
-                uSlot.tokensRequested = resultSet.getInt("NoofTokens");
+                uSlot.id = _resultSet.getInt("id");
+                uSlot.MerchantId = _resultSet.getString("Merchant_id");
+                String epoch = _resultSet.getString("selectedSlotEpochHash");
+                uSlot.tokensRequested = _resultSet.getInt("NoofTokens");
                 try {
                     Merchantslot mslot = getMerchantSlotDetails(uSlot.MerchantId, epoch);//Move this by maintaing in FreqUsed collection
                     System.out.println("failed extacting slot details ");
@@ -1112,8 +1111,6 @@ LNG VARCHAR(10)
                 {
                     System.out.println("failed extacting user details ");
                 }
-
-
                 objList.add(uSlot);
             }
 

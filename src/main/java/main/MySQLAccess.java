@@ -1059,6 +1059,10 @@ LNG VARCHAR(10)
                 return generatedKey.toString();
             }
         }
+        else
+        {
+            generatedKey=-2;
+        }
         return generatedKey.toString();
     }
 

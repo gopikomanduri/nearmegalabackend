@@ -1439,27 +1439,29 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             }
             //region-- FCM Push
             try {
-                EntityMessage msg = new EntityMessage();
+                if(GeneratedToken.equals("Success")) {
+                    EntityMessage msg = new EntityMessage();
 
-                System.out.println("reached to obtain fire details ");
+                    System.out.println("reached to obtain fire details ");
 
-                System.out.println("obtained fire details and sending to  " + fireID[0]);
-                if (fireID[0] != null) {
-                    msg.addRegistrationToken(fireID[0]);
-                    // Add key value pair into payload
-                    msg.putStringData("title", "Hello " + fireID[1]);
-                    msg.putStringData("body", GeneratedToken);
-                    msg.putStringMess("Your Token is registered successfully");
-                    System.out.println("created FCM message");
-                    // push
-                    try {
-                        if (client != null) {
-                            System.out.println(" achived client connection. message is being pushed ");
-                            FcmResponse res = client.pushToEntities(msg);
-                            System.out.println(res);
-                            System.out.println("message pushed ");
+                    System.out.println("obtained fire details and sending to  " + fireID[0]);
+                    if (fireID[0] != null) {
+                        msg.addRegistrationToken(fireID[0]);
+                        // Add key value pair into payload
+                        msg.putStringData("title", "Hello " + fireID[1]);
+                        msg.putStringData("body", GeneratedToken);
+                        msg.putStringMess("Your Token is registered successfully");
+                        System.out.println("created FCM message");
+                        // push
+                        try {
+                            if (client != null) {
+                                System.out.println(" achived client connection. message is being pushed ");
+                                FcmResponse res = client.pushToEntities(msg);
+                                System.out.println(res);
+                                System.out.println("message pushed ");
+                            }
+                        } catch (Exception ex) {
                         }
-                    } catch (Exception ex) {
                     }
                 }
             }

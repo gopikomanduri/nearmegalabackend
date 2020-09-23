@@ -872,7 +872,8 @@ LNG VARCHAR(10)
             try {
                 //EXTRACT(DATE FROM TIMESTAMP_MILLIS(ToEpoHash))
 
-                String sql = "SELECT count(*) as count FROM " + slotTable + " where EXTRACT(DATE FROM TIMESTAMP_MILLIS(FromEpoHash)) >= EXTRACT(DATE FROM TIMESTAMP_MILLIS(" + obj.FromTime+ ")) and EXTRACT(DATE FROM TIMESTAMP_MILLIS(ToEpoHash))< EXTRACT(DATE FROM TIMESTAMP_MILLIS(" + obj.FromTime+ "))";
+                //String sql = "SELECT count(*) as count FROM " + slotTable + " where FROM_UNIXTIME(FromEpoHash) >= FROM_UNIXTIME(" + obj.FromTime+ ") and FROM_UNIXTIME(ToEpoHash)< FROM_UNIXTIME(" + obj.FromTime+ ")";
+                String sql = "SELECT count(*) as count FROM " + slotTable + " where FromEpoHash >= " + obj.FromTime+ " and ToEpoHash< " + obj.FromTime;
                 System.out.println("query executing is " + sql);
                 statement = connect.createStatement();
                 // Result set get the result of the SQL query

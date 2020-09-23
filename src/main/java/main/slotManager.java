@@ -73,12 +73,14 @@ public class slotManager {
                     mSlot.MaxToken = curSlotDeatils.MaxToken.get(index);
                     mSlot.CurToken = curSlotDeatils.MaxToken.get(index);
                     System.out.println("rInserting  " + toDate.toString());
-                    mSlot.Slot_ID = MySQLAccess.dbObj.insertMerchantSlot(mSlot);
-                    System.out.println("success slot   " + String.valueOf(mSlot.Slot_ID));
-                    if (mSlot.Slot_ID == -1) {
-                        return mSlots;
+                    if(!MySQLAccess.dbObj.CheckIfSlotMatches(mSlot)) {
+                        mSlot.Slot_ID = MySQLAccess.dbObj.insertMerchantSlot(mSlot);
+                        System.out.println("success slot   " + String.valueOf(mSlot.Slot_ID));
+                        if (mSlot.Slot_ID == -1) {
+                            return mSlots;
+                        }
+                        mSlots.add(mSlot);
                     }
-                    mSlots.add(mSlot);
                 }
             }
         }

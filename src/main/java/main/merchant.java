@@ -98,4 +98,14 @@ public class merchant {
     {
         return MySQLAccess.dbObj.getMerchantDetails(contact);
     }
+
+    public String registerMerchantCategory(String merchantID,String category)
+    {
+        return MySQLAccess.dbObj.registerMerchantCategory(merchantID,category);
+    }
+
+    public String getMerchantCategory(String merchantID)
+    {
+        return MySQLAccess.dbObj.getMerchantCategory(merchantID);
+    }
 }

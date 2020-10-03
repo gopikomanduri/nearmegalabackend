@@ -24,7 +24,7 @@ public class main {
 //
 //            System.out.println("running on 557");
 //        }else {
-            port(5556);
+            port(5557);
             CorsFilter corsFilter =new CorsFilter();
             corsFilter.apply();
             options("/*",
@@ -207,6 +207,8 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
             return str;
         });
+
+
 
         post("/pushgroup", (request, response) -> {
             //      System.out.println("pushing ad  : "+request.toString());
@@ -425,7 +427,26 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
             //  return "Gopi";
         });
+        post("/getMyCategories", (request, response) -> {
+            // Create table Merchant_categories(MerchantID varchar(20), selectedCategories BigInt);
+            response.type("application/json");
+            String merID = request.queryParams("merchantID");
+            System.out.println("fetching cats  merchant ID is : "+merID);
+            merchant reg = new merchant();
+            String str =reg.getMerchantCategory(merID);
+            return str;
+        });
+        post("/registerMyCategories", (request, response) -> {
+            // Create table Merchant_categories(MerchantID varchar(20), selectedCategories BigInt);
+            response.type("application/json");
+            String category = request.queryParams("selectedCatVal");
+            String merID = request.queryParams("merchantID");
+            System.out.println("fetching ads around  category is: "+category+" merchant ID is : "+merID);
+            merchant reg = new merchant();
+            String str =reg.registerMerchantCategory(merID,category);
 
+            return str;
+        });
         ConcurrentHashMap<String , tokenassigner> merchantstokens = new ConcurrentHashMap<String, tokenassigner>();
         ConcurrentHashMap<String , slotManager> merchantsSlotwiseTokens = new ConcurrentHashMap<String, slotManager>();
         ConcurrentHashMap<String , slotManager> userSlots = new ConcurrentHashMap<String, slotManager>();
@@ -1206,28 +1227,11 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
         });
 
         post("/getnextreceiptid", (request, response) -> {
-
-
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
-
-
-
-
             System.out.println("for /getnextreceiptid .. request received contact "+merchantid);
-
-            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
-
-//            String lng = request.queryParams("lng");
-//            String lastId = request.queryParams("lastId");
             String str =  new contactspecificdatagatherer().getnextreceiptid(merchantid);
             return str;
-
-
-
-
-
-            //  return "Gopi";
         });
 
         post("/getforspecificcontact", (request, response) -> {

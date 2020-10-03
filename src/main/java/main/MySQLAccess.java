@@ -1937,7 +1937,60 @@ closedon datetime
             return "0";
         }
         }
+    public String registerMerchantCategory(String merchantID,String category){
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+        try {
+            String sql = "INSERT INTO Merchant_categories (MerchantID, selectedCategories)" +
+                    "VALUES (?, ?)";
+            PreparedStatement preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setString(1,merchantID);
+            preparedStatement.setString(2, category);
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            return "0";
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "-1";
+        }
+    }
+
+    public String getMerchantCategory(String merchantID) {
+        try {
+            if (connect.isClosed() == true)
+                connect = initConnection();
+
+            String merchantQuery = "SELECT selectedCategories FROM Merchant_categories where  MerchantID='" + merchantID + "'";
+
+            System.out.println("query executing is " + merchantQuery);
+            statement = connect.createStatement();
+
+            // Result set get the result of the SQL query
+            resultSet = statement
+                    .executeQuery(merchantQuery);
+            String selectedCategory = "";
+            if (resultSet.next()) {
+
+                selectedCategory = resultSet.getString("selectedCategories");
+            }
+
+            String merchantjson = new Gson().toJson(selectedCategory);
+            System.out.println("returning merchant details  " + merchantjson.toString());
+            return merchantjson;
+        } catch (Exception ex) {
+            System.out.println("exception while returning merchant details ");
+            String merchantjson ="";
+
+            return new Gson().toJson(merchantjson);
+        }
+    }
     public String getMerchantDetails(String merchantContact)
     {
         try

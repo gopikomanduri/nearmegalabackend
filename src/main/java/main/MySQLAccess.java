@@ -1954,7 +1954,7 @@ closedon datetime
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
-            return "0";
+            return category;
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -24,8 +24,13 @@ public class AdHandler implements Callable {
         }
 
     MySQLAccess.dbObj.createAdsTableIfNotExist(receivedAd.geo);
+        String offercode =receivedAd.offercode;
+        if(offercode.length()>6)
+        {
+            offercode =offercode.substring(0,6);
+        }
     Integer adId = MySQLAccess.dbObj.insertAd(receivedAd.merchantid, receivedAd.cat, receivedAd.tilldate,
-            receivedAd.tillmonth, receivedAd.tillyear, receivedAd.imgUrl, receivedAd.itemdesc, receivedAd.offercode.substring(0,3), receivedAd.geo,
+            receivedAd.tillmonth, receivedAd.tillyear, receivedAd.imgUrl, receivedAd.itemdesc, offercode, receivedAd.geo,
             receivedAd.mindiscount,receivedAd.maxdiscount,receivedAd.discdesc, receivedAd.lat, receivedAd.lng
             );
 

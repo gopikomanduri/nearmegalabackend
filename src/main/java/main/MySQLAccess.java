@@ -1945,9 +1945,9 @@ closedon datetime
             e.printStackTrace();
         }
 
-        try {
+        try {//ON DUPLICATE KEY UPDATE
             String sql = "INSERT INTO Merchant_categories (MerchantID, selectedCategories)" +
-                    "VALUES (?, ?)";
+                    "VALUES (?, ?) ON DUPLICATE KEY UPDATE selectedCategories = "+category;
             PreparedStatement preparedStatement = connect.prepareStatement(sql);
             preparedStatement.setString(1,merchantID);
             preparedStatement.setString(2, category);
@@ -3786,7 +3786,7 @@ minamount int(6)
     public void insertIntomerchantGeohashesStore(String mID,String geo) {
         try {
 
-            String sql = "INSERT INTO merchant_geohases_Storage (merchant_geohash) VALUES (?)";
+            String sql = "INSERT INTO merchant_geohases_Storage (merchant_geohash) VALUES (?) ON DUPLICATE KEY UPDATE merchant_geohash ='"+mID + "_" + geo+"'";
             PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, mID + "_" + geo);
             preparedStatement.executeUpdate();

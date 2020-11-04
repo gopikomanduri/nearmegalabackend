@@ -3072,8 +3072,14 @@ adnotification int(11)
                 obj.customercontact = resultSet.getString("customercontact");
                 obj.ShoppingProbableDates = resultSet.getString("ShoppingProbableDates");
 
-
-
+                AdPayLoad adDetail = getAdDetails(obj.notificationid, obj.geohash);
+                if (adDetail != null) {
+                    System.out.println("recived ad details");
+                    obj.adObj = new AdPayLoad();
+                    obj.adObj = adDetail;
+                } else {
+                    System.out.println("recived null details");
+                }
                 response.add(obj);
             }
 

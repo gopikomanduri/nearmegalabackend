@@ -2810,7 +2810,8 @@ lastaddedpointson varchar(45)
                 connect = initConnection();
 
             tstmnt.executeQuery();
-            ResultSet resultSet1 = statement
+            Statement statement1 = connect.createStatement();
+            ResultSet resultSet1 = statement1
                     .executeQuery(sql);
 
 //            if(connect.isClosed() == true)

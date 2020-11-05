@@ -2862,7 +2862,7 @@ lastaddedpointson varchar(45)
                 obj. offercode= resultSet.getString("offercode");
                 obj. itemdesc= resultSet.getString("itemdesc");
                 obj. imgUrl= resultSet.getString("adimgurl");
-                obj.shopDp= resultSet.getString("totalpoints");
+//                obj.shopDp= resultSet.getString("totalpoints");
                 obj.shopname= resultSet.getString("shopname");
 
             }

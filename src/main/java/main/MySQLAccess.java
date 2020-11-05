@@ -2810,7 +2810,7 @@ lastaddedpointson varchar(45)
                 connect = initConnection();
 
             tstmnt.executeQuery();
-            resultSet = statement
+            ResultSet resultSet1 = statement
                     .executeQuery(sql);
 
 //            if(connect.isClosed() == true)
@@ -2822,7 +2822,7 @@ lastaddedpointson varchar(45)
 //                    .executeQuery(sql);
 
 
-            while (resultSet.next()) {
+            while (resultSet1.next()) {
  /*
 
 
@@ -2851,19 +2851,19 @@ lastaddedpointson varchar(45)
          */
                 obj.geo = GeoHash;
 
-                obj.merchantid = resultSet.getString("MerchantId");
-                obj.cat= resultSet.getString("Category");
-                obj. tilldate= resultSet.getString("ValidTillDate");
-                obj.tillmonth= resultSet.getString("ValidTillMonth");
-                obj.tillyear= resultSet.getString("ValidTillYear");
-                obj. fromdate= resultSet.getString("ValidFromDate");
-                obj. frommonth= resultSet.getString("ValidFromMonth");
-                obj. fromyear= resultSet.getString("ValidFromYear");
-                obj. offercode= resultSet.getString("offercode");
-                obj. itemdesc= resultSet.getString("itemdesc");
-                obj. imgUrl= resultSet.getString("adimgurl");
+                obj.merchantid = resultSet1.getString("MerchantId");
+                obj.cat= resultSet1.getString("Category");
+                obj. tilldate= resultSet1.getString("ValidTillDate");
+                obj.tillmonth= resultSet1.getString("ValidTillMonth");
+                obj.tillyear= resultSet1.getString("ValidTillYear");
+                obj. fromdate= resultSet1.getString("ValidFromDate");
+                obj. frommonth= resultSet1.getString("ValidFromMonth");
+                obj. fromyear= resultSet1.getString("ValidFromYear");
+                obj. offercode= resultSet1.getString("offercode");
+                obj. itemdesc= resultSet1.getString("itemdesc");
+                obj. imgUrl= resultSet1.getString("adimgurl");
 //                obj.shopDp= resultSet.getString("totalpoints");
-                obj.shopname= resultSet.getString("shopname");
+                obj.shopname= resultSet1.getString("shopname");
 
             }
             return obj;
@@ -3075,7 +3075,6 @@ adnotification int(11)
                 AdPayLoad adDetail = getAdDetails(obj.notificationid, obj.geohash);
                 if (adDetail != null) {
                     System.out.println("recived ad details");
-                    obj.adObj = new AdPayLoad();
                     obj.adObj = adDetail;
                 } else {
                     System.out.println("recived null details");

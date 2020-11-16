@@ -3464,27 +3464,54 @@ pointstomerchant int(10)
         }
     }
 
-    public List<AdPayLoadResponse> fetchAd(String geohash, int lastId,String merchantid) {
+    // A utility function to check whether
+    // n is power of 2 or not
+    static boolean isPowerOfTwo(int n)
+    {
+        return n > 0 && ((n & (n - 1)) == 0);
+    }
+
+    // Returns position of the only set bit in 'n'
+    static List<Integer> findPositions(int n)
+    {
+        List<Integer> setBits =new ArrayList<>();
+        if (!isPowerOfTwo(n))
+            return null;
+
+        int count = 0;
+
+        // One by one move the only set bit
+        // to right till it reaches end
+        while (n > 0) {
+            n = n >> 1;
+
+            // increment count of shifts
+            ++count;
+            setBits.add(count);
+        }
+
+        return setBits;
+    }
+    public List<AdPayLoadResponse> fetchAd(String geohash, int lastId,String merchantid,int Category) {
 
         String ads = "";
 
         List<AdPayLoadResponse> Lads = new ArrayList<>();
 
         try {
-            if(connect.isClosed() == true)
+            if (connect.isClosed() == true)
                 initConnection();
             statement = connect.createStatement();
 
             DatabaseMetaData dmd = connect.getMetaData();
 
 
-            ResultSet tables = dmd.getTables(null, null, "ad_"+geohash, null);
+            ResultSet tables = dmd.getTables(null, null, "ad_" + geohash, null);
             if (tables.next()) {
                 // Table exists
 
                 statement = connect.createStatement();
                 Integer intLastId = lastId;
-
 
 
                 LocalDateTime now = LocalDateTime.now();
@@ -3495,32 +3522,32 @@ pointstomerchant int(10)
                 Integer vay = Util.getCurrentYear(now);
 
                 createNegotiateRequestTableIfNotExist(geohash);
-                boolean ignoreB=false;
+                boolean ignoreB = false;
                 // Result set get the result of the SQL query
 //                String sqlcmd= "select * from ad_"+geohash+" as A LEFT JOIN  negotiate_"+geohash+" as B on  A.Id = B.adId where A.Id > "+intLastId+" " +
 //                        "AND A.ValidTillDate >= "+vad+" AND A.ValidTillMonth >= "+vam+" AND A.ValidTillYear >= "+vay ;AND MerchantId = '"+MerchantID+"'
-                String sqlcmd= "select * from ad_"+geohash+" as A LEFT JOIN  negotiate_"+geohash+" as B on  A.Id = B.adId where A.Id > "+intLastId+" " +
-                        "AND ( (A.ValidTillYear > "+vay+" ) OR (A.ValidTillYear = "+vay+" AND A.ValidTillMonth > "+vam+" ) " +
-                        "OR (A.ValidTillYear = "+vay+" AND A.ValidTillMonth = "+vam+"  AND A.ValidTillDate >= "+vad+"))" ;
+                String sqlcmd = "select * from ad_" + geohash + " as A LEFT JOIN  negotiate_" + geohash + " as B on  A.Id = B.adId where A.Id > " + intLastId +
+                        "(A.Category & (1 <<"+ Category+")) > 0" +
+                        " AND ( (A.ValidTillYear > " + vay + " ) OR (A.ValidTillYear = " + vay + " AND A.ValidTillMonth > " + vam + " ) " +
+                        "OR (A.ValidTillYear = " + vay + " AND A.ValidTillMonth = " + vam + "  AND A.ValidTillDate >= " + vad + "))";
 
-                if(merchantid!=null) {
-                    sqlcmd = "select * from ad_" + geohash + " as A where A.MerchantId ='" + merchantid + "' AND " + " A.Id > " + intLastId ;
+                if (merchantid != null) {
+                    sqlcmd = "select * from ad_" + geohash + " as A where A.MerchantId ='" + merchantid + "' AND " + " A.Id > " + intLastId;
 
-                    ignoreB=true;
+                    ignoreB = true;
                 }
 
 
-                System.out.println("cmd executed is : "+sqlcmd);
+                System.out.println("cmd executed is : " + sqlcmd);
 
                 resultSet = statement
                         .executeQuery(sqlcmd);
-                Lads = resultSetToString(resultSet, geohash,ignoreB);
+                Lads = resultSetToString(resultSet, geohash, ignoreB);
 
             }
-              } catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return Lads;
 
 

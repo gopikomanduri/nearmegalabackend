@@ -35,7 +35,7 @@ public class AdPusher  {
         for(int i=0;i<lastReceivedAdDetails.length;i++)
         {
             LastReceivedAdStruct temp = lastReceivedAdDetails[i];
-            adRes.addAll(MySQLAccess.dbObj.fetchAd(temp.geoHash, temp.lastReceivedAdId,null));
+            adRes.addAll(MySQLAccess.dbObj.fetchAd(temp.geoHash, temp.lastReceivedAdId,null,-1));
         }
         try
         {
@@ -83,12 +83,12 @@ public class AdPusher  {
         for(int i=0;i<lastReceivedAdDetails.length;i++)
         {
             LastReceivedAdStruct temp = lastReceivedAdDetails[i];
-            adRes.addAll(MySQLAccess.dbObj.fetchAd(temp.geoHash, temp.lastReceivedAdId,merchantid));
+            adRes.addAll(MySQLAccess.dbObj.fetchAd(temp.geoHash, temp.lastReceivedAdId,merchantid,temp.Category));
         }
         for(int i=0;i<tobeadded.size();i++)
         {
             LastReceivedAdStruct temp = tobeadded.get(i);
-            adRes.addAll(MySQLAccess.dbObj.fetchAd(temp.geoHash, temp.lastReceivedAdId,merchantid));
+            adRes.addAll(MySQLAccess.dbObj.fetchAd(temp.geoHash, temp.lastReceivedAdId,merchantid,temp.Category));
         }
         try
         {

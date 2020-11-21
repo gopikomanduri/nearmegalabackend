@@ -3527,12 +3527,12 @@ pointstomerchant int(10)
 //                String sqlcmd= "select * from ad_"+geohash+" as A LEFT JOIN  negotiate_"+geohash+" as B on  A.Id = B.adId where A.Id > "+intLastId+" " +
 //                        "AND A.ValidTillDate >= "+vad+" AND A.ValidTillMonth >= "+vam+" AND A.ValidTillYear >= "+vay ;AND MerchantId = '"+MerchantID+"'
                 String sqlcmd = "select * from ad_" + geohash + " as A LEFT JOIN  negotiate_" + geohash + " as B on  A.Id = B.adId where A.Id > " + intLastId +
-                        "(A.Category & (1 <<"+ Category+")) > 0" +
+                        " AND (A.Category & (1 <<"+ Category+")) > 0" +
                         " AND ( (A.ValidTillYear > " + vay + " ) OR (A.ValidTillYear = " + vay + " AND A.ValidTillMonth > " + vam + " ) " +
                         "OR (A.ValidTillYear = " + vay + " AND A.ValidTillMonth = " + vam + "  AND A.ValidTillDate >= " + vad + "))";
 
                 if (merchantid != null) {
-                    sqlcmd = "select * from ad_" + geohash + " as A where A.MerchantId ='" + merchantid + "' AND " + " A.Id > " + intLastId;
+                    sqlcmd = "select * from ad_" + geohash + " as A where A.MerchantId ='" + merchantid + "' AND " + " A.Id > " + intLastId+" AND (A.Category & (1 <<"+ Category+")) > 0";
 
                     ignoreB = true;
                 }
@@ -3543,7 +3543,7 @@ pointstomerchant int(10)
                 resultSet = statement
                         .executeQuery(sqlcmd);
                 Lads = resultSetToString(resultSet, geohash, ignoreB);
-
+                System.out.println("recvied ads c: " + Lads.size());
             }
         } catch (SQLException e) {
             e.printStackTrace();

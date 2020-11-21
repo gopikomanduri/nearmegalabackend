@@ -98,8 +98,8 @@ public class AdPusher  {
         }
         try
         {
+            System.out.println("fectched /ads .. requestRegUser received ");
             str = gson.toJson(adRes.toArray(),AdPayLoadResponse[].class);
-
             System.out.println(str);
             return str;
         }

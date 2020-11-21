@@ -82,6 +82,7 @@ public class AdPusher  {
         {
             merchantid ="";
         }
+        try{
         for(int i=0;i<lastReceivedAdDetails.length;i++)
         {
             LastReceivedAdStruct temp = lastReceivedAdDetails[i];
@@ -95,6 +96,11 @@ public class AdPusher  {
             for(int j=0;j<temp.geoHash.length;j++) {
                 adRes.addAll(MySQLAccess.dbObj.fetchAd(temp.geoHash[j], temp.lastReceivedAdId, merchantid, temp.Category));
             }
+        }
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getMessage());
         }
         try
         {

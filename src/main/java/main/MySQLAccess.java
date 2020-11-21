@@ -3219,7 +3219,7 @@ groupdesc varchar(256)
 
 
 
-                obj.cat = resultSet.getString("A.Category");
+                obj.cat = resultSet.getObject("A.Category").toString();
                 obj.geo = geoHash;
                 obj.shopDp = dpimg;
                 obj.imgUrl = resultSet.getString("A.adimgurl");

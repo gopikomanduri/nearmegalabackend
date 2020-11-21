@@ -3572,7 +3572,8 @@ pointstomerchant int(10)
                 LastReceivedAdStruct obj = new LastReceivedAdStruct();
 
                 String geoID = resultSet.getString("merchant_geohash");
-                obj.geoHash = geoID.split("_")[2];
+                obj.geoHash= new String[1];
+                obj.geoHash[0]=geoID.split("_")[2];
                 obj.lastReceivedAdId = -1;
 
                 mergeoIDS.add(obj);

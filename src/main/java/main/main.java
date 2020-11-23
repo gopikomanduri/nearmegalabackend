@@ -251,24 +251,11 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             return str;
         });
 
-        post("/ads1", (request, response) -> {
-            response.type("application/json");
-            String dataReceived = request.body();
-
-            System.out.println("for /ads .. requestRegUser received "+dataReceived);
-
-            return "Success";
-
-            //  return "Gopi";
-        });
-
-
-
 
         post("/ads", (request, response) -> {
             response.type("application/json");
-            String dataReceived = request.queryParams("geohash");
-            request.body();
+            String dataReceived = request.body();//request.queryParams("geohash");
+
             System.out.println("for /ads .. requestRegUser received "+dataReceived);
 
             //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);

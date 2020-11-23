@@ -43,6 +43,8 @@ public class AdPusher  {
         }
         try
         {
+            adRes = removeDuplicates(adRes);
+            System.out.println("fectched /ads .. ");
             str = gson.toJson(adRes.toArray(),AdPayLoadResponse[].class);
 
             System.out.println(str);

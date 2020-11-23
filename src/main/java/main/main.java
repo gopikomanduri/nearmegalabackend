@@ -251,7 +251,16 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             return str;
         });
 
+        post("/ads1", (request, response) -> {
+            response.type("application/json");
+            String dataReceived = request.body();
 
+            System.out.println("for /ads .. requestRegUser received "+dataReceived);
+
+            return "Success";
+
+            //  return "Gopi";
+        });
 
 
 
@@ -259,6 +268,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
         post("/ads", (request, response) -> {
             response.type("application/json");
             String dataReceived = request.queryParams("geohash");
+            request.body();
             System.out.println("for /ads .. requestRegUser received "+dataReceived);
 
             //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
@@ -281,6 +291,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
         post("/adshistory", (request, response) -> {
             response.type("application/json");
+//            request.body().
             String merchantid = request.queryParams("merchantid");
             String dataReceived = request.queryParams("geohash");
             System.out.println("for /ads .. requestRegUser received "+dataReceived);

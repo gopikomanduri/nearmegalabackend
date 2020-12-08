@@ -62,8 +62,6 @@ public class AdPusher  {
         String str = "";
         Gson gson = new Gson();
 
-        LastReceivedAdStruct[] lastReceivedAdDetails = received;//new Gson().fromJson(received,LastReceivedAdStruct[].class);
-
         List<LastReceivedAdStruct> ExistingReceivedAdDetails = MySQLAccess.dbObj.fetchMerchantGeoHashes(merchantid);
 
         List<LastReceivedAdStruct> tobeadded = new ArrayList<LastReceivedAdStruct>();
@@ -87,9 +85,9 @@ public class AdPusher  {
             merchantid ="";
         }
         try{
-        for(int i=0;i<lastReceivedAdDetails.length;i++)
+        for(int i = 0; i< received.length; i++)
         {
-            LastReceivedAdStruct temp = lastReceivedAdDetails[i];
+            LastReceivedAdStruct temp = received[i];
             for(int j=0;j<temp.geoHash.length;j++) {
                 adRes.addAll(MySQLAccess.dbObj.fetchAd(temp.geoHash[j], temp.lastReceivedAdId, merchantid, temp.Category));
             }

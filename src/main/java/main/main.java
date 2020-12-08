@@ -284,13 +284,9 @@ class adshistoryPayload{
 //            request.body().
             responseJson[0]="";
             try {
-                String actualData = request.body();
-                System.out.println("for /ads .. requestRegUser received " + actualData);
-
-                adshistoryPayload payload = new Gson().fromJson(actualData, adshistoryPayload.class);
-                System.out.println("parse success " + payload.merchantid + " geohashses val is "+String.valueOf(payload.geohash.length));
-                String merchantid = payload.merchantid;//request.queryParams("merchantid");
-                LastReceivedAdStruct[] dataReceived = payload.geohash;//request.queryParams("geohash");
+                String merchantid = request.queryParams("merchantid");
+                String dataReceived = request.queryParams("geohash");
+                System.out.println("for /ads .. requestRegUser received "+dataReceived);
 
 
                 //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);

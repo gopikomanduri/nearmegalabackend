@@ -57,19 +57,19 @@ public class AdPusher  {
         }
     }
 
-    public Object call(String received,String merchantid) throws Exception {
+    public Object call(LastReceivedAdStruct[] received,String merchantid) throws Exception {
 
         String str = "";
         Gson gson = new Gson();
 
-        LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(received,LastReceivedAdStruct[].class);
+        LastReceivedAdStruct[] lastReceivedAdDetails = received;//new Gson().fromJson(received,LastReceivedAdStruct[].class);
 
         List<LastReceivedAdStruct> ExistingReceivedAdDetails = MySQLAccess.dbObj.fetchMerchantGeoHashes(merchantid);
 
         List<LastReceivedAdStruct> tobeadded = new ArrayList<LastReceivedAdStruct>();
         for (LastReceivedAdStruct exisitngDeatil : ExistingReceivedAdDetails) {
             boolean exist = false;
-            for (LastReceivedAdStruct lastDeatil : lastReceivedAdDetails) {
+            for (LastReceivedAdStruct lastDeatil : received) {
                 if (lastDeatil.geoHash.equals(exisitngDeatil.geoHash)) {
                     exist = true;
                     break;

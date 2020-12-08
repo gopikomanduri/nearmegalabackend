@@ -282,25 +282,34 @@ class adshistoryPayload{
         post("/adshistory", (request, response) -> {
             response.type("application/json");
 //            request.body().
-            String actualData = request.body();
-            adshistoryPayload payload = new Gson().fromJson(actualData,adshistoryPayload.class);
-            String merchantid = payload.merchantid;//request.queryParams("merchantid");
-            LastReceivedAdStruct[] dataReceived = payload.geohash;//request.queryParams("geohash");
-            System.out.println("for /ads .. requestRegUser received "+dataReceived);
+            responseJson[0]="";
+            try {
+                String actualData = request.body();
+                System.out.println("for /ads .. requestRegUser received " + actualData);
 
-            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
+                adshistoryPayload payload = new Gson().fromJson(actualData, adshistoryPayload.class);
+                String merchantid = payload.merchantid;//request.queryParams("merchantid");
+                LastReceivedAdStruct[] dataReceived = payload.geohash;//request.queryParams("geohash");
+
+
+                //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
 
 //            String lng = request.queryParams("lng");
 //            String lastId = request.queryParams("lastId");
-            AdPusher adPusher = new AdPusher();
+                AdPusher adPusher = new AdPusher();
 //            Future ft = threadpool.submit(adPusher);
 //            while(ft.isDone() == false);
-            //   return ft.get().toString();
-            responseJson[0] = adPusher.call(dataReceived,merchantid).toString();
+                //   return ft.get().toString();
+                responseJson[0] = adPusher.call(dataReceived, merchantid).toString();
 
 //            String str = adPusher.call(responseJson[0]).toString();
 //            System.out.println("for /ads .. response sent "+str);
 //            return str;
+            }
+            catch (Exception ex)
+            {
+
+            }
             return responseJson[0];
 
             //  return "Gopi";

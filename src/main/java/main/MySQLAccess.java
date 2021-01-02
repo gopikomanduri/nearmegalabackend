@@ -2532,7 +2532,7 @@ utilized int(6)
 //        int vty = Integer.parseInt(vy);
 
 
-        if(merchantGeoHash.length() < 6)
+        if(merchantGeoHash.length() < 5)
             return -1;
 
         try {
@@ -2620,7 +2620,7 @@ utilized int(6)
 //        int vty = Integer.parseInt(vy);
 
 
-        if(merchantGeoHash.length() < 6)
+        if(merchantGeoHash.length() < 5)
             return -1;
 
         try {

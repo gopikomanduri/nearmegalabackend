@@ -453,17 +453,17 @@ public class tokenassigner {
                 while ((line = rd.readLine()) != null) {
 
                     if (line.contains("\"success\":1") == true) {
-                        success = 1;
+                        success = 5;
                     }
                     //   myres.append(line);
                 }
 
 
             } catch (Exception ex) {
-                success = 0;
+                success += 1;
                 System.out.println("Unable to send message " + ex.getMessage());
             }
-        }while(success == 0);
+        }while(success < 5);
 
         return "1";
 

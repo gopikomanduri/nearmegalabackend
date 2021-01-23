@@ -301,28 +301,26 @@ public class tokenassigner {
 
 
 
-    public synchronized tokenstatus createnewtoken(String merchantId)
-    {
+    public synchronized tokenstatus createnewtoken(String merchantId,boolean isContactRegistered) {
         tokenstatus obj = new tokenstatus();
+        if (!isContactRegistered) {
+            System.out.println("createnewtoken for merchantId :" + merchantId + " before increment currentMaxToken = " + currentMaxToken.toString());
+            obj.token = currentMaxToken.incrementAndGet();
+            System.out.println("createnewtoken for merchantId : after updating  currentMaxToken = " + currentMaxToken.toString());
 
-        System.out.println("createnewtoken for merchantId :"+merchantId+" before increment currentMaxToken = "+currentMaxToken.toString());
-        obj.token = currentMaxToken.incrementAndGet();
-        System.out.println("createnewtoken for merchantId : after updating  currentMaxToken = "+currentMaxToken.toString());
+            pendingTokens.add(currentMaxToken.get());
 
-        pendingTokens.add(currentMaxToken.get());
+            if (currentMinPendingToken.get() == 0) {
+                currentMinPendingToken.set(obj.token);
+            }
 
-        if(currentMinPendingToken.get() == 0)
-        {
-            currentMinPendingToken.set(obj.token);
+
+            obj.youareat = pendingTokens.size();
+
+
+            System.out.println("createnewtoken for merchantId : pendingTokens size is  after adding = " + pendingTokens.size());
+
         }
-
-
-        obj.youareat = pendingTokens.size();
-
-
-        System.out.println("createnewtoken for merchantId : pendingTokens size is  after adding = "+pendingTokens.size());
-
-
         return obj;
     }
 
@@ -332,36 +330,37 @@ public class tokenassigner {
 //
 //        String str =  currentMaxToken.toString();
         //Insert into token DB
-
-        tokenstatus tok = createnewtoken(merchantId);
-        if (registeredContacts.contains(contact) == false) {
+        boolean isContactRegistered =registeredContacts.contains(contact);
+        tokenstatus tok = createnewtoken(merchantId,isContactRegistered);
+        if (!isContactRegistered) {
             registeredContacts.add(contact);
-        }
-        pendingNumbers.add(contact);
-        //Insert into merchant_token_log
-        token dbTokenObj = new token();
-        dbTokenObj.FirebaseID=consumerFirebaseID;
-        dbTokenObj.position = tok.youareat;
-        dbTokenObj.token_id=tok.token;
-        dbTokenObj.contact = contact;
-        MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj,merchantId, Util.CRUD.INSERT);
-        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
-            // Simulate a long-running Job
-            try {
-                sendMsgToNumber(merchantId, contact, "your_token_is_" + tok.token + "_you_are_at_" + tok.youareat);
 
-            } catch (Exception e) {
-                System.out.println("exception in future.. in creating new token " + e.getMessage());
+            pendingNumbers.add(contact);
+            //Insert into merchant_token_log
+            token dbTokenObj = new token();
+            dbTokenObj.FirebaseID = consumerFirebaseID;
+            dbTokenObj.position = tok.youareat;
+            dbTokenObj.token_id = tok.token;
+            dbTokenObj.contact = contact;
+            MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj, merchantId, Util.CRUD.INSERT);
+            CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+                // Simulate a long-running Job
+                try {
+                    sendMsgToNumber(merchantId, contact, "your_token_is_" + tok.token + "_you_are_at_" + tok.youareat);
+
+                } catch (Exception e) {
+                    System.out.println("exception in future.. in creating new token " + e.getMessage());
+                }
+                System.out.println("I'll run in a separate thread than the main thread.");
+            });
+
+
+            if (helper == true) {
+                currentsmstokens.put(tok.token, contact);
             }
-            System.out.println("I'll run in a separate thread than the main thread.");
-        });
 
-
-        if (helper == true) {
-            currentsmstokens.put(tok.token, contact);
+            System.out.println("created new token for contact " + contact + " . Token is " + tok.token + "  waiting at " + tok.youareat);
         }
-
-        System.out.println("created new token for contact " + contact + " . Token is " + tok.token + "  waiting at " + tok.youareat);
         return new Gson().toJson(tok);
     }
 

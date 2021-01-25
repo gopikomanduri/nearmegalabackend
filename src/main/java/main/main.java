@@ -5,25 +5,16 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static spark.Spark.*;
 
 public class main {
-
 //    private static final ExecutorService threadpool =  Executors.newCachedThreadPool();
     public static void main( String[] args) {
 
 
-
-//        if(args[0]!=null && args[0]!="")
-//        {
-//            port(5557);
-//
-//            System.out.println("running on 557");
-//        }else {
             port(5556);
             CorsFilter corsFilter =new CorsFilter();
             corsFilter.apply();
@@ -46,7 +37,6 @@ public class main {
 
                     return "OK";
                 });
-//        }
         final FirebaseMessagingClient client =new FirebaseMessagingClient();
         try {
 //            client = new FirebaseMessagingClient();
@@ -70,31 +60,8 @@ public class main {
         }catch (Exception ex){
 
         }
-//        EntityMessage msgr = new EntityMessage();
-////        consumer reg = new consumer();
-//        System.out.println("reached to obtain fire details ");
-////        String[] fireID = reg.getUSerFireID(contact);
-////        System.out.println("obtained fire details and sending to  " + fireID[0] );
-////        if(fireID[0]!=null)
-//        {
-////            msg.addRegistrationToken(fireID[0]);
-//            msgr.addRegistrationToken("eXo49MLuJGE:APA91bEE4zMCQ_lnNst9Fw-cBAfgiyYsdxHdQ7TW1w5JDOZya9holq1KQWC3-nZ_7SRpGqeqC_ZgtvaPjj9QTMCQqsmoUiH-jMdzU_F14b8Vcic20Vztk3RChoE66EzskArJzVKj1_wu");
-//            msgr.addRegistrationToken("fEXJFJ7kysc:APA91bEaEh-Dhtv9vQIueCPs7tjeJLMFV7_4cZUL2lDyMJPUlZdbRSqDkJULfLvMOP6nxIjw0RMCFEknPhFYqtsI66JJb3anuPW--QMpi5R8EekamYQSmMUluTGcndfGmF7SZsMJl_O7");
-//            // Add key value pair into payload
-//            msgr.putStringData("title", "Hello ");
-//            msgr.putStringData("body", "test" );
-//            System.out.println("created FCM message");
-//            // push
-//            try {
-//                if (client != null) {
-//                    System.out.println(" achived client connection. message is being pushed ");
-//                    FcmResponse res = client.pushToEntities(msgr);
-//                    System.out.println(res);
-//                    System.out.println("message pushed ");
-//                }
-//            } catch (Exception ex) {
-//            }
-//        }
+
+
 
         final String[] responseJson = new String[1];
         tokenregistrationpayload emptyone = new tokenregistrationpayload();
@@ -816,7 +783,10 @@ class adshistoryPayload{
 
              obj.counterslist =  MySQLAccess.dbObj.getmerchantcounterdetails(contact,"counters");
             obj.helperslist =  MySQLAccess.dbObj.getmerchantcounterdetails(contact,"helpers");
-
+            if(obj.helperslist.size()==0 && obj.counterslist.size()==0)
+            {
+                merchantstokens.remove(contact);
+            }
            return  new Gson().toJson(obj);
 
 

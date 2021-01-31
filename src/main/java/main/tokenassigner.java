@@ -111,6 +111,15 @@ public class tokenassigner {
         dbTokenObj.token_id=Integer.parseInt(existingtoken);
         MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj,merchantId, Util.CRUD.UPDATE);
         registeredContacts.remove(contact);
+        Iterator<Integer> itr = pendingTokens.iterator();
+        while(itr.hasNext())
+        {
+            if(itr.next() == dbTokenObj.token_id)
+            {
+                itr.remove();
+                break;
+            }
+        }
         deregisterset.add(iexistingToken);
         return "0";
 

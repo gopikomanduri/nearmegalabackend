@@ -110,7 +110,7 @@ public class tokenassigner {
         dbTokenObj.position = -6; //-6 is unregistered customer
         dbTokenObj.token_id=Integer.parseInt(existingtoken);
         MySQLAccess.dbObj.crudMerchantsTokens(dbTokenObj,merchantId, Util.CRUD.UPDATE);
-
+        registeredContacts.remove(contact);
         deregisterset.add(iexistingToken);
         return "0";
 
@@ -303,7 +303,8 @@ public class tokenassigner {
 
     public synchronized tokenstatus createnewtoken(String merchantId,boolean isContactRegistered) {
         tokenstatus obj = new tokenstatus();
-        if (!isContactRegistered) {
+//        if (!isContactRegistered)
+        {
             System.out.println("createnewtoken for merchantId :" + merchantId + " before increment currentMaxToken = " + currentMaxToken.toString());
             obj.token = currentMaxToken.incrementAndGet();
             System.out.println("createnewtoken for merchantId : after updating  currentMaxToken = " + currentMaxToken.toString());
@@ -332,7 +333,8 @@ public class tokenassigner {
         //Insert into token DB
         boolean isContactRegistered =registeredContacts.contains(contact);
         tokenstatus tok = createnewtoken(merchantId,isContactRegistered);
-        if (!isContactRegistered) {
+//        if (!isContactRegistered)
+        {
             registeredContacts.add(contact);
 
             pendingNumbers.add(contact);

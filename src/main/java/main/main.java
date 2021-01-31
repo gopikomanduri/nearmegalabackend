@@ -1487,6 +1487,7 @@ class adshistoryPayload{
                 System.out.println("for /getmerchanttokendetails ..counters not yet opened   " + merchantid + "  returning empty details");
 //                return "-10";
             }
+            System.out.println("Gene Token is"+GeneratedToken);
             if(!GeneratedToken.equals("-10") && GenTokenObject!=null && GenTokenObject.token_id>0) {
                 EntityMessage msg = new EntityMessage();
                 consumer reg = new consumer();

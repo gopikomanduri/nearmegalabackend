@@ -758,7 +758,7 @@ public class tokenassigner {
             renewlistmerchantwise.remove(token);
             System.out.println("getTokenStatus token is there for renew .. hence returning 5  = "+token.toString());
 
-//            return "-5";
+            return "-5";
         }
 
 

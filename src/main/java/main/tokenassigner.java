@@ -120,7 +120,7 @@ public class tokenassigner {
                 break;
             }
         }
-        deregisterset.add(iexistingToken);
+        //deregisterset.add(iexistingToken);
         return "0";
 
     }
@@ -232,6 +232,9 @@ public class tokenassigner {
         MySQLAccess.dbObj.createLikeTableIfNotExistGeneric(tName,"merchant_token_log ");
 
         List<counteremppayload> existingids =  MySQLAccess.dbObj.getmerchantcounterdetails(merchantId, tableName);
+        System.out.println("before setting curMax Counter" + currentMaxCounter.get());
+        currentMaxCounter.set(existingids.size());
+        System.out.println("after setting curMax Counter" + existingids.size());
 
 
 //        java.lang.reflect.Method method;
@@ -242,14 +245,11 @@ public class tokenassigner {
 
         Integer i = 0;
         List<counteremppayload> counteremps = new ArrayList<counteremppayload>();
-
        int counter = 0;
-
        if(tableName.equalsIgnoreCase("viewers"))
        {
            counter = 0;
        }
-
        else if(tableName.equalsIgnoreCase("counters"))
         {
             counter = currentMaxCounter.get();
@@ -258,7 +258,6 @@ public class tokenassigner {
         {
             counter =  currentMaxHelper.get();
         }
-
             for( i=counter+1;i<=counter+counterscount;i++)
             {
                 String id;
@@ -292,14 +291,14 @@ public class tokenassigner {
 
         if(tableName.equalsIgnoreCase("counters"))
         {
-            currentMaxCounter.set(i-1);
+            currentMaxCounter.set((counter+counterscount)-1);
             System.out.println("for counters .. returning "+existingids.size());
         }
         else
         {
             System.out.println("for helpers .. returning "+existingids.size());
 
-            currentMaxHelper.set(i-1);
+            currentMaxHelper.set((counter+counterscount)-1);
         }
 
             return existingids;
@@ -744,7 +743,8 @@ public class tokenassigner {
 
 
         // hasNext() returns true if the queue has more elements
-
+        //if -5 returned call createnew token
+        //
         System.out.println("getTokenStatus for merchantId : merchantId = "+merchantId.toString()+"  currentMinPendingToken: "+currentMinPendingToken.toString());
 
 
@@ -758,7 +758,7 @@ public class tokenassigner {
             renewlistmerchantwise.remove(token);
             System.out.println("getTokenStatus token is there for renew .. hence returning 5  = "+token.toString());
 
-            return "-5";
+            return "-5" ;
         }
 
 

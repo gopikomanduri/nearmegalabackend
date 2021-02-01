@@ -232,9 +232,7 @@ public class tokenassigner {
         MySQLAccess.dbObj.createLikeTableIfNotExistGeneric(tName,"merchant_token_log ");
 
         List<counteremppayload> existingids =  MySQLAccess.dbObj.getmerchantcounterdetails(merchantId, tableName);
-        System.out.println("before setting curMax Counter" + currentMaxCounter.get());
-        currentMaxCounter.set(existingids.size());
-        System.out.println("after setting curMax Counter" + existingids.size());
+
 
 
 //        java.lang.reflect.Method method;
@@ -252,10 +250,16 @@ public class tokenassigner {
        }
        else if(tableName.equalsIgnoreCase("counters"))
         {
+            System.out.println("before setting curMax Counter" + currentMaxCounter.get());
+            currentMaxCounter.set(existingids.size());
+            System.out.println("after setting curMax Counter" + existingids.size());
             counter = currentMaxCounter.get();
         }
         else
         {
+            System.out.println("before setting curMax Counter" + currentMaxHelper.get());
+            currentMaxHelper.set(existingids.size());
+            System.out.println("after setting curMax Counter" + existingids.size());
             counter =  currentMaxHelper.get();
         }
             for( i=counter+1;i<=counter+counterscount;i++)

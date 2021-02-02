@@ -177,10 +177,6 @@ public class tokenassigner {
         return str;
     }
 
-
-
-
-
     public synchronized String getTokenLogForCounter(String merchantId, String counterId)
     {
 
@@ -220,9 +216,6 @@ public class tokenassigner {
 
         return new Gson().toJson(obj);
     }
-
-
-
 
     public synchronized List<counteremppayload> createcounters(String merchantId, Integer counterscount, String tableName)
     {
@@ -309,9 +302,6 @@ public class tokenassigner {
 
             //return new Gson().toJson(existingids);
     }
-
-
-
 
     public synchronized tokenstatus createnewtoken(String merchantId,boolean isContactRegistered) {
         tokenstatus obj = new tokenstatus();

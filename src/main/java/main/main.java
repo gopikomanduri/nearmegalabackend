@@ -1488,7 +1488,11 @@ class adshistoryPayload{
 //                return "-10";
             }
             System.out.println("Gene Token is"+GeneratedToken);
-            if(!GeneratedToken.equals("-10") && GenTokenObject!=null && GenTokenObject.token_id>0) {
+
+            if((!GeneratedToken.equals("-10")) && GenTokenObject!=null && GenTokenObject.token_id>0) {
+                System.out.println("GeneratedToken.equals(\"-10\") :"+GeneratedToken.equals("-10"));
+                System.out.println("GenTokenObject.token_id>0 "+ (GenTokenObject.token_id>0));
+
                 EntityMessage msg = new EntityMessage();
                 consumer reg = new consumer();
                 System.out.println("reached to obtain fire details ");

@@ -1476,23 +1476,23 @@ class adshistoryPayload{
 //            String lng = request.queryParams("lng");
 //            String lastId = request.queryParams("lastId");
             tokenassigner tkobj = null;
-            token GenTokenObject =null;
+            tokenstatus GenTokenObject =null;
             boolean tokenupdated=false;
             if ((tkobj = merchantstokens.get(merchantid)) != null) {
                 // tkobj = new tokenassigner();
 
                 merchantstokens.put(merchantid, tkobj);
                 GeneratedToken = tkobj.createnewtokenWithContact(merchantid, consumercontact,consumerFirebaseID, false);
-                GenTokenObject = new Gson().fromJson(GeneratedToken,token.class);
+                GenTokenObject = new Gson().fromJson(GeneratedToken,tokenstatus.class);
                 tokenupdated=true;
             } else {
                 System.out.println("for /getmerchanttokendetails ..counters not yet opened   " + merchantid + "  returning empty details");
 //                return "-10";
             }
             System.out.println("Gene Token is"+GeneratedToken);
-            System.out.println("Gene Token from object is"+GenTokenObject.token_id);
-            if(tokenupdated && GenTokenObject!=null && GenTokenObject.token_id>0) {
 
+            if(tokenupdated && GenTokenObject!=null && GenTokenObject.token>0) {
+                System.out.println("Gene Token from object is"+GenTokenObject.token);
                 EntityMessage msg = new EntityMessage();
                 consumer reg = new consumer();
                 System.out.println("reached to obtain fire details ");

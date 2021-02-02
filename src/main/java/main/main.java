@@ -1477,21 +1477,21 @@ class adshistoryPayload{
 //            String lastId = request.queryParams("lastId");
             tokenassigner tkobj = null;
             token GenTokenObject =null;
+            boolean tokenupdated=false;
             if ((tkobj = merchantstokens.get(merchantid)) != null) {
                 // tkobj = new tokenassigner();
 
                 merchantstokens.put(merchantid, tkobj);
                 GeneratedToken = tkobj.createnewtokenWithContact(merchantid, consumercontact,consumerFirebaseID, false);
                 GenTokenObject = new Gson().fromJson(GeneratedToken,token.class);
+                tokenupdated=true;
             } else {
                 System.out.println("for /getmerchanttokendetails ..counters not yet opened   " + merchantid + "  returning empty details");
 //                return "-10";
             }
             System.out.println("Gene Token is"+GeneratedToken);
-
-            if((!GeneratedToken.equals("-10")) && GenTokenObject!=null && GenTokenObject.token_id>0) {
-                System.out.println("GeneratedToken.equals(\"-10\") :"+GeneratedToken.equals("-10"));
-                System.out.println("GenTokenObject.token_id>0 "+ (GenTokenObject.token_id>0));
+            System.out.println("Gene Token from object is"+GenTokenObject.token_id);
+            if(tokenupdated && GenTokenObject!=null && GenTokenObject.token_id>0) {
 
                 EntityMessage msg = new EntityMessage();
                 consumer reg = new consumer();

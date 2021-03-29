@@ -1354,6 +1354,7 @@ class adshistoryPayload{
         });
         post("/getMerchantsAround", (request, response) -> {
             String geohashes = request.queryParams("geohashes");
+            System.out.println("call recived for getMerchantsAround with param "+geohashes);
             return MySQLAccess.dbObj.getMerchantsAround(new Gson().fromJson(geohashes, ArrayList.class));
         });
         post("/getMerchantSlots", (request, response) -> {

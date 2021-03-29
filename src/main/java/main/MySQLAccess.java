@@ -177,7 +177,9 @@ public class MySQLAccess {
             {
                 _merchants.get(j).category  = getMerchantCategory(_merchants.get(j).merchantId);
             }
-            return new Gson().toJson(_merchants);
+            String output = new Gson().toJson(_merchants);
+            System.out.println(output);
+            return output;
 
         } catch (SQLException e) {
             e.printStackTrace();

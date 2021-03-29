@@ -147,7 +147,7 @@ public class MySQLAccess {
 
     public String getMerchantsAround(ArrayList<?> geohashes)
     {
-        List<merchantDetails> _merchants=new ArrayList<>();
+        List<merchantDetailsWithCategory> _merchants=new ArrayList<>();
         try {
             if((connect == null) || (connect.isClosed() == true))
                 connect = initConnection();
@@ -162,7 +162,7 @@ public class MySQLAccess {
                 resultSet = preparedStatement.executeQuery();
 
                 while (resultSet.next()) {
-                    merchantDetails merchantDet=new merchantDetails();
+                    merchantDetailsWithCategory merchantDet=new merchantDetailsWithCategory();
                     merchantDet.merchantId =    resultSet.getString("MerchantId");
                     merchantDet.geoHash =       resultSet.getString("geohash");
                     merchantDet.latitude =      resultSet.getDouble("latitude");
@@ -172,6 +172,10 @@ public class MySQLAccess {
                     _merchants.add(merchantDet);
 //                    _merchants.add(merchantID);
                 }
+            }
+            for(int j=0;j<_merchants.size();j++)
+            {
+                _merchants.get(j).category  = getMerchantCategory(_merchants.get(j).merchantId);
             }
             return new Gson().toJson(_merchants);
 

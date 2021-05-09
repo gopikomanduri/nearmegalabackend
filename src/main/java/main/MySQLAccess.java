@@ -276,6 +276,36 @@ public class MySQLAccess {
         }
     }
 
+    public String getMerchantMobileNumberForId(String MerchantId, String geoHash)
+    {
+        String merchantName = "";
+
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            preparedStatement = connect
+                    .prepareStatement("SELECT MerchantContact from merchant where MerchantId like '"+MerchantId+"' AND geohash like '"+geoHash+"'");
+            resultSet = preparedStatement.executeQuery();
+
+            LatLng obj = new LatLng();
+            //  while(resultSet.next())
+            {
+                resultSet.next();
+                merchantName = resultSet.getString("MerchantContact");
+            }
+            return merchantName;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return merchantName;
+        }
+    }
+
 
     public String getMerchantDpForId(String MerchantId)
     {
@@ -3220,7 +3250,7 @@ groupdesc varchar(256)
             String merchantName = getMerchantNameForId(obj.merchantid,merchantorggeohash);
             String dpimg = getMerchantDpForId(obj.merchantid,merchantorggeohash);
             String shopno = getMerchantShopNoForId(obj.merchantid, merchantorggeohash);
-
+            String mobno= getMerchantMobileNumberForId(obj.merchantid, merchantorggeohash);
 
 
 
@@ -3238,6 +3268,7 @@ groupdesc varchar(256)
                 obj.fromyear=resultSet.getString("A.ValidFromYear");
                 obj.offercode=resultSet.getString("A.offercode");
                 obj.shopname="Name:"+merchantName+" ShopNo :"+shopno;
+                obj.contatNumber =mobno;
                 if(!ignoreB) {
                     obj.negotiate = resultSet.getInt("B.cannegotiate");
                     obj.minBusiness = resultSet.getInt("B.minamount");

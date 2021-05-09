@@ -25,4 +25,5 @@ public class AdPayLoad {
   public String mindiscount;
   public String maxdiscount;
   public String discdesc;
+  public String contatNumber;
 }

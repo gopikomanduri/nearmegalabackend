@@ -45,7 +45,7 @@ public class MySQLAccess {
                 Class.forName("com.mysql.jdbc.Driver");
                 // Setup the connection with the DB
                 connect = DriverManager
-                        .getConnection("jdbc:mysql://localhost/nearmegala?"
+                        .getConnection("jdbc:mysql://127.0.0.1:3306/nearmegala?"
                                 + "user=nearme&password=nearme");
             }
             System.out.println("returning connect");

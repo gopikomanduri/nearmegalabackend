@@ -28,4 +28,15 @@ public class consumer {
         }
         return  FireID;
     }
+    public String[] getUSerFireIDbyconsumerID(int consumerID)
+    {
+        String FireID[]=new String[3];
+        consumerpayload cc =new Gson().fromJson(MySQLAccess.dbObj.getUserDetailsbyID(consumerID,null),consumerpayload.class);
+        if(cc!=null) {
+            FireID[0] = MySQLAccess.dbObj.getUserFireDetails(consumerID);
+            FireID[1] = cc.consumername;
+            FireID[2] = cc.idconsumers.toString();
+        }
+        return  FireID;
+    }
 }

@@ -175,7 +175,50 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             return str;
         });
 
+        post("/notifyVaccineAvailablity", (request, response) -> {
 
+            response.type("application/json");
+            String userID = request.queryParams("userID");
+            String pincode = request.queryParams("pincode");
+            System.out.println("requested vaccineAvailablity : "+request.toString());
+            int uID=-1;
+            try {
+                uID =Integer.parseInt(userID);
+            }
+            catch (NumberFormatException nex)
+            {
+                return "-1";
+            }
+            String regval =MySQLAccess.dbObj.insertIntovaccineRegistartions(uID,pincode);
+            if(!regval.equals("-1")) {
+                System.out.println("registered successfully and notifying same");
+                EntityMessage msg = new EntityMessage();
+                consumer reg = new consumer();
+                System.out.println("reached to obtain fire details ");
+                String[] fireID = reg.getUSerFireIDbyconsumerID(uID);
+                System.out.println("obtained fire details and sending to  " + fireID[0]);
+                if (fireID[0] != null) {
+                    msg.addRegistrationToken(fireID[0]);// Add key value pair into payload
+                    msg.putStringData("title", "Hello " + fireID[1]);
+                    msg.putStringData("body", regval);
+                    msg.putStringMess("Your registration is successful!");
+
+
+                    System.out.println("created FCM message");
+                    // push
+                    try {
+                        if (client != null) {
+                            System.out.println(" achived client connection. message is being pushed ");
+                            FcmResponse res = client.pushToEntities(msg);
+                            System.out.println(res);
+                            System.out.println("message pushed ");
+                        }
+                    } catch (Exception ex) {
+                    }
+                }
+            }
+            return "";
+        });
 
         post("/pushgroup", (request, response) -> {
             //      System.out.println("pushing ad  : "+request.toString());

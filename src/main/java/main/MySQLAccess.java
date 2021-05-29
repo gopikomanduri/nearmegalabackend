@@ -45,8 +45,8 @@ public class MySQLAccess {
                 Class.forName("com.mysql.jdbc.Driver");
                 // Setup the connection with the DB
                 connect = DriverManager
-                        .getConnection("jdbc:mysql://127.0.0.1:3306/nearmegala?"
-                                + "user=nearme&password=nearme");
+                        .getConnection("jdbc:mysql://localhost/nearmegala?"
+                                + "user=nearme&password=nearme&autoReconnect=true&useSSL=false");
             }
             System.out.println("returning connect");
 //            redisManager= new RedisManager();
@@ -1350,6 +1350,62 @@ sex int(11)
         return merchantjson;
     }
 
+    public String getUserDetailsbyID(int id,consumerFirebasepayload _firePayload)
+    {
+        consumerpayload temp = new consumerpayload();
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+
+            String merchantQuery = "SELECT * FROM consumers where  idconsumers  ="+id+" ;";
+
+
+            System.out.println("query executing is "+merchantQuery);
+            statement = connect.createStatement();
+            // Result set get the result of the SQL query
+            resultSet = statement
+                    .executeQuery(merchantQuery);
+                    /*
+consumername varchar(128)
+contact varchar(15)
+DOB date
+dpurl varchar(256)
+registeredon datetime
+status int(11)
+sex int(11)
+         */
+            if(resultSet.next()) {
+                temp.idconsumers=resultSet.getInt("idconsumers");
+                temp.consumername = resultSet.getString("consumername");
+                temp.contact = resultSet.getString("contact");
+                temp.dob = resultSet.getDate("DOB").toString();
+                temp.dpurl = resultSet.getString("dpurl");
+                temp.sex = resultSet.getInt("sex");
+            }
+            if(temp.idconsumers!=null ) {
+                try {
+//                    if (_firePayload != null) {
+                    insertIntoFirebaseDetails(temp.idconsumers, _firePayload, true);
+//                    } else {
+//                        insertIntoFirebaseDetails(temp.idconsumers, _firePayload, false);
+//                    }
+                }
+                catch (Exception ex) {
+
+                }
+            }
+            String merchantjson = new Gson().toJson(temp);
+            System.out.println("returning user details  "+merchantjson.toString());
+            return merchantjson;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String merchantjson = new Gson().toJson(temp);
+
+        return merchantjson;
+    }
+
     public String getUserFireDetails(int consumerID)
     {
         consumerFirebasepayload temp = new consumerFirebasepayload();
@@ -1629,6 +1685,38 @@ sex int(11)
                 preparedStatement.close();
 
             }
+            preparedStatement.close();
+            System.out.println("command executed is "+sql);
+            return retVal.toString();
+        }
+        catch(Exception ex)
+        {
+            return retVal.toString();
+        }
+
+    }
+
+    public String insertIntovaccineRegistartions(int consumerID,String pincode)
+    {
+
+        String sql = "INSERT INTO VaccineRegistrations (ConsumerID ,pincode)" +
+                "VALUES (?,?)";
+
+        Integer retVal = -1;
+        try {
+            PreparedStatement preparedStatement = connect.prepareStatement(sql,  Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setInt(1, consumerID);
+                preparedStatement.setString(2, pincode);
+                preparedStatement.executeUpdate();
+
+
+                ResultSet rs = preparedStatement.getGeneratedKeys();
+                if (rs.next()) {
+                    retVal = rs.getInt(1);
+                }
+                preparedStatement.close();
+
+
             preparedStatement.close();
             System.out.println("command executed is "+sql);
             return retVal.toString();

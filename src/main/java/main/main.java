@@ -7,8 +7,10 @@ import java.io.FileReader;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -249,8 +251,9 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 Integer vad = Util.getCurrentDay(now);
                 Integer vam = Util.getCurrentMonth(now);
                 Integer vay = Util.getCurrentYear(now);
+                Date date=new SimpleDateFormat("dd-MM-yyyy").parse(now.toString());
                 String vaccineAPI = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByPin?pincode="+vaccineRegistartions.
-                get(i).pincode+"&date="+vad+"-"+vam+"-"+vay;// 01-06-2021
+                get(i).pincode+"&date="+date.toString();//+vad+"-"+vam+"-"+vay;// 01-06-2021
                 URL url = new URL(vaccineAPI);
                 System.out.println("Calling Vaccine API "+vaccineAPI);
 // Open a connection(?) on the URL(??) and cast the response(???)
@@ -303,7 +306,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                     }
                 }
             }
-            return "";
+            return "-1";
         });
         post("/pushgroup", (request, response) -> {
             //      System.out.println("pushing ad  : "+request.toString());

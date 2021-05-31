@@ -1736,6 +1736,7 @@ sex int(11)
 
     public List<VaccineRegistration> getvaccineRegistartions()
     {
+
         String sql = "Select * from VaccineRegistrations;";
         List<VaccineRegistration> vaccineRegistrations =new ArrayList<VaccineRegistration>();
         Integer retVal = -1;

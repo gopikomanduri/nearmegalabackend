@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -258,26 +259,34 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 URL url = new URL(vaccineAPI);
                 System.out.println("Calling Vaccine API "+vaccineAPI);
 // Open a connection(?) on the URL(??) and cast the response(???)
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                try {
+
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
 // Now it's "open", we can set the request method, headers etc.
-                connection.setRequestProperty("accept", "application/json");
+                    connection.setRequestProperty("accept", "application/json");
 
 // This line makes the request
-                InputStream responseStream = connection.getInputStream();
-                System.out.println(responseStream.toString());
-                if(responseStream.toString().contains("1\":0") || responseStream.toString().contains("2\":0"))
-                {
-                    regval="1";
-                    System.out.println("found vaccine slot!");
+                    InputStream responseStream = connection.getInputStream();
+                    System.out.println(responseStream.toString());
+                    BufferedReader rd = new BufferedReader(new InputStreamReader(responseStream));
+                    StringBuilder vaccresponse = new StringBuilder(); // or StringBuffer if Java version 5+
+                    String line;
+                    while ((line = rd.readLine()) != null) {
+                        vaccresponse.append(line);
+                        vaccresponse.append('\r');
+                    }
+                    rd.close();
+                    System.out.println("recived Vaccine API response "+vaccresponse);
+                    if (vaccresponse.toString().contains("1\":0") || vaccresponse.toString().contains("2\":0")) {
+                        regval = "1";
+                        System.out.println("found vaccine slot!");
+                    }
                 }
-// Manually converting the response body InputStream to APOD using Jackson
-//                ObjectMapper mapper = new ObjectMapper();
-//                APOD apod = mapper.readValue(responseStream, APOD.class);
+                catch (Exception ex)
+                {
 
-
-                //if available
-//                regval = "1";
+                }
 
                 if (!regval.equals("-1")) {
                     System.out.println("registered successfully and notifying same");

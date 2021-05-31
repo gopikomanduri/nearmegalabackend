@@ -254,7 +254,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 LocalDateTime now1 = LocalDateTime.now();
                 String  strDate = dtf.format(now1);
-                String vaccineAPI = "http://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByPin?pincode="+vaccineRegistartions.
+                String vaccineAPI = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByPin?pincode="+vaccineRegistartions.
                 get(i).pincode+"&date="+strDate;//+vad+"-"+vam+"-"+vay;// 01-06-2021
                 URL url = new URL(vaccineAPI);
                 System.out.println("Calling Vaccine API "+vaccineAPI);

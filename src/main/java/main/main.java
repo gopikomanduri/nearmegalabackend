@@ -249,7 +249,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 String vaccineAPI = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByPin?pincode="+vaccineRegistartions.
                 get(i).pincode+"&date="+vad+"-"+vam+"-"+vay;// 01-06-2021
                 URL url = new URL(vaccineAPI);
-
+                System.out.println("Calling Vaccine API "+vaccineAPI);
 // Open a connection(?) on the URL(??) and cast the response(???)
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -258,9 +258,11 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
 // This line makes the request
                 InputStream responseStream = connection.getInputStream();
+                System.out.println(responseStream.toString());
                 if(responseStream.toString().contains("1\":0") || responseStream.toString().contains("2\":0"))
                 {
                     regval="1";
+                    System.out.println("found vaccine slot!");
                 }
 // Manually converting the response body InputStream to APOD using Jackson
 //                ObjectMapper mapper = new ObjectMapper();

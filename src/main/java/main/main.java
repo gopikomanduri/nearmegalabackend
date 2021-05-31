@@ -252,7 +252,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 Integer vam = Util.getCurrentMonth(now);
                 Integer vay = Util.getCurrentYear(now);
                 Date date = new Date();
-                SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
                 String  strDate = formatter.format(date);
                 String vaccineAPI = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByPin?pincode="+vaccineRegistartions.
                 get(i).pincode+"&date="+strDate;//+vad+"-"+vam+"-"+vay;// 01-06-2021

@@ -1701,7 +1701,13 @@ sex int(11)
 
         String sql = "INSERT INTO VaccineRegistrations (ConsumerID ,pincode)" +
                 "VALUES (?,?)";
-
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("executing  "+sql);
         Integer retVal = -1;
         try {
             PreparedStatement preparedStatement = connect.prepareStatement(sql,  Statement.RETURN_GENERATED_KEYS);
@@ -1717,7 +1723,7 @@ sex int(11)
                 preparedStatement.close();
 
 
-            preparedStatement.close();
+//            preparedStatement.close();
             System.out.println("command executed is "+sql);
             return retVal.toString();
         }
@@ -1730,7 +1736,7 @@ sex int(11)
 
     public List<VaccineRegistration> getvaccineRegistartions()
     {
-        String sql = "Select * from VaccineRegistrations";
+        String sql = "Select * from VaccineRegistrations;";
         List<VaccineRegistration> vaccineRegistrations =new ArrayList<VaccineRegistration>();
         Integer retVal = -1;
         try {
@@ -1748,7 +1754,7 @@ sex int(11)
                 obj. pincode= resultSet1.getString("pincode");
                 vaccineRegistrations.add(obj);
             }
-            preparedStatement.close();
+//            preparedStatement.close();
             System.out.println("command executed is "+sql);
             return vaccineRegistrations;
         }

@@ -195,6 +195,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 return "-1";
             }
             String regval =MySQLAccess.dbObj.insertIntovaccineRegistartions(uID,pincode);
+
             if(!regval.equals("-1")) {
                 System.out.println("registered successfully and notifying same");
                 EntityMessage msg = new EntityMessage();
@@ -243,6 +244,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             List<VaccineRegistration> vaccineRegistartions =MySQLAccess.dbObj.getvaccineRegistartions();
             for(int i=0;i<=vaccineRegistartions.size();i++) {
                 //vaccineRegistartions.get(i).pincode;
+                System.out.println("checking for : "+vaccineRegistartions.get(i).consumerID);
                 LocalDateTime now = LocalDateTime.now();
                 Integer vad = Util.getCurrentDay(now);
                 Integer vam = Util.getCurrentMonth(now);

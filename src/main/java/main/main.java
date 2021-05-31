@@ -262,10 +262,9 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 System.out.println("Calling Vaccine API "+vaccineAPI);
 // Open a connection(?) on the URL(??) and cast the response(???)
                 try {
-                    String agent = java.security.AccessController.doPrivileged(new sun.security.action.GetPropertyAction("http.agent"));
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//                    connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0");
-                    connection.setRequestProperty("User-Agent", "Mozilla");
+                    connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0");
+//                    connection.setRequestProperty("User-Agent", "Mozilla");
                     connection.setReadTimeout(5000);
                     connection.setConnectTimeout(5000);
 // Now it's "open", we can set the request method, headers etc.

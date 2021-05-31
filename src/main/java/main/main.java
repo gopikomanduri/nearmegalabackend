@@ -244,13 +244,15 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 //            }
             String regval ="-1";
             List<VaccineRegistration> vaccineRegistartions =MySQLAccess.dbObj.getvaccineRegistartions();
+//            VaccineRegistration vc = new VaccineRegistration();
+//            vc.consumerID=105;
+//            vc.pincode="500090";
+//            vaccineRegistartions.add(vc);
             for(int i=0;i<=vaccineRegistartions.size();i++) {
                 //vaccineRegistartions.get(i).pincode;
                 System.out.println("checking for : "+vaccineRegistartions.get(i).consumerID);
                 LocalDateTime now = LocalDateTime.now();
-                Integer vad = Util.getCurrentDay(now);
-                Integer vam = Util.getCurrentMonth(now);
-                Integer vay = Util.getCurrentYear(now);
+
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 LocalDateTime now1 = LocalDateTime.now();
                 String  strDate = dtf.format(now1);
@@ -262,8 +264,10 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 try {
                     String agent = java.security.AccessController.doPrivileged(new sun.security.action.GetPropertyAction("http.agent"));
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0");
-
+//                    connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0");
+                    connection.setRequestProperty("User-Agent", "Mozilla");
+                    connection.setReadTimeout(5000);
+                    connection.setConnectTimeout(5000);
 // Now it's "open", we can set the request method, headers etc.
                     connection.setRequestProperty("accept", "application/json");
 

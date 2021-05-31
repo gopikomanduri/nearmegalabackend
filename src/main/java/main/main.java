@@ -285,7 +285,7 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 }
                 catch (Exception ex)
                 {
-
+System.out.println(ex.getMessage());
                 }
 
                 if (!regval.equals("-1")) {

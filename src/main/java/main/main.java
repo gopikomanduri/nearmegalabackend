@@ -251,9 +251,11 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 Integer vad = Util.getCurrentDay(now);
                 Integer vam = Util.getCurrentMonth(now);
                 Integer vay = Util.getCurrentYear(now);
-                Date date=new SimpleDateFormat("dd-MM-yyyy").parse(now.toString());
+                Date date = new Date();
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy");
+                String  strDate = formatter.format(date);
                 String vaccineAPI = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByPin?pincode="+vaccineRegistartions.
-                get(i).pincode+"&date="+date.toString();//+vad+"-"+vam+"-"+vay;// 01-06-2021
+                get(i).pincode+"&date="+strDate;//+vad+"-"+vam+"-"+vay;// 01-06-2021
                 URL url = new URL(vaccineAPI);
                 System.out.println("Calling Vaccine API "+vaccineAPI);
 // Open a connection(?) on the URL(??) and cast the response(???)

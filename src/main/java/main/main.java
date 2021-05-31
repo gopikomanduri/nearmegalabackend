@@ -7,10 +7,9 @@ import java.io.FileReader;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -251,9 +250,9 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
                 Integer vad = Util.getCurrentDay(now);
                 Integer vam = Util.getCurrentMonth(now);
                 Integer vay = Util.getCurrentYear(now);
-                Date date = new Date();
-                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-                String  strDate = formatter.format(date);
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                LocalDateTime now1 = LocalDateTime.now();
+                String  strDate = dtf.format(now1);
                 String vaccineAPI = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByPin?pincode="+vaccineRegistartions.
                 get(i).pincode+"&date="+strDate;//+vad+"-"+vam+"-"+vay;// 01-06-2021
                 URL url = new URL(vaccineAPI);

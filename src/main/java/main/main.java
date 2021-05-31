@@ -184,7 +184,8 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             response.type("application/json");
             String userID = request.queryParams("userID");
             String pincode = request.queryParams("pincode");
-            System.out.println("requested vaccineAvailablity : "+request.toString());
+            System.out.println("requested vaccineAvailablity for UserId: "+userID+ " at pincode:"+pincode);
+
             int uID=-1;
             try {
                 uID =Integer.parseInt(userID);

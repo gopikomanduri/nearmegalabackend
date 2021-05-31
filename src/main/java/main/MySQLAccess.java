@@ -1727,6 +1727,37 @@ sex int(11)
         }
 
     }
+
+    public List<VaccineRegistration> getvaccineRegistartions()
+    {
+        String sql = "Select * from VaccineRegistrations";
+        List<VaccineRegistration> vaccineRegistrations =new ArrayList<VaccineRegistration>();
+        Integer retVal = -1;
+        try {
+            PreparedStatement tstmnt = connect.prepareStatement(sql);
+            if(connect.isClosed() == true)
+                connect = initConnection();
+            tstmnt.executeQuery();
+            Statement statement1 = connect.createStatement();
+            ResultSet resultSet1 = statement1
+                    .executeQuery(sql);
+//            VaccineRegistration obj=new VaccineRegistration;
+            while (resultSet1.next()) {
+                VaccineRegistration obj= new VaccineRegistration();
+                obj. consumerID= resultSet1.getInt("consumerID");
+                obj. pincode= resultSet1.getString("pincode");
+                vaccineRegistrations.add(obj);
+            }
+            preparedStatement.close();
+            System.out.println("command executed is "+sql);
+            return vaccineRegistrations;
+        }
+        catch(Exception ex)
+        {
+            return vaccineRegistrations;
+        }
+
+    }
     public String insertIntoBirthdays(String contact)
     {
         String sql = "INSERT INTO birthdays (contact)" +

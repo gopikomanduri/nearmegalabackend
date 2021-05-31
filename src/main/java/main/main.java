@@ -4,8 +4,12 @@ import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static spark.Spark.*;
@@ -220,6 +224,82 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             return "";
         });
 
+        post("/notifyVaccineAvailablitytoUser", (request, response) -> {
+
+            response.type("application/json");
+//            String userID = request.queryParams("userID");
+//            String pincode = request.queryParams("pincode");
+            System.out.println("requested vaccineAvailablity : "+request.toString());
+//            int uID=-1;
+//            try {
+//                uID =Integer.parseInt(userID);
+//            }
+//            catch (NumberFormatException nex)
+//            {
+//                return "-1";
+//            }
+            String regval ="-1";
+            List<VaccineRegistration> vaccineRegistartions =MySQLAccess.dbObj.getvaccineRegistartions();
+            for(int i=0;i<=vaccineRegistartions.size();i++) {
+                //vaccineRegistartions.get(i).pincode;
+                LocalDateTime now = LocalDateTime.now();
+                Integer vad = Util.getCurrentDay(now);
+                Integer vam = Util.getCurrentMonth(now);
+                Integer vay = Util.getCurrentYear(now);
+                String vaccineAPI = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByPin?pincode="+vaccineRegistartions.
+                get(i).pincode+"&date="+vad+"-"+vam+"-"+vay;// 01-06-2021
+                URL url = new URL(vaccineAPI);
+
+// Open a connection(?) on the URL(??) and cast the response(???)
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+// Now it's "open", we can set the request method, headers etc.
+                connection.setRequestProperty("accept", "application/json");
+
+// This line makes the request
+                InputStream responseStream = connection.getInputStream();
+                if(responseStream.toString().contains("1\":0") || responseStream.toString().contains("2\":0"))
+                {
+                    regval="1";
+                }
+// Manually converting the response body InputStream to APOD using Jackson
+//                ObjectMapper mapper = new ObjectMapper();
+//                APOD apod = mapper.readValue(responseStream, APOD.class);
+
+
+                //if available
+//                regval = "1";
+
+                if (!regval.equals("-1")) {
+                    System.out.println("registered successfully and notifying same");
+                    EntityMessage msg = new EntityMessage();
+                    consumer reg = new consumer();
+                    System.out.println("reached to obtain fire details ");
+                    String[] fireID = reg.getUSerFireIDbyconsumerID(vaccineRegistartions.get(i).consumerID);
+                    System.out.println("obtained fire details and sending to  " + fireID[0]);
+                    if (fireID[0] != null) {
+                        msg.addRegistrationToken(fireID[0]);// Add key value pair into payload
+                        msg.putStringData("title", "Hello " + fireID[1]);
+                        msg.putStringData("body", regval);
+                        msg.putStringMess("We found vaccine slots available around your area!");
+
+
+                        System.out.println("created FCM message");
+                        // push
+                        try {
+                            if (client != null) {
+                                System.out.println(" achived client connection. message is being pushed ");
+                                FcmResponse res = client.pushToEntities(msg);
+                                System.out.println(res);
+                                System.out.println("message pushed ");
+                            }
+                        } catch (Exception ex) {
+                        }
+                    }
+                }
+            }
+            return "";
+        });
         post("/pushgroup", (request, response) -> {
             //      System.out.println("pushing ad  : "+request.toString());
             response.type("application/json");

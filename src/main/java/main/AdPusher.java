@@ -90,8 +90,10 @@ public class AdPusher  {
         for(int i = 0; i< lastReceivedAdDetails.length; i++)
         {
             LastReceivedAdStruct temp = lastReceivedAdDetails[i];
-            for(int j=0;j<temp.geoHash.length;j++) {
+            for(int j=0; j<temp.geoHash.length; j++) {
                 adRes.addAll(MySQLAccess.dbObj.fetchAd(temp.geoHash[j], temp.lastReceivedAdId, merchantid, temp.Category));
+                // Need to be removed later this is to push covid related ads to history
+                adRes.addAll(MySQLAccess.dbObj.fetchAd(temp.geoHash[j], temp.lastReceivedAdId, merchantid, 29));
             }
         }
         for(int i=0;i<tobeadded.size();i++)

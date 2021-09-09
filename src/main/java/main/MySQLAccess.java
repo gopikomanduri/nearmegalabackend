@@ -3291,7 +3291,7 @@ adnotification int(11)
                 obj.notificationid = resultSet.getInt("adnotification");
                 obj.customercontact = resultSet.getString("customercontact");
                 obj.ShoppingProbableDates = resultSet.getString("ShoppingProbableDates");
-
+                obj.response= resultSet.getInt(11);
             }
 
             return obj;

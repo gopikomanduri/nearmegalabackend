@@ -4294,12 +4294,7 @@ negotiationsresponse int(1)
 respondedon datetime
 notificationid int(11)
              */
-
-
-
-
-
-            try {
+try {
 
                 int lastNegotiationResponse = lastResponsesReceived.get(i);
                 String tableName = "negotiationsresponse_"+negotiationsareas.get(i);

@@ -1889,7 +1889,7 @@ class adshistoryPayload{
             response.type("application/json");
             String customerContact = request.queryParams("contact");
             String lastId = request.queryParams("lastid");
-            String geoHash = request.queryParams("geohashlist");
+            //String geoHash = request.queryParams("geohashlist");
             System.out.println("for /Negotiate .. request received "+customerContact+"  geohash is all");
 
             //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
@@ -1898,10 +1898,10 @@ class adshistoryPayload{
 //            String lastId = request.queryParams("lastId");
             NegotiationHandler obj = new NegotiationHandler();
             String res =  obj.fetchconsumerNegotiations(customerContact, Integer.valueOf(lastId));
-            String res1 =  obj.fetchNegotiationResponses(customerContact,lastId, geoHash);
-            String finalresponse="["+res+","+res1+"]";
-            System.out.println("for /fetchnegotiations .. response sent "+finalresponse);
-            return finalresponse;
+            //String res1 =  obj.fetchNegotiationResponses(customerContact,lastId, geoHash);
+            //String finalresponse="["+res+","+res1+"]";
+            //System.out.println("for /fetchnegotiations .. response sent "+finalresponse);
+            return res;
 
             //  return "Gopi";
         });

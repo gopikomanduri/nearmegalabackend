@@ -55,4 +55,20 @@ public class AdHandler implements Callable {
         String str = new Gson().toJson(adRes.toArray(),AdPayLoadResponse[].class);
         return str;
     }
+
+    public String getAdsAroundBasedonCategory(String lastAdID,String geohash,String CatID)
+    {
+
+//        lastReceivedJobStruct[] lastReceivedAdDetails = new Gson().fromJson(lastAdID,lastReceivedJobStruct[].class);
+        List<AdPayLoadResponse> adRes = new ArrayList<>();
+
+//        for(int i=0;i<lastReceivedAdDetails.length;i++)
+//        {
+//            lastReceivedJobStruct temp = lastReceivedAdDetails[i];
+        adRes.addAll(MySQLAccess.dbObj.getAdsAroundBasedOnCategory(geohash, CatID,String.valueOf(lastAdID)));
+//        }
+
+        String str = new Gson().toJson(adRes.toArray(),AdPayLoadResponse[].class);
+        return str;
+    }
 }

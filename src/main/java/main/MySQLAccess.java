@@ -660,39 +660,38 @@ public class MySQLAccess {
     }
     public List<JobPayLoad> getJobsAround(String geohash, String lastJobId)
     {
-
         List<JobPayLoad> jobs = new ArrayList<JobPayLoad>();
-
         try {
-
-
-
-
-            Integer maxJobIdReceived = Integer.valueOf(lastJobId);
-
-
-           // String sqlcmd = "select * from job_" + geohash+" where idjobs > ? AND postedon >= ? ";
-
-            String sqlcmd = "select * from job_" + geohash+" where idjobs > "+maxJobIdReceived+"  AND postedon >= '"+Util.getCurrentDate()+"' ";
-
-
-            if(connect.isClosed() == true)
+                Integer maxJobIdReceived = Integer.valueOf(lastJobId);
+                String sqlcmd = "select * from job_" + geohash+" where idjobs > "+maxJobIdReceived+"  AND postedon >= '"+Util.getCurrentDate()+"' ";
+                if(connect.isClosed())
+                    connect = initConnection();
+                PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
+                stmnt.executeQuery();
+                System.out.println("cmd executed is : " + sqlcmd);
+                resultSet = statement
+                    .executeQuery(sqlcmd);
+            return resultSetToJobPayLoad(resultSet, geohash);
+        }
+        catch(Exception ex)
+        {
+            return jobs;
+        }
+    }
+    public List<AdPayLoadResponse> getAdsAroundBasedOnCategory(String geohash, String Category,String lastAdId )
+    {
+        List<AdPayLoadResponse> jobs = new ArrayList<AdPayLoadResponse>();
+        try {
+            Integer maxAdIdReceived = Integer.valueOf(lastAdId);
+            String sqlcmd = "select * from ad_" + geohash+" where Id > "+maxAdIdReceived+"  AND Category = '"+Category+"' ";
+            if(connect.isClosed())
                 connect = initConnection();
-
             PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
-         //   stmnt.setInt(1, maxJobIdReceived);
-          //  stmnt.setDate(2, Util.getCurrentDate());
             stmnt.executeQuery();
-
-
-
             System.out.println("cmd executed is : " + sqlcmd);
-
-
             resultSet = statement
                     .executeQuery(sqlcmd);
-
-            return resultSetToJobPayLoad(resultSet, geohash);
+            return resultSetToAdPayLoad(resultSet, geohash);
         }
         catch(Exception ex)
         {
@@ -702,34 +701,17 @@ public class MySQLAccess {
 
     public List<AdPayLoadResponse> getAdsAround(String geohash, String MerchantID,String lastAdId )
     {
-
         List<AdPayLoadResponse> jobs = new ArrayList<AdPayLoadResponse>();
-
         try {
              Integer maxAdIdReceived = Integer.valueOf(lastAdId);
-
-
-            // String sqlcmd = "select * from job_" + geohash+" where idjobs > ? AND postedon >= ? ";
-
-            String sqlcmd = "select * from ad_" + geohash+" where Id > "+maxAdIdReceived+"  AND MerchantId = '"+MerchantID+"' ";
-
-
-            if(connect.isClosed() == true)
+             String sqlcmd = "select * from ad_" + geohash+" where Id > "+maxAdIdReceived+"  AND MerchantId = '"+MerchantID+"' ";
+             if(connect.isClosed())
                 connect = initConnection();
-
-            PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
-            //   stmnt.setInt(1, maxJobIdReceived);
-            //  stmnt.setDate(2, Util.getCurrentDate());
+             PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
             stmnt.executeQuery();
-
-
-
             System.out.println("cmd executed is : " + sqlcmd);
-
-
             resultSet = statement
                     .executeQuery(sqlcmd);
-
             return resultSetToAdPayLoad(resultSet, geohash);
         }
         catch(Exception ex)
@@ -1254,6 +1236,34 @@ LNG VARCHAR(10)
                 // CREATE TABLE new_tbl LIKE orig_tbl;
                 statement = connect.createStatement();
                 String createStatement = "CREATE TABLE "+tableName+"  LIKE Merchant_slots;";
+                statement.executeUpdate(createStatement);
+                statement.close();
+                out=0;
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+        return  out;
+    }
+
+    public int createMerchantEventTable(String merchantID,boolean create) {
+        int out=-1;
+        try {
+
+            String tableName = merchantID+"_events";
+            DatabaseMetaData dmd = connect.getMetaData();
+
+
+            ResultSet tables = dmd.getTables(null, null, tableName, null);
+            if (tables.next()) {
+                // Table exists
+                out=1;
+            } else if (create){
+                // CREATE TABLE new_tbl LIKE orig_tbl;
+                statement = connect.createStatement();
+                String createStatement = "CREATE TABLE "+tableName+"  LIKE Merchant_events;";
                 statement.executeUpdate(createStatement);
                 statement.close();
                 out=0;
@@ -2124,6 +2134,135 @@ closedon datetime
         }
     }
 
+    public Integer registerMerchantEvent(String merchantID,String eventCondition)
+    {
+
+        Integer generatedKey = -1;
+
+        int isCreated = createMerchantEventTable(merchantID,true);
+
+        String eventTable = merchantID+"_events";
+
+        String tableName = eventTable;
+
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("the slot received for merchant is "+merchantID);
+        if(isCreated!=-1) {
+            try {
+                String sql = "INSERT INTO " + tableName + " (eventCondition)" +
+                        "VALUES (?)";
+                PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setString(1, eventCondition);
+                preparedStatement.executeUpdate();
+
+                ResultSet rs = preparedStatement.getGeneratedKeys();
+                if (rs.next()) {
+                    generatedKey = rs.getInt(1);
+                }
+                preparedStatement.close();
+                return generatedKey;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return generatedKey;
+            }
+        }
+        return generatedKey;
+    }
+
+    public String getMerchantEvents(String merchantID) {
+        try {
+            if (connect.isClosed() == true)
+                connect = initConnection();
+
+            String merchantQuery = "SELECT * FROM "+ merchantID+"_events";
+
+            System.out.println("query executing is " + merchantQuery);
+            statement = connect.createStatement();
+
+            // Result set get the result of the SQL query
+            resultSet = statement
+                    .executeQuery(merchantQuery);
+            String eventConditions = "";
+            if (resultSet.next()) {
+
+                eventConditions = resultSet.getString("eventCondition");
+            }
+
+            String merchantjson = new Gson().toJson(eventConditions);
+            System.out.println("returning merchant details  " + merchantjson.toString());
+            return merchantjson;
+        } catch (Exception ex) {
+            System.out.println("exception while returning merchant details ");
+            String merchantjson ="";
+
+            return new Gson().toJson(merchantjson);
+        }
+    }
+
+    public String getMerchantEventCriterias() {
+        try {
+            if (connect.isClosed() == true)
+                connect = initConnection();
+
+            String merchantQuery = "SELECT * FROM merchantEvent_criterias";
+
+            System.out.println("query executing is " + merchantQuery);
+            statement = connect.createStatement();
+
+            // Result set get the result of the SQL query
+            resultSet = statement
+                    .executeQuery(merchantQuery);
+            String eventcriterias = "";
+            if (resultSet.next()) {
+
+                eventcriterias = resultSet.getString("criteria");
+            }
+
+            String merchantjson = new Gson().toJson(eventcriterias);
+            System.out.println("returning merchant details  " + merchantjson.toString());
+            return merchantjson;
+        } catch (Exception ex) {
+            System.out.println("exception while returning merchant details ");
+            String merchantjson ="";
+
+            return new Gson().toJson(merchantjson);
+        }
+    }
+    public String getMerchantEventOperations() {
+        try {
+            if (connect.isClosed() == true)
+                connect = initConnection();
+
+            String merchantQuery = "SELECT * FROM merchantEvent_operations";
+
+            System.out.println("query executing is " + merchantQuery);
+            statement = connect.createStatement();
+
+            // Result set get the result of the SQL query
+            resultSet = statement
+                    .executeQuery(merchantQuery);
+            String eventoperations = "";
+            if (resultSet.next()) {
+
+                eventoperations = resultSet.getString("operation");
+            }
+
+            String merchantjson = new Gson().toJson(eventoperations);
+            System.out.println("returning merchant eventoperations  " + merchantjson.toString());
+            return merchantjson;
+        } catch (Exception ex) {
+            System.out.println("exception while returning merchant details ");
+            String merchantjson ="";
+
+            return new Gson().toJson(merchantjson);
+        }
+    }
     public String getMerchantCategory(String merchantID) {
         try {
             if (connect.isClosed() == true)

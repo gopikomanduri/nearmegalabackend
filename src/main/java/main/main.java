@@ -67,8 +67,6 @@ public class main {
 
         }
 
-
-
         final String[] responseJson = new String[1];
         tokenregistrationpayload emptyone = new tokenregistrationpayload();
 
@@ -77,6 +75,7 @@ public class main {
         emptyone.currentRunningToken = -1;
         emptyone.currentMaxToken = -1;
         String emptystr = new Gson().toJson(emptyone);
+
         post("/pushad", (request, response) -> {
       //      System.out.println("pushing ad  : "+request.toString());
             response.type("application/json");
@@ -87,20 +86,13 @@ public class main {
             AdHandler adHandler = new AdHandler(adreceived);
          //   Future ft = threadpool.submit(adHandler);
            String id = adHandler.call();
-
             AdPayLoad temp = new AdPayLoad();
-
             Gson test = new Gson();
             temp.geo=id;
-
-//            return temp;
             String str = test.toJson(temp);
-//
-//
+
           return str;
         });
-
-
         post("/pushjob", (request, response) -> {
             //      System.out.println("pushing ad  : "+request.toString());
             response.type("application/json");
@@ -118,9 +110,7 @@ public class main {
             return new Gson()
                     .toJson(new adpostresponse(StatusResponse.SUCCESS));
         });
-
-
-post("/getjobsaroundbasedoncategory", (request, response) -> {
+        post("/getjobsaroundbasedoncategory", (request, response) -> {
             //      System.out.println("pushing adzz  : "+request.toStringz());
             response.type("application/json");
             String geohashRecived = request.queryParams("geohash");
@@ -134,7 +124,6 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
             return str;
         });
-
         post("/postjobsaroundbasedoncategory", (request, response) -> {
             //      System.out.println("pushing adzz  : "+request.toStringz());
             response.type("application/json");
@@ -152,10 +141,24 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
             return str;
         });
+        post("/postadsaroundbasedoncategory", (request, response) -> {
+            //      System.out.println("pushing adzz  : "+request.toStringz());
+            response.type("application/json");
 
+//            JSONObject jsonObj = new JSONObject(request.body());
 
+            String geohashRecived = request.queryParams("geohash");
+            String CatId= request.queryParams("categoryid");
+            //get job details
+            System.out.println("fetching jobs around  : "+geohashRecived);
+            //AdPayLoad adreceived = new Gson().fromJson(dataReceived, AdPayLoad.class);
+            AdHandler adHandler = new AdHandler(null);
+            //   Future ft = threadpool.submit(adHandler);
+            String str = adHandler.getAdsAroundBasedonCategory("-1",geohashRecived,CatId);
 
-        post("/getjobsaround", (request, response) -> {
+            return str;
+        });
+         post("/getjobsaround", (request, response) -> {
             //      System.out.println("pushing adzz  : "+request.toStringz());
             response.type("application/json");
             String dataReceived = request.queryParams("geohash");
@@ -180,7 +183,6 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
 
             return str;
         });
-
         post("/notifyVaccineAvailablity", (request, response) -> {
 
             response.type("application/json");
@@ -227,7 +229,6 @@ post("/getjobsaroundbasedoncategory", (request, response) -> {
             }
             return "";
         });
-
         post("/notifyVaccineAvailablitytoUser", (request, response) -> {
 
             response.type("application/json");
@@ -334,7 +335,6 @@ System.out.println(ex.getMessage());
             //   Future ft = threadpool.submit(adHandler);
             return "";
         });
-
         post("/getgroups", (request, response) -> {
             //      System.out.println("pushing ad  : "+request.toString());
             response.type("application/json");
@@ -347,7 +347,6 @@ System.out.println(ex.getMessage());
             //   Future ft = threadpool.submit(adHandler);
             return str;
         });
-
         post("/addmsgtogroup", (request, response) -> {
             //      System.out.println("pushing ad  : "+request.toString());
             response.type("application/json");
@@ -362,8 +361,6 @@ System.out.println(ex.getMessage());
             //   Future ft = threadpool.submit(adHandler);
             return str;
         });
-
-
         post("/ads", (request, response) -> {
             response.type("application/json");
             String dataReceived = request.body();//request.queryParams("geohash");
@@ -387,7 +384,7 @@ System.out.println(ex.getMessage());
 
             //  return "Gopi";
         });
-class adshistoryPayload{
+        class adshistoryPayload{
     String merchantid;
     LastReceivedAdStruct[] geohash;
 }
@@ -423,7 +420,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/latestversionconsumer", (request, response) -> {
           System.out.println("in latestversionconsumer");
 	      	response.type("application/json");
@@ -447,7 +443,6 @@ class adshistoryPayload{
             return str;
 
         });
-
         post("/latestversionmerchant", (request, response) -> {
         
 		System.out.println("in latestversionmerchant");
@@ -472,7 +467,6 @@ class adshistoryPayload{
 
             return str;
         });
-
         post("/transaction", (request, response) -> {
             response.type("application/json");
             String merchantIdReceived = request.queryParams("merchant");
@@ -493,7 +487,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/adviewed", (request, response) -> {
             response.type("application/json");
             String merchantIdReceived = request.queryParams("merchant");
@@ -514,8 +507,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
-
         post("/MerchantChangePwd", (request, response) -> {
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
@@ -531,7 +522,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/RegMerchant", (request, response) -> {
             response.type("application/json");
             String dataReceived = request.queryParams("merchant");
@@ -557,6 +547,41 @@ class adshistoryPayload{
             String str =reg.getMerchantCategory(merID);
             return str;
         });
+
+        post("/getMerchantEvents", (request, response) -> {
+            // Create table Merchant_categories(MerchantID varchar(20), selectedCategories BigInt);
+            response.type("application/json");
+            String merID = request.queryParams("merchantID");
+            System.out.println("fetching events  merchant ID is : "+merID);
+            String str =MySQLAccess.dbObj.getMerchantEvents(merID);
+            return str;
+        });
+
+        post("/getMerchantEventCriterias", (request, response) -> {
+            // Create table Merchant_categories(MerchantID varchar(20), selectedCategories BigInt);
+            response.type("application/json");
+
+            String str =MySQLAccess.dbObj.getMerchantEventCriterias();
+            return str;
+        });
+        post("/getMerchantEventOperations", (request, response) -> {
+            // Create table Merchant_categories(MerchantID varchar(20), selectedCategories BigInt);
+            response.type("application/json");
+
+            String str =MySQLAccess.dbObj.getMerchantEventOperations();
+            return str;
+        });
+        post("/registerMerchantEvent", (request, response) -> {
+            // Create table Merchant_categories(MerchantID varchar(20), selectedCategories BigInt);
+            response.type("application/json");
+            String evnentCondition = request.queryParams("eventCondition");
+            String merID = request.queryParams("merchantID");
+
+            int eventID =MySQLAccess.dbObj.registerMerchantEvent(merID,evnentCondition);
+
+            return eventID;
+        });
+
         post("/registerMyCategories", (request, response) -> {
             // Create table Merchant_categories(MerchantID varchar(20), selectedCategories BigInt);
             response.type("application/json");
@@ -571,8 +596,6 @@ class adshistoryPayload{
         ConcurrentHashMap<String , tokenassigner> merchantstokens = new ConcurrentHashMap<String, tokenassigner>();
         ConcurrentHashMap<String , slotManager> merchantsSlotwiseTokens = new ConcurrentHashMap<String, slotManager>();
         ConcurrentHashMap<String , slotManager> userSlots = new ConcurrentHashMap<String, slotManager>();
-
-
         post("/login", (request, response) -> {
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
@@ -640,7 +663,6 @@ class adshistoryPayload{
 
               return str;
         });
-
         post("/RegUser", (request, response) -> {
             response.type("application/json");
             String dataReceived = request.queryParams("consumerpayload");
@@ -657,7 +679,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/LoginUser", (request, response) -> {
             response.type("application/json");
             String dataReceived = request.queryParams("consumerpayload");
@@ -682,7 +703,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/pushstatus", (request, response) -> {
             response.type("application/json");
             String dataReceived = request.queryParams("status");
@@ -699,7 +719,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/joinad", (request, response) -> {
             response.type("application/json");
             String dataReceived = request.queryParams("joincountpayload");
@@ -716,7 +735,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/fetchstatuses", (request, response) -> {
             response.type("application/json");
             String dataReceived = request.queryParams("geohash");
@@ -742,7 +760,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/createcounters", (request, response) -> {
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
@@ -773,7 +790,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/getmerchanttokendetails", (request, response) -> {
 
             String str = "";
@@ -813,7 +829,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/getnexttoken", (request, response) -> {
 
             response.type("application/json");
@@ -894,7 +909,6 @@ class adshistoryPayload{
             }
             return  GeneratedToken;
         });
-
         post("/getmerchantdetails", (request, response) -> {
 
             /*
@@ -914,7 +928,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/getmerchantcounterdetails", (request, response) -> {
 
 
@@ -937,7 +950,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/closecounters", (request, response) -> {
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
@@ -952,7 +964,6 @@ class adshistoryPayload{
 
             return 0;
         });
-
         post("/pendingtokens", (request, response) -> {
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
@@ -968,7 +979,6 @@ class adshistoryPayload{
 
             return 0;
         });
-
         post("/gettokenstatus", (request, response) -> {
 
             /*
@@ -1067,7 +1077,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/getalltokenstatus", (request, response) -> {
 
             /*
@@ -1107,7 +1116,6 @@ class adshistoryPayload{
             _tokenstatuspayload = new Gson().toJson(obj);
             return _tokenstatuspayload;
         });
-
         post("/renewtoken", (request, response) -> {
 
             /*
@@ -1140,7 +1148,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/getbdaycount", (request, response) -> {
 
             response.type("application/json");
@@ -1164,7 +1171,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/getreceipthistory", (request, response) -> {
 
             response.type("application/json");
@@ -1186,7 +1192,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/deregister", (request, response) -> {
 
             response.type("application/json");
@@ -1211,7 +1216,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/", (request, response) -> {
 
 
@@ -1258,7 +1262,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/postoffertospecificcontact", (request, response) -> {
 
 
@@ -1298,7 +1301,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/posttospecificcontact", (request, response) -> {
 
 
@@ -1349,7 +1351,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/getnextreceiptid", (request, response) -> {
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
@@ -1357,7 +1358,6 @@ class adshistoryPayload{
             String str =  new contactspecificdatagatherer().getnextreceiptid(merchantid);
             return str;
         });
-
         post("/getforspecificcontact", (request, response) -> {
 
 
@@ -1383,7 +1383,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/gettokenlogforcounter", (request, response) -> {
 
             /*
@@ -1416,7 +1415,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/registerfortokenthruhelper", (request, response) -> {
 
             /*
@@ -1459,7 +1457,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/registerMerchantSlots", (request, response) -> {
             String dataReceived= request.queryParams("slotDetails");
 
@@ -1601,8 +1598,6 @@ class adshistoryPayload{
             //FCM Push End
             return GeneratedToken;
         });
-
-
         post("/registerfortoken", (request, response) -> {
 
             /*
@@ -1667,7 +1662,6 @@ class adshistoryPayload{
             }
             return GeneratedToken;
         });
-
         post("/respondtostatus", (request, response) -> {
 
             /*
@@ -1693,7 +1687,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/fetchjoineescount", (request, response) -> {
 
             /*
@@ -1717,7 +1710,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/fetchalljoinees", (request, response) -> {
 
             /*
@@ -1742,15 +1734,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
-
-
-
-
-
-
-
-
         post("/fetchacategories", (request, response) -> {
 
             /*
@@ -1775,8 +1758,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
-
         post("/addsmsid", (request, response) -> {
 
             /*
@@ -1799,8 +1780,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
-
         post("/deactivatesmsid", (request, response) -> {
 
             /*
@@ -1822,10 +1801,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
-
-
-
         post("/deletesmsid", (request, response) -> {
 
             /*
@@ -1846,9 +1821,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
-
-
         post("/StartNegotiate", (request, response) -> {
             response.type("application/json");
             String dataReceived = request.queryParams("negotiate");
@@ -1865,7 +1837,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/fetchnegotiations", (request, response) -> {
             response.type("application/json");
             String merchantId = request.queryParams("merchantid");
@@ -1925,7 +1896,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/anypendingtokens", (request, response) -> {
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
@@ -1951,9 +1921,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
-
-
         post("/currenttokenforallcounterswithmerchantid", (request, response) -> {
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
@@ -1979,7 +1946,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/currenttokenforcounterswithmerchantid", (request, response) -> {
             response.type("application/json");
             String merchantid = request.queryParams("merchantid");
@@ -2007,7 +1973,6 @@ class adshistoryPayload{
 
             //  return "Gopi";
         });
-
         post("/fetchnegotiationresponse", (request, response) -> {
             response.type("application/json");
             String merchantId = request.queryParams("customercontact");
@@ -2026,7 +1991,6 @@ class adshistoryPayload{
             return res;
 
         });
-
         post("/getsupportedjobs", (request, response) -> {
             response.type("application/json");
 
@@ -2037,7 +2001,6 @@ class adshistoryPayload{
             return res;
 
         });
-
         post("/postlogs", (request, response) -> {
             response.type("application/json");
             String logs = request.queryParams("logs");
@@ -2050,22 +2013,11 @@ class adshistoryPayload{
             return res;
 
         });
-
-
-
-
-
-
-
-
-
-
-       /* MySQLAccess dao = new MySQLAccess();
+        /* MySQLAccess dao = new MySQLAccess();
         try {
             dao.readDataBase();
         } catch (Exception e) {
             e.printStackTrace();
         }*/
-
     }
 }

@@ -1000,6 +1000,49 @@ LNG VARCHAR(10)
         return generatedKey;
     }
 
+    public Integer insertMerchantAdEvent(int adId,String Merchant_id,int event)
+    {
+
+        Integer generatedKey = -1;
+
+        int isCreated = createMerchantEventAdRegisterTable(Merchant_id,true);
+
+        String slotTable = Merchant_id+"_ad_events";
+
+        String tableName = slotTable;
+
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if(isCreated!=-1) {
+            try {
+                String sql = "INSERT INTO " + tableName + " (EventID, adID)" +
+                        "VALUES (?, ?)";
+                PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setInt(1, event);
+                preparedStatement.setInt(2, adId);
+                preparedStatement.executeUpdate();
+                generatedKey=1;
+                //ResultSet rs = preparedStatement.getGeneratedKeys();
+//                if (rs.next()) {
+//                    generatedKey = rs.getInt(1);
+//                }
+                preparedStatement.close();
+                return generatedKey;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return generatedKey;
+            }
+        }
+        return generatedKey;
+    }
+
+
     public String updateMerchantSlot(String MerchantID,int epochID,int TokensRequested,String UserID,String selectedSlotEpochHash)
     {
 
@@ -1264,6 +1307,34 @@ LNG VARCHAR(10)
                 // CREATE TABLE new_tbl LIKE orig_tbl;
                 statement = connect.createStatement();
                 String createStatement = "CREATE TABLE "+tableName+"  LIKE Merchant_events;";
+                statement.executeUpdate(createStatement);
+                statement.close();
+                out=0;
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+        return  out;
+    }
+
+    public int createMerchantEventAdRegisterTable(String merchantID,boolean create) {
+        int out=-1;
+        try {
+
+            String tableName = merchantID+"_ad_events";
+            DatabaseMetaData dmd = connect.getMetaData();
+
+
+            ResultSet tables = dmd.getTables(null, null, tableName, null);
+            if (tables.next()) {
+                // Table exists
+                out=1;
+            } else if (create){
+                // CREATE TABLE new_tbl LIKE orig_tbl;
+                statement = connect.createStatement();
+                String createStatement = "CREATE TABLE "+tableName+"  LIKE Merchant_ad_events;";
                 statement.executeUpdate(createStatement);
                 statement.close();
                 out=0;

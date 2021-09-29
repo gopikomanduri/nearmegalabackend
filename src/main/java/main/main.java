@@ -80,17 +80,31 @@ public class main {
       //      System.out.println("pushing ad  : "+request.toString());
             response.type("application/json");
             String dataReceived = request.queryParams("ad");
+            String eventID = "-1";
+            try {
+                eventID = request.queryParams("eventID");
+            }
+            catch (Exception ex)
+            {
+
+            }
             System.out.println("pushing ad  : "+dataReceived);
 
             AdPayLoad adreceived = new Gson().fromJson(dataReceived, AdPayLoad.class);
             AdHandler adHandler = new AdHandler(adreceived);
-         //   Future ft = threadpool.submit(adHandler);
+         //   Future ft = threadpool.submit(aAdHandlerdHandler);
            String id = adHandler.call();
             AdPayLoad temp = new AdPayLoad();
             Gson test = new Gson();
             temp.geo=id;
             String str = test.toJson(temp);
-
+            try {
+                MySQLAccess.dbObj.insertMerchantAdEvent(Integer.parseInt(id), temp.merchantid, Integer.parseInt(eventID));
+            }
+            catch (Exception ex)
+            {
+                System.out.println("unable to register ad with event  : "+dataReceived);
+            }
           return str;
         });
         post("/pushjob", (request, response) -> {

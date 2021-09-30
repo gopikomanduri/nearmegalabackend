@@ -398,6 +398,31 @@ System.out.println(ex.getMessage());
 
             //  return "Gopi";
         });
+
+        post("/adswithevents", (request, response) -> {
+            response.type("application/json");
+            String dataReceived = request.body();//request.queryParams("geohash");
+
+            System.out.println("for /ads .. requestRegUser received "+dataReceived);
+
+            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
+
+//            String lng = request.queryParams("lng");
+//            String lastId = request.queryParams("lastId");
+            AdPusher adPusher = new AdPusher();
+//            Future ft = threadpool.submit(adPusher);
+//            while(ft.isDone() == false);
+            //   return ft.get().toString();
+            responseJson[0] = adPusher.call(dataReceived).toString();
+
+//            String str = adPusher.call(responseJson[0]).toString();
+//            System.out.println("for /ads .. response sent "+str);
+//            return str;
+            return responseJson[0];
+
+            //  return "Gopi";
+        });
+
         class adshistoryPayload{
     String merchantid;
     LastReceivedAdStruct[] geohash;

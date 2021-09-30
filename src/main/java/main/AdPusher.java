@@ -30,14 +30,14 @@ public class AdPusher  {
         String str = "";
         Gson gson = new Gson();
 
-        LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(received,LastReceivedAdStruct[].class);
+        LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(received, LastReceivedAdStruct[].class);
         List<AdPayLoadResponse> adRes = new ArrayList<>();
 
 
-        for(int i=0;i<lastReceivedAdDetails.length;i++)
-        {
+        for (int i = 0; i < lastReceivedAdDetails.length; i++) {
             LastReceivedAdStruct temp = lastReceivedAdDetails[i];
-            for(int j=0;j<temp.geoHash.length;j++) {
+
+            for (int j = 0; j < temp.geoHash.length; j++) {
                 adRes.addAll(MySQLAccess.dbObj.fetchAd(temp.geoHash[j], temp.lastReceivedAdId, null, temp.Category));
             }
         }
@@ -45,6 +45,26 @@ public class AdPusher  {
         {
             adRes = removeDuplicates(adRes);
             System.out.println("fectched /ads .. ");
+
+            List<Integer> adsTobeRemoved =  new ArrayList<>();
+
+            for (int k=0; k < adRes.size(); k++) {
+                List<Integer> events = MySQLAccess.dbObj.getEventsforAd(adRes.get(k).merchantid,adRes.get(k).Id);
+                for (int eventId:
+                        events){
+                    EventPayload eventPayload = MySQLAccess.dbObj.getMerchantEvent(adRes.get(k).merchantid,eventId);
+                    if(!MySQLAccess.dbObj.CheckIfAdValidForUser(adRes.get(k).geo,eventPayload.EventCondition))
+                    {
+                        adsTobeRemoved.add(adRes.get(k).Id);
+                    }
+                }
+            }
+            for(int advID: adsTobeRemoved)
+            {
+                adRes.remove(advID);
+            }
+
+
             str = gson.toJson(adRes.toArray(),AdPayLoadResponse[].class);
 
             System.out.println(str);

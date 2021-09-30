@@ -2248,6 +2248,7 @@ closedon datetime
 
     public String getMerchantEvents(String merchantID) {
         try {
+            List<EventPayload> events =new ArrayList<EventPayload>();
             if (connect.isClosed() == true)
                 connect = initConnection();
 
@@ -2260,19 +2261,105 @@ closedon datetime
             resultSet = statement
                     .executeQuery(merchantQuery);
             String eventConditions = "";
-            if (resultSet.next()) {
 
-                eventConditions = resultSet.getString("eventCondition");
+            if (resultSet.next()) {
+                EventPayload eventPayload =new EventPayload();
+                eventPayload.EventCondition=resultSet.getString("eventCondition");
+                eventPayload.EventID = resultSet.getInt("EventID");
+                events.add(eventPayload);
             }
 
-            String merchantjson = new Gson().toJson(eventConditions);
+            String merchantjson = new Gson().toJson(events.toArray());
             System.out.println("returning merchant details  " + merchantjson.toString());
             return merchantjson;
         } catch (Exception ex) {
-            System.out.println("exception while returning merchant details ");
+            System.out.println("exception while returning merchant event details ");
             String merchantjson ="";
 
             return new Gson().toJson(merchantjson);
+        }
+    }
+
+    public EventPayload getMerchantEvent(String merchantID,int eventID) {
+        EventPayload event =new EventPayload();
+        try {
+            if (connect.isClosed() == true)
+                connect = initConnection();
+
+            String merchantQuery = "SELECT * FROM "+ merchantID+"_events where EventID="+eventID;
+
+            System.out.println("query executing is " + merchantQuery);
+            statement = connect.createStatement();
+
+            // Result set get the result of the SQL query
+            resultSet = statement
+                    .executeQuery(merchantQuery);
+            String eventConditions = "";
+
+            if (resultSet.next()) {
+                event.EventCondition=resultSet.getString("eventCondition");
+                event.EventID = resultSet.getInt("EventID");
+            }
+
+            //String merchantjson = new Gson().toJson(events.toArray());
+            //System.out.println("returning merchant details  " + merchantjson.toString());
+            return event;
+        } catch (Exception ex) {
+            System.out.println("exception while returning merchant event details ");
+            //String merchantjson ="";
+
+            return event;
+        }
+    }
+
+    public List<Integer> getEventsforAd(String merchantID,int adId)
+    {
+        List<Integer> EventIds =new ArrayList<Integer>();
+        try {
+            if (connect.isClosed() == true)
+                connect = initConnection();
+
+            String merchantQuery = "SELECT EventID FROM "+ merchantID+"_ad_events where adID="+adId;
+
+            System.out.println("query executing is " + merchantQuery);
+            statement = connect.createStatement();
+            // Result set get the result of the SQL query
+            resultSet = statement
+                    .executeQuery(merchantQuery);
+            if (resultSet.next()) {
+
+                EventIds.add(resultSet.getInt("EventID"));
+            }
+            return EventIds;
+        } catch (Exception ex) {
+            System.out.println("exception while returning merchant event details ");
+            //String merchantjson ="";
+            return EventIds;
+        }
+    }
+
+    public boolean CheckIfAdValidForUser(String geohash,String condition)
+    {
+        boolean isValid=false;
+        try {
+            if (connect.isClosed() == true)
+                connect = initConnection();
+
+            String merchantQuery = "SELECT * FROM ads_"+ geohash+" where "+condition;
+
+            System.out.println("query executing is " + merchantQuery);
+            statement = connect.createStatement();
+            // Result set get the result of the SQL query
+            resultSet = statement
+                    .executeQuery(merchantQuery);
+            if (resultSet.next()) {
+isValid=true;
+            }
+            return isValid;
+        } catch (Exception ex) {
+            System.out.println("exception while returning merchant event details ");
+            //String merchantjson ="";
+            return isValid;
         }
     }
 

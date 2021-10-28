@@ -2338,14 +2338,14 @@ closedon datetime
         }
     }
 
-    public boolean CheckIfAdValidForUser(String geohash,String condition)
+    public boolean CheckIfAdValidForUser(Integer UserID,String condition)
     {
         boolean isValid=false;
         try {
             if (connect.isClosed() == true)
                 connect = initConnection();
 
-            String merchantQuery = "SELECT * FROM ads_"+ geohash+" where "+condition;
+            String merchantQuery = "SELECT * FROM consumers where idconsumers="+UserID +" and "+condition;
 
             System.out.println("query executing is " + merchantQuery);
             statement = connect.createStatement();
@@ -2377,12 +2377,14 @@ isValid=true;
             resultSet = statement
                     .executeQuery(merchantQuery);
             String eventcriterias = "";
+            List<String> criterias= new ArrayList<>();
             if (resultSet.next()) {
 
                 eventcriterias = resultSet.getString("criteria");
+                criterias.add(eventcriterias);
             }
 
-            String merchantjson = new Gson().toJson(eventcriterias);
+            String merchantjson = new Gson().toJson(criterias.toArray());
             System.out.println("returning merchant details  " + merchantjson.toString());
             return merchantjson;
         } catch (Exception ex) {
@@ -2406,12 +2408,14 @@ isValid=true;
             resultSet = statement
                     .executeQuery(merchantQuery);
             String eventoperations = "";
+            List<String> operations = new ArrayList<>();
             if (resultSet.next()) {
 
                 eventoperations = resultSet.getString("operation");
+                operations.add(eventoperations);
             }
 
-            String merchantjson = new Gson().toJson(eventoperations);
+            String merchantjson = new Gson().toJson(operations.toArray());
             System.out.println("returning merchant eventoperations  " + merchantjson.toString());
             return merchantjson;
         } catch (Exception ex) {

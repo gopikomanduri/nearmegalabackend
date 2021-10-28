@@ -53,9 +53,10 @@ public class AdPusher  {
                 for (int eventId:
                         events){
                     EventPayload eventPayload = MySQLAccess.dbObj.getMerchantEvent(adRes.get(k).merchantid,eventId);
-                    if(!MySQLAccess.dbObj.CheckIfAdValidForUser(adRes.get(k).geo,eventPayload.EventCondition))
-                    {
-                        adsTobeRemoved.add(adRes.get(k).Id);
+                    for (int i = 0; i < lastReceivedAdDetails.length; i++) {
+                        if (!MySQLAccess.dbObj.CheckIfAdValidForUser(lastReceivedAdDetails[i].UserID, eventPayload.EventCondition)) {
+                            adsTobeRemoved.add(adRes.get(k).Id);
+                        }
                     }
                 }
             }

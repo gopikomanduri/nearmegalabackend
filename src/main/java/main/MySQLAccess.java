@@ -2378,7 +2378,7 @@ isValid=true;
                     .executeQuery(merchantQuery);
             String eventcriterias = "";
             List<String> criterias= new ArrayList<>();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
 
                 eventcriterias = resultSet.getString("criteria");
                 criterias.add(eventcriterias);
@@ -2409,7 +2409,7 @@ isValid=true;
                     .executeQuery(merchantQuery);
             String eventoperations = "";
             List<String> operations = new ArrayList<>();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
 
                 eventoperations = resultSet.getString("operation");
                 operations.add(eventoperations);

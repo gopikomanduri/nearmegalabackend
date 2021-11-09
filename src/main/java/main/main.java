@@ -621,6 +621,19 @@ System.out.println(ex.getMessage());
             return eventID;
         });
 
+        post("/registerUserEvent", (request, response) -> {
+            // Create table Merchant_categories(MerchantID varchar(20), selectedCategories BigInt);
+            response.type("application/json");
+            String evnentCondition = request.queryParams("eventCondition");
+            String userID = request.queryParams("userID");
+            String geohash = request.queryParams("geohash");
+            String landmark = request.queryParams("landmark");
+
+            //int eventID =MySQLAccess.dbObj.registerMerchantEvent(merID,evnentCondition);
+
+            return 1;
+        });
+
         post("/registerMyCategories", (request, response) -> {
             // Create table Merchant_categories(MerchantID varchar(20), selectedCategories BigInt);
             response.type("application/json");

@@ -2262,7 +2262,7 @@ closedon datetime
                     .executeQuery(merchantQuery);
             String eventConditions = "";
 
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 EventPayload eventPayload =new EventPayload();
                 eventPayload.EventCondition=resultSet.getString("eventCondition");
                 eventPayload.EventID = resultSet.getInt("EventID");
@@ -2326,7 +2326,7 @@ closedon datetime
             // Result set get the result of the SQL query
             resultSet = statement
                     .executeQuery(merchantQuery);
-            if (resultSet.next()) {
+            while (resultSet.next()) {
 
                 EventIds.add(resultSet.getInt("EventID"));
             }

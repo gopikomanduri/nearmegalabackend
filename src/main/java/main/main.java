@@ -155,7 +155,7 @@ public class main {
 
             return str;
         });
-        post("/postadsaroundbasedoncategory", (request, response) -> {
+        post("/getadsaroundbasedoncategory", (request, response) -> {
             //      System.out.println("pushing adzz  : "+request.toStringz());
             response.type("application/json");
 

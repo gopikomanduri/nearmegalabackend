@@ -99,6 +99,8 @@ public class main {
             temp.geo=id;
             String str = test.toJson(temp);
             try {
+                System.out.println("ad id is  : "+id);
+                System.out.println(" event id is  : "+eventID);
                 MySQLAccess.dbObj.insertMerchantAdEvent(Integer.parseInt(id), temp.merchantid, Integer.parseInt(eventID));
             }
             catch (Exception ex)

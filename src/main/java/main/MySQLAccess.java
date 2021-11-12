@@ -1002,7 +1002,7 @@ LNG VARCHAR(10)
 
     public Integer insertMerchantAdEvent(int adId,String Merchant_id,int event)
     {
-
+        System.out.println("Entered adding Ad event with id : "+event);
         Integer generatedKey = -1;
 
         int isCreated = createMerchantEventAdRegisterTable(Merchant_id,true);

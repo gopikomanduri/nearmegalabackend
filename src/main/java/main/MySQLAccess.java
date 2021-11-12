@@ -2376,11 +2376,13 @@ isValid=true;
             // Result set get the result of the SQL query
             resultSet = statement
                     .executeQuery(merchantQuery);
-            String eventcriterias = "";
-            List<String> criterias= new ArrayList<>();
-            while (resultSet.next()) {
 
-                eventcriterias = resultSet.getString("criteria");
+            List<EventCriteriaPayload> criterias= new ArrayList<>();
+            while (resultSet.next()) {
+                EventCriteriaPayload eventcriterias = new EventCriteriaPayload();
+                eventcriterias.EventCriteria = resultSet.getString("criteria");
+                eventcriterias.criteriaID = resultSet.getInt("criteriaID");
+                eventcriterias.CriteriaDataType = resultSet.getString("CriteriaDataType");
                 criterias.add(eventcriterias);
             }
 

@@ -1342,7 +1342,7 @@ LNG VARCHAR(10)
         }
         catch (Exception ex)
         {
-
+            System.out.println(ex.getMessage().toString());
         }
         return  out;
     }

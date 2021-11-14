@@ -2353,7 +2353,7 @@ closedon datetime
             resultSet = statement
                     .executeQuery(merchantQuery);
             if (resultSet.next()) {
-isValid=true;
+                isValid=true;
             }
             return isValid;
         } catch (Exception ex) {

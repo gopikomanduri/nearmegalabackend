@@ -1017,7 +1017,7 @@ LNG VARCHAR(10)
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        System.out.println("Added table! ");
         if(isCreated!=-1) {
             try {
                 String sql = "INSERT INTO " + tableName + " (EventID, adID)" +
@@ -1335,8 +1335,10 @@ LNG VARCHAR(10)
                 // CREATE TABLE new_tbl LIKE orig_tbl;
                 statement = connect.createStatement();
                 String createStatement = "CREATE TABLE "+tableName+"  LIKE Merchant_ad_events;";
+                System.out.println(createStatement);
                 statement.executeUpdate(createStatement);
                 statement.close();
+                System.out.println("Added table! ");
                 out=0;
             }
         }

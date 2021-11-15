@@ -101,7 +101,7 @@ public class main {
             try {
                 System.out.println("ad id is  : "+id);
                 System.out.println(" event id is  : "+eventID);
-                MySQLAccess.dbObj.insertMerchantAdEvent(Integer.parseInt(id), temp.merchantid, Integer.parseInt(eventID));
+                MySQLAccess.dbObj.insertMerchantAdEvent(Integer.parseInt(id), adreceived.merchantid, Integer.parseInt(eventID));
             }
             catch (Exception ex)
             {

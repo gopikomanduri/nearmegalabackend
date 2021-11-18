@@ -49,16 +49,18 @@ public class AdPusher  {
             List<Integer> adsTobeRemoved =  new ArrayList<>();
 
             for (int k=0; k < adRes.size(); k++) {
-                List<Integer> events = MySQLAccess.dbObj.getEventsforAd(adRes.get(k).merchantid,adRes.get(k).Id);
-                for (int eventId:
-                        events){
-                    EventPayload eventPayload = MySQLAccess.dbObj.getMerchantEvent(adRes.get(k).merchantid,eventId);
-                    System.out.println("checking event for merchant "+adRes.get(k).merchantid +"with event "+eventId);
-                    for (int i = 0; i < lastReceivedAdDetails.length; i++) {
-                        System.out.println("checking for "+lastReceivedAdDetails[i].UserID +"with condition "+eventPayload.EventCondition);
-                        if (!MySQLAccess.dbObj.CheckIfAdValidForUser(lastReceivedAdDetails[i].UserID, eventPayload.EventCondition)) {
+                if(adRes.get(k).Id!=-1) {
+                    List<Integer> events = MySQLAccess.dbObj.getEventsforAd(adRes.get(k).merchantid, adRes.get(k).Id);
+                    for (int eventId :
+                            events) {
+                        EventPayload eventPayload = MySQLAccess.dbObj.getMerchantEvent(adRes.get(k).merchantid, eventId);
+                        System.out.println("checking event for merchant " + adRes.get(k).merchantid + "with event " + eventId);
+                        //for (int i = 0; i < lastReceivedAdDetails.length; i++) {
+                        System.out.println("checking for " + lastReceivedAdDetails[0].UserID + "with condition " + eventPayload.EventCondition);
+                        if (!MySQLAccess.dbObj.CheckIfAdValidForUser(lastReceivedAdDetails[0].UserID, eventPayload.EventCondition)) {
                             adsTobeRemoved.add(adRes.get(k).Id);
                         }
+                        //}
                     }
                 }
             }

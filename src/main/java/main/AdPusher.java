@@ -46,7 +46,7 @@ public class AdPusher  {
             adRes = removeDuplicates(adRes);
             System.out.println("fectched /ads .. ");
 
-            List<Integer> adsTobeRemoved =  new ArrayList<>();
+            List<AdPayLoadResponse> adsTobeRemoved =  new ArrayList<>();
 
             for (int k=0; k < adRes.size(); k++) {
                 if(adRes.get(k).Id!=-1) {
@@ -59,13 +59,13 @@ public class AdPusher  {
                         System.out.println("checking for " + lastReceivedAdDetails[0].UserID + "with condition " + eventPayload.EventCondition);
                         if (!MySQLAccess.dbObj.CheckIfAdValidForUser(lastReceivedAdDetails[0].UserID, eventPayload.EventCondition)) {
                             System.out.println("removing ad" + adRes.get(k).Id);
-                            adsTobeRemoved.add(adRes.get(k).Id);
+                            adsTobeRemoved.add(adRes.get(k));
                         }
                         //}
                     }
                 }
             }
-            for(int advID: adsTobeRemoved)
+            for(AdPayLoadResponse advID: adsTobeRemoved)
             {
                 adRes.remove(advID);
             }

@@ -78,6 +78,7 @@ public class AdPusher  {
         }
         catch(Exception ex)
         {
+            System.out.println("Failed to check"+ex.getMessage());
             str = "";
             return str;
         }

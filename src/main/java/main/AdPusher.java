@@ -58,6 +58,7 @@ public class AdPusher  {
                         //for (int i = 0; i < lastReceivedAdDetails.length; i++) {
                         System.out.println("checking for " + lastReceivedAdDetails[0].UserID + "with condition " + eventPayload.EventCondition);
                         if (!MySQLAccess.dbObj.CheckIfAdValidForUser(lastReceivedAdDetails[0].UserID, eventPayload.EventCondition)) {
+                            System.out.println("removing ad" + adRes.get(k).Id);
                             adsTobeRemoved.add(adRes.get(k).Id);
                         }
                         //}

@@ -4000,8 +4000,12 @@ pointstomerchant int(10)
                         "OR (A.ValidTillYear = " + vay + " AND A.ValidTillMonth = " + vam + "  AND A.ValidTillDate >= " + vad + "))";
 
                 if (merchantid != null) {
-                    sqlcmd = "select * from ad_" + geohash + " as A where A.MerchantId ='" + merchantid + "' AND " + " A.Id > " + intLastId+" AND (A.Category & (1 <<"+ Category+")) > 0";
-
+                    if (Category!=0) {
+                        sqlcmd = "select * from ad_" + geohash + " as A where A.MerchantId ='" + merchantid + "' AND " + " A.Id > " + intLastId + " AND (A.Category & (1 <<" + Category + ")) > 0";
+                    }
+                    else{
+                        sqlcmd = "select * from ad_" + geohash + " as A where A.MerchantId ='" + merchantid + "' AND " + " A.Id > " + intLastId;
+                    }
                     ignoreB = true;
                 }
 

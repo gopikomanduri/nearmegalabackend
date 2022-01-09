@@ -111,7 +111,7 @@ public class AdPusher  {
         }
 
         List<AdPayLoadResponse> adRes = new ArrayList<>();
-
+        Integer Cat=0;
         if (merchantid==null)
         {
             merchantid ="";
@@ -121,6 +121,7 @@ public class AdPusher  {
         {
             LastReceivedAdStruct temp = lastReceivedAdDetails[i];
             for(int j=0; j<temp.geoHash.length; j++) {
+                Cat = temp.Category;
                 adRes.addAll(MySQLAccess.dbObj.fetchAd(temp.geoHash[j], temp.lastReceivedAdId, merchantid, temp.Category));
                 // Need to be removed later this is to push covid related ads to history
                 adRes.addAll(MySQLAccess.dbObj.fetchAd(temp.geoHash[j], temp.lastReceivedAdId, merchantid, 29));
@@ -130,6 +131,10 @@ public class AdPusher  {
         {
             LastReceivedAdStruct temp = tobeadded.get(i);
 
+            if(temp.Category == null)
+            {
+                temp.Category =Cat;
+            }
             for(int j=0;j<temp.geoHash.length;j++) {
                 System.out.println("Trying to fetch history for geoshashses lenght"+temp.geoHash.length);
                 System.out.println("Trying to fetch history for "+ merchantid +" for geohash "+ temp.geoHash[j]+ " with "+ temp.lastReceivedAdId +" "+temp.Category);

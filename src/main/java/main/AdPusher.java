@@ -132,7 +132,7 @@ public class AdPusher  {
 
             for(int j=0;j<temp.geoHash.length;j++) {
                 System.out.println("Trying to fetch history for geoshashses lenght"+temp.geoHash.length);
-                System.out.println("Trying to fetch history for "+ merchantid +" for geohash "+ temp.geoHash[j]);
+                System.out.println("Trying to fetch history for "+ merchantid +" for geohash "+ temp.geoHash[j]+ " with "+ temp.lastReceivedAdId +" "+temp.Category);
                 adRes.addAll(MySQLAccess.dbObj.fetchAd(temp.geoHash[j], temp.lastReceivedAdId, merchantid, temp.Category));
             }
         }

@@ -133,7 +133,7 @@ public class AdPusher  {
 
             if(temp.Category == null)
             {
-                temp.Category =Cat;
+                temp.Category =2147483647; // default value to allow to get max all categories
             }
             for(int j=0;j<temp.geoHash.length;j++) {
                 System.out.println("Trying to fetch history for geoshashses lenght"+temp.geoHash.length);

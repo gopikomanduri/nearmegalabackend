@@ -26,4 +26,6 @@ public class AdPayLoad {
   public String maxdiscount;
   public String discdesc;
   public String contatNumber;
+  public Integer Price;
+  public Integer Unit;
 }

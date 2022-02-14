@@ -870,6 +870,8 @@ LNG VARCHAR(10)
         return generatedKey;
     }
 
+
+
     public boolean CheckIfSlotMatches(Merchantslot obj)
     {
         boolean slotExist = false;
@@ -4519,6 +4521,75 @@ minamount int(6)
 
     }
 
+    public Integer insertTransaction(String customerID,int ad_id,String Merchant_Id_geohash, Date timestamp, boolean status)
+    {
+
+        Integer generatedKey = -1;
+
+        int isCreated = createTransactionsTableIfNotExist(customerID);
+
+        String transactsTable = customerID+"_Transactations";
+
+
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("the slot received for merchant is "+transactsTable+" \n is ");
+        if(isCreated!=-1) {
+            try {
+                String sql = "INSERT INTO " + transactsTable + " (adId, timeStamp, status, Merchant_geohash)" +
+                        "VALUES (?, ?, ?, ?)";
+                PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setInt(1, ad_id);
+                preparedStatement.setDate(2, timestamp);
+                preparedStatement.setBoolean(3, status);
+                preparedStatement.setString(4, Merchant_Id_geohash);
+                preparedStatement.executeUpdate();
+
+                ResultSet rs = preparedStatement.getGeneratedKeys();
+                if (rs.next()) {
+                    generatedKey = rs.getInt(1);
+                }
+                preparedStatement.close();
+                return generatedKey;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return generatedKey;
+            }
+        }
+        return generatedKey;
+    }
+
+    public int createTransactionsTableIfNotExist(String customerID) {
+        int isCreated=-1;
+        try {
+
+            String actualTable = "customerID_Transactations";
+            String mytabename = customerID+"_Transactations";
+            DatabaseMetaData dmd = connect.getMetaData();
+
+
+            ResultSet tables = dmd.getTables(null, null, mytabename, null);
+            if (tables.next()) {
+                // Table exists
+            } else {
+                // CREATE TABLE new_tbl LIKE orig_tbl;
+                statement = connect.createStatement();
+                String createStatement = "CREATE TABLE "+mytabename+"  LIKE "+actualTable+" ;";
+                isCreated = statement.executeUpdate(createStatement);
+                //   statement.close();
+            }
+        }
+        catch (Exception ex)
+        {
+            return isCreated;
+        }
+        return isCreated;
+    }
 
     private List<NegotationPayLoadResponse> resultSetToNegotiationsResponsePayLoad(ResultSet resultSet)
     {

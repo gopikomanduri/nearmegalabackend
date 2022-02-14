@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -400,7 +401,58 @@ System.out.println(ex.getMessage());
 
             //  return "Gopi";
         });
+        post("/recordPaymentTransaction", (request, response) -> {
+            response.type("application/json");
+            String adId = request.queryParams("adID");
+            String merchantIdReceived = request.queryParams("merchantID_geohash");
+            String customerIdReceived = request.queryParams("customerID");
+            String timestamp = request.queryParams("TimeStamp");
 
+            MySQLAccess.dbObj.insertTransaction(customerIdReceived,Integer.valueOf(adId),merchantIdReceived, Date.valueOf(timestamp),false);
+
+            return 1;//recordID against transaction
+
+            //  return "Gopi";
+        });
+        post("/getMyPaymentRecords", (request, response) -> {
+            response.type("application/json");
+
+            String customerIdReceived = request.queryParams("customerID");
+
+
+            //transaction transactionObj = new transaction();
+            //String resVal = transactionObj.addTransaction(merchantIdReceived,customerIdReceived,offer);
+            //store in dataase
+            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
+
+//            String lng = request.queryParams("lng");
+//            String lastId = request.queryParams("lastId");
+//            merchant reg = new merchant();
+//            String merchantId =  reg.registerMerchant(reg);
+            //     System.out.println("for /RegMerchant .. response sent "+merchantId);
+            return 1;//recordID against transaction
+
+            //  return "Gopi";
+        });
+        post("/PaymentTransactionStatus", (request, response) -> {
+            response.type("application/json");
+            String merchantIdReceived = request.queryParams("recordID");
+
+
+            //transaction transactionObj = new transaction();
+            //String resVal = transactionObj.addTransaction(merchantIdReceived,customerIdReceived,offer);
+            //store in dataase
+            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
+
+//            String lng = request.queryParams("lng");
+//            String lastId = request.queryParams("lastId");
+//            merchant reg = new merchant();
+//            String merchantId =  reg.registerMerchant(reg);
+            //     System.out.println("for /RegMerchant .. response sent "+merchantId);
+            return true;
+
+            //  return "Gopi";
+        });
         post("/adswithevents", (request, response) -> {
             response.type("application/json");
             String dataReceived = request.body();//request.queryParams("geohash");

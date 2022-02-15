@@ -4520,7 +4520,66 @@ minamount int(6)
         }
 
     }
+    public boolean getTransactionStatus(String customerID,int recordID)
+    {
+        boolean transactionStatus = false;
+        String transactsTable = customerID+"_Transactations";
+        try {
+            if((connect == null) || (connect.isClosed() == true))
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            preparedStatement = connect
+                    .prepareStatement("SELECT *  from "+transactsTable+" where recordId="+ recordID);
+            resultSet = preparedStatement.executeQuery();
 
+            while(resultSet.next())
+            {
+                transactionStatus = resultSet.getBoolean("status");
+            }
+            return transactionStatus;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public String getTransactions(String customerID)
+    {
+        String transactions = "";
+        String transactsTable = customerID+"_Transactations";
+
+        List<PaymemtTransaction> pts =new ArrayList<PaymemtTransaction>();
+        try {
+            if((connect == null) || (connect.isClosed() == true))
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            preparedStatement = connect
+                    .prepareStatement("SELECT *  from "+transactsTable);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next())
+            {
+                PaymemtTransaction pt =new PaymemtTransaction();
+                pt.adId = resultSet.getInt("adId");
+                pt.recordID = resultSet.getInt("recordID");
+                pt.timeStamp = resultSet.getDate("timeStamp");
+                pt.status = resultSet.getBoolean("status");
+                pts.add(pt);
+            }
+            transactions = new Gson().toJson(pts);
+            return transactions;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "-1";
+        }
+    }
     public Integer insertTransaction(String customerID,int ad_id,String Merchant_Id_geohash, Date timestamp, boolean status)
     {
 

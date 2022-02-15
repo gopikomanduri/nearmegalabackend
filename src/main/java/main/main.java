@@ -418,40 +418,17 @@ System.out.println(ex.getMessage());
             response.type("application/json");
 
             String customerIdReceived = request.queryParams("customerID");
-
-
-            //transaction transactionObj = new transaction();
-            //String resVal = transactionObj.addTransaction(merchantIdReceived,customerIdReceived,offer);
-            //store in dataase
-            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
-
-//            String lng = request.queryParams("lng");
-//            String lastId = request.queryParams("lastId");
-//            merchant reg = new merchant();
-//            String merchantId =  reg.registerMerchant(reg);
-            //     System.out.println("for /RegMerchant .. response sent "+merchantId);
-            return 1;//recordID against transaction
-
-            //  return "Gopi";
+            String records = MySQLAccess.dbObj.getTransactions(customerIdReceived);
+            System.out.println(records);
+            return records;
         });
         post("/PaymentTransactionStatus", (request, response) -> {
             response.type("application/json");
-            String merchantIdReceived = request.queryParams("recordID");
+            String recordID = request.queryParams("recordID");
+            String customerIdReceived =request.queryParams("customerID");
+            return MySQLAccess.dbObj.getTransactionStatus(customerIdReceived,Integer.valueOf(recordID));
+            //return true;
 
-
-            //transaction transactionObj = new transaction();
-            //String resVal = transactionObj.addTransaction(merchantIdReceived,customerIdReceived,offer);
-            //store in dataase
-            //      LastReceivedAdStruct[] lastReceivedAdDetails = new Gson().fromJson(lat,LastReceivedAdStruct[].class);
-
-//            String lng = request.queryParams("lng");
-//            String lastId = request.queryParams("lastId");
-//            merchant reg = new merchant();
-//            String merchantId =  reg.registerMerchant(reg);
-            //     System.out.println("for /RegMerchant .. response sent "+merchantId);
-            return true;
-
-            //  return "Gopi";
         });
         post("/adswithevents", (request, response) -> {
             response.type("application/json");

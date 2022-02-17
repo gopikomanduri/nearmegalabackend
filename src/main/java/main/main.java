@@ -407,8 +407,10 @@ System.out.println(ex.getMessage());
             String merchantIdReceived = request.queryParams("merchantID_geohash");
             String customerIdReceived = request.queryParams("customerID");
             String timestamp = request.queryParams("TimeStamp");
+        System.out.println("recevd adid: "+ adId+ " mer: "+merchantIdReceived +" cusID : "+customerIdReceived );
+            int advID=Integer.parseInt(adId);
 
-            MySQLAccess.dbObj.insertTransaction(customerIdReceived,Integer.valueOf(adId),merchantIdReceived, Date.valueOf(timestamp),false);
+            MySQLAccess.dbObj.insertTransaction(customerIdReceived,advID,merchantIdReceived, Date.valueOf(timestamp),false);
 
             return 1;//recordID against transaction
 
@@ -426,7 +428,8 @@ System.out.println(ex.getMessage());
             response.type("application/json");
             String recordID = request.queryParams("recordID");
             String customerIdReceived =request.queryParams("customerID");
-            return MySQLAccess.dbObj.getTransactionStatus(customerIdReceived,Integer.valueOf(recordID));
+            int rcID= Integer.parseInt(recordID);
+            return MySQLAccess.dbObj.getTransactionStatus(customerIdReceived,rcID);
             //return true;
 
         });

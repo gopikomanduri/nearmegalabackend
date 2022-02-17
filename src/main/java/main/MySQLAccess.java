@@ -4629,8 +4629,15 @@ minamount int(6)
 
             String actualTable = "customerID_Transactations";
             String mytabename = customerID+"_Transactations";
+            try {
+                if(connect.isClosed() == true)
+                    connect = initConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             DatabaseMetaData dmd = connect.getMetaData();
-
+System.out.println("trying to create table"+ mytabename);;
+System.out.println(mytabename);
 
             ResultSet tables = dmd.getTables(null, null, mytabename, null);
             if (tables.next()) {
@@ -4646,6 +4653,7 @@ minamount int(6)
         }
         catch (Exception ex)
         {
+            System.out.println("failed to create");
             System.out.println(ex.getMessage());
             return isCreated;
         }

@@ -4639,12 +4639,14 @@ minamount int(6)
                 // CREATE TABLE new_tbl LIKE orig_tbl;
                 statement = connect.createStatement();
                 String createStatement = "CREATE TABLE "+mytabename+"  LIKE "+actualTable+" ;";
+                System.out.println(createStatement);
                 isCreated = statement.executeUpdate(createStatement);
                 //   statement.close();
             }
         }
         catch (Exception ex)
         {
+            System.out.println(ex.getMessage());
             return isCreated;
         }
         return isCreated;

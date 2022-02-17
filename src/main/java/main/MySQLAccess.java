@@ -4580,7 +4580,7 @@ minamount int(6)
             return "-1";
         }
     }
-    public Integer insertTransaction(String customerID,int ad_id,String Merchant_Id_geohash, Date timestamp, boolean status)
+    public Integer insertTransaction(String customerID,int ad_id,String Merchant_Id_geohash, Timestamp timestamp, boolean status)
     {
 
         Integer generatedKey = -1;
@@ -4603,7 +4603,7 @@ minamount int(6)
                         "VALUES (?, ?, ?, ?)";
                 PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setInt(1, ad_id);
-                preparedStatement.setDate(2, timestamp);
+                preparedStatement.setTimestamp(2, timestamp);
                 preparedStatement.setBoolean(3, status);
                 preparedStatement.setString(4, Merchant_Id_geohash);
                 preparedStatement.executeUpdate();

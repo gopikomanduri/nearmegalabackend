@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -410,7 +410,7 @@ System.out.println(ex.getMessage());
         System.out.println("recevd adid: "+ adId+ " mer: "+merchantIdReceived +" cusID : "+customerIdReceived );
             int advID=Integer.parseInt(adId);
 
-            MySQLAccess.dbObj.insertTransaction(customerIdReceived,advID,merchantIdReceived, Date.valueOf(timestamp),false);
+            MySQLAccess.dbObj.insertTransaction(customerIdReceived,advID,merchantIdReceived, Timestamp.valueOf(timestamp),false);
 
             return 1;//recordID against transaction
 

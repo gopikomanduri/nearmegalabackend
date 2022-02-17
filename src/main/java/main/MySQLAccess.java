@@ -4644,6 +4644,7 @@ System.out.println(mytabename);
             ResultSet tables = dmd.getTables(null, null, mytabename, null);
             if (tables.next()) {
                 // Table exists
+                isCreated=1;
             } else {
                 // CREATE TABLE new_tbl LIKE orig_tbl;
                 statement = connect.createStatement();
@@ -4651,6 +4652,7 @@ System.out.println(mytabename);
                 System.out.println(createStatement);
                 isCreated = statement.executeUpdate(createStatement);
                 //   statement.close();
+                isCreated=1;
             }
         }
         catch (Exception ex)

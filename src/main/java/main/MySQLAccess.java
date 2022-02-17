@@ -4601,11 +4601,13 @@ minamount int(6)
             try {
                 String sql = "INSERT INTO " + transactsTable + " (adId, timeStamp, status, Merchant_geohash)" +
                         "VALUES (?, ?, ?, ?)";
+                System.out.println(sql);
                 PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setInt(1, ad_id);
                 preparedStatement.setTimestamp(2, timestamp);
                 preparedStatement.setBoolean(3, status);
                 preparedStatement.setString(4, Merchant_Id_geohash);
+                System.out.println(preparedStatement.getMetaData());
                 preparedStatement.executeUpdate();
 
                 ResultSet rs = preparedStatement.getGeneratedKeys();

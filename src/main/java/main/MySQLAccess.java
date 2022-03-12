@@ -2951,7 +2951,7 @@ utilized int(6)
 
     public Integer insertAd(String MerchantId, String category, String vd, String vm, String vy, String imgurl,String itemdesc,String offercode, String geohash
     , String mindiscount, String maxdiscount, String discdesc,
-                            double latitude, double longitude)
+                            double latitude, double longitude, int price,int unit)
     {
 
         /*
@@ -3007,8 +3007,8 @@ utilized int(6)
         try {
             String sql = "INSERT INTO ad_"+geohash+" (MerchantId, category, validtilldate, validtillmonth, validtillyear," +
                     "validfromdate, validfrommonth, validfromyear, adimgurl, itemdesc, receivedon, offercode, mindiscount,maxdiscount,discdesc," +
-                    "latitude, longitude)" +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "latitude, longitude,Price,Unit)" +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
             PreparedStatement preparedStatement = connect.prepareStatement(sql,  Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, MerchantId);
             preparedStatement.setString(2, category);
@@ -3027,7 +3027,8 @@ utilized int(6)
             preparedStatement.setString(15, discdesc);
             preparedStatement.setDouble(16, latitude);
             preparedStatement.setDouble(17, longitude);
-
+            preparedStatement.setInt(18, price);
+            preparedStatement.setInt(19, unit);
             preparedStatement.executeUpdate();
 
 
@@ -3708,6 +3709,9 @@ groupdesc varchar(256)
                 }
                 obj.lat = resultSet.getDouble("A.latitude");
                 obj.lng = resultSet.getDouble("A.longitude");
+                obj.Price = resultSet.getInt("A.Price");
+                obj.Unit = resultSet.getInt("A.Unit");
+            //Price,Unit
 //            LatLng temp = null;
 ////            temp.lng = 0.0;
 ////            temp.lat = 0.0;

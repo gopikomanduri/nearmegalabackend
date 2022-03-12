@@ -433,6 +433,15 @@ System.out.println(ex.getMessage());
             //return true;
 
         });
+        post("/confirmPaymentandacceptdeal", (request, response) -> {
+            response.type("application/json");
+            String recordID = request.queryParams("recordID");
+            String customerIdReceived =request.queryParams("customerID");
+            int rcID= Integer.parseInt(recordID);
+            return MySQLAccess.dbObj.getTransactionStatus(customerIdReceived,rcID);
+            //return true;
+
+        });
         post("/adswithevents", (request, response) -> {
             response.type("application/json");
             String dataReceived = request.body();//request.queryParams("geohash");

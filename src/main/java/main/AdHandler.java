@@ -31,7 +31,7 @@ public class AdHandler implements Callable {
         }
     Integer adId = MySQLAccess.dbObj.insertAd(receivedAd.merchantid, receivedAd.cat, receivedAd.tilldate,
             receivedAd.tillmonth, receivedAd.tillyear, receivedAd.imgUrl, receivedAd.itemdesc, offercode, receivedAd.geo,
-            receivedAd.mindiscount,receivedAd.maxdiscount,receivedAd.discdesc, receivedAd.lat, receivedAd.lng
+            receivedAd.mindiscount,receivedAd.maxdiscount,receivedAd.discdesc, receivedAd.lat, receivedAd.lng,receivedAd.Price,receivedAd.Unit
             );
 
     MySQLAccess.dbObj.insertIntoNegotiateOffer(adId,receivedAd.geo,receivedAd.negotiate, receivedAd.minBusiness);

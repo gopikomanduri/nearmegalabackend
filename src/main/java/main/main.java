@@ -403,11 +403,11 @@ System.out.println(ex.getMessage());
         });
         post("/recordPaymentTransaction", (request, response) -> {
             response.type("application/json");
-            String adId = request.queryParams("adID");
-            String merchantIdReceived = request.queryParams("merchantID_geohash");
-            String customerIdReceived = request.queryParams("customerID");
+            String adId = request.queryParams("adID");//statusID
+            String merchantIdReceived = request.queryParams("merchantID_geohash");//userid of perosn who posted status
+            String customerIdReceived = request.queryParams("customerID");//joinee userID
             String timestamp = request.queryParams("TimeStamp");
-        System.out.println("recevd adid: "+ adId+ " mer: "+merchantIdReceived +" cusID : "+customerIdReceived );
+            System.out.println("recevd adid: "+ adId+ " mer: "+merchantIdReceived +" cusID : "+customerIdReceived );
             int advID=Integer.parseInt(adId);
 
             MySQLAccess.dbObj.insertTransaction(customerIdReceived,advID,merchantIdReceived, Timestamp.valueOf(timestamp),false);
@@ -828,8 +828,9 @@ System.out.println(ex.getMessage());
             System.out.println("for /joinad .. response sent "+statusId);
             return statusId;
 
-            //  return "Gopi";
+            //  return "Gopi";fetchalljoinees
         });
+
         post("/fetchstatuses", (request, response) -> {
             response.type("application/json");
             String dataReceived = request.queryParams("geohash");
@@ -1813,7 +1814,7 @@ System.out.println(ex.getMessage());
             response.type("application/json");
             String statusId = request.queryParams("statusid");
             String geohash =  request.queryParams("geohash");
-
+            String userId =  request.queryParams("userId");
 
             System.out.println("for /respondtostatus .. request received "+statusId+"  : "+geohash);
 
@@ -1822,8 +1823,8 @@ System.out.println(ex.getMessage());
 //            String lng = request.queryParams("lng");
 //            String lastId = request.queryParams("lastId");
             statusHandler obj = new statusHandler();
-//            String statuses =  obj.fetchalljoinees(Integer.valueOf(statusId),geohash);
-            String statuses ="Commented API";
+           String statuses =  obj.fetchalljoinees(Integer.valueOf(statusId),Integer.valueOf(userId));
+            //String statuses ="Commented API";
             System.out.println("for /respondtostatus .. response sent "+statuses);
             return statuses;
 

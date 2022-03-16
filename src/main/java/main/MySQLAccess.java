@@ -4550,6 +4550,34 @@ minamount int(6)
             return false;
         }
     }
+
+    public boolean getTransactionStatus(int customerID,int statusID)
+    {
+        boolean transactionStatus = false;
+        String transactsTable = customerID+"_Transactations";
+        try {
+            if((connect == null) || (connect.isClosed() == true))
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            preparedStatement = connect
+                    .prepareStatement("SELECT *  from "+transactsTable+" where adId="+ statusID);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next())
+            {
+                transactionStatus = resultSet.getBoolean("status");
+            }
+            return transactionStatus;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public String getTransactions(String customerID)
     {
         String transactions = "";
@@ -4874,12 +4902,13 @@ statusid int(11)
 //        preparedStatement.executeUpdate();
 
 
-        String sql = "INSERT INTO ad_join (statusid,userid)"+
+            String sql = "INSERT INTO ad_join (statusid,userid,paymentStatus)"+
                 "VALUES (?,?)";
         PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 //        preparedStatement.setString(1, geohash);
         preparedStatement.setInt(1, statusid);
         preparedStatement.setInt(2, userid);
+            preparedStatement.setInt(2, -1);
         preparedStatement.executeUpdate();
 
 
@@ -4887,12 +4916,31 @@ statusid int(11)
         if (rs.next()) {
             generatedKey = rs.getInt(1);
         }            preparedStatement.close();
+            updatePaymentStatus(userid, statusid);
         return generatedKey.toString();
 
     } catch (SQLException e) {
         e.printStackTrace();
         return generatedKey.toString();
     }
+    }
+
+    private int updatePaymentStatus(Integer userid, Integer statusId) {
+        int paymentStatus =-1;
+        try {
+            if(getTransactionStatus(userid, statusId))
+            {
+                paymentStatus =1;
+            }
+            else {
+                paymentStatus =0;
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+        return paymentStatus;
     }
 
     public String fetchjoineecount(Integer statusid, Integer userID) {
@@ -4940,13 +4988,14 @@ statusid int(11)
 
     }
 
-    public List<String> fetchalljoinees(Integer statusid, Integer userid) {
+    public List<JoinCountPayLoad> fetchalljoinees(Integer statusid, Integer userid) {
 
         String tableName = "ad_join";
         String sqlcmd = "select contact from "+tableName+" where statusId="+statusid;
-        List<String> contacts = new ArrayList<>();
+        List<JoinCountPayLoad> response = new ArrayList<JoinCountPayLoad>();
         try
         {
+            updatePaymentStatus(userid,statusid);
             if(connect.isClosed() == true)
                 connect = initConnection();
 
@@ -4957,16 +5006,21 @@ statusid int(11)
 
             resultSet = statement
                     .executeQuery(sqlcmd);
-            while(resultSet.next())
-            {
-                contacts.add(resultSet.getString(1));
-            }
+                while(resultSet.next()) {
 
-            return contacts;
+                    JoinCountPayLoad obj = new JoinCountPayLoad();
+                    obj.id = resultSet.getInt("id");
+                    obj.userid = resultSet.getInt("userid");
+                    obj.paymentstatus = resultSet.getInt("paymentStatus");
+                    obj.statusId = resultSet.getInt("statusid");
+
+                    response.add(obj);
+                }
+                return response;
         }
         catch(Exception ex)
         {
-            return contacts;
+            return response;
         }
 
     }

@@ -5060,7 +5060,7 @@ statusid int(11)
 //        preparedStatement.setString(1, geohash);
         preparedStatement.setInt(1, statusid);
         preparedStatement.setInt(2, userid);
-            preparedStatement.setInt(2, -1);
+            //preparedStatement.setInt(2, -1);
         preparedStatement.executeUpdate();
 
 

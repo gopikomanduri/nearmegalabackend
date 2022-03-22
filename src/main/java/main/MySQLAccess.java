@@ -5055,7 +5055,7 @@ statusid int(11)
 
 
             String sql = "INSERT INTO ad_join (statusid,userid,paymentStatus)"+
-                "VALUES (?,?)";
+                "VALUES (?,?,?)";
         PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 //        preparedStatement.setString(1, geohash);
         preparedStatement.setInt(1, statusid);

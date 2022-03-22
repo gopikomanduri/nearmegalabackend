@@ -4656,6 +4656,158 @@ minamount int(6)
         }
         return generatedKey;
     }
+    public Integer updateDeliveryStatus(Integer statusId,Integer deliveryStatus,Integer userId, Integer customerContact)
+    {
+        String transactsTable = statusId+"_"+userId+"_deliveryStatus";
+
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+
+            PreparedStatement update = connect.prepareStatement
+                    ("UPDATE "+transactsTable+" SET deliveryStatus = "+deliveryStatus+ "WHERE statusid= ?, userid= ?, customerContact= ?");
+
+
+            update.setInt(1, statusId);
+            update.setInt(2, userId);
+            update.setInt(3, customerContact);
+
+            update.executeUpdate();
+
+            update.close();
+            return 1;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public String getDeliveryStatus(Integer statusId,Integer userId)
+    {
+        List<DeliveryStatusPayLoad> response = new ArrayList<DeliveryStatusPayLoad>();
+
+        String transactsTable = statusId+"_"+userId+"_deliveryStatus";
+        String mId = "0";
+        String sqlcmd = "select * from "+transactsTable;
+        try
+        {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+
+
+            PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
+
+            //  stmnt.executeQuery();
+
+            resultSet = stmnt
+                    .executeQuery(sqlcmd);
+
+            while(resultSet.next()) {
+
+                DeliveryStatusPayLoad obj = new DeliveryStatusPayLoad();
+                obj.id = resultSet.getInt("id");
+                obj.userid = resultSet.getInt("userid");
+                obj.customerContact = resultSet.getInt("customerContact");
+                obj.deliveryStatus = resultSet.getInt("deliveryStatus");
+                obj.statusid = resultSet.getInt("statusid");
+                response.add(obj);
+            }
+            String output = new Gson().toJson(response);
+            return output;
+        }
+        catch(Exception ex)
+        {
+            return "Failed";
+        }
+    }
+
+    public Integer insertDeliveryStatus(Integer statusId,Integer deliveryStatus,Integer userId, Integer customerContact)
+    {
+
+        Integer generatedKey = -1;
+
+        String transactsTable = statusId+"_"+userId+"_deliveryStatus";
+
+        int isCreated = createDeliveryTableIfNotExist(transactsTable);
+
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("the slot received for merchant is "+transactsTable+" \n is ");
+        if(isCreated!=-1) {
+            try {
+                String sql = "INSERT INTO " + transactsTable + " (statusid, userid, customerContact, deliveryStatus)" +
+                        "VALUES (?, ?, ?, ?)";
+                System.out.println(sql);
+                PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setInt(1, statusId);
+                preparedStatement.setInt(2, userId);
+                preparedStatement.setInt(3, customerContact);
+                preparedStatement.setInt(4, deliveryStatus);
+                System.out.println(preparedStatement.getMetaData());
+                preparedStatement.executeUpdate();
+
+                ResultSet rs = preparedStatement.getGeneratedKeys();
+                if (rs.next()) {
+                    generatedKey = rs.getInt(1);
+                }
+                preparedStatement.close();
+                return generatedKey;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return generatedKey;
+            }
+        }
+        return generatedKey;
+    }
+    public int createDeliveryTableIfNotExist(String tableName) {
+        int isCreated=-1;
+        try {
+
+            String actualTable = "statusId_UserId_deliveryStatus";
+            String mytabename = tableName;
+            try {
+                if(connect.isClosed() == true)
+                    connect = initConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            DatabaseMetaData dmd = connect.getMetaData();
+            System.out.println("trying to create table"+ mytabename);;
+            System.out.println(mytabename);
+
+            ResultSet tables = dmd.getTables(null, null, mytabename, null);
+            if (tables.next()) {
+                // Table exists
+                isCreated=1;
+            } else {
+                // CREATE TABLE new_tbl LIKE orig_tbl;
+                statement = connect.createStatement();
+                String createStatement = "CREATE TABLE "+mytabename+"  LIKE "+actualTable+" ;";
+                System.out.println(createStatement);
+                isCreated = statement.executeUpdate(createStatement);
+                //   statement.close();
+                isCreated=1;
+            }
+        }
+        catch (Exception ex)
+        {
+            System.out.println("failed to create");
+            System.out.println(ex.getMessage());
+            return isCreated;
+        }
+        return isCreated;
+    }
 
     public int createTransactionsTableIfNotExist(String customerID) {
         int isCreated=-1;
@@ -4670,8 +4822,8 @@ minamount int(6)
                 e.printStackTrace();
             }
             DatabaseMetaData dmd = connect.getMetaData();
-System.out.println("trying to create table"+ mytabename);;
-System.out.println(mytabename);
+            System.out.println("trying to create table"+ mytabename);;
+            System.out.println(mytabename);
 
             ResultSet tables = dmd.getTables(null, null, mytabename, null);
             if (tables.next()) {

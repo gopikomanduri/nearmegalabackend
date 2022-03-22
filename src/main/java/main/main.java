@@ -886,6 +886,40 @@ System.out.println(ex.getMessage());
 
             //  return "Gopi";
         });
+        post("/outForDelivery", (request, response) -> {
+            String str = "";
+            response.type("application/json");
+            String statusId = request.queryParams("statusId");
+            String deliveryStatus=request.queryParams("deliveryStatus");
+            String userId=request.queryParams("userId");
+            String customerContact=request.queryParams("customerContact");
+
+            Integer value = MySQLAccess.dbObj.insertDeliveryStatus(Integer.valueOf(statusId),Integer.valueOf(deliveryStatus),Integer.valueOf(userId),Integer.valueOf(customerContact));
+            return value.toString();
+        });
+
+        post("/orderRecivedUpdate", (request, response) -> {
+            String str = "";
+            response.type("application/json");
+            String statusId = request.queryParams("statusId");
+            String deliveryStatus=request.queryParams("deliveryStatus");
+            String userId=request.queryParams("userId");
+            String customerContact=request.queryParams("customerContact");
+            Integer value = MySQLAccess.dbObj.updateDeliveryStatus(Integer.valueOf(statusId),Integer.valueOf(deliveryStatus),Integer.valueOf(userId),Integer.valueOf(customerContact));
+            return value.toString();
+        });
+
+        post("/orderstatus", (request, response) -> {
+            String str = "";
+            response.type("application/json");
+            String statusId = request.queryParams("statusId");
+            String userId=request.queryParams("userId");
+            String customerContact=request.queryParams("customerContact");
+            str= MySQLAccess.dbObj.getDeliveryStatus(Integer.valueOf(statusId),Integer.valueOf(userId));
+            return str;
+
+        });
+
         post("/getmerchanttokendetails", (request, response) -> {
 
             String str = "";

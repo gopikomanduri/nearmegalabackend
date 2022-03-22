@@ -5034,7 +5034,7 @@ notificationid int(11)
 
 
 
-    public String insertStatusJoinee(Integer statusid, Integer userid) {
+    public String insertStatusJoinee(Integer statusid, Integer userid,Integer PaymentStatus) {
         /*
         geohash varchar(45)
 contact varchar(15)
@@ -5060,7 +5060,7 @@ statusid int(11)
 //        preparedStatement.setString(1, geohash);
         preparedStatement.setInt(1, statusid);
         preparedStatement.setInt(2, userid);
-            //preparedStatement.setInt(2, -1);
+        preparedStatement.setInt(3, PaymentStatus);
         preparedStatement.executeUpdate();
 
 

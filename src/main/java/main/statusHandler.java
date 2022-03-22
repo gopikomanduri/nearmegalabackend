@@ -18,7 +18,7 @@ public class statusHandler {
     {
 //        Integer statusid, String contact, String geohash
         JoinCountPayLoad obj = new Gson().fromJson(payload,JoinCountPayLoad.class);
-         MySQLAccess.dbObj.insertStatusJoinee(obj.statusId, obj.userid);
+         MySQLAccess.dbObj.insertStatusJoinee(obj.statusId, obj.userid,obj.paymentstatus);
          return fetchalljoinees(obj.statusId, obj.userid);
     }
 

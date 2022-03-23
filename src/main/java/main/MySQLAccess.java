@@ -5143,7 +5143,7 @@ statusid int(11)
     public List<JoinCountPayLoad> fetchalljoinees(Integer statusid, Integer userid) {
 
         String tableName = "ad_join";
-        String sqlcmd = "select contact from "+tableName+" where statusId="+statusid;
+        String sqlcmd = "select * from "+tableName+" where statusId="+statusid;
         List<JoinCountPayLoad> response = new ArrayList<JoinCountPayLoad>();
         try
         {

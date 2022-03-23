@@ -5147,7 +5147,12 @@ statusid int(11)
         List<JoinCountPayLoad> response = new ArrayList<JoinCountPayLoad>();
         try
         {
-            updatePaymentStatus(userid,statusid);
+            try{
+            updatePaymentStatus(userid,statusid);}
+            catch(Exception exx)
+            {
+
+            }
             if(connect.isClosed() == true)
                 connect = initConnection();
 

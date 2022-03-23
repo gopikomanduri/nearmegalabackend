@@ -29,7 +29,12 @@ public class statusHandler {
 
     public String fetchalljoinees(Integer statusid, Integer userid)
     {
-
+//        try{
+//            MySQLAccess.dbObj.updatePaymentStatus(userid,statusid);}
+//        catch(Exception exx)
+//        {
+//
+//        }
         List<JoinCountPayLoad> joineeslist = MySQLAccess.dbObj.fetchalljoinees(statusid, userid);
         String contactslist = new Gson().toJson(joineeslist);
 

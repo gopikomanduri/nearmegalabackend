@@ -5077,7 +5077,7 @@ statusid int(11)
     }
     }
 
-    private int updatePaymentStatus(Integer userid, Integer statusId) {
+    public int updatePaymentStatus(Integer userid, Integer statusId) {
         int paymentStatus =-1;
         try {
             if(getTransactionStatus(userid, statusId))
@@ -5147,12 +5147,6 @@ statusid int(11)
         List<JoinCountPayLoad> response = new ArrayList<JoinCountPayLoad>();
         try
         {
-            try{
-            updatePaymentStatus(userid,statusid);}
-            catch(Exception exx)
-            {
-
-            }
             if(connect.isClosed() == true)
                 connect = initConnection();
 

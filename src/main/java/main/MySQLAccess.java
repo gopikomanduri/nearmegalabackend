@@ -5144,6 +5144,7 @@ statusid int(11)
 
         String tableName = "ad_join";
         String sqlcmd = "select * from "+tableName+" where statusId="+statusid;
+        System.out.println("sql cmd "+sqlcmd);
         List<JoinCountPayLoad> response = new ArrayList<JoinCountPayLoad>();
         try
         {
@@ -5167,10 +5168,14 @@ statusid int(11)
 
                     response.add(obj);
                 }
+            System.out.println("respones");
+            System.out.println(response);
                 return response;
         }
         catch(Exception ex)
         {
+            System.out.println(ex.getMessage());
+
             return response;
         }
 

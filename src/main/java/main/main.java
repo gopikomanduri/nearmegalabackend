@@ -869,8 +869,9 @@ System.out.println(ex.getMessage());
             String deliveryStatus=request.queryParams("deliveryStatus");
             String userId=request.queryParams("userId");
             String customerContact=request.queryParams("customerContact");
+            String statusUserID=request.queryParams("statusUserID");
             Integer value = MySQLAccess.dbObj.updateDeliveryStatus(Integer.valueOf(statusId),Integer.valueOf(deliveryStatus),Integer.valueOf(userId),Integer.valueOf(customerContact));
-            PushNotificationBasedonUserID(client,Integer.valueOf(userId),"Order Update","Order is Received");
+            PushNotificationBasedonUserID(client,Integer.valueOf(statusUserID),"Order Update","Order is Received");
             return value.toString();
         });
 

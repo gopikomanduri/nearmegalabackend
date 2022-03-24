@@ -219,30 +219,7 @@ public class main {
 
             if(!regval.equals("-1")) {
                 System.out.println("registered successfully and notifying same");
-                EntityMessage msg = new EntityMessage();
-                consumer reg = new consumer();
-                System.out.println("reached to obtain fire details ");
-                String[] fireID = reg.getUSerFireIDbyconsumerID(uID);
-                System.out.println("obtained fire details and sending to  " + fireID[0]);
-                if (fireID[0] != null) {
-                    msg.addRegistrationToken(fireID[0]);// Add key value pair into payload
-                    msg.putStringData("title", "Hello " + fireID[1]);
-                    msg.putStringData("body", regval);
-                    msg.putStringMess("Your registration is successful!");
-
-
-                    System.out.println("created FCM message");
-                    // push
-                    try {
-                        if (client != null) {
-                            System.out.println(" achived client connection. message is being pushed ");
-                            FcmResponse res = client.pushToEntities(msg);
-                            System.out.println(res);
-                            System.out.println("message pushed ");
-                        }
-                    } catch (Exception ex) {
-                    }
-                }
+                PushNotificationBasedonUserID(client, uID, regval, "Your registration is successful!");
             }
             return "";
         });
@@ -312,30 +289,7 @@ System.out.println(ex.getMessage());
 
                 if (!regval.equals("-1")) {
                     System.out.println("registered successfully and notifying same");
-                    EntityMessage msg = new EntityMessage();
-                    consumer reg = new consumer();
-                    System.out.println("reached to obtain fire details ");
-                    String[] fireID = reg.getUSerFireIDbyconsumerID(vaccineRegistartions.get(i).consumerID);
-                    System.out.println("obtained fire details and sending to  " + fireID[0]);
-                    if (fireID[0] != null) {
-                        msg.addRegistrationToken(fireID[0]);// Add key value pair into payload
-                        msg.putStringData("title", "Hello " + fireID[1]);
-                        msg.putStringData("body", regval);
-                        msg.putStringMess("We found vaccine slots available around your area!");
-
-
-                        System.out.println("created FCM message");
-                        // push
-                        try {
-                            if (client != null) {
-                                System.out.println(" achived client connection. message is being pushed ");
-                                FcmResponse res = client.pushToEntities(msg);
-                                System.out.println(res);
-                                System.out.println("message pushed ");
-                            }
-                        } catch (Exception ex) {
-                        }
-                    }
+                    PushNotificationBasedonUserID(client, vaccineRegistartions.get(i).consumerID, regval, "We found vaccine slots available around your area!");
                 }
             }
             return "-1";
@@ -429,7 +383,12 @@ System.out.println(ex.getMessage());
             String recordID = request.queryParams("recordID");
             String customerIdReceived =request.queryParams("customerID");
             int rcID= Integer.parseInt(recordID);
-            return MySQLAccess.dbObj.getTransactionStatus(customerIdReceived,rcID);
+            boolean paymentstatus =MySQLAccess.dbObj.getTransactionStatus(customerIdReceived,rcID);
+            if(paymentstatus) {
+                PushNotificationBasedonUserID(client, Integer.valueOf(customerIdReceived), "Payment Update", "Your Payment is success!");
+            }
+            return paymentstatus;
+
             //return true;
 
         });
@@ -438,7 +397,11 @@ System.out.println(ex.getMessage());
             String recordID = request.queryParams("recordID");
             String customerIdReceived =request.queryParams("customerID");
             int rcID= Integer.parseInt(recordID);
-            return MySQLAccess.dbObj.getTransactionStatus(customerIdReceived,rcID);
+            boolean paymentstatus =MySQLAccess.dbObj.getTransactionStatus(customerIdReceived,rcID);
+            if(paymentstatus) {
+                PushNotificationBasedonUserID(client, Integer.valueOf(customerIdReceived), "Payment Update", "Your Payment is success!");
+            }
+            return paymentstatus;
             //return true;
 
         });
@@ -895,6 +858,7 @@ System.out.println(ex.getMessage());
             String customerContact=request.queryParams("customerContact");
 
             Integer value = MySQLAccess.dbObj.insertDeliveryStatus(Integer.valueOf(statusId),Integer.valueOf(deliveryStatus),Integer.valueOf(userId),Integer.valueOf(customerContact));
+            PushNotificationBasedonUserID(client,Integer.valueOf(userId),"Order Update","Your Order is Out For Delivery");
             return value.toString();
         });
 
@@ -906,6 +870,7 @@ System.out.println(ex.getMessage());
             String userId=request.queryParams("userId");
             String customerContact=request.queryParams("customerContact");
             Integer value = MySQLAccess.dbObj.updateDeliveryStatus(Integer.valueOf(statusId),Integer.valueOf(deliveryStatus),Integer.valueOf(userId),Integer.valueOf(customerContact));
+            PushNotificationBasedonUserID(client,Integer.valueOf(userId),"Order Update","Order is Received");
             return value.toString();
         });
 
@@ -2149,5 +2114,32 @@ System.out.println(ex.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }*/
+    }
+
+    private static void PushNotificationBasedonUserID(FirebaseMessagingClient client, int uID, String body, String message) {
+        EntityMessage msg = new EntityMessage();
+        consumer reg = new consumer();
+        System.out.println("reached to obtain fire details ");
+        String[] fireID = reg.getUSerFireIDbyconsumerID(uID);
+        System.out.println("obtained fire details and sending to  " + fireID[0]);
+        if (fireID[0] != null) {
+            msg.addRegistrationToken(fireID[0]);// Add key value pair into payload
+            msg.putStringData("title", "Hello " + fireID[1]);
+            msg.putStringData("body", body);
+            msg.putStringMess(message);
+
+
+            System.out.println("created FCM message");
+            // push
+            try {
+                if (client != null) {
+                    System.out.println(" achived client connection. message is being pushed ");
+                    FcmResponse res = client.pushToEntities(msg);
+                    System.out.println(res);
+                    System.out.println("message pushed ");
+                }
+            } catch (Exception ex) {
+            }
+        }
     }
 }

@@ -4738,12 +4738,6 @@ minamount int(6)
         System.out.println("trying to create table "+transactsTable+" \n is ");
         int isCreated = createDeliveryTableIfNotExist(transactsTable);
 
-        try {
-            if(connect.isClosed() == true)
-                connect = initConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         System.out.println("the slot received for merchant is "+transactsTable+" \n is ");
         if(isCreated!=-1) {
             try {

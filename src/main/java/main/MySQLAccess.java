@@ -4693,7 +4693,7 @@ minamount int(6)
         List<DeliveryStatusPayLoad> response = new ArrayList<DeliveryStatusPayLoad>();
 
         String transactsTable = statusId+"_"+userId+"_deliveryStatus";
-        String mId = "0";
+        String output = "-1";
         String sqlcmd = "select * from "+transactsTable;
         System.out.println("for /orderstatus sqlcmd "+sqlcmd);
         try
@@ -4719,14 +4719,14 @@ minamount int(6)
                 obj.statusid = resultSet.getInt("statusid");
                 response.add(obj);
             }
-            String output = new Gson().toJson(response);
+            output = new Gson().toJson(response);
             System.out.println("for /orderstatus returning "+output);
-            return output;
         }
         catch(Exception ex)
         {
-            return "Failed";
+            output ="-1";
         }
+        return output;
     }
 
     public Integer insertDeliveryStatus(Integer statusId,Integer deliveryStatus,Integer userId, Integer customerContact)

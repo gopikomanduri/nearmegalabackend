@@ -4670,7 +4670,7 @@ minamount int(6)
         try {
 
             PreparedStatement update = connect.prepareStatement
-                    ("UPDATE "+transactsTable+" SET deliveryStatus = "+deliveryStatus+ "WHERE statusid= ?, userid= ?, customerContact= ?");
+                    ("UPDATE "+transactsTable+" SET deliveryStatus = "+deliveryStatus+ " WHERE statusid= ?, userid= ?, customerContact= ?");
 
 
             update.setInt(1, statusId);

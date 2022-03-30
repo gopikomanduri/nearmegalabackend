@@ -4656,7 +4656,7 @@ minamount int(6)
         }
         return generatedKey;
     }
-    public Integer updateDeliveryStatus(Integer statusId,Integer deliveryStatus,Integer userId, Integer customerContact)
+    public Integer updateDeliveryStatus(Integer statusId,Integer deliveryStatus,Integer userId, String customerContact)
     {
         String transactsTable = statusId+"_"+userId+"_deliveryStatus";
 
@@ -4675,7 +4675,7 @@ minamount int(6)
 
             update.setInt(1, statusId);
             update.setInt(2, userId);
-            update.setInt(3, customerContact);
+            update.setString(3, customerContact);
 
             update.executeUpdate();
 
@@ -4714,7 +4714,7 @@ minamount int(6)
                 DeliveryStatusPayLoad obj = new DeliveryStatusPayLoad();
                 obj.id = resultSet.getInt("id");
                 obj.userid = resultSet.getInt("userid");
-                obj.customerContact = resultSet.getInt("customerContact");
+                obj.customerContact = resultSet.getString("customerContact");
                 obj.deliveryStatus = resultSet.getInt("deliveryStatus");
                 obj.statusid = resultSet.getInt("statusid");
                 response.add(obj);
@@ -4729,7 +4729,7 @@ minamount int(6)
         return output;
     }
 
-    public Integer insertDeliveryStatus(Integer statusId,Integer deliveryStatus,Integer userId, Integer customerContact)
+    public Integer insertDeliveryStatus(Integer statusId,Integer deliveryStatus,Integer userId, String customerContact)
     {
 
         Integer generatedKey = -1;
@@ -4753,7 +4753,7 @@ minamount int(6)
                 PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setInt(1, statusId);
                 preparedStatement.setInt(2, userId);
-                preparedStatement.setInt(3, customerContact);
+                preparedStatement.setString(3, customerContact);
                 preparedStatement.setInt(4, deliveryStatus);
                 System.out.println(preparedStatement.getMetaData());
                 preparedStatement.executeUpdate();

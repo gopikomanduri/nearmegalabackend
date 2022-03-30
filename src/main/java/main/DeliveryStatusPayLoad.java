@@ -8,6 +8,6 @@ public class DeliveryStatusPayLoad {
     public Integer statusid;
 
     public Integer userid;
-    public Integer customerContact;
+    public String customerContact;
     public Integer deliveryStatus;
 }

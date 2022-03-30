@@ -4695,6 +4695,7 @@ minamount int(6)
         String transactsTable = statusId+"_"+userId+"_deliveryStatus";
         String mId = "0";
         String sqlcmd = "select * from "+transactsTable;
+        System.out.println("for /orderstatus sqlcmd "+sqlcmd);
         try
         {
             if(connect.isClosed() == true)
@@ -4719,6 +4720,7 @@ minamount int(6)
                 response.add(obj);
             }
             String output = new Gson().toJson(response);
+            System.out.println("for /orderstatus returning "+output);
             return output;
         }
         catch(Exception ex)

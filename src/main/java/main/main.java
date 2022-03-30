@@ -881,7 +881,11 @@ System.out.println(ex.getMessage());
             String statusId = request.queryParams("statusId");
             String userId=request.queryParams("userId");
             String customerContact=request.queryParams("customerContact");
+
+            System.out.println("for /orderstatus .. request received  statusId"+statusId +" userId: "+userId+" contact: "+customerContact);
+
             str= MySQLAccess.dbObj.getDeliveryStatus(Integer.valueOf(statusId),Integer.valueOf(userId));
+            System.out.println("for /orderstatus returning "+str);
             return str;
 
         });

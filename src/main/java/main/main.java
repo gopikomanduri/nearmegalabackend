@@ -856,7 +856,7 @@ System.out.println(ex.getMessage());
             String deliveryStatus=request.queryParams("deliveryStatus");
             String userId=request.queryParams("userId");
             String customerContact=request.queryParams("customerContact");
-
+            System.out.println("for /outForDelivery .. request received  statusId"+statusId +" userId: "+userId+" contact: "+customerContact);
             Integer value = MySQLAccess.dbObj.insertDeliveryStatus(Integer.valueOf(statusId),Integer.valueOf(deliveryStatus),Integer.valueOf(userId),Integer.valueOf(customerContact));
             PushNotificationBasedonUserID(client,Integer.valueOf(userId),"Order Update","Your Order is Out For Delivery");
             return value.toString();
@@ -870,6 +870,7 @@ System.out.println(ex.getMessage());
             String userId=request.queryParams("userId");
             String customerContact=request.queryParams("customerContact");
             String statusUserID=request.queryParams("statusUserID");
+            System.out.println("for /orderRecivedUpdate .. request received  statusId"+statusId +" userId: "+userId+" contact: "+customerContact);
             Integer value = MySQLAccess.dbObj.updateDeliveryStatus(Integer.valueOf(statusId),Integer.valueOf(deliveryStatus),Integer.valueOf(userId),Integer.valueOf(customerContact));
             PushNotificationBasedonUserID(client,Integer.valueOf(statusUserID),"Order Update","Order is Received");
             return value.toString();

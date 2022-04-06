@@ -868,7 +868,7 @@ System.out.println(ex.getMessage());
             String userId=request.queryParams("userId");
 
             System.out.println("for /getMyBalance .. request received userId: "+userId);
-            Integer value = 0
+            Integer value = 0;
             return value.toString();
         });
 

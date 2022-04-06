@@ -862,6 +862,16 @@ System.out.println(ex.getMessage());
             return value.toString();
         });
 
+        post("/getMyBalance", (request, response) -> {
+            response.type("application/json");
+
+            String userId=request.queryParams("userId");
+
+            System.out.println("for /getMyBalance .. request received userId: "+userId);
+            Integer value = 0
+            return value.toString();
+        });
+
         post("/orderRecivedUpdate", (request, response) -> {
             String str = "";
             response.type("application/json");

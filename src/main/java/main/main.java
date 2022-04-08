@@ -361,11 +361,24 @@ System.out.println(ex.getMessage());
             String merchantIdReceived = request.queryParams("merchantID_geohash");//userid of perosn who posted status
             String customerIdReceived = request.queryParams("customerID");//joinee userID
             String timestamp = request.queryParams("TimeStamp");
+            String amountRecived = request.queryParams("amount");
             System.out.println("recevd adid: "+ adId+ " mer: "+merchantIdReceived +" cusID : "+customerIdReceived );
-            int advID=Integer.parseInt(adId);
-
-            MySQLAccess.dbObj.insertTransaction(customerIdReceived,advID,merchantIdReceived, Timestamp.valueOf(timestamp),false);
-
+            int advID = Integer.parseInt(adId);
+            int amount = Integer.parseInt(amountRecived);
+            try {
+                MySQLAccess.dbObj.insertTransaction(customerIdReceived, advID, merchantIdReceived, Timestamp.valueOf(timestamp), false);
+            }
+            catch(Exception ex)
+            {
+                System.out.println("error:" + ex.getMessage());
+            }
+            try {
+            MySQLAccess.dbObj.insertTransactionsIntoMerchant(merchantIdReceived,advID,customerIdReceived,Timestamp.valueOf(timestamp),false,amount);
+            }
+            catch(Exception ex)
+            {
+                System.out.println("error:" + ex.getMessage());
+            }
             return 1;//recordID against transaction
 
             //  return "Gopi";
@@ -866,9 +879,10 @@ System.out.println(ex.getMessage());
             response.type("application/json");
 
             String userId=request.queryParams("userId");
-
             System.out.println("for /getMyBalance .. request received userId: "+userId);
             Integer value = 0;
+            value = MySQLAccess.dbObj.getMyBalance(userId);
+
             return value.toString();
         });
 

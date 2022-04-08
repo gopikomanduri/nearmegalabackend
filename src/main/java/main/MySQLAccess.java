@@ -4612,14 +4612,51 @@ minamount int(6)
             return "-1";
         }
     }
+
+    public int getMyBalance( String merchantID )
+    {
+        int balance =0;
+        String merID="";
+        try {
+
+            if(merchantID.contains("_")) {
+                merID = merchantID;
+            }
+            else
+            {
+                merID = "Status_"+merchantID;
+            }
+            String transactsTable =  merID+"_Transactions";
+
+            String sqlcmd = "select SUM(Amount) from " + transactsTable+" where Status =1";
+            if(connect.isClosed())
+                connect = initConnection();
+
+            PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
+            stmnt.executeQuery();
+            System.out.println("cmd executed is : " + sqlcmd);
+            resultSet = statement.executeQuery(sqlcmd);
+
+            if(resultSet.next()) {
+                balance = resultSet.getInt(1);
+            }
+            return balance;
+        }
+        catch(Exception ex)
+        {
+            return balance;
+        }
+    }
+
     public Integer insertTransaction(String customerID,int ad_id,String Merchant_Id_geohash, Timestamp timestamp, boolean status)
     {
 
         Integer generatedKey = -1;
+        String actualTable = "customerID_Transactions";
+        String transactsTable = customerID+"_Transactions";
+        int isCreated = createTransactionsTableIfNotExist(transactsTable,actualTable);
 
-        int isCreated = createTransactionsTableIfNotExist(customerID);
 
-        String transactsTable = customerID+"_Transactations";
 
 
         try {
@@ -4656,6 +4693,61 @@ minamount int(6)
         }
         return generatedKey;
     }
+
+    public Integer insertTransactionsIntoMerchant(String merchantID,int ad_id,String customerID, Timestamp timestamp, boolean status,int amount)
+    {
+
+        Integer generatedKey = -1;
+        String actualTable = "merchant_Transactions";
+        String merID="";
+
+        if(merchantID.split("_").length>2) {
+            merID = merchantID.replace("_"+merchantID.split("_")[2],"");
+        }
+        else
+        {
+            merID = "Status_"+merchantID.split("_")[0];
+        }
+        String transactsTable =  merID+"_Transactions";
+        int isCreated = createTransactionsTableIfNotExist(transactsTable,actualTable);
+
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("the slot received for merchant is "+transactsTable+" \n is ");
+        if(isCreated!=-1) {
+            try {
+                String sql = "INSERT INTO " + transactsTable + " (adId, timeStamp, Status, UserId, Amount)" +
+                        "VALUES (?, ?, ?, ?)";
+                System.out.println(sql);
+                PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setInt(1, ad_id);
+                preparedStatement.setTimestamp(2, timestamp);
+                preparedStatement.setBoolean(3, status);
+                preparedStatement.setString(4, customerID);
+                preparedStatement.setInt(5, amount);
+                System.out.println(preparedStatement.getMetaData());
+                preparedStatement.executeUpdate();
+
+//                ResultSet rs = preparedStatement.getGeneratedKeys();
+//                if (rs.next()) {
+//                    generatedKey = rs.getInt(1);
+//                }
+                preparedStatement.close();
+                return 1;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return 0;
+            }
+        }
+        return generatedKey;
+    }
+
+    //public Integer
     public Integer updateDeliveryStatus(Integer statusId,Integer deliveryStatus,Integer userId, String customerContact)
     {
         String transactsTable = statusId+"_"+userId+"_deliveryStatus";
@@ -4805,12 +4897,10 @@ minamount int(6)
         return isCreated;
     }
 
-    public int createTransactionsTableIfNotExist(String customerID) {
+    public int createTransactionsTableIfNotExist(String myTableName, String actualTable) {
         int isCreated=-1;
         try {
-
-            String actualTable = "customerID_Transactations";
-            String mytabename = customerID+"_Transactations";
+            //String myTableName = customerID+"_Transactions";
             try {
                 if(connect.isClosed() == true)
                     connect = initConnection();
@@ -4818,17 +4908,17 @@ minamount int(6)
                 e.printStackTrace();
             }
             DatabaseMetaData dmd = connect.getMetaData();
-            System.out.println("trying to create table"+ mytabename);;
-            System.out.println(mytabename);
+            System.out.println("trying to create table"+ myTableName);
+            System.out.println(myTableName);
 
-            ResultSet tables = dmd.getTables(null, null, mytabename, null);
+            ResultSet tables = dmd.getTables(null, null, myTableName, null);
             if (tables.next()) {
                 // Table exists
                 isCreated=1;
             } else {
                 // CREATE TABLE new_tbl LIKE orig_tbl;
                 statement = connect.createStatement();
-                String createStatement = "CREATE TABLE "+mytabename+"  LIKE "+actualTable+" ;";
+                String createStatement = "CREATE TABLE "+myTableName+"  LIKE "+actualTable+" ;";
                 System.out.println(createStatement);
                 isCreated = statement.executeUpdate(createStatement);
                 //   statement.close();

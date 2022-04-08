@@ -5169,7 +5169,7 @@ statusid int(11)
             if(getTransactionStatus(userid, statusId))
             {
                 paymentStatus =1;
-                updatePayment(paymentStatus,statusId,userid);
+                updatePayment(paymentStatus,userid,statusId);
             }
             else {
                 paymentStatus =0;

@@ -5169,6 +5169,7 @@ statusid int(11)
             if(getTransactionStatus(userid, statusId))
             {
                 paymentStatus =1;
+                updatePayment(paymentStatus,statusId,userid);
             }
             else {
                 paymentStatus =0;
@@ -5180,6 +5181,39 @@ statusid int(11)
         }
         return paymentStatus;
     }
+
+    public Integer updatePayment(Integer paymentstatus, Integer userid, Integer statusId)
+    {
+
+        String tableName = "ad_join";
+
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+
+            PreparedStatement update = connect.prepareStatement
+                    ("UPDATE ad_join SET paymentStatus = "+paymentstatus+" WHERE userid = ? AND statusid = ?");
+
+
+            update.setInt(1, userid);
+            update.setInt(2, statusId);
+
+            update.executeUpdate();
+
+            update.close();
+            return 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
 
     public String fetchjoineecount(Integer statusid, Integer userID) {
 
@@ -5240,10 +5274,9 @@ statusid int(11)
 
             PreparedStatement stmnt = connect.prepareStatement(sqlcmd);
 
-            stmnt.executeQuery();
+            resultSet = stmnt.executeQuery();
 
-            resultSet = statement
-                    .executeQuery(sqlcmd);
+
                 while(resultSet.next()) {
 
                     JoinCountPayLoad obj = new JoinCountPayLoad();

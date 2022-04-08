@@ -4721,7 +4721,7 @@ minamount int(6)
         if(isCreated!=-1) {
             try {
                 String sql = "INSERT INTO " + transactsTable + " (adId, timeStamp, Status, UserId, Amount)" +
-                        "VALUES (?, ?, ?, ?)";
+                        "VALUES (?, ?, ?, ?,?)";
                 System.out.println(sql);
                 PreparedStatement preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setInt(1, ad_id);

@@ -4527,7 +4527,7 @@ minamount int(6)
     public boolean getTransactionStatus(String customerID,int recordID)
     {
         boolean transactionStatus = false;
-        String transactsTable = customerID+"_Transactations";
+        String transactsTable = customerID+"_Transactions";
         try {
             if((connect == null) || (connect.isClosed() == true))
                 connect = initConnection();
@@ -4554,7 +4554,7 @@ minamount int(6)
     public boolean getTransactionStatus(int customerID,int statusID)
     {
         boolean transactionStatus = false;
-        String transactsTable = customerID+"_Transactations";
+        String transactsTable = customerID+"_Transactions";
         try {
             if((connect == null) || (connect.isClosed() == true))
                 connect = initConnection();
@@ -4581,7 +4581,7 @@ minamount int(6)
     public String getTransactions(String customerID)
     {
         String transactions = "";
-        String transactsTable = customerID+"_Transactations";
+        String transactsTable = customerID+"_Transactions";
 
         List<PaymemtTransaction> pts =new ArrayList<PaymemtTransaction>();
         try {

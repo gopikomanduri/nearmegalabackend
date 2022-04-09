@@ -5214,6 +5214,34 @@ statusid int(11)
         }
     }
 
+    public Integer confirmPaymentAtDA(String userid, Integer adId)
+    {
+
+        try {
+            if(connect.isClosed() == true)
+                connect = initConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+
+            PreparedStatement update = connect.prepareStatement
+                    ("UPDATE "+userid+"_Transactions SET Status = 1 WHERE adId = ?");
+
+
+            update.setInt(1, adId);
+
+            update.executeUpdate();
+
+            update.close();
+            return 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 
     public String fetchjoineecount(Integer statusid, Integer userID) {
 

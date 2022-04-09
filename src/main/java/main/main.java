@@ -1859,6 +1859,21 @@ System.out.println(ex.getMessage());
 
             //  return "Gopi";
         });
+
+        //placeholderAPI
+        post("/confirmPaymentAtDA", (request, response) -> {
+
+            /*
+    public String fetchjoineecount(Integer statusid, String geohash) {
+             */
+            response.type("application/json");
+            String statusId = request.queryParams("adId");
+            String merchantId =  request.queryParams("merchantId");
+            String userId =  request.queryParams("userId");
+            MySQLAccess.dbObj.confirmPaymentAtDA(userId,Integer.valueOf(statusId));
+            MySQLAccess.dbObj.confirmPaymentAtDA(merchantId,Integer.valueOf(statusId));
+              return "Gopi";
+        });
         post("/fetchacategories", (request, response) -> {
 
             /*
